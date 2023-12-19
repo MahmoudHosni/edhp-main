@@ -5,6 +5,7 @@ import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompaniesCubit.dart';
+import 'package:edhp/features/medical_advices/cubit/MedicalAdvicesCubit.dart';
 import 'package:edhp/features/membership_data/cubit/cubit.dart';
 import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
 import 'package:edhp/features/service/cubit/cubit.dart';
@@ -61,10 +62,13 @@ class MyApp extends StatelessWidget {
           create: (context) => OurProductCubit()..getMembershipType(),
         ),
         BlocProvider(
-          create: (context) => OrganizationMembershipDataCubit()//..getSubscriptionInfoLookUps(),
+          create: (context) => OrganizationMembershipDataCubit()
         ),
         BlocProvider(
-            create: (context) => MembershipDataCubit()//..getSubscriptionInfoLookUps(),
+            create: (context) => MembershipDataCubit()
+        ),
+        BlocProvider(
+            create: (context) => MedicalAdvicesCubit()
         )
       ],
       child: MaterialApp.router(

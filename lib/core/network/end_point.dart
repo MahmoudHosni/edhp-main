@@ -22,4 +22,5 @@ class EndPoint {
   static const String getMembershipTypes = '/apiMembershipTypes/GetList';// '/apiUserInterface/GetMembershipTypes';https://edhp-eg.com/apiMembershipTypes/GetList
   static const String getSubscriptionInfoLookup = '/apiPublicUserInterface/GetSubscriptionInfoLookupsViewModel';
   static const String getStaticData = '/apiPublicUserInterface/GetSubscriptionInfoLookupsViewModel';
+  static const String getAdvicesData = '/apiUserInterface/GetMedicalAdvices';
 }

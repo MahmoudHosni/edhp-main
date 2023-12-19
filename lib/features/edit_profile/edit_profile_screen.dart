@@ -1,4 +1,3 @@
-import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -9,26 +8,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_paths.dart';
 import '../../core/utils/styles/styles.dart';
-import '../layout/cubit/states.dart';
 import 'cubit/state.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({super.key});
-
   TextEditingController nameController = TextEditingController();
+
   TextEditingController usernameController = TextEditingController();
 
   TextEditingController emailController = TextEditingController();
+
   TextEditingController identityNumberController = TextEditingController();
+
   TextEditingController phoneNumberController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    nameController.text = GetProfileCubit.get(context).userProfileModel!.profileName.toString();
+    usernameController.text = GetProfileCubit.get(context).userProfileModel!.userName.toString();
+    emailController.text = GetProfileCubit.get(context).userProfileModel!.email.toString();
+    identityNumberController.text = GetProfileCubit.get(context).userProfileModel?.identityNumber?.toString() ??'';
+    phoneNumberController.text = GetProfileCubit.get(context).userProfileModel!.mobileNumber.toString();
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -56,11 +61,6 @@ class EditProfileScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          nameController.text = GetProfileCubit.get(context).userProfileModel!.profileName.toString();
-          usernameController.text = GetProfileCubit.get(context).userProfileModel!.userName.toString();
-          emailController.text = GetProfileCubit.get(context).userProfileModel!.email.toString();
-          identityNumberController.text = GetProfileCubit.get(context).userProfileModel!.identityNumber.toString();
-          phoneNumberController.text = GetProfileCubit.get(context).userProfileModel!.mobileNumber.toString();
           return Scaffold(
             appBar: AppBar(
               actions: [
@@ -78,7 +78,7 @@ class EditProfileScreen extends StatelessWidget {
             ),
             body: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child:  SingleChildScrollView(
                   child: Form(
                     key: formKey,
@@ -101,30 +101,29 @@ class EditProfileScreen extends StatelessWidget {
                             SvgPicture.asset(AppPaths.editIconSvg , color: AppColors.primaryBlueColor, width: 12,),
                           ],
                         ),
-                        const SizedBox(
-                          height: 14,
-                        ),
+                        const SizedBox(height: 8,),
                         Text(GetProfileCubit.get(context).userProfileModel!.userName.toString() , style: Styles.textStyle16W400,),
+                        const SizedBox(height: 8,),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height / 30,
-                        ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1.1,
-                          height: MediaQuery.of(context).size.height / 4.2,
+                          width: MediaQuery.of(context).size.width ,
+                          height: MediaQuery.of(context).size.height / 3.45,
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
-                              Image.asset(AppPaths.cardImage),
+                              Image.asset(AppPaths.cardImage,width: 1100),
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Align(
                                     alignment: Alignment.center,
                                     child: SizedBox(
-                                      height: MediaQuery.of(context).size.height / 9,
-                                      child: Text(
-                                        nameController.text.trim().toString() ,
-                                        style: Styles.textStyle14W400,
+                                      height: MediaQuery.of(context).size.height / 8,
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(5.0,0,0,5),
+                                        child: Text(
+                                          nameController.text.trim().toString() ,
+                                          style: Styles.textStyle13W500,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -138,7 +137,9 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الإسم' , style: Styles.textStyle16W500,),),
                         DefaultTextFormFieldWithoutLabel(
-                          controller: nameController,
+                          controller: nameController,onChange: (value) => {
+                              nameController.text = value
+                          },
                           keyboardType: TextInputType.text,
                           validation: (value){
                             if(value!.isEmpty){
@@ -232,6 +233,7 @@ class EditProfileScreen extends StatelessWidget {
                           text: 'حفظ التغييرات' ,
                           redius: 10,
                         ),
+                        SizedBox(height: 18,)
                       ],
                     ),
                   ),

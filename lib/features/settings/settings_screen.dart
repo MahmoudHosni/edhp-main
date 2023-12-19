@@ -72,7 +72,7 @@ class SettingScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(GetProfileCubit.get(context).userProfileModel!.profileName.toString() , style: Styles.textStyle16W400,),
+                    Text(GetProfileCubit.get(context).userProfileModel!.profileName.toString() , style: Styles.textStyle14W400,),
                     const SizedBox(
                       width: 5,
                     ),
@@ -82,7 +82,7 @@ class SettingScreen extends StatelessWidget {
                 const SizedBox(
                   height: 14,
                 ),
-                Text(GetProfileCubit.get(context).userProfileModel!.userName.toString(), style: Styles.textStyle16W400,),
+                Text(GetProfileCubit.get(context).userProfileModel!.userName.toString(), style: Styles.textStyle13W400,),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 30,
                 ),
@@ -97,7 +97,7 @@ class SettingScreen extends StatelessWidget {
                       children: [
                         const Icon(Icons.arrow_back_ios),
                         const Spacer(),
-                        const Text('تعديل الملف الشخصي' , style: Styles.textStyle20W500,),
+                        const Text('تعديل الملف الشخصي' , style: Styles.textStyle15W500,),
                         const SizedBox(
                           width: 20,
                         ),
@@ -107,14 +107,14 @@ class SettingScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 35,
+                  height: MediaQuery.of(context).size.height / 40,
                 ),
                 const Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Text('الإشعارات والتنبيهات' , style: Styles.textStyle20W500,),
+                  child: Text('الإشعارات والتنبيهات' , style: Styles.textStyle15W500,),
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 5,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -140,7 +140,7 @@ class SettingScreen extends StatelessWidget {
                           activeTrackColor: AppColors.primaryBlueColor,
                         ),
                         const Spacer(),
-                        const Text('تفعيل الإشعارات والتنبيهات' , style: Styles.textStyle16W400,),
+                        const Text('تفعيل الإشعارات والتنبيهات' , style: Styles.textStyle12W400,),
                       ],
                     ),
                   ),
@@ -150,7 +150,10 @@ class SettingScreen extends StatelessWidget {
                 ),
                 const Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Text('المؤشرات الحيوية' , style: Styles.textStyle20W500,),
+                  child: Text('المؤشرات الحيوية' , style: Styles.textStyle15W500,),
+                ),
+                SizedBox(
+                  height:  5,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -176,7 +179,7 @@ class SettingScreen extends StatelessWidget {
                           activeTrackColor: AppColors.primaryBlueColor,
                         ),
                         const Spacer(),
-                        const Text('تفعيل بصمة اللإصبع عند الدخول' , style: Styles.textStyle16W400,),
+                        const Text('تفعيل بصمة اللإصبع عند الدخول' , style: Styles.textStyle12W400,),
                       ],
                     ),
                   ),
@@ -186,10 +189,10 @@ class SettingScreen extends StatelessWidget {
                 ),
                 const Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Text('اللغة المفضلة' , style: Styles.textStyle20W500,),
+                  child: Text('اللغة المفضلة' , style: Styles.textStyle15W500,),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 35,
+                  height: 10,
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width/1.48,
@@ -217,7 +220,7 @@ class SettingScreen extends StatelessWidget {
                             color: cubit.isArabic? AppColors.primaryBlueColor : AppColors.whiteColor,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(child: Text('العربية' , style: Styles.textStyle16W500.copyWith(color: cubit.isArabic ? AppColors.whiteColor : AppColors.blackColor),)),
+                          child: Center(child: Text('العربية' , style: Styles.textStyle15W500.copyWith(color: cubit.isArabic ? AppColors.whiteColor : AppColors.blackColor),)),
                         ),
                       ),
                       InkWell(
@@ -231,7 +234,7 @@ class SettingScreen extends StatelessWidget {
                             color: cubit.isArabic? AppColors.whiteColor : AppColors.primaryBlueColor,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Center(child: Text('الإنجليزية' , style: Styles.textStyle16W500.copyWith(color: cubit.isArabic ? AppColors.blackColor : AppColors.whiteColor),)),
+                          child: Center(child: Text('الإنجليزية' , style: Styles.textStyle15W500.copyWith(color: cubit.isArabic ? AppColors.blackColor : AppColors.whiteColor),)),
                         ),
                       ),
                     ],

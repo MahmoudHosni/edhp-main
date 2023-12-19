@@ -5,12 +5,12 @@ import 'package:edhp/features/create_membership/create_membership_screen.dart';
 import 'package:edhp/features/edit_profile/edit_profile_screen.dart';
 import 'package:edhp/features/insurance_companies/SelectInsuranceCompany.dart';
 import 'package:edhp/features/layout/layout_screen.dart';
+import 'package:edhp/features/medical_advices/MedicalAdvices.dart';
 import 'package:edhp/features/medical_network/medical_network_screen.dart';
 import 'package:edhp/features/medical_record/medical_record_screen.dart';
 import 'package:edhp/features/membership_data/membership_data_screen.dart';
 import 'package:edhp/features/otp/otp_screen.dart';
 import 'package:edhp/features/payment/payment_screen.dart';
-import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
 import 'package:edhp/features/service/service_screen.dart';
 import 'package:edhp/features/splash_screen/splash_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -49,6 +49,7 @@ abstract class AppRouters {
   static const kOrganizationSubscriptionScreen = '/organizationSubscriptionScreen';
   static const kCreateMembershipInsideAppScreen = '/createMembershipInsideAppScreen';
   static const kSelectInsuranceCompany = '/SelectInsuranceCompany';
+  static const kMedicalAdvices = '/MedicalAdvices';
 
   static final baseRouter = GoRouter(redirect: (context, state) {
     String _token = CacheHelper.getData(key: 'token') ??'';
@@ -152,7 +153,10 @@ abstract class AppRouters {
       GoRoute(
         path: kSelectInsuranceCompany ,
         builder: (context, state) => SelectInsuranceCompany(),
-      )
+      ),
+      GoRoute(
+        path: kMedicalAdvices ,
+        builder: (context , state) => MedicalAdvices())
     ],
   );
 

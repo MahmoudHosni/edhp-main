@@ -19,4 +19,6 @@ class StringsManager {
   static const String jahat = 'هيئات';
   static const String resumeMemberShipData = 'إستكمال بيانات الأعضاء';
   static const String membershipCards = 'بطاقات العضويات' ;
+  static const String medicalAdvices = 'نصائح طبية' ;
+
 }

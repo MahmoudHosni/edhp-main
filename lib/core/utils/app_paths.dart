@@ -53,6 +53,6 @@ abstract class AppPaths {
   static const String product01 = 'assets/images/Products01.png';
   static const String product02 = 'assets/images/Products02.png';
   static const String product03 = 'assets/images/Products03.png';
-  static const String cardImage = 'assets/images/card_image.png';
+  static const String cardImage = 'assets/images/card_Image.jpg';
 
 }

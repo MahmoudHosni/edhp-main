@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:edhp/core/network/cache_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
@@ -25,7 +26,7 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
       path: EndPoint.updateProfile,
       token: token,
       data: {
-        "ProfileID": loginModel!.resultObject!.profileID!.toInt(),
+        "ProfileID": CacheHelper.getData(key: 'id').toInt(),
         "ProfileName": name,
         "UserName": username,
         "Gender": 1,

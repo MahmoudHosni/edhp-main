@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/models/user_profile_model.dart';
@@ -25,6 +26,10 @@ class GetProfileCubit extends Cubit<GetProfileState> {
     ).then((value) {
       print(value.data);
       userProfileModel = GetUserProfile.fromJson(value.data);
+      CacheHelper.saveData(key: 'name', value: userProfileModel?.userName??'');
+      CacheHelper.saveData(key: 'profile', value: userProfileModel?.profileName);
+      CacheHelper.saveData(key: 'id', value: userProfileModel?.profileID);
+      CacheHelper.saveData(key: 'email', value: userProfileModel?.email??'');
       print(userProfileModel!.userName);
       emit(GetProfileSuccessfullyState());
       getImageProfile();

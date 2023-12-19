@@ -3,6 +3,7 @@ import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_button.dart';
 import 'package:edhp/core/utils/app_paths.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/call_center/call_center_screen.dart';
 import 'package:edhp/features/drawer/drawer_components.dart';
@@ -15,6 +16,7 @@ import 'package:edhp/features/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -110,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           InkWell(
                             child: Image.asset(AppPaths.product03),
-                            onTap: (){},
+                            onTap: (){GoRouter.of(context).push(AppRouters.kMedicalAdvices);},
                           ),
                         ],
                       ),
