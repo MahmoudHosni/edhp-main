@@ -7,11 +7,16 @@ import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompaniesCubit.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompanyState.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SelectInsuranceCompany extends StatefulWidget{
+  final SubscriptionRequest subscriptionRequest;
+
+  SelectInsuranceCompany({required this.subscriptionRequest});
+
   @override
   State<SelectInsuranceCompany> createState() => _SelectInsuranceCompanyState();
 }
@@ -22,6 +27,7 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
 
   @override
   Widget build(BuildContext context) {
+    print("Member ship :: ${widget.subscriptionRequest.memberShipID}");
     return BlocConsumer<InsuranceCompaniesCubit, InsuranceCompanyState>(
       listener: (context, state) {
         // TODO: implement listener

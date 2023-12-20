@@ -31,7 +31,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
           }
         },
         builder: (context, state) {
-          LayoutCubit cubit = LayoutCubit.get(context);
           return SafeArea(
             child: Scaffold(
               body: screens[currentIndex],

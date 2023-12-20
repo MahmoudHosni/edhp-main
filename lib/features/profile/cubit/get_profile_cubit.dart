@@ -30,6 +30,7 @@ class GetProfileCubit extends Cubit<GetProfileState> {
       CacheHelper.saveData(key: 'profile', value: userProfileModel?.profileName);
       CacheHelper.saveData(key: 'id', value: userProfileModel?.profileID);
       CacheHelper.saveData(key: 'email', value: userProfileModel?.email??'');
+      CacheHelper.saveData(key: 'identity', value: userProfileModel?.identityNumber??'');
       print(userProfileModel!.userName);
       emit(GetProfileSuccessfullyState());
       getImageProfile();

@@ -3,6 +3,7 @@ import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -10,10 +11,13 @@ import 'package:go_router/go_router.dart';
 import '../../core/utils/styles/styles.dart';
 
 class CreateMembershipScreen extends StatelessWidget {
-  const CreateMembershipScreen({super.key});
+  final SubscriptionRequest subscriptionRequest;
+
+  const CreateMembershipScreen({super.key,required this.subscriptionRequest});
 
   @override
   Widget build(BuildContext context) {
+    print("Company ID : ${subscriptionRequest.companyID}");
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -40,7 +44,8 @@ class CreateMembershipScreen extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany);
+                        subscriptionRequest.memberShipID = 2;
+                        GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: subscriptionRequest);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -74,7 +79,8 @@ class CreateMembershipScreen extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        GoRouter.of(context).push(AppRouters.kMembershipDataScreen);
+                        subscriptionRequest.memberShipID = 1;
+                        GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: subscriptionRequest);
                       },
                       child: Container(
                         decoration: BoxDecoration(

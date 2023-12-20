@@ -23,4 +23,6 @@ class EndPoint {
   static const String getSubscriptionInfoLookup = '/apiPublicUserInterface/GetSubscriptionInfoLookupsViewModel';
   static const String getStaticData = '/apiPublicUserInterface/GetSubscriptionInfoLookupsViewModel';
   static const String getAdvicesData = '/apiUserInterface/GetMedicalAdvices';
+
+  static const String getAdvertisements = '/apiUserInterface/GetAdvertisements';
 }

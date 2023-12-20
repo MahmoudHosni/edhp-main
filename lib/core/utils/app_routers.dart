@@ -13,6 +13,7 @@ import 'package:edhp/features/otp/otp_screen.dart';
 import 'package:edhp/features/payment/payment_screen.dart';
 import 'package:edhp/features/service/service_screen.dart';
 import 'package:edhp/features/splash_screen/splash_screen.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/add_relatives/add_relatives_screen.dart';
 import '../../features/authantication/forget_password/forget_password_screen.dart';
@@ -112,7 +113,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kCreateMembershipScreen,
-        builder: (context, state) => CreateMembershipScreen(),
+        builder: (context, state) => CreateMembershipScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kMedicalNetworkScreen ,
@@ -128,7 +129,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kMembershipDataScreen ,
-        builder: (context, state) => MembershipDataScreen(),
+        builder: (context, state) => MembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kConfirmMembershipDataScreen,
@@ -152,7 +153,7 @@ abstract class AppRouters {
       ),//
       GoRoute(
         path: kSelectInsuranceCompany ,
-        builder: (context, state) => SelectInsuranceCompany(),
+        builder: (context, state) => SelectInsuranceCompany(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kMedicalAdvices ,
@@ -196,7 +197,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kCreateMembershipScreen,
-        builder: (context, state) => CreateMembershipScreen(),
+        builder: (context, state) => CreateMembershipScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kMedicalNetworkScreen ,
@@ -212,7 +213,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kMembershipDataScreen ,
-        builder: (context, state) => MembershipDataScreen(),
+        builder: (context, state) => MembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kConfirmMembershipDataScreen,

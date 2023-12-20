@@ -29,3 +29,7 @@ class GetNewAccessTokenLoadingState extends LayoutStates {}
 class GetNewAccessTokenSuccessfullyState extends LayoutStates {}
 
 class GetNewAccessTokenErrorState extends LayoutStates {}
+
+class AdvertisementStateLoadError extends LayoutStates{}
+
+class AdvertisementStateLoadSuccess extends LayoutStates{}

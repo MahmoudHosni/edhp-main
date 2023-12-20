@@ -11,6 +11,7 @@ import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/membership_data/cubit/cubit.dart';
 import 'package:edhp/features/membership_data/cubit/states.dart';
 import 'package:edhp/features/membership_data/widgets/membership_text_form_field.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,7 +20,8 @@ import 'package:go_router/go_router.dart';
 import 'widgets/custom_step_one_app_bar.dart';
 
 class MembershipDataScreen extends StatefulWidget {
-  MembershipDataScreen({super.key});
+  final SubscriptionRequest subscriptionRequest;
+  MembershipDataScreen({super.key,required this.subscriptionRequest});
 
   @override
   State<MembershipDataScreen> createState() => _MembershipDataScreenState();
@@ -39,6 +41,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
   @override
   void initState() {
     super.initState();
+    print("selected Membership :: ${widget.subscriptionRequest.memberShipID}");
     cubit = MembershipDataCubit.get(context);
     cubit?.getSubscriptionInfoLookUps();
     birthDateController.text = cubit?.selectedDate != null ?'${cubit?.selectedDate!.year}/${cubit?.selectedDate!.month}/${cubit?.selectedDate!.day}' : '';

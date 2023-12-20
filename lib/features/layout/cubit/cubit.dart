@@ -6,6 +6,7 @@ import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/features/layout/cubit/states.dart';
 import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
+import 'package:edhp/models/Advertisement.dart';
 import 'package:edhp/models/user_profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
 
   static LayoutCubit get(BuildContext context) => BlocProvider.of(context);
 
+  List<Advertisement> advertisements = [];
   bool switchOfNotification = true;
   void changeSwitchOfNotification(bool value){
     switchOfNotification = value;
@@ -36,6 +38,27 @@ class LayoutCubit extends Cubit<LayoutStates>{
     emit(ChangeLanguageSettingsState());
   }
 
+  Future getAdvertisements(BuildContext context) async {
+    await DioHelper.getData(
+      path: EndPoint.getAdvertisements ,
+      token: CacheHelper.getData(key: 'token'),
+    ).then((value) {
+      advertisements=[];
+      value.data.forEach((element) {
+        advertisements?.add(Advertisement.fromJson(element));
+      });
+      emit(AdvertisementStateLoadSuccess());
+    }).catchError((error) {
+      print(error.toString());
+      emit(AdvertisementStateLoadError());
+    });
+  }
+
+  Future loadData(BuildContext context) async{
+    getProfile(context);
+    getAdvertisements(context);
+  }
+
   Future getProfile(BuildContext context) async {
     emit(GetProfileLoadingState());
     await DioHelper.getData(
@@ -45,7 +68,13 @@ class LayoutCubit extends Cubit<LayoutStates>{
       print(value.data);
       GetProfileCubit.get(context).userProfileModel = GetUserProfile.fromJson(value.data);
       print(GetProfileCubit.get(context).userProfileModel!.userName);
+      CacheHelper.saveData(key: 'name', value: GetProfileCubit.get(context).userProfileModel?.userName??'');
+      CacheHelper.saveData(key: 'profile', value: GetProfileCubit.get(context).userProfileModel?.profileName);
+      CacheHelper.saveData(key: 'id', value: GetProfileCubit.get(context).userProfileModel?.profileID);
+      CacheHelper.saveData(key: 'email', value: GetProfileCubit.get(context).userProfileModel?.email??'');
+      CacheHelper.saveData(key: 'identity', value: GetProfileCubit.get(context).userProfileModel?.identityNumber??'');
       emit(GetProfileSuccessfullyState());
+      getAdvertisements(context);
       getImageProfile(context);
     }).catchError((error) {
       print(error.toString());
@@ -106,7 +135,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
   Random random = Random();
   int ? index = 1;
   void changeAdsImageRightIcon(){
-    index = random.nextInt(adsImage.length);
+    index = random.nextInt(advertisements.length);
     emit(ChangeAdsImage());
   }
 
