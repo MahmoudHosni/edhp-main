@@ -2,6 +2,7 @@ import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
+import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/UserSexType.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
@@ -12,6 +13,7 @@ import 'package:edhp/features/membership_data/cubit/cubit.dart';
 import 'package:edhp/features/membership_data/cubit/states.dart';
 import 'package:edhp/features/membership_data/widgets/membership_text_form_field.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
+import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,20 +30,25 @@ class MembershipDataScreen extends StatefulWidget {
 }
 
 class _MembershipDataScreenState extends State<MembershipDataScreen> {
+  TextEditingController identityNumberController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController jobController = TextEditingController();
   TextEditingController notationIdController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController birthDateController = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String? maritalStatusSelectedValue;
   MembershipDataCubit? cubit;
+  int stateID=0;
+  List<City> cities = [];
 
   @override
   void initState() {
     super.initState();
-    print("selected Membership :: ${widget.subscriptionRequest.memberShipID}");
+    print("selected Membership :: ${widget.subscriptionRequest.MembershipTypeID}");
     cubit = MembershipDataCubit.get(context);
     cubit?.getSubscriptionInfoLookUps();
     birthDateController.text = cubit?.selectedDate != null ?'${cubit?.selectedDate!.year}/${cubit?.selectedDate!.month}/${cubit?.selectedDate!.day}' : '';
@@ -66,34 +73,49 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                     const SizedBox(
                       height: 25,
                     ),
-                    MembershipTextFormField(
+                    MembershipTextFormField(error: identityNumberController.text.length==14?'':"",onSummit: (value) {
+                      if(value!=null && value.length==14){
+                        widget.subscriptionRequest.IdentityNumber = value;
+                      }else{
+                        ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
+                        return 'برجاء ادخال الرقم القومى بصورة صحيحة';
+                      }
+                    },
                       validation: (value){
-
+                        widget.subscriptionRequest.IdentityNumber = value;
                       },
-                      controller: notationIdController,
+                      controller: identityNumberController,
                       textInputType: TextInputType.number,
                       nameOfField: 'الرقم القومي',
                     ),
-                    GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states),
+                    GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack: onSelectGovernorate),
                     const SizedBox(
                       height: 10,
                     ),
-                    GovernorateRegionsView(cities: cubit?.subscriptionInfoLookupsModel?.Cities),
+                    GovernorateRegionsView(cities: cities,callBack: onSelectCity),
 
                     const SizedBox(
                       height: 10,
                     ),
 
-                    MembershipTextFormField(
-                      validation: (value){
-
+                    MembershipTextFormField(error: addressController.text.length==14?'':"",
+                      onSummit: (value) {
+                        if(value!=null && (value?.length ??0) >20){
+                          widget.subscriptionRequest.Address = value;
+                        }else{
+                          ShowToast.showToast('برجاء ادخال العنوان بشكل صحيح');
+                          return 'برجاء ادخال العنوان بشكل صحيح';
+                        }
                       },
-                      controller: phoneNumberController,
+                      validation: (value){
+                        widget.subscriptionRequest.Address = value;
+                      },
+                      controller: addressController,
                       textInputType: TextInputType.text,
                       nameOfField: 'العنوان',
                     ),
 
-                    UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList),
+                    UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack:onSelectGender),
                     const SizedBox(
                       height: 10,
                     ),
@@ -101,16 +123,29 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                       children: [
                         IconButton(
                           onPressed: (){
-                            MembershipDataCubit.get(context).selectDate(context);
+                            selectDate(context);
                           },
                           icon: SvgPicture.asset(AppPaths.dateIconSvg),
                         ),
                         Expanded(
                           flex: 6,
-                          child: DefaultTextFormFieldWithoutLabel(
+                          child: DefaultTextFormFieldWithoutLabel(error: birthDateController.text.length>=7?'':"",
                             controller: birthDateController,
-                            keyboardType: TextInputType.text,
-                            validation: (value){},
+                            keyboardType: TextInputType.text,onChange: (value) {
+                              print("onChange");
+                              if(value != null && value.length>7) {
+                                setState(() {
+                                  birthDateController.text = value;
+                                  widget.subscriptionRequest.BirthDate = value;
+                                });
+                              }else{
+                                ShowToast.showToast('برجاء ادخال تاريخ الميلاد بصورة صحيحة');
+                                return 'برجاء ادخال تاريخ الميلاد بصورة صحيحة';
+                              }
+                            },
+                            validation: (value){
+                              print("validation");
+                            },
                             isClickable: false,
                           ),
                         ),
@@ -119,6 +154,76 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                     ),
                     const SizedBox(
                       height: 16,
+                    ),
+
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: (){
+                            selectDate(context);
+                          },
+                          icon: SvgPicture.asset(AppPaths.dateIconSvg),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: DefaultTextFormFieldWithoutLabel(error: startDateController.text.length>=7?'':"",
+                            controller: startDateController,
+                            keyboardType: TextInputType.text,onChange: (value) {
+                              print("onChange");
+                              if(value != null && value.length>7) {
+                                setState(() {
+                                  startDateController.text = value;
+                                  widget.subscriptionRequest.SubscriptionStartDate = value;
+                                });
+                              }else{
+                                ShowToast.showToast('برجاء ادخال تاريخ بدء الاشتراك بصورة صحيحة');
+                                return 'برجاء ادخال تاريخ بدء الاشتراك بصورة صحيحة';
+                              }
+                            },
+                            validation: (value){
+                              print("validation");
+                            },
+                            isClickable: false,
+                          ),
+                        ),
+                        const Expanded(flex: 4,child: Text('تاريخ بدء الاشتراك' , style: Styles.textStyle14W400, textAlign: TextAlign.end,)),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: (){
+                            selectDate(context);
+                          },
+                          icon: SvgPicture.asset(AppPaths.dateIconSvg),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: DefaultTextFormFieldWithoutLabel(error: endDateController.text.length>=7?'':"",
+                            controller: endDateController,
+                            keyboardType: TextInputType.text,onChange: (value) {
+                              print("onChange");
+                              if(value != null && value.length>7) {
+                                setState(() {
+                                  endDateController.text = value;
+                                  widget.subscriptionRequest.SubscriptionEndDate = value;
+                                });
+                              }else{
+                                ShowToast.showToast('برجاء ادخال تاريخ نهاية الاشتراك بصورة صحيحة');
+                                return 'برجاء ادخال تاريخ نهاية الاشتراك بصورة صحيحة';
+                              }
+                            },
+                            validation: (value){
+                              print("validation");
+                            },
+                            isClickable: false,
+                          ),
+                        ),
+                        const Expanded(flex: 4,child: Text('تاريخ نهاية الاشتراك' , style: Styles.textStyle14W400, textAlign: TextAlign.end,)),
+                      ],
                     ),
 
                     Padding(
@@ -206,7 +311,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                     ),
                     DefaultButton(
                       function: (){
-                        GoRouter.of(context).push(AppRouters.kServiceScreen);
+                        validateAndContinue();
                       },
                       text: 'متابعة' ,
                       height: 45,
@@ -221,6 +326,81 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
           ),
         );
       },
-);
+    );
+  }
+
+  onSelectGovernorate(String name) {
+    widget.subscriptionRequest.StateID = cubit?.subscriptionInfoLookupsModel?.states?[cubit?.subscriptionInfoLookupsModel?.states?.indexWhere((element) => element.name==name) ??0].iD ??0;
+    setState(() {
+      cities  = cubit?.subscriptionInfoLookupsModel?.Cities?.where((element) => element.StateID == widget.subscriptionRequest?.StateID).toList() ??[];
+      print(cities.length.toString());
+    });
+  }
+
+  onSelectCity(String name) {
+    widget.subscriptionRequest.CityID = cubit?.subscriptionInfoLookupsModel?.Cities?[cubit?.subscriptionInfoLookupsModel?.Cities?.indexWhere((element) => element.name==name) ??0].iD ??0;
+  }
+
+  onSelectGender(String name){
+    widget.subscriptionRequest.Gender = (name.toLowerCase() == 'male' || name.toLowerCase() == 'ذكر')? 1 :2 ;
+  }
+
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1970, 1),
+        lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        String date = picked.year.toString() +" / "+picked.month.toString()+" / "+picked.day.toString();
+        birthDateController.text = date;
+        widget.subscriptionRequest.BirthDate = date;
+      });
+    }
+  }
+
+  void validateAndContinue() {
+    if(widget.subscriptionRequest.IdentityNumber==null || ((widget.subscriptionRequest.IdentityNumber?.length??0)<14 || (widget.subscriptionRequest.IdentityNumber?.length??0)>14)){
+      ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
+      return ;
+    }
+    else if(widget.subscriptionRequest.StateID==null || (widget.subscriptionRequest.StateID??0) <0){
+      ShowToast.showToast('برجاء اختيار المحافظة بصورة صحيحة');
+      return ;
+    }
+    else if(widget.subscriptionRequest.CityID==null || (widget.subscriptionRequest.CityID??0) <0){
+      ShowToast.showToast('برجاء اختيار المنطقة بصورة صحيحة');
+      return ;
+    }
+    else if(widget.subscriptionRequest.Address==null || (widget.subscriptionRequest.Address?.length ??0) <10){
+      ShowToast.showToast('برجاء ادخال العنوان بصورة صحيحة');
+      return ;
+    }
+    else if(widget.subscriptionRequest.Gender==null || (widget.subscriptionRequest.Gender ??0) <0){
+      ShowToast.showToast('برجاء اختيار النوع بصورة صحيحة');
+      return ;
+    }else if(widget.subscriptionRequest.BirthDate==null || (widget.subscriptionRequest.BirthDate?.length ??0) <=6){
+      ShowToast.showToast('برجاء ادخال تاريخ الميلاد بصورة صحيحة');
+      return ;
+    }else if(widget.subscriptionRequest.SubscriptionStartDate==null || (widget.subscriptionRequest.SubscriptionStartDate?.length ??0) <=6){
+      ShowToast.showToast('برجاء ادخال تاريخ بدء الاشتراك بصورة صحيحة');
+      return ;
+    }else if(widget.subscriptionRequest.SubscriptionEndDate==null || (widget.subscriptionRequest.SubscriptionEndDate?.length ??0) <=6){
+      ShowToast.showToast('برجاء ادخال تاريخ نهاية الاشتراك بصورة صحيحة');
+      return ;
+    }else if(cubit?.profileImage == null || cubit?.profileImage?.path==null){
+      ShowToast.showToast('برجاء اختيار صورة شخصية لك بصورة صحيحة');
+      return ;
+    }else if(cubit?.notationIdImage == null || cubit?.notationIdImage?.path==null){
+      ShowToast.showToast('برجاء اختيار صورة الرقم القومى بصورة صحيحة');
+      return ;
+    } else {
+      widget.subscriptionRequest.PersonalImage = cubit?.profileImage;
+      widget.subscriptionRequest.NationalNumberImage = cubit?.notationIdImage;
+
+      GoRouter.of(context).push(AppRouters.kServiceScreen,extra: widget.subscriptionRequest);
+    };
   }
 }

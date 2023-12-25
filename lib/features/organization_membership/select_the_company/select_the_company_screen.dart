@@ -1,7 +1,6 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
-import 'package:edhp/core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
@@ -101,7 +100,7 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                 DefaultButton(backgroundColor: (organizationID > 0) ? AppColors.primaryBlueColor : Colors.grey,
                   function: () {
                     var subscriptionRequest = SubscriptionRequest();
-                    subscriptionRequest.companyID = organizationID;
+                    subscriptionRequest.MedicalCompanyID = organizationID;
                     GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
                   },
                   text: StringsManager.select,

@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
+import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/UserSexType.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_paths.dart';
@@ -11,6 +12,8 @@ import 'package:edhp/features/membership_data/widgets/membership_text_form_field
 import 'package:edhp/features/organization_membership/organization_membership_data/cubit/cubit.dart';
 import 'package:edhp/features/organization_membership/organization_membership_data/cubit/states.dart';
 import 'package:edhp/features/organization_membership/select_the_company/cubit/cubit.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
+import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:edhp/models/validate_organization_member_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +22,10 @@ import 'package:go_router/go_router.dart';
 import '../../../core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
 import '../../membership_data/widgets/custom_step_one_app_bar.dart';
 
-
 class OrganizationMembershipDataScreen extends StatefulWidget {
-  OrganizationMembershipDataScreen({super.key});
+  final SubscriptionRequest subscriptionRequest;
+
+  OrganizationMembershipDataScreen({super.key,required this.subscriptionRequest});
 
   @override
   State<OrganizationMembershipDataScreen> createState() => _OrganizationMembershipDataScreenState();
@@ -29,6 +33,7 @@ class OrganizationMembershipDataScreen extends StatefulWidget {
 
 class _OrganizationMembershipDataScreenState extends State<OrganizationMembershipDataScreen> {
   TextEditingController identityNumberController = TextEditingController();
+  TextEditingController membershipNumberController = TextEditingController();
   TextEditingController birthDate = TextEditingController();
   String? genderSelectedValue;
   String ? governorateSelectedValue;
@@ -36,13 +41,14 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
   TextEditingController region = TextEditingController();
   TextEditingController address = TextEditingController();
   OrganizationMembershipDataCubit? cubit ;
+  List<City> cities = [];
 
   @override
   void initState() {
     super.initState();
     cubit = OrganizationMembershipDataCubit.get(context);
     cubit?.getSubscriptionInfoLookUps();
-    birthDate.text = cubit?.selectedBirthDate != null ? '${cubit?.selectedBirthDate!.year} / ${cubit?.selectedBirthDate!.month} / ${cubit?.selectedBirthDate!.day}' : '';
+    // birthDate.text = cubit?.selectedBirthDate != null ? '${cubit?.selectedBirthDate!.year} / ${cubit?.selectedBirthDate!.month} / ${cubit?.selectedBirthDate!.day}' : '';
   }
 
   @override
@@ -66,37 +72,62 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     height: 40,
                   ),
 
-                  MembershipTextFormField(
+                  MembershipTextFormField(error: identityNumberController.text.length==14?'':"",onSummit: (value) {
+                    if(value!=null && value.length==14){
+                      widget.subscriptionRequest.IdentityNumber = value;
+                    }else{
+                      ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
+                      return 'برجاء ادخال الرقم القومى بصورة صحيحة';
+                    }
+                    },
                     validation: (value){
-
+                      widget.subscriptionRequest.IdentityNumber = value;
                     },
                     controller: identityNumberController,
                     textInputType: TextInputType.number,
                     nameOfField: 'الرقم القومي',
                   ),
-                  MembershipTextFormField(
-                    validation: (value){},
-                    controller: identityNumberController,
+                  MembershipTextFormField(error: membershipNumberController.text.length==14?'':"",
+                    onSummit: (value) {
+                      if(value!=null && value.length==14){
+                        widget.subscriptionRequest.OrganizationMembershipNumber = value;
+                      }else{
+                        ShowToast.showToast('برجاء ادخال رقم العضوية بصورة صحيحة');
+                        return 'برجاء ادخال رقم العضوية بصورة صحيحة';
+                      }
+                    },
+                    validation: (value){
+                      widget.subscriptionRequest.OrganizationMembershipNumber = value;
+                    },
+                    controller: membershipNumberController,
                     textInputType: TextInputType.text,
                     nameOfField: 'رقم العضوية',
-                    isClickable: false,
                   ),
-                  GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states),
+                  GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack : onSelectGovernorate),
                   const SizedBox(
                     height: 10,
                   ),
-                  GovernorateRegionsView(cities: cubit?.subscriptionInfoLookupsModel?.Cities),
+                  GovernorateRegionsView(cities: cities,callBack : onSelectCity),
                   const SizedBox(
                     height: 10,
                   ),
-                  MembershipTextFormField(
-                    validation: (value){},
+                  MembershipTextFormField(error: address.text.length==14?'':"",
+                    onSummit: (value) {
+                      if(value!=null && (value?.length ??0) >20){
+                        widget.subscriptionRequest.Address = value;
+                      }else{
+                        ShowToast.showToast('برجاء ادخال العنوان بشكل صحيح');
+                        return 'برجاء ادخال العنوان بشكل صحيح';
+                      }
+                    },
+                    validation: (value){
+                      widget.subscriptionRequest.Address = value;
+                    },
                     controller: address,
                     textInputType: TextInputType.text,
                     nameOfField: 'العنوان',
-                    isClickable: false,
                   ),
-                  UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList),
+                  UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack: onSelectGender),
                   const SizedBox(
                     height: 10,
                   ),
@@ -105,16 +136,26 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     children: [
                       IconButton(
                         onPressed: (){
-                          OrganizationMembershipDataCubit.get(context).selectBirthDate(context);
+                          selectDate(context);
                         },
                         icon: SvgPicture.asset(AppPaths.dateIconSvg),
                       ),
                       Expanded(
                         flex: 6,
-                        child: DefaultTextFormFieldWithoutLabel(
+                        child: DefaultTextFormFieldWithoutLabel(error: birthDate.text.length>=7?'':"",
                           controller: birthDate,
                           keyboardType: TextInputType.text,
-                          validation: (value){},
+                          validation: (value){
+                            if(value != null && value.length>7) {
+                              setState(() {
+                                birthDate.text = value;
+                                widget.subscriptionRequest.BirthDate = value;
+                              });
+                            }else{
+                              ShowToast.showToast('برجاء ادخال تاريخ الميلاد بصورة صحيحة');
+                              return 'برجاء ادخال تاريخ الميلاد بصورة صحيحة';
+                            }
+                          },
                           isClickable: false,
                         ),
                       ),
@@ -134,7 +175,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              OrganizationMembershipDataCubit.get(context).getNationalIDImageFromGallery();
+                              cubit?.getNationalIDImageFromGallery();
                             },
                             child: Container(
                               height: 80,
@@ -170,8 +211,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              OrganizationMembershipDataCubit.get(context).getPersonalImageFromGallery();
-
+                              cubit?.getPersonalImageFromGallery();
                             },
                             child: Container(
                               height: 80,
@@ -209,7 +249,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   ),
                   InkWell(
                     onTap: (){
-                      OrganizationMembershipDataCubit.get(context).getOrganizationCardFromGallery ();
+                      cubit?.getOrganizationCardFromGallery ();
                     },
                     child: Container(
                       height: 85, padding: EdgeInsets.all(2),
@@ -243,7 +283,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   ),
                   DefaultButton(
                     function: (){
-                      GoRouter.of(context).push(AppRouters.kServiceScreen);
+                      validateAndContinue();
                     },
                     text: 'متابعة' ,
                     height: 45,
@@ -259,5 +299,83 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
       );
     },
 );
+  }
+
+  onSelectGovernorate(String name) {
+    widget.subscriptionRequest.StateID = cubit?.subscriptionInfoLookupsModel?.states?[cubit?.subscriptionInfoLookupsModel?.states?.indexWhere((element) => element.name==name) ??0].iD ??0;
+    setState(() {
+      cities  = cubit?.subscriptionInfoLookupsModel?.Cities?.where((element) => element.StateID == widget.subscriptionRequest?.StateID).toList() ??[];
+      print(cities.length.toString());
+    });
+  }
+
+  onSelectCity(String name) {
+    widget.subscriptionRequest.CityID = cubit?.subscriptionInfoLookupsModel?.Cities?[cubit?.subscriptionInfoLookupsModel?.Cities?.indexWhere((element) => element.name==name) ??0].iD ??0;
+  }
+
+  onSelectGender(String name){
+    widget.subscriptionRequest.Gender = (name.toLowerCase() == 'male' || name.toLowerCase() == 'ذكر')? 1 :2 ;
+  }
+
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1970, 1),
+        lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        String date = picked.year.toString() +" / "+picked.month.toString()+" / "+picked.day.toString();
+        birthDate.text = date;
+        widget.subscriptionRequest.BirthDate = date;
+      });
+    }
+  }
+
+  void validateAndContinue() {
+      if(widget.subscriptionRequest.IdentityNumber==null || ((widget.subscriptionRequest.IdentityNumber?.length??0)<14 || (widget.subscriptionRequest.IdentityNumber?.length??0)>14)){
+        ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
+        return ;
+      }
+      else if(widget.subscriptionRequest.OrganizationMembershipNumber==null || ((widget.subscriptionRequest.OrganizationMembershipNumber?.length??0)<7 || (widget.subscriptionRequest.OrganizationMembershipNumber?.length??0)>7)){
+        ShowToast.showToast('برجاء ادخال رقم العضوية بصورة صحيحة');
+        return ;
+      }
+      else if(widget.subscriptionRequest.StateID==null || (widget.subscriptionRequest.StateID??0) <0){
+        ShowToast.showToast('برجاء اختيار المحافظة بصورة صحيحة');
+        return ;
+      }
+      else if(widget.subscriptionRequest.CityID==null || (widget.subscriptionRequest.CityID??0) <0){
+        ShowToast.showToast('برجاء اختيار المنطقة بصورة صحيحة');
+        return ;
+      }
+      else if(widget.subscriptionRequest.Address==null || (widget.subscriptionRequest.Address?.length ??0) <10){
+        ShowToast.showToast('برجاء ادخال العنوان بصورة صحيحة');
+        return ;
+      }
+      else if(widget.subscriptionRequest.Gender==null || (widget.subscriptionRequest.Gender ??0) <0){
+        ShowToast.showToast('برجاء اختيار النوع بصورة صحيحة');
+        return ;
+      }else if(widget.subscriptionRequest.BirthDate==null || (widget.subscriptionRequest.BirthDate?.length ??0) <=6){
+        ShowToast.showToast('برجاء ادخال تاريخ الميلاد بصورة صحيحة');
+        return ;
+      }else if(cubit?.personalImage == null || cubit?.personalImage?.path==null){
+        ShowToast.showToast('برجاء اختيار صورة شخصية لك بصورة صحيحة');
+        return ;
+      }else if(cubit?.nationalIdImage == null || cubit?.nationalIdImage?.path==null){
+        ShowToast.showToast('برجاء اختيار صورة الرقم القومى بصورة صحيحة');
+        return ;
+      }else if(cubit?.orgCardImage == null || cubit?.orgCardImage?.path==null){
+        ShowToast.showToast('برجاء اختيار صورة كارت العضوية للمؤسسة بصورة صحيحة');
+        return ;
+      } else {
+        widget.subscriptionRequest.PersonalImage = cubit?.personalImage;
+        widget.subscriptionRequest.NationalNumberImage = cubit?.nationalIdImage;
+        widget.subscriptionRequest.OrganizationMembershipNumberImage = cubit?.orgCardImage;
+
+        // OrganizationMembershipDataCubit.get(context).requestSubscription(widget.subscriptionRequest);
+        GoRouter.of(context).push(AppRouters.kServiceScreen,extra: widget.subscriptionRequest);
+      };
   }
 }

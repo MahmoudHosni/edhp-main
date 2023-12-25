@@ -44,9 +44,13 @@ class LayoutCubit extends Cubit<LayoutStates>{
       token: CacheHelper.getData(key: 'token'),
     ).then((value) {
       advertisements=[];
+      adsImage = [];
       value.data.forEach((element) {
-        advertisements?.add(Advertisement.fromJson(element));
+        var adv = Advertisement.fromJson(element);
+        adsImage.add('$baseUrl${EndPoint.imgPath}?referenceTypeId=4&referenceId=${adv.iD}');
+        advertisements?.add(adv);
       });
+
       emit(AdvertisementStateLoadSuccess());
     }).catchError((error) {
       print(error.toString());
@@ -126,14 +130,14 @@ class LayoutCubit extends Cubit<LayoutStates>{
   }
 
   List<String> adsImage = [
-    'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22220740/auto-draft-1317-1024x683.jpg',
-    'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22220827/auto-draft-1320-1024x683.jpg',
-    'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22221000/auto-draft-1326-1024x683.jpg',
-    'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22221000/auto-draft-1326.jpg',
-    'https://elements-cover-images-0.imgix.net/ba74bcfa-aa7c-43e6-b726-2bba7733d5fb?auto=compress%2Cformat&w=1370&fit=max&s=f2de7d383a6ab16de8dd4ebf90382d68'
+    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22220740/auto-draft-1317-1024x683.jpg',
+    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22220827/auto-draft-1320-1024x683.jpg',
+    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22221000/auto-draft-1326-1024x683.jpg',
+    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22221000/auto-draft-1326.jpg',
+    // 'https://elements-cover-images-0.imgix.net/ba74bcfa-aa7c-43e6-b726-2bba7733d5fb?auto=compress%2Cformat&w=1370&fit=max&s=f2de7d383a6ab16de8dd4ebf90382d68'
   ];
   Random random = Random();
-  int ? index = 1;
+  int ? index = 0;
   void changeAdsImageRightIcon(){
     index = random.nextInt(advertisements.length);
     emit(ChangeAdsImage());

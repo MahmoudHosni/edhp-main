@@ -47,7 +47,7 @@ class DrawerAppHeader extends StatelessWidget {
             ),
             clipBehavior: Clip.antiAlias,
             child: CachedNetworkImage(
-                    imageUrl: '$baseUrl${EndPoint.imageProfile}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                    imageUrl: '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
                     fit: BoxFit.cover,
                     width: 115,
                     height: 115,

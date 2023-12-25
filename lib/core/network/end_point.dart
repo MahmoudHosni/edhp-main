@@ -16,6 +16,7 @@ class EndPoint {
   static String getProfileImage(BuildContext context){
     return '$baseUrl/apiAttachments/Get?referenceTypeId=${1}&referenceId=${GetProfileCubit.get(context).userProfileModel!.profileID}';
   }
+  static const String imgPath = '/apiPublicUserInterface/GetImage';
   static const imageProfile = '/apiAttachments/Get';
   static const String organizationMemberSubscription = '/apiAccount/OrganizationMemberSubscription';
   static const String getNewAccessToken = '/apiAccount/GetNewToken';
@@ -23,6 +24,7 @@ class EndPoint {
   static const String getSubscriptionInfoLookup = '/apiPublicUserInterface/GetSubscriptionInfoLookupsViewModel';
   static const String getStaticData = '/apiPublicUserInterface/GetSubscriptionInfoLookupsViewModel';
   static const String getAdvicesData = '/apiUserInterface/GetMedicalAdvices';
-
+  static const String staticAds = 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22220740/auto-draft-1317-1024x683.jpg';
   static const String getAdvertisements = '/apiUserInterface/GetAdvertisements';
+  static const String addNewSubscription = '/apiUserInterface/AddNewSubscription';
 }

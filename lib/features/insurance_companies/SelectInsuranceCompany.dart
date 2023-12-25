@@ -23,11 +23,11 @@ class SelectInsuranceCompany extends StatefulWidget{
 
 class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
   final formKey = GlobalKey<FormState>();
-  int companyID=-1;
+  int orgID=-1;
 
   @override
   Widget build(BuildContext context) {
-    print("Member ship :: ${widget.subscriptionRequest.memberShipID}");
+    print("Member ship :: ${widget.subscriptionRequest.MembershipTypeID}");
     return BlocConsumer<InsuranceCompaniesCubit, InsuranceCompanyState>(
       listener: (context, state) {
         // TODO: implement listener
@@ -53,7 +53,7 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
                       itemBuilder: (_, index) => InkWell(
                         onTap: (){
                           setState(() {
-                            companyID = InsuranceCompaniesCubit.get(context).companiesList[index].iD ??-1;
+                            orgID = InsuranceCompaniesCubit.get(context).companiesList[index].iD ??-1;
                           });
                         },
                         child: Padding(
@@ -61,7 +61,7 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
-                                color: companyID == InsuranceCompaniesCubit.get(context).companiesList[index].iD ? AppColors.primaryBlueColor : AppColors.whiteColor,
+                                color: orgID == InsuranceCompaniesCubit.get(context).companiesList[index].iD ? AppColors.primaryBlueColor : AppColors.whiteColor,
                                 boxShadow: const [
                                   BoxShadow(
                                     color: AppColors.lightGrayColor,
@@ -80,7 +80,7 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
                                     padding: const EdgeInsets.fromLTRB(8.0,0,8,0),
                                     child: Text(InsuranceCompaniesCubit.get(context).companiesList[index].name ??'' ,textAlign: TextAlign.center,
                                       style: Styles.textStyle13W400.
-                                                    copyWith(color: companyID == InsuranceCompaniesCubit.get(context).companiesList[index].iD ? Colors.white:Colors.black),maxLines: 2,),
+                                                    copyWith(color: orgID == InsuranceCompaniesCubit.get(context).companiesList[index].iD ? Colors.white:Colors.black),maxLines: 2,),
                                   )
                                 ],
                               ),
@@ -94,9 +94,10 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 25,
                   ),
-                  DefaultButton(backgroundColor: (companyID > 0) ? AppColors.primaryBlueColor : Colors.grey,
+                  DefaultButton(backgroundColor: (orgID > 0) ? AppColors.primaryBlueColor : Colors.grey,
                     function: () {
-                      GoRouter.of(context).push(AppRouters.kOrganizationMembershipDataScreen);
+                      widget.subscriptionRequest.OrganizationID = orgID;
+                      GoRouter.of(context).push(AppRouters.kOrganizationMembershipDataScreen,extra: widget.subscriptionRequest);
                     },
                     text: StringsManager.select,
                     redius: 10,

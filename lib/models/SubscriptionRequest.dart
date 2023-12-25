@@ -1,18 +1,23 @@
 import 'dart:io';
 
 class SubscriptionRequest {
-  int? companyID;
-  int? memberShipID;
-  int? organizationID;
-  String? nationalID;
-  int? governorateID;
-  int? cityID;
-  String? address;
-  int? gender;
-  String? birthDate;
-  File? yourPhoto;
-  File? yourNationalIDPhoto;
-  File? yourMembership;
+  int? MedicalCompanyID;
+  int? MembershipTypeID;
+  int? SubscriptionTypeID;
+  int? OrganizationID;
+  String? Cost;
+  String? IdentityNumber;
+  String? OrganizationMembershipNumber;
+  int? CityID;
+  int? StateID;
+  String? Address;
+  int? Gender;
+  String? BirthDate;
+  String? SubscriptionStartDate;
+  String? SubscriptionEndDate;
+  File? PersonalImage;
+  File? NationalNumberImage;
+  File? OrganizationMembershipNumberImage;
 
   SubscriptionRequest();
 }

@@ -109,7 +109,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kServiceScreen,
-        builder: (context, state) => ServiceScreen(),
+        builder: (context, state) => ServiceScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kCreateMembershipScreen,
@@ -133,7 +133,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kConfirmMembershipDataScreen,
-        builder: (context, state) => ConfirmMembershipDataScreen(),
+        builder: (context, state) => ConfirmMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kPaymentMembershipScreen,
@@ -145,7 +145,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kOrganizationMembershipDataScreen ,
-        builder: (context, state) => OrganizationMembershipDataScreen(),
+        builder: (context, state) => OrganizationMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kAddRelativesScreen ,
@@ -193,7 +193,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kServiceScreen,
-        builder: (context, state) => ServiceScreen(),
+        builder: (context, state) => ServiceScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kCreateMembershipScreen,
@@ -217,7 +217,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kConfirmMembershipDataScreen,
-        builder: (context, state) => ConfirmMembershipDataScreen(),
+        builder: (context, state) => ConfirmMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kPaymentMembershipScreen,
@@ -229,7 +229,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kOrganizationMembershipDataScreen ,
-        builder: (context, state) => OrganizationMembershipDataScreen(),
+        builder: (context, state) => OrganizationMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kAddRelativesScreen ,

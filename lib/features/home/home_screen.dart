@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:edhp/core/network/cache_helper.dart';
+import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_button.dart';
@@ -62,7 +64,11 @@ class HomeScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              child: Image.network(LayoutCubit.get(context).adsImage[LayoutCubit.get(context).index!] , fit: BoxFit.cover,),
+                              child: CachedNetworkImage(
+                                  imageUrl:LayoutCubit.get(context).adsImage.length>0 ? LayoutCubit.get(context).adsImage[LayoutCubit.get(context).index!] :EndPoint.staticAds,
+                                  fit: BoxFit.fill,
+                                  placeholder: (context, url) =>  Image.network( EndPoint.staticAds, fit: BoxFit.cover,),
+                                  errorWidget: (context, url, error) => Image.network( EndPoint.staticAds, fit: BoxFit.cover,))
                             ),
                             Align(
                               alignment: Alignment.centerRight,

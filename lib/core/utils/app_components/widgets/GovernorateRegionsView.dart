@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 class GovernorateRegionsView extends StatelessWidget{
   List<City>? cities;
-  String ? governorateSelectedValue;
+  final Function callBack;
 
-  GovernorateRegionsView({required this.cities});
+  GovernorateRegionsView({required this.cities,required this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +49,17 @@ class GovernorateRegionsView extends StatelessWidget{
                   .toList(),
               validator: (value) {
                 if (value == null) {
-                  return 'من فضلك اختر نوع جنسك';
+                  return 'من فضلك اختر المنطقة';
+                }else{
+                  callBack(value);
                 }
                 return null;
               },
               onChanged: (value) {
+                callBack(value);
               },
               onSaved: (value) {
-                governorateSelectedValue = value.toString();
+                callBack(value);
               },
               dropdownStyleData: DropdownStyleData(
                 decoration: BoxDecoration(

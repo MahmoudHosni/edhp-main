@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                     ConfirmDataFieldAndValueItem(field: 'اسم المستخدم', value: cubit.userProfileModel!.userName!.toString()),
                     ConfirmDataFieldAndValueItem(field: 'رقم الهاتف', value: cubit.userProfileModel!.mobileNumber!.toString()),
                     ConfirmDataFieldAndValueItem(field: 'البريد الالكتروني', value: cubit.userProfileModel!.email!.toString()),
-                    ConfirmDataFieldAndValueItem(field: 'الرقم القومي', value: cubit.userProfileModel!.identityNumber!.toString()),
+                    ConfirmDataFieldAndValueItem(field: 'الرقم القومي', value: cubit.userProfileModel!.identityNumber.toString()),
                     ConfirmDataFieldAndValueItem(field: 'الجنس', value: cubit.userProfileModel!.gender! == 1 ? 'ذكر' : 'انثى'),
                     SizedBox(
                       height: MediaQuery.of(context).size.height/15,

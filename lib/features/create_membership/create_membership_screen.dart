@@ -17,7 +17,7 @@ class CreateMembershipScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Company ID : ${subscriptionRequest.companyID}");
+    print("Company ID : ${subscriptionRequest.MedicalCompanyID}");
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -44,7 +44,7 @@ class CreateMembershipScreen extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        subscriptionRequest.memberShipID = 2;
+                        subscriptionRequest.SubscriptionTypeID = 2;
                         GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: subscriptionRequest);
                       },
                       child: Container(
@@ -79,7 +79,7 @@ class CreateMembershipScreen extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        subscriptionRequest.memberShipID = 1;
+                        subscriptionRequest.SubscriptionTypeID = 1;
                         GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: subscriptionRequest);
                       },
                       child: Container(

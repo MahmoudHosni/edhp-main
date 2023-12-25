@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/features/edit_profile/cubit/cubit.dart';
 import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
@@ -31,10 +33,13 @@ class EditImage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                 ),
                 clipBehavior: Clip.antiAlias,
-                child: Image.file(
-                  GetProfileCubit.get(context).profileImage!,
-                  fit: BoxFit.cover,
-                ),
+                child: CachedNetworkImage(
+                    imageUrl: '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                    fit: BoxFit.cover,
+                    width: 115,
+                    height: 115,
+                    placeholder: (context, url) =>  Image.asset(AppPaths.profileImage, fit: BoxFit.cover,),
+                    errorWidget: (context, url, error) => Image.asset(AppPaths.profileImage, fit: BoxFit.cover,))
               ),
               InkWell(
                 onTap: () {

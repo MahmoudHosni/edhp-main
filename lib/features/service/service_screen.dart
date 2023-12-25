@@ -1,6 +1,7 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/features/service/widgets/membership_type_container.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/utils/app_components/widgets/back_custom_app_bar.dart';
@@ -9,7 +10,8 @@ import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
 class ServiceScreen extends StatelessWidget {
-  const ServiceScreen({super.key});
+  final SubscriptionRequest subscriptionRequest;
+  const ServiceScreen({super.key,required this.subscriptionRequest});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class ServiceScreen extends StatelessWidget {
                           price: cubit.membershipTypeList[index].price.toString(),
                           name: cubit.membershipTypeList[index].name.toString(),
                           description: cubit.membershipTypeList[index].description.toString(),
-                          index: index,
+                          id: cubit.membershipTypeList[index].iD??0,subscriptionRequest: subscriptionRequest,
                         ),
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 30,

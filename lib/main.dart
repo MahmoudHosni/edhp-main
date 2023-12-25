@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_routers.dart';
+import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMemberShipCubit.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompaniesCubit.dart';
 import 'package:edhp/features/medical_advices/cubit/MedicalAdvicesCubit.dart';
 import 'package:edhp/features/membership_data/cubit/cubit.dart';
@@ -63,6 +64,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => OrganizationMembershipDataCubit()
+        ),//
+        BlocProvider(
+            create: (context) => ConfirmMemberShipCubit()
         ),
         BlocProvider(
             create: (context) => MembershipDataCubit()

@@ -17,35 +17,7 @@ class MembershipDataCubit extends Cubit<MembershipDataStates>{
 
   DateTime ? selectedDate;
 
-  Future<void> selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1970, 1),
-        lastDate: DateTime.now(),
-        builder: (context, child) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-              colorScheme: const ColorScheme.light(
-                primary: AppColors.primaryBlueColor,
-                onPrimary: AppColors.whiteColor,
-                onSurface: AppColors.primaryBlueColor,
-              ),
-              textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(
-                  primary: AppColors.primaryBlueColor, // button text color
-                ),
-              ),
-            ),
-            child: child!,
-          );
-        }
-    );
-    if (picked != null && picked != selectedDate) {
-      selectedDate = picked;
-      emit(MembershipDataSelectDateState());
-    }
-  }
+
 
   File ? profileImage;
   var picker = ImagePicker();

@@ -56,7 +56,9 @@ class AddRelativesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 40,
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: primaryMemberController.text.length==14?'':"",onSummit: (value) {
+
+                   },
                   validation: (value){
 
                   },
@@ -64,7 +66,9 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'العضو الاساسي',
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: memberNumberController.text.length==14?'':"",onSummit: (value) {
+
+                   },
                   validation: (value){
 
                   },
@@ -72,7 +76,9 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'رقم العضو',
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: nameController.text.length==14?'':"",onSummit: (value) {
+
+                },
                   validation: (value){
 
                   },
@@ -80,7 +86,9 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'الاسم',
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: addressController.text.length==14?'':"",onSummit: (value) {
+
+                },
                   validation: (value){
 
                   },
@@ -88,7 +96,9 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'العنوان',
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: jobController.text.length==14?'':"",onSummit: (value) {
+
+                },
                   validation: (value){
 
                   },
@@ -232,7 +242,9 @@ class AddRelativesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: notationIdController.text.length==14?'':"",onSummit: (value) {
+
+                },
                   validation: (value){
 
                   },
@@ -240,7 +252,9 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.number,
                   nameOfField: 'الرقم القومي',
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: governorateController.text.length==14?'':"",onSummit: (value) {
+
+                },
                   validation: (value){
 
                   },
@@ -248,7 +262,9 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'المحافظة',
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: phoneNumberController.text.length==14?'':"",onSummit: (value) {
+
+                },
                   validation: (value){
 
                   },
@@ -266,7 +282,7 @@ class AddRelativesScreen extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 6,
-                      child: DefaultTextFormFieldWithoutLabel(
+                      child: DefaultTextFormFieldWithoutLabel(error: birthDateController.text.length==14?'':"",
                         controller: birthDateController,
                         keyboardType: TextInputType.text,
                         validation: (value){},
@@ -347,7 +363,9 @@ class AddRelativesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                MembershipTextFormField(
+                MembershipTextFormField(error: passwordController.text.length==14?'':"",onSummit: (value) {
+
+                },
                   validation: (value){
 
                   },

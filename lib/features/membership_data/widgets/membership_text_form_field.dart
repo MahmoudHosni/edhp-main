@@ -6,14 +6,16 @@ import '../../../core/utils/styles/styles.dart';
 class MembershipTextFormField extends StatelessWidget {
 
   MembershipTextFormField({
-    super.key,
+    super.key,required this.error,
+    required this.onSummit,
     required this.validation,
     required this.controller,
     required this.textInputType,
     required this.nameOfField,
     this.isClickable = true,
   });
-
+  final String error;
+  final String? Function(String? value) onSummit;
   TextEditingController controller;
   TextInputType textInputType;
   final String? Function(String? value) validation;
@@ -28,10 +30,10 @@ class MembershipTextFormField extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: DefaultTextFormFieldWithoutLabel(
-                controller: controller,
+              child: DefaultTextFormFieldWithoutLabel(error: error,
+                controller: controller,onSubmit: onSummit,
                 keyboardType: textInputType,
-                validation: validation,
+                validation: validation,onChange: validation,
                 isClickable: isClickable,
               ),
             ),

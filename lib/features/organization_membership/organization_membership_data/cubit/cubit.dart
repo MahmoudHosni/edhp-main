@@ -1,15 +1,15 @@
 import 'dart:io';
-
+import 'package:dio/dio.dart';
+import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/features/organization_membership/organization_membership_data/cubit/states.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../../core/utils/app_colors.dart';
 
 class OrganizationMembershipDataCubit extends Cubit<OrganizationMembershipDataStates> {
   OrganizationMembershipDataCubit() : super(OrganizationMembershipDataInitiateState());
@@ -53,38 +53,6 @@ class OrganizationMembershipDataCubit extends Cubit<OrganizationMembershipDataSt
     }
   }
 
-  DateTime ? selectedBirthDate;
-
-  Future<void> selectBirthDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1970, 1),
-        lastDate: DateTime.now(),
-        builder: (context, child) {
-          return Theme(
-            data: Theme.of(context).copyWith(
-              colorScheme: const ColorScheme.light(
-                primary: AppColors.primaryBlueColor,
-                onPrimary: AppColors.whiteColor,
-                onSurface: AppColors.primaryBlueColor,
-              ),
-              textButtonTheme: TextButtonThemeData(
-                style: TextButton.styleFrom(
-                  primary: AppColors.primaryBlueColor, // button text color
-                ),
-              ),
-            ),
-            child: child!,
-          );
-        }
-    );
-    if (picked != null && picked != selectedBirthDate) {
-      selectedBirthDate = picked;
-      emit(OrganizationMembershipDataSelectDateState());
-    }
-  }
-
   Future getNationalIDImageFromGallery()async{
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if(pickedFile != null){
@@ -115,5 +83,40 @@ class OrganizationMembershipDataCubit extends Cubit<OrganizationMembershipDataSt
       print(error.toString());
       emit(GetSubscriptionInfoLookupsErrorState());
     });
+  }
+
+  Future<bool> requestSubscription(SubscriptionRequest subscriptionRequest) async{
+    emit(GetSubscriptionInfoLookupsLoadingState());
+    FormData formData = FormData.fromMap({
+      // 'Access-Token':CacheHelper.getData(key: 'token'),
+      'SubscriptionTypeID':"1",//subscriptionRequest.SubscriptionTypeID.toString(),
+      'OrganizationID':subscriptionRequest.OrganizationID.toString(),
+      'OrganizationMembershipNumber':subscriptionRequest.OrganizationMembershipNumber,
+      'MedicalCompanyID':subscriptionRequest.MedicalCompanyID.toString(),
+      'MembershipTypeID':subscriptionRequest.MembershipTypeID.toString(),
+      'Address':subscriptionRequest.Address,
+      'IdentityNumber':subscriptionRequest.IdentityNumber,
+      'StateID':subscriptionRequest.StateID.toString(),
+      'CityID':subscriptionRequest.CityID.toString(),
+      'Gender':subscriptionRequest.Gender.toString(),
+      'BirthDate':subscriptionRequest.BirthDate,
+      "PersonalImage": await MultipartFile.fromFile(subscriptionRequest.PersonalImage?.path ??'', filename:'PersonalImage'),
+      "OrganizationMembershipNumberImage": await MultipartFile.fromFile(subscriptionRequest.OrganizationMembershipNumberImage?.path ??'', filename:'OrganizationMembershipNumberImage'),
+      "NationalNumberImage": await MultipartFile.fromFile(subscriptionRequest.NationalNumberImage?.path ??'', filename:'NationalNumberImage')
+    });
+
+    await DioHelper.postFormData(
+      path: EndPoint.addNewSubscription ,
+      data: formData,
+      token: CacheHelper.getData(key: 'token'),
+    ).then((value) {
+      print(value.data);
+
+      return Future(() => true);
+    }).catchError((error) {
+      print(error.toString());
+      return Future(() => false);
+    });
+    return Future(() => false);
   }
 }

@@ -19,8 +19,9 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
   int? minLines;
   bool isClickable = true;
   double? radius = 10;
+  String? error;
 
-  DefaultTextFormFieldWithoutLabel({Key? key,
+  DefaultTextFormFieldWithoutLabel({Key? key, this.error='',
   required this.controller,
   required this.keyboardType,
   this.onSubmit,
@@ -61,12 +62,12 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
           validator: validation,
           onChanged: onChange,
           decoration: InputDecoration(
-            border: InputBorder.none,
+            border: InputBorder.none,errorText: error,errorStyle: TextStyle(color: Colors.red),
             prefixIcon: prefixIcon != null ? IconButton(
               onPressed: onPressedPrefixIcon,
               icon: Icon(
                 prefixIcon ,
-                color: AppColors.lightGrayColor,
+                color: ((error?.length??0) > 0)? AppColors.lightGrayColor:Colors.red,
               ),
             ) : null,
             suffixIcon:  suffixIcon != null ? IconButton(

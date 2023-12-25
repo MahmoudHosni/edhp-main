@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 class UserSexType extends StatelessWidget{
   List<GenderList>? genderList;
   String? genderSelectedValue;
+  final Function callBack;
 
-  UserSexType({required this.genderList});
+  UserSexType({required this.genderList,required this.callBack});
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +50,17 @@ class UserSexType extends StatelessWidget{
               validator: (value) {
                 if (value == null) {
                   return 'من فضلك اختر نوع جنسك';
+                }else{
+                  callBack(value);
                 }
                 return null;
               },
               onChanged: (value) {
+                callBack(value);
               },
               onSaved: (value) {
                 genderSelectedValue = value.toString();
+                callBack(value);
               },
               dropdownStyleData: DropdownStyleData(
                 decoration: BoxDecoration(
