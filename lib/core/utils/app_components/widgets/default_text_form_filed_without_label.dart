@@ -20,8 +20,9 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
   bool isClickable = true;
   double? radius = 10;
   String? error;
+  int maxLen;
 
-  DefaultTextFormFieldWithoutLabel({Key? key, this.error='',
+  DefaultTextFormFieldWithoutLabel({Key? key,required this.maxLen, this.error='',
   required this.controller,
   required this.keyboardType,
   this.onSubmit,
@@ -50,7 +51,7 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: TextFormField(
-          textAlign: TextAlign.end,
+          textAlign: TextAlign.end,maxLength: maxLen,
           enabled: isClickable,
           style: Styles.textStyle14W400,
           minLines: minLines,

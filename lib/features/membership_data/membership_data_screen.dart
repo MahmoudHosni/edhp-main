@@ -1,3 +1,4 @@
+import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
@@ -42,7 +43,8 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
   TextEditingController passwordController = TextEditingController();
   String? maritalStatusSelectedValue;
   MembershipDataCubit? cubit;
-  int stateID=0;
+  int stateID=1;
+  int gender = 1;
   List<City> cities = [];
 
   @override
@@ -73,9 +75,18 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                     const SizedBox(
                       height: 25,
                     ),
-                    MembershipTextFormField(error: identityNumberController.text.length==14?'':"",onSummit: (value) {
+                    MembershipTextFormField(maxLength: 14,error: identityNumberController.text.length==14?'':"",onSummit: (value) {
                       if(value!=null && value.length==14){
+                        var analyser = DateAnaylser(date: value);
                         widget.subscriptionRequest.IdentityNumber = value;
+                        birthDateController.text = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                        widget.subscriptionRequest.BirthDate = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                        stateID = int.parse(analyser.getGovernorate());
+                        print('State   ::: ${stateID}');
+                        widget.subscriptionRequest.StateID = stateID;
+                        gender = analyser.getGender();
+                        print('Gender   ::: ${gender}');
+                        widget.subscriptionRequest.Gender = gender;
                       }else{
                         ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
                         return 'برجاء ادخال الرقم القومى بصورة صحيحة';
@@ -83,12 +94,24 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                     },
                       validation: (value){
                         widget.subscriptionRequest.IdentityNumber = value;
+                        if(value!=null && value.length==14){
+                          var analyser = DateAnaylser(date: value);
+                          birthDateController.text = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                          widget.subscriptionRequest.BirthDate = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                          stateID = int.parse(analyser.getGovernorate());
+                          print('State   ::: ${stateID}');
+                          widget.subscriptionRequest.StateID = stateID;
+                          gender = analyser.getGender();
+                          print('Gender   ::: ${gender}');
+                          widget.subscriptionRequest.Gender = gender;
+                          updateCities();
+                        }
                       },
                       controller: identityNumberController,
                       textInputType: TextInputType.number,
                       nameOfField: 'الرقم القومي',
                     ),
-                    GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack: onSelectGovernorate),
+                    GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack: onSelectGovernorate,stateID: stateID),
                     const SizedBox(
                       height: 10,
                     ),
@@ -98,7 +121,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                       height: 10,
                     ),
 
-                    MembershipTextFormField(error: addressController.text.length==14?'':"",
+                    MembershipTextFormField(maxLength: 100,error: addressController.text.length==14?'':"",
                       onSummit: (value) {
                         if(value!=null && (value?.length ??0) >20){
                           widget.subscriptionRequest.Address = value;
@@ -115,7 +138,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                       nameOfField: 'العنوان',
                     ),
 
-                    UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack:onSelectGender),
+                    UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack:onSelectGender,gender: gender),
                     const SizedBox(
                       height: 10,
                     ),
@@ -123,13 +146,13 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                       children: [
                         IconButton(
                           onPressed: (){
-                            selectDate(context);
+                            selectDate(context,birthDateController);
                           },
                           icon: SvgPicture.asset(AppPaths.dateIconSvg),
                         ),
                         Expanded(
                           flex: 6,
-                          child: DefaultTextFormFieldWithoutLabel(error: birthDateController.text.length>=7?'':"",
+                          child: DefaultTextFormFieldWithoutLabel(maxLen: 11,error: birthDateController.text.length>=7?'':"",
                             controller: birthDateController,
                             keyboardType: TextInputType.text,onChange: (value) {
                               print("onChange");
@@ -160,13 +183,13 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                       children: [
                         IconButton(
                           onPressed: (){
-                            selectDate(context);
+                            selectDate(context,startDateController);
                           },
                           icon: SvgPicture.asset(AppPaths.dateIconSvg),
                         ),
                         Expanded(
                           flex: 6,
-                          child: DefaultTextFormFieldWithoutLabel(error: startDateController.text.length>=7?'':"",
+                          child: DefaultTextFormFieldWithoutLabel(maxLen: 11,error: startDateController.text.length>=7?'':"",
                             controller: startDateController,
                             keyboardType: TextInputType.text,onChange: (value) {
                               print("onChange");
@@ -196,13 +219,13 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                       children: [
                         IconButton(
                           onPressed: (){
-                            selectDate(context);
+                            selectDate(context,endDateController);
                           },
                           icon: SvgPicture.asset(AppPaths.dateIconSvg),
                         ),
                         Expanded(
                           flex: 6,
-                          child: DefaultTextFormFieldWithoutLabel(error: endDateController.text.length>=7?'':"",
+                          child: DefaultTextFormFieldWithoutLabel(maxLen: 11,error: endDateController.text.length>=7?'':"",
                             controller: endDateController,
                             keyboardType: TextInputType.text,onChange: (value) {
                               print("onChange");
@@ -331,10 +354,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
 
   onSelectGovernorate(String name) {
     widget.subscriptionRequest.StateID = cubit?.subscriptionInfoLookupsModel?.states?[cubit?.subscriptionInfoLookupsModel?.states?.indexWhere((element) => element.name==name) ??0].iD ??0;
-    setState(() {
-      cities  = cubit?.subscriptionInfoLookupsModel?.Cities?.where((element) => element.StateID == widget.subscriptionRequest?.StateID).toList() ??[];
-      print(cities.length.toString());
-    });
+    updateCities();
   }
 
   onSelectCity(String name) {
@@ -345,7 +365,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
     widget.subscriptionRequest.Gender = (name.toLowerCase() == 'male' || name.toLowerCase() == 'ذكر')? 1 :2 ;
   }
 
-  Future<void> selectDate(BuildContext context) async {
+  Future<void> selectDate(BuildContext context,TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -355,8 +375,14 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
     if (picked != null) {
       setState(() {
         String date = picked.year.toString() +" / "+picked.month.toString()+" / "+picked.day.toString();
-        birthDateController.text = date;
-        widget.subscriptionRequest.BirthDate = date;
+        controller.text = date;
+        if(controller == birthDateController) {
+          widget.subscriptionRequest.BirthDate = date;
+        }else if(controller == startDateController) {
+          widget.subscriptionRequest.SubscriptionStartDate = date;
+        }else if(controller == endDateController) {
+          widget.subscriptionRequest.SubscriptionEndDate = date;
+        }
       });
     }
   }
@@ -402,5 +428,12 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
 
       GoRouter.of(context).push(AppRouters.kServiceScreen,extra: widget.subscriptionRequest);
     };
+  }
+
+  void updateCities() {
+    setState(() {
+      cities  = cubit?.subscriptionInfoLookupsModel?.Cities?.where((element) => element.StateID == widget.subscriptionRequest?.StateID).toList() ??[];
+      print(cities.length.toString());
+    });
   }
 }

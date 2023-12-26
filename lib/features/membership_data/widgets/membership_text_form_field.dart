@@ -6,7 +6,7 @@ import '../../../core/utils/styles/styles.dart';
 class MembershipTextFormField extends StatelessWidget {
 
   MembershipTextFormField({
-    super.key,required this.error,
+    super.key,required this.maxLength,required this.error,
     required this.onSummit,
     required this.validation,
     required this.controller,
@@ -14,6 +14,7 @@ class MembershipTextFormField extends StatelessWidget {
     required this.nameOfField,
     this.isClickable = true,
   });
+  final int maxLength;
   final String error;
   final String? Function(String? value) onSummit;
   TextEditingController controller;
@@ -30,7 +31,7 @@ class MembershipTextFormField extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: DefaultTextFormFieldWithoutLabel(error: error,
+              child: DefaultTextFormFieldWithoutLabel(maxLen: maxLength,error: error,
                 controller: controller,onSubmit: onSummit,
                 keyboardType: textInputType,
                 validation: validation,onChange: validation,

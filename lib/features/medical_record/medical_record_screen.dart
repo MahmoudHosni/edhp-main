@@ -50,7 +50,7 @@ class MedicalRecordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                DefaultTextFormFieldWithoutLabel(controller: nameController, keyboardType: TextInputType.name, validation: (value){},),
+                DefaultTextFormFieldWithoutLabel(maxLen: 100,controller: nameController, keyboardType: TextInputType.name, validation: (value){},),
                 const SizedBox(
                   height: 10,
                 ),
@@ -58,7 +58,7 @@ class MedicalRecordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                DefaultTextFormFieldWithoutLabel(controller: phoneNumberController, keyboardType: TextInputType.number, validation: (value){},),
+                DefaultTextFormFieldWithoutLabel(maxLen: 11,controller: phoneNumberController, keyboardType: TextInputType.number, validation: (value){},),
                 const SizedBox(
                   height: 10,
                 ),
@@ -66,7 +66,7 @@ class MedicalRecordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                DefaultTextFormFieldWithoutLabel(controller: genderController, keyboardType: TextInputType.text, validation: (value){},),
+                DefaultTextFormFieldWithoutLabel(maxLen: 1,controller: genderController, keyboardType: TextInputType.text, validation: (value){},),
                 const SizedBox(
                   height: 10,
                 ),
@@ -74,7 +74,7 @@ class MedicalRecordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                DefaultTextFormFieldWithoutLabel(controller: notationIdController, keyboardType: TextInputType.number, validation: (value){},),
+                DefaultTextFormFieldWithoutLabel(maxLen: 14,controller: notationIdController, keyboardType: TextInputType.number, validation: (value){},),
                 const SizedBox(
                   height: 10,
                 ),
@@ -82,7 +82,7 @@ class MedicalRecordScreen extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                DefaultTextFormFieldWithoutLabel(controller: bloodTypeController, keyboardType: TextInputType.text, validation: (value){},),
+                DefaultTextFormFieldWithoutLabel(maxLen: 4,controller: bloodTypeController, keyboardType: TextInputType.text, validation: (value){},),
                 const SizedBox(
                   height: 20,
                 ),

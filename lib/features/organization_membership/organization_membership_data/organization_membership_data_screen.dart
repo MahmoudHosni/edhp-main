@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
@@ -42,6 +43,8 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
   TextEditingController address = TextEditingController();
   OrganizationMembershipDataCubit? cubit ;
   List<City> cities = [];
+  int stateID = 1;
+  int gender  = 1;
 
   @override
   void initState() {
@@ -72,9 +75,18 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     height: 40,
                   ),
 
-                  MembershipTextFormField(error: identityNumberController.text.length==14?'':"",onSummit: (value) {
+                  MembershipTextFormField(maxLength: 14,error: identityNumberController.text.length==14?'':"",onSummit: (value) {
                     if(value!=null && value.length==14){
-                      widget.subscriptionRequest.IdentityNumber = value;
+                        widget.subscriptionRequest.IdentityNumber = value;
+                        var analyser = DateAnaylser(date: value);
+                        birthDate.text = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                        widget.subscriptionRequest.BirthDate = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                        stateID = int.parse(analyser.getGovernorate());
+                        print('State   ::: ${stateID}');
+                        widget.subscriptionRequest.StateID = stateID;
+                        gender = analyser.getGender();
+                        print('Gender   ::: ${gender}');
+                        widget.subscriptionRequest.Gender = gender;
                     }else{
                       ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
                       return 'برجاء ادخال الرقم القومى بصورة صحيحة';
@@ -82,14 +94,26 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     },
                     validation: (value){
                       widget.subscriptionRequest.IdentityNumber = value;
+                      if(value!=null && value.length==14){
+                        var analyser = DateAnaylser(date: value);
+                        birthDate.text = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                        widget.subscriptionRequest.BirthDate = analyser.getYear()+"/"+analyser.getMonth()+"/"+analyser.getDay();
+                        stateID = int.parse(analyser.getGovernorate());
+                        print('State   ::: ${stateID}');
+                        widget.subscriptionRequest.StateID = stateID;
+                        gender = analyser.getGender();
+                        print('Gender   ::: ${gender}');
+                        widget.subscriptionRequest.Gender = gender;
+                        updateCities();
+                      }
                     },
                     controller: identityNumberController,
                     textInputType: TextInputType.number,
                     nameOfField: 'الرقم القومي',
                   ),
-                  MembershipTextFormField(error: membershipNumberController.text.length==14?'':"",
+                  MembershipTextFormField(maxLength: 15,error: membershipNumberController.text.length==14?'':"",
                     onSummit: (value) {
-                      if(value!=null && value.length==14){
+                      if(value!=null && value.length<3){
                         widget.subscriptionRequest.OrganizationMembershipNumber = value;
                       }else{
                         ShowToast.showToast('برجاء ادخال رقم العضوية بصورة صحيحة');
@@ -103,7 +127,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     textInputType: TextInputType.text,
                     nameOfField: 'رقم العضوية',
                   ),
-                  GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack : onSelectGovernorate),
+                  GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack : onSelectGovernorate,stateID: stateID),
                   const SizedBox(
                     height: 10,
                   ),
@@ -111,7 +135,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   const SizedBox(
                     height: 10,
                   ),
-                  MembershipTextFormField(error: address.text.length==14?'':"",
+                  MembershipTextFormField(maxLength: 100,error: address.text.length==14?'':"",
                     onSummit: (value) {
                       if(value!=null && (value?.length ??0) >20){
                         widget.subscriptionRequest.Address = value;
@@ -127,7 +151,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     textInputType: TextInputType.text,
                     nameOfField: 'العنوان',
                   ),
-                  UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack: onSelectGender),
+                  UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack: onSelectGender,gender: gender),
                   const SizedBox(
                     height: 10,
                   ),
@@ -142,7 +166,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                       ),
                       Expanded(
                         flex: 6,
-                        child: DefaultTextFormFieldWithoutLabel(error: birthDate.text.length>=7?'':"",
+                        child: DefaultTextFormFieldWithoutLabel(maxLen: 11,error: birthDate.text.length>=7?'':"",
                           controller: birthDate,
                           keyboardType: TextInputType.text,
                           validation: (value){
@@ -303,10 +327,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
 
   onSelectGovernorate(String name) {
     widget.subscriptionRequest.StateID = cubit?.subscriptionInfoLookupsModel?.states?[cubit?.subscriptionInfoLookupsModel?.states?.indexWhere((element) => element.name==name) ??0].iD ??0;
-    setState(() {
-      cities  = cubit?.subscriptionInfoLookupsModel?.Cities?.where((element) => element.StateID == widget.subscriptionRequest?.StateID).toList() ??[];
-      print(cities.length.toString());
-    });
+    updateCities();
   }
 
   onSelectCity(String name) {
@@ -338,7 +359,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
         ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
         return ;
       }
-      else if(widget.subscriptionRequest.OrganizationMembershipNumber==null || ((widget.subscriptionRequest.OrganizationMembershipNumber?.length??0)<7 || (widget.subscriptionRequest.OrganizationMembershipNumber?.length??0)>7)){
+      else if(widget.subscriptionRequest.OrganizationMembershipNumber==null || ((widget.subscriptionRequest.OrganizationMembershipNumber?.length??0)<3 || (widget.subscriptionRequest.OrganizationMembershipNumber?.length??0)>15)){
         ShowToast.showToast('برجاء ادخال رقم العضوية بصورة صحيحة');
         return ;
       }
@@ -377,5 +398,12 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
         // OrganizationMembershipDataCubit.get(context).requestSubscription(widget.subscriptionRequest);
         GoRouter.of(context).push(AppRouters.kServiceScreen,extra: widget.subscriptionRequest);
       };
+  }
+
+  void updateCities() {
+    setState(() {
+      cities  = cubit?.subscriptionInfoLookupsModel?.Cities?.where((element) => element.StateID == widget.subscriptionRequest?.StateID).toList() ??[];
+      print(cities.length.toString());
+    });
   }
 }

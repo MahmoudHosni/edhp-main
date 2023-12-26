@@ -47,7 +47,8 @@ class LayoutCubit extends Cubit<LayoutStates>{
       adsImage = [];
       value.data.forEach((element) {
         var adv = Advertisement.fromJson(element);
-        adsImage.add('$baseUrl${EndPoint.imgPath}?referenceTypeId=4&referenceId=${adv.iD}');
+        print(adv.iD.toString());
+        adsImage.add('$baseUrl${EndPoint.imgPath}?referenceTypeId=4&referenceId=${adv.iD}&id=${Random().nextInt(100000)}');
         advertisements?.add(adv);
       });
 

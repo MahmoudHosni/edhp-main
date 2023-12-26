@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 class GovernoratesView extends StatelessWidget{
   List<States>? states;
   final Function callBack;
+  int stateID;
 
-  GovernoratesView({required this.states,required this.callBack});
+  GovernoratesView({required this.states,required this.callBack,required this.stateID});
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +29,10 @@ class GovernoratesView extends StatelessWidget{
                 contentPadding: EdgeInsets.symmetric(vertical: 10),
                 border: InputBorder.none,
               ),
-              hint: const Align(
+              hint:  Align(
                 alignment: AlignmentDirectional.centerEnd,
                 child: Text(
-                  'اختار المحافظة',
-                  // subscriptionInfoDTOModel.gender == 1 ? 'ذكر' : 'انثى',
+                  states?.firstWhere((element) => element?.iD==stateID).name ??'',
                   style: Styles.textStyle14W400,
                 ),
               ),

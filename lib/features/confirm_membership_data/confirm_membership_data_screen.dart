@@ -64,8 +64,8 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                     const SizedBox(
                       height: 34,
                     ),
-                    ConfirmDataFieldAndValueItem(field: 'الإسم', value: (CacheHelper.getData(key: 'name') )),
-                    ConfirmDataFieldAndValueItem(field: 'رقم الهاتف', value: CacheHelper.getData(key: 'profile')),
+                    ConfirmDataFieldAndValueItem(field: 'الإسم', value: (CacheHelper.getData(key: 'profile') )),
+                    ConfirmDataFieldAndValueItem(field: 'رقم الهاتف', value: CacheHelper.getData(key: 'name')),
                     ConfirmDataFieldAndValueItem(field: 'الجنس', value: widget.subscriptionRequest.Gender==1?genderItems[0]:genderItems[1]),
                     ConfirmDataFieldAndValueItem(field: 'الرقم القومي', value: widget.subscriptionRequest?.IdentityNumber ??''),
                     ConfirmDataFieldAndValueItem(field: 'المبلغ', value: widget.subscriptionRequest.Cost ??''),

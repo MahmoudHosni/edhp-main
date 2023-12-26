@@ -93,7 +93,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: DefaultTextFormFieldWithoutLabel(
+                        child: DefaultTextFormFieldWithoutLabel(maxLen: 16,
                           controller: number1Controller,
                           keyboardType: TextInputType.number,
                           validation: (value){},
@@ -103,7 +103,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         width: MediaQuery.of(context).size.width / 22,
                       ),
                       Expanded(
-                        child: DefaultTextFormFieldWithoutLabel(
+                        child: DefaultTextFormFieldWithoutLabel(maxLen: 16,
                           controller: number2Controller,
                           keyboardType: TextInputType.number,
                           validation: (value){},
@@ -113,7 +113,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         width: MediaQuery.of(context).size.width / 22,
                       ),
                       Expanded(
-                        child: DefaultTextFormFieldWithoutLabel(
+                        child: DefaultTextFormFieldWithoutLabel(maxLen: 16,
                           controller: number3Controller,
                           keyboardType: TextInputType.number,
                           validation: (value){},
@@ -123,7 +123,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         width: MediaQuery.of(context).size.width / 22,
                       ),
                       Expanded(
-                        child: DefaultTextFormFieldWithoutLabel(
+                        child: DefaultTextFormFieldWithoutLabel(maxLen: 16,
                           controller: number4Controller,
                           keyboardType: TextInputType.number,
                           validation: (value){},

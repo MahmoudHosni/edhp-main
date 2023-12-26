@@ -7,13 +7,13 @@ import '../../../../core/utils/styles/styles.dart';
 class MembershipTextFormField extends StatelessWidget {
 
   MembershipTextFormField({
-    super.key,
+    super.key,required this.maxLen,
     required this.validation,
     required this.controller,
     required this.textInputType,
     required this.nameOfField,
   });
-
+  final int maxLen;
   TextEditingController controller;
   TextInputType textInputType;
   final String? Function(String? value) validation;
@@ -27,7 +27,7 @@ class MembershipTextFormField extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: DefaultTextFormFieldWithoutLabel(
+              child: DefaultTextFormFieldWithoutLabel(maxLen: maxLen,
                 controller: controller,
                 keyboardType: textInputType,
                 validation: validation,

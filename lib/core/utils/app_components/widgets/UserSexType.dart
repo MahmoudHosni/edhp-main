@@ -8,8 +8,9 @@ class UserSexType extends StatelessWidget{
   List<GenderList>? genderList;
   String? genderSelectedValue;
   final Function callBack;
+  int gender;
 
-  UserSexType({required this.genderList,required this.callBack});
+  UserSexType({required this.genderList,required this.callBack,required this.gender});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +30,10 @@ class UserSexType extends StatelessWidget{
                 contentPadding: const EdgeInsets.symmetric(vertical: 10),
                 border: InputBorder.none,
               ),
-              hint: const Align(
+              hint:  Align(
                 alignment: AlignmentDirectional.centerEnd,
                 child: Text(
-                  'اختار جنسك',
+                  genderList?.firstWhere((element) => element?.key==gender).value ??'',
                   style: Styles.textStyle14W400,
                 ),
               ),

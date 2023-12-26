@@ -136,7 +136,7 @@ class EditProfileScreen extends StatelessWidget {
                           height: MediaQuery.of(context).size.height / 25,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الإسم' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(error: nameController.text.length==14?'':"",
+                        DefaultTextFormFieldWithoutLabel(maxLen:  100,error: nameController.text.length==14?'':"",
                           controller: nameController,onChange: (value) => {
                               nameController.text = value
                           },
@@ -152,7 +152,7 @@ class EditProfileScreen extends StatelessWidget {
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('اسم المستخدم' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(error: usernameController.text.length==14?'':"",
+                        DefaultTextFormFieldWithoutLabel(maxLen : 100,error: usernameController.text.length==14?'':"",
                           controller: usernameController,
                           keyboardType: TextInputType.text,
                           validation: (value){
@@ -167,7 +167,7 @@ class EditProfileScreen extends StatelessWidget {
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الرقم القومي' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(error: identityNumberController.text.length==14?'':"",
+                        DefaultTextFormFieldWithoutLabel(maxLen: 100,error: identityNumberController.text.length==14?'':"",
                           controller: identityNumberController,
                           keyboardType: TextInputType.text,
                           validation: (value){
@@ -181,7 +181,7 @@ class EditProfileScreen extends StatelessWidget {
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('البريد الالكتروني' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(error: emailController.text.length==14?'':"",
+                        DefaultTextFormFieldWithoutLabel(maxLen: 100,error: emailController.text.length==14?'':"",
                           controller: emailController,
                           keyboardType: TextInputType.text,
                           validation: (value){
@@ -195,7 +195,7 @@ class EditProfileScreen extends StatelessWidget {
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('رقم الهاتف' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(error: phoneNumberController.text.length==14?'':"",
+                        DefaultTextFormFieldWithoutLabel(maxLen: 100,error: phoneNumberController.text.length==14?'':"",
                           controller: phoneNumberController,
                           keyboardType: TextInputType.number,
                           validation: (value){

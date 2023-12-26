@@ -56,7 +56,7 @@ class AddRelativesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 40,
                 ),
-                MembershipTextFormField(error: primaryMemberController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: primaryMemberController.text.length==14?'':"",onSummit: (value) {
 
                    },
                   validation: (value){
@@ -66,7 +66,7 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'العضو الاساسي',
                 ),
-                MembershipTextFormField(error: memberNumberController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: memberNumberController.text.length==14?'':"",onSummit: (value) {
 
                    },
                   validation: (value){
@@ -76,7 +76,7 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'رقم العضو',
                 ),
-                MembershipTextFormField(error: nameController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: nameController.text.length==14?'':"",onSummit: (value) {
 
                 },
                   validation: (value){
@@ -86,7 +86,7 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'الاسم',
                 ),
-                MembershipTextFormField(error: addressController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: addressController.text.length==14?'':"",onSummit: (value) {
 
                 },
                   validation: (value){
@@ -96,7 +96,7 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'العنوان',
                 ),
-                MembershipTextFormField(error: jobController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: jobController.text.length==14?'':"",onSummit: (value) {
 
                 },
                   validation: (value){
@@ -242,7 +242,7 @@ class AddRelativesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                MembershipTextFormField(error: notationIdController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: notationIdController.text.length==14?'':"",onSummit: (value) {
 
                 },
                   validation: (value){
@@ -252,7 +252,7 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.number,
                   nameOfField: 'الرقم القومي',
                 ),
-                MembershipTextFormField(error: governorateController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: governorateController.text.length==14?'':"",onSummit: (value) {
 
                 },
                   validation: (value){
@@ -262,7 +262,7 @@ class AddRelativesScreen extends StatelessWidget {
                   textInputType: TextInputType.text,
                   nameOfField: 'المحافظة',
                 ),
-                MembershipTextFormField(error: phoneNumberController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: phoneNumberController.text.length==14?'':"",onSummit: (value) {
 
                 },
                   validation: (value){
@@ -282,7 +282,7 @@ class AddRelativesScreen extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 6,
-                      child: DefaultTextFormFieldWithoutLabel(error: birthDateController.text.length==14?'':"",
+                      child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: birthDateController.text.length==14?'':"",
                         controller: birthDateController,
                         keyboardType: TextInputType.text,
                         validation: (value){},
@@ -363,7 +363,7 @@ class AddRelativesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                MembershipTextFormField(error: passwordController.text.length==14?'':"",onSummit: (value) {
+                MembershipTextFormField(maxLength: 100,error: passwordController.text.length==14?'':"",onSummit: (value) {
 
                 },
                   validation: (value){

@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
@@ -72,7 +76,11 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
                             child:  Container(
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Image.asset(AppPaths.companyImage,width: 85,height: 85,),
+                                  CachedNetworkImage(
+                                      imageUrl:'$baseUrl${EndPoint.imgPath}?referenceTypeId=6&referenceId=${InsuranceCompaniesCubit.get(context).companiesList[index].iD}&id=${Random().nextInt(100000)}',
+                                      fit: BoxFit.fill,height: 85,width: 85,
+                                      placeholder: (context, url) =>  Image.asset(AppPaths.companyImage,width: 85,height: 85,),
+                                      errorWidget: (context, url, error) => Image.asset(AppPaths.companyImage,width: 85,height: 85,)),
                                   const SizedBox(
                                     height: 2,
                                   ),
