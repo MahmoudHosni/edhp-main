@@ -3,6 +3,7 @@ import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
+import 'package:edhp/features/confirm_membership_data/cubit/ConfirmResponse.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,8 +65,9 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
       token: CacheHelper.getData(key: 'token'),
     ).then((value) {
       print(value.data);
+      ConfirmResponse res = ConfirmResponse.fromJson(value.data);
       ShowToast.showToastGreen(value.data);
-      emit(ConfirmMembershipSuccessState());
+      emit(ConfirmMembershipSuccessState(response: res));
     }).catchError((error) {
       print(error.toString());
       ShowToast.showToast(error.toString());

@@ -258,7 +258,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                               onTap: (){
                                 cubit?.getNotationIdImageFromGallery();
                               },
-                              child: Container(height: 80,
+                              child: Container(height: 100,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
                                     color: AppColors.whiteColor,
@@ -270,13 +270,15 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                                     ]
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                  padding: const EdgeInsets.symmetric(vertical: 2.0),
                                   child: Column(
                                     children: [
                                       const SizedBox(
                                         height: 8,
                                       ),
-                                      SvgPicture.asset(AppPaths.notationIdIconSvg),
+                                      cubit?.notationIdImage==null?
+                                          SvgPicture.asset(AppPaths.notationIdIconSvg):
+                                           ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.notationIdImage!,width: 65,height: 65,)) ,
                                       const SizedBox(
                                         height: 5,
                                       ),
@@ -288,14 +290,14 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                             ),
                           ),
                           const SizedBox(
-                            width: 24,
+                            width: 18,
                           ),
                           Expanded(
                             child: InkWell(
                               onTap: (){
                                 cubit?.getProfileImageFromGallery();
                               },
-                              child: Container(height: 80,alignment: Alignment.center,
+                              child: Container(height: 100,alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0),
                                     color: AppColors.whiteColor,
@@ -308,13 +310,15 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                                 ),
                                 child: Center(
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                    padding: const EdgeInsets.symmetric(vertical: 5.0),
                                     child: Column(crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         const SizedBox(
                                           height: 8,
                                         ),
-                                        SvgPicture.asset(AppPaths.imageIconSvg),
+                                        cubit?.profileImage==null?
+                                        SvgPicture.asset(AppPaths.notationIdIconSvg):
+                                        ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.profileImage!,width: 65,height: 65,)) ,
                                         const SizedBox(
                                           height: 5,
                                         ),

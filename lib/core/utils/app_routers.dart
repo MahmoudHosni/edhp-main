@@ -1,5 +1,6 @@
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/app_constants.dart';
+import 'package:edhp/features/confirm_membership_data/CardPreview.dart';
 import 'package:edhp/features/confirm_membership_data/confirm_membership_data_screen.dart';
 import 'package:edhp/features/create_membership/create_membership_screen.dart';
 import 'package:edhp/features/edit_profile/edit_profile_screen.dart';
@@ -11,6 +12,7 @@ import 'package:edhp/features/medical_record/medical_record_screen.dart';
 import 'package:edhp/features/membership_data/membership_data_screen.dart';
 import 'package:edhp/features/otp/otp_screen.dart';
 import 'package:edhp/features/payment/payment_screen.dart';
+import 'package:edhp/features/service/MemberShipTypes.dart';
 import 'package:edhp/features/service/service_screen.dart';
 import 'package:edhp/features/splash_screen/splash_screen.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
@@ -37,6 +39,7 @@ abstract class AppRouters {
   static const kLayoutScreen = '/layoutScreen';
   static const kEditProfileScreen = '/editProfileScreen';
   static const kServiceScreen = '/serviceScreen';
+  static const kMemberShipTypes = '/memberShipTypes';
   static const kCreateMembershipScreen = '/createMembershipScreen';
   static const kMedicalNetworkScreen = '/medicalNetworkScreen';
   static const kMedicalRecordScreen = '/medicalRecordScreen';
@@ -44,6 +47,8 @@ abstract class AppRouters {
   static const kMembershipDataScreen = '/membershipDataScreen';
   static const kConfirmMembershipDataScreen = '/confirmMembershipDataScreen';
   static const kPaymentMembershipScreen = '/paymentMembershipScreen';
+  static const kCardPreviewScreen = '/cardPreviewScreen';
+
   static const kProfileScreen = '/profileScreen';
   static const kOrganizationMembershipDataScreen = '/organizationMembershipDataScreen';
   static const kAddRelativesScreen = '/addRelativesScreen';
@@ -112,6 +117,10 @@ abstract class AppRouters {
         builder: (context, state) => ServiceScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
+        path: kMemberShipTypes,
+        builder: (context, state) => MemberShipTypes(),
+      ),
+      GoRoute(
         path: kCreateMembershipScreen,
         builder: (context, state) => CreateMembershipScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
@@ -138,6 +147,10 @@ abstract class AppRouters {
       GoRoute(
         path: kPaymentMembershipScreen,
         builder: (context, state) => PaymentScreen(),
+      ),//kCardPreviewScreen
+      GoRoute(
+        path: kCardPreviewScreen,
+        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kProfileScreen ,
@@ -222,6 +235,10 @@ abstract class AppRouters {
       GoRoute(
         path: kPaymentMembershipScreen,
         builder: (context, state) => PaymentScreen(),
+      ),
+      GoRoute(
+        path: kCardPreviewScreen,
+        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kProfileScreen ,

@@ -19,5 +19,9 @@ class SubscriptionRequest {
   File? NationalNumberImage;
   File? OrganizationMembershipNumberImage;
 
+  String? MembershipTypeName;
+  String? MedicalCompanyName;
+  String? OrganizationName;
+
   SubscriptionRequest();
 }

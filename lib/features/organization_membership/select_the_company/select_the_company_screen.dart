@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -31,6 +32,8 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
   final formKey = GlobalKey<FormState>();
 
   int organizationID=-1;
+
+  String organizationName='';
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +65,7 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                       onTap: (){
                         setState(() {
                           organizationID = CompanyItemCubit.get(context).organizationItemsList[index].iD ??-1;
+                          organizationName = CompanyItemCubit.get(context).organizationItemsList[index].name ??'';
                         });
                       },
                       child: Padding(
@@ -77,18 +81,17 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                                 ),
                               ]
                           ),
-                          child:  Container(
-                              child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+                          child:  Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                              child: Column(mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  CachedNetworkImage(
-                                      imageUrl:'$baseUrl${EndPoint.imgPath}?referenceTypeId=7&referenceId=${CompanyItemCubit.get(context).organizationItemsList[index].iD}&id=${Random().nextInt(100000)}',
-                                      fit: BoxFit.fill,height: 85,width: 85,
-                                      placeholder: (context, url) =>  Image.asset(AppPaths.companyImage,width: 85,height: 85,),
-                                      errorWidget: (context, url, error) => Image.asset(AppPaths.companyImage,width: 85,height: 85,)),
-                                  // Image.asset(AppPaths.companyImage,width: 85,height: 85,),
-                                  const SizedBox(
-                                    height: 2,
-                                  ),
+                                  ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),
+                                    child: CachedNetworkImage(
+                                        imageUrl:'$baseUrl${EndPoint.imgPath}?referenceTypeId=7&referenceId=${CompanyItemCubit.get(context).organizationItemsList[index].iD}&id=${Random().nextInt(100000)}',
+                                        fit: BoxFit.fill,height: 85,width: 85,
+                                        placeholder: (context, url) =>  Image.asset(AppPaths.companyImage,width: 85,height: 85,),
+                                        errorWidget: (context, url, error) => Image.asset(AppPaths.companyImage,width: 85,height: 85,)), ) ,
+
+                                  const SizedBox(height: 2,),
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(8.0,0,8,0),
                                     child: Text(CompanyItemCubit.get(context).organizationItemsList[index].name.toString() ,textAlign: TextAlign.center,
@@ -108,9 +111,14 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                 ),
                 DefaultButton(backgroundColor: (organizationID > 0) ? AppColors.primaryBlueColor : Colors.grey,
                   function: () {
-                    var subscriptionRequest = SubscriptionRequest();
-                    subscriptionRequest.MedicalCompanyID = organizationID;
-                    GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
+                    if(organizationID<=0){
+                      ShowToast.showToast('برجاء اختيار شركة التأمين بصورة صحيحة');
+                    }else{
+                      var subscriptionRequest = SubscriptionRequest();
+                      subscriptionRequest.MedicalCompanyID = organizationID;
+                      subscriptionRequest.MedicalCompanyName = organizationName;
+                      GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
+                    }
                   },
                   text: StringsManager.select,
                   redius: 10,

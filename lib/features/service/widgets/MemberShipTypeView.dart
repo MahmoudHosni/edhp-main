@@ -1,19 +1,17 @@
-import 'package:edhp/core/utils/app_routers.dart';
-import 'package:edhp/models/SubscriptionRequest.dart';
+
+
+import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
+import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/app_components/widgets/default_button.dart';
-import '../../../core/utils/styles/styles.dart';
-
-class MembershipTypeContainer extends StatelessWidget {
+class MemberShipTypeView extends StatelessWidget {
   final String price;
   final String name;
   final String description;
   final int id;
-  final SubscriptionRequest subscriptionRequest;
-  const MembershipTypeContainer({super.key, required this.price, required this.name , required this.description, required this.id,required this.subscriptionRequest});
+
+  const MemberShipTypeView({super.key, required this.price, required this.name , required this.description, required this.id,});
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +56,7 @@ class MembershipTypeContainer extends StatelessWidget {
           ),
           DefaultButton(
             function: (){
-              subscriptionRequest.MembershipTypeID = id;
-              subscriptionRequest.MembershipTypeName = name;
-              subscriptionRequest.Cost = price;
-              GoRouter.of(context).push(AppRouters.kConfirmMembershipDataScreen,extra: subscriptionRequest);
+
             },
             text: 'اختر عضويتك',
             backgroundColor: id % 2 == 0 ? AppColors.whiteColor : AppColors.primaryBlueColor,

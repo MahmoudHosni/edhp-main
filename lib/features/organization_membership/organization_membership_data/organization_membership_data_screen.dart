@@ -202,7 +202,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                               cubit?.getNationalIDImageFromGallery();
                             },
                             child: Container(
-                              height: 80,
+                              height: 100,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.0),
                                   color: AppColors.whiteColor,
@@ -214,15 +214,17 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                                   ]
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                padding: const EdgeInsets.symmetric(vertical: 2.0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SvgPicture.asset(AppPaths.notationIdIconSvg),
+                                    cubit?.nationalIdImage==null?
+                                        SvgPicture.asset(AppPaths.notationIdIconSvg):
+                                        ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.nationalIdImage!,width: 65,height: 65,)) ,
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    const Text('قم برفع صورة بطاقة الرقم القومي' , style: Styles.textStyle9W400,textAlign: TextAlign.center,)
+                                    const Text('قم برفع صورة بطاقة الرقم القومي' , style: Styles.textStyle8W400,textAlign: TextAlign.center,)
                                   ],
                                 ),
                               ),
@@ -230,7 +232,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                           ),
                         ),
                         const SizedBox(
-                          width: 24,
+                          width: 18,
                         ),
                         Expanded(
                           child: InkWell(
@@ -238,7 +240,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                               cubit?.getPersonalImageFromGallery();
                             },
                             child: Container(
-                              height: 80,
+                              height: 100,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.0),
                                   color: AppColors.whiteColor,
@@ -250,11 +252,13 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                                   ]
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                padding: const EdgeInsets.symmetric(vertical: 2.0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SvgPicture.asset(AppPaths.imageIconSvg),
+                                    cubit?.personalImage==null?
+                                      SvgPicture.asset(AppPaths.notationIdIconSvg):
+                                      ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.personalImage!,width: 65,height: 65,)) ,
                                     const SizedBox(
                                       height: 5,
                                     ),
@@ -276,7 +280,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                       cubit?.getOrganizationCardFromGallery ();
                     },
                     child: Container(
-                      height: 85, padding: EdgeInsets.all(2),
+                      height: 110, padding: EdgeInsets.all(2),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
                           color: AppColors.whiteColor,
@@ -288,11 +292,13 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                           ]
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(vertical: 2.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(AppPaths.notationIdIconSvg),
+                            cubit?.orgCardImage==null?
+                              SvgPicture.asset(AppPaths.notationIdIconSvg):
+                              ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.orgCardImage!,width: 80,height: 65,)) ,
                             const SizedBox(
                               height: 5,
                             ),

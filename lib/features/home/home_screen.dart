@@ -110,14 +110,14 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: (){},
-                            child: Image.asset(AppPaths.product01),
+                            child: Image.asset(AppPaths.product01,width: 96,height: 88),
                           ),
                           InkWell(
-                            child: Image.asset(AppPaths.product02),
-                            onTap: (){},
+                            child: Image.asset(AppPaths.product02,width: 96,height: 88),
+                            onTap: (){GoRouter.of(context).push(AppRouters.kMemberShipTypes);},
                           ),
                           InkWell(
-                            child: Image.asset(AppPaths.product03),
+                            child: Image.asset(AppPaths.product03,width: 96,height: 88),
                             onTap: (){GoRouter.of(context).push(AppRouters.kMedicalAdvices);},
                           ),
                         ],

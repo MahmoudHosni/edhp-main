@@ -1,6 +1,7 @@
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_constants.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMemberShipCubit.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMembershipState.dart';
 import 'package:edhp/features/confirm_membership_data/widgets/custom_step_two_app_bar.dart';
@@ -8,7 +9,7 @@ import 'package:edhp/features/confirm_membership_data/widgets/terms_and_conditio
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/utils/app_paths.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/utils/styles/styles.dart';
 import 'widgets/confirm_data_field_and_value_item.dart';
 
@@ -58,7 +59,7 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                           borderRadius: BorderRadius.circular(100),
                         ),
                         clipBehavior: Clip.antiAlias,
-                        child: Image.network(AppPaths.image, fit: BoxFit.cover, ),
+                        child: Image.file(widget.subscriptionRequest!.PersonalImage! , fit: BoxFit.cover, ),
                       ),
                     ),
                     const SizedBox(
@@ -77,7 +78,7 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                       function: (){
                         cubit.requestSubscription(widget.subscriptionRequest);
                         // // GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen);
-                        // GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen);
+                        GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
                       },
                       text: 'الدفع',
                     ),

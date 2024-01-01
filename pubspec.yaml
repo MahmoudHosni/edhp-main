@@ -92,6 +92,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: Droid Arabic Kufi
+      fonts:
+        - asset: assets/fonts/regular.ttf
     - family: Tajawal
       fonts:
         - asset: assets/fonts/Tajawal-Black.ttf
