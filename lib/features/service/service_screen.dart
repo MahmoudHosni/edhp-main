@@ -9,19 +9,36 @@ import '../../core/utils/styles/styles.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
-class ServiceScreen extends StatelessWidget {
+class ServiceScreen extends StatefulWidget {
   final SubscriptionRequest subscriptionRequest;
   const ServiceScreen({super.key,required this.subscriptionRequest});
 
   @override
+  State<ServiceScreen> createState() => _ServiceScreenState();
+}
+
+class _ServiceScreenState extends State<ServiceScreen> {
+  late OurProductCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = OurProductCubit.get(context);
+    if(widget.subscriptionRequest.SubscriptionTypeID==2){
+      cubit.getMembershipType(
+        NationalNumber: widget.subscriptionRequest.IdentityNumber,
+        OrganizationID: widget.subscriptionRequest.OrganizationID,
+        OrganizationMembershipNumber: widget.subscriptionRequest.OrganizationMembershipNumber??'');
+    }else{
+      cubit.getMembershipType();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<OurProductCubit, OurProductStates>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {      },
       builder: (context, state) {
-
-        OurProductCubit cubit = OurProductCubit.get(context);
         return SafeArea(
           child: Scaffold(
             body: Padding(
@@ -47,7 +64,7 @@ class ServiceScreen extends StatelessWidget {
                           price: cubit.membershipTypeList[index].price.toString(),
                           name: cubit.membershipTypeList[index].name.toString(),
                           description: cubit.membershipTypeList[index].description.toString(),
-                          id: cubit.membershipTypeList[index].iD??0,subscriptionRequest: subscriptionRequest,
+                          id: cubit.membershipTypeList[index].iD??0,subscriptionRequest: widget.subscriptionRequest,
                         ),
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 30,

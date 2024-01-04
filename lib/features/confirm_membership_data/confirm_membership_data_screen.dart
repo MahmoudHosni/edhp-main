@@ -34,7 +34,13 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ConfirmMemberShipCubit, ConfirmMembershipState>(
-        listener: (context, state) {         },
+        listener: (context, state) {
+          if(state is ConfirmMembershipSuccessState){
+            GoRouter.of(context).pushReplacement(AppRouters.kLayoutScreen);
+          }else if(state is ConfirmMembershipErrorState){
+
+          }
+        },
         builder: (context, state) {
           return SafeArea(
              child: Scaffold(
@@ -77,8 +83,11 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                     DefaultButton(
                       function: (){
                         cubit.requestSubscription(widget.subscriptionRequest);
-                        // // GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen);
-                        GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
+                        // if(int.parse(widget.subscriptionRequest.Cost??'0')>0){
+                        //   GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen,extra: widget.subscriptionRequest);
+                        // }else{
+                        //   GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
+                        // }
                       },
                       text: 'الدفع',
                     ),

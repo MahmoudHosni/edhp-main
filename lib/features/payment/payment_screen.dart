@@ -4,13 +4,15 @@ import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/payment/widgets/custom_step_three_app_bar.dart';
 import 'package:edhp/features/payment/widgets/payment_text_form_field.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/utils/app_colors.dart';
 
 class PaymentScreen extends StatelessWidget {
-  PaymentScreen({super.key});
+  final SubscriptionRequest subscriptionRequest;
+  PaymentScreen({super.key,required this.subscriptionRequest});
 
   TextEditingController cardNumberController = TextEditingController();
   TextEditingController expiryDateController = TextEditingController();

@@ -8,7 +8,6 @@ import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMembershipState.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
   ConfirmMemberShipCubit() : super(ConfirmMembershipLoadingState());
@@ -22,7 +21,7 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
       formData = FormData.fromMap({
         // 'Access-Token':CacheHelper.getData(key: 'token'),
         'SubscriptionTypeID':subscriptionRequest.SubscriptionTypeID.toString(),
-        'OrganizationID':subscriptionRequest.OrganizationID.toString(),
+        'OrganizationID':'0',
         'OrganizationMembershipNumber':"0",
         'MedicalCompanyID':subscriptionRequest.MedicalCompanyID.toString(),
         'MembershipTypeID':subscriptionRequest.MembershipTypeID.toString(),
@@ -66,8 +65,13 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
     ).then((value) {
       print(value.data);
       ConfirmResponse res = ConfirmResponse.fromJson(value.data);
-      ShowToast.showToastGreen(value.data);
-      emit(ConfirmMembershipSuccessState(response: res));
+      if(res.IsSuccess) {
+        ShowToast.showToastGreen(value.data);
+        emit(ConfirmMembershipSuccessState(response: res));
+      }else{
+        ShowToast.showToast(res.Message);
+        emit(ConfirmMembershipErrorState());
+      }
     }).catchError((error) {
       print(error.toString());
       ShowToast.showToast(error.toString());

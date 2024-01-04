@@ -12,6 +12,13 @@ abstract class Styles {
     fontWeight: FontWeight.w500,
     fontFamily: 'Tajawal',
   );
+
+  static const textStyle195W500 = TextStyle(
+    fontSize: 19.5,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Tajawal',
+  );
+
   static const textStyle13W400 = TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.w400,

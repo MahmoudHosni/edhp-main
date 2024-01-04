@@ -16,7 +16,7 @@ class ConfirmResponse{
     Message = json['Message'];
     IsSuccess = json['IsSuccess'];
     IsFailed = json['IsFailed'];
-    result = ResultObject.fromJson(json['ResultObject']);
+    result = json['ResultObject'] == null? null: ResultObject.fromJson(json['ResultObject']);
   }
 
   Map<String, dynamic> toJson() {

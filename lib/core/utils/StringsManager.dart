@@ -1,5 +1,6 @@
 
 class StringsManager {
+  static const String saveandshare = 'حفظ و مشاركة';
   static const String rayaaTitle = 'الشبكة المصرية للرعاية الصحية ترحب بكم';
   static const String loginToAccount = 'سجل دخول للدخول لحسابك';
   static const String phoneNumber = 'رقم الهاتف';

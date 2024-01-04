@@ -4,6 +4,7 @@ import 'package:edhp/features/confirm_membership_data/CardPreview.dart';
 import 'package:edhp/features/confirm_membership_data/confirm_membership_data_screen.dart';
 import 'package:edhp/features/create_membership/create_membership_screen.dart';
 import 'package:edhp/features/edit_profile/edit_profile_screen.dart';
+import 'package:edhp/features/home/widgets/MemberShipPreview.dart';
 import 'package:edhp/features/insurance_companies/SelectInsuranceCompany.dart';
 import 'package:edhp/features/layout/layout_screen.dart';
 import 'package:edhp/features/medical_advices/MedicalAdvices.dart';
@@ -48,7 +49,7 @@ abstract class AppRouters {
   static const kConfirmMembershipDataScreen = '/confirmMembershipDataScreen';
   static const kPaymentMembershipScreen = '/paymentMembershipScreen';
   static const kCardPreviewScreen = '/cardPreviewScreen';
-
+  static const kMemberShipPreview = '/memberShipPreview';
   static const kProfileScreen = '/profileScreen';
   static const kOrganizationMembershipDataScreen = '/organizationMembershipDataScreen';
   static const kAddRelativesScreen = '/addRelativesScreen';
@@ -146,11 +147,15 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kPaymentMembershipScreen,
-        builder: (context, state) => PaymentScreen(),
+        builder: (context, state) => PaymentScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),//kCardPreviewScreen
       GoRoute(
         path: kCardPreviewScreen,
         builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
+      ),//MemberShipPreview
+      GoRoute(
+        path: kMemberShipPreview,
+        builder: (context, state) => MemberShipPreview(),
       ),
       GoRoute(
         path: kProfileScreen ,
@@ -234,11 +239,15 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kPaymentMembershipScreen,
-        builder: (context, state) => PaymentScreen(),
+        builder: (context, state) => PaymentScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kCardPreviewScreen,
         builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
+      ),
+      GoRoute(
+        path: kMemberShipPreview,
+        builder: (context, state) => MemberShipPreview(),
       ),
       GoRoute(
         path: kProfileScreen ,

@@ -13,11 +13,18 @@ class OurProductCubit extends Cubit<OurProductStates> {
 
   List<MembershipType> membershipTypeList = [];
 
-  Future getMembershipType() async {
+  Future getMembershipType({int? OrganizationID=0,String? NationalNumber='',String? OrganizationMembershipNumber=''}) async {
     emit(OurProductLoadingState());
     if(membershipTypeList.isEmpty){
+      String? path = '';
+      if((OrganizationID??0) > 0){
+        path = EndPoint.getMembershipTypes+"?OrganizationID=${OrganizationID}&NationalNumber=${NationalNumber}&OrganizationMembershipNumber=${OrganizationMembershipNumber}";
+      }else{
+        path =  EndPoint.getMembershipTypes ;
+      }
+
       await DioHelper.getData(
-        path: EndPoint.getMembershipTypes ,
+        path: path ,
         token: token,
       ).then((value) {
         print(value.data);

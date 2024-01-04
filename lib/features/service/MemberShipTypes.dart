@@ -1,5 +1,3 @@
-
-
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
@@ -10,9 +8,23 @@ import 'package:edhp/features/service/widgets/MemberShipTypeView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MemberShipTypes extends StatelessWidget {
+class MemberShipTypes extends StatefulWidget {
 
   const MemberShipTypes({super.key,});
+
+  @override
+  State<MemberShipTypes> createState() => _MemberShipTypesState();
+}
+
+class _MemberShipTypesState extends State<MemberShipTypes> {
+  late OurProductCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = OurProductCubit.get(context);
+    cubit.getMembershipType();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +33,6 @@ class MemberShipTypes extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-
-        OurProductCubit cubit = OurProductCubit.get(context);
         return SafeArea(
           child: Scaffold(
             body: Padding(

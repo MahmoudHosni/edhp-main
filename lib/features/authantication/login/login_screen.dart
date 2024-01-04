@@ -63,11 +63,11 @@ class LoginScreen extends StatelessWidget {
 
                         const SizedBox(height: 28,),
 
-                        const Text(StringsManager.rayaaTitle, style: Styles.textStyle21W500,textAlign: TextAlign.center),
+                        const Text(StringsManager.rayaaTitle, style: Styles.textStyle195W500,textAlign: TextAlign.center),
 
                         const SizedBox(height: 8,),
 
-                        Text(StringsManager.loginToAccount, style: Styles.textStyle13W400.copyWith(color: const Color(0xFF333333)),textAlign: TextAlign.center,),
+                        Text(StringsManager.loginToAccount, style: Styles.textStyle12W400.copyWith(color: const Color(0xFF333333)),textAlign: TextAlign.center,),
 
                         const SizedBox(height: 22,),
 
