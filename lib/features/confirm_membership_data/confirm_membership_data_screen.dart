@@ -1,4 +1,5 @@
 import 'package:edhp/core/network/cache_helper.dart';
+import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -36,9 +37,13 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
     return BlocConsumer<ConfirmMemberShipCubit, ConfirmMembershipState>(
         listener: (context, state) {
           if(state is ConfirmMembershipSuccessState){
-            GoRouter.of(context).pushReplacement(AppRouters.kLayoutScreen);
+            if(int.parse(widget.subscriptionRequest.Cost??'0')>0){
+              GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen,extra: widget.subscriptionRequest);
+            }else{
+              GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
+            }
           }else if(state is ConfirmMembershipErrorState){
-
+            GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
           }
         },
         builder: (context, state) {
@@ -50,6 +55,10 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                 child: Column(
                   children: [
                     const CustomStepTwoAppBar(),
+
+                    if(state == ConfirmMembershipLoadingState())
+                      const CircularProgressIndicator(color: AppColors.primaryBlueColor,),
+
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 18.0),
                       child: Center(child: Text('تأكيد البيانات' , style: Styles.textStyle20W500,)),

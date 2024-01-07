@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
           create: (context) => GetProfileCubit()..getProfile(),
         ),
         BlocProvider(
-          create: (context) => OurProductCubit()..getMembershipType(),
+          create: (context) => OurProductCubit(),
         ),
         BlocProvider(
           create: (context) => OrganizationMembershipDataCubit()

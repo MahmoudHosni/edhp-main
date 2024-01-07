@@ -66,7 +66,7 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
       print(value.data);
       ConfirmResponse res = ConfirmResponse.fromJson(value.data);
       if(res.IsSuccess) {
-        ShowToast.showToastGreen(value.data);
+        ShowToast.showToastGreen('تم الاشتراك بنجاح');
         emit(ConfirmMembershipSuccessState(response: res));
       }else{
         ShowToast.showToast(res.Message);

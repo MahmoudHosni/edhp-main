@@ -7,15 +7,16 @@ class ResultObject{
   int MembershipTypeID = 0;
   String SubscriptionStartDate = '';
   String SubscriptionEndDate = '';
-  String IdentityNumber = '';
+  String SubscriptionNumber = '';
   int StateID = 0;
   int CityID = 0;
   int Gender = 1;
+  int TotalPrice = 0;
   String BirthDate = '';
 
   ResultObject({required this.SubscriptionTypeID,required this.OrganizationID,
                 required this.OrganizationMembershipNumber,required this.MedicalCompanyID,required this.MembershipTypeID,
-                required this.SubscriptionStartDate,required this.SubscriptionEndDate,required this.IdentityNumber,required this.StateID,
+                required this.SubscriptionStartDate,required this.SubscriptionEndDate,required this.SubscriptionNumber,required this.StateID,
                 required this.CityID,required this.Gender,required this.BirthDate,});
 
   ResultObject.fromJson(Map<String, dynamic> json) {
@@ -27,9 +28,10 @@ class ResultObject{
 
     SubscriptionStartDate = json['SubscriptionStartDate'];
     SubscriptionEndDate = json['SubscriptionEndDate'];
-    IdentityNumber = json['IdentityNumber'];
+    SubscriptionNumber = json['SubscriptionNumber'];
     StateID = json['StateID'];
     CityID = json['CityID'];
+    TotalPrice = json['TotalPrice'];
 
     Gender = json['Gender'];
     BirthDate = json['BirthDate'];
@@ -46,9 +48,9 @@ class ResultObject{
     data['SubscriptionStartDate'] = SubscriptionStartDate;
     data['SubscriptionEndDate'] = SubscriptionEndDate;
 
-    data['IdentityNumber'] = IdentityNumber;
+    data['SubscriptionNumber'] = SubscriptionNumber;
     data['StateID'] = StateID;
-
+    data['TotalPrice'] = TotalPrice;
     data['CityID'] = CityID;
     data['Gender'] = Gender;
     data['BirthDate'] = BirthDate;

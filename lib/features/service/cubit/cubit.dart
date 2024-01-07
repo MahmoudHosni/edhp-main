@@ -27,8 +27,9 @@ class OurProductCubit extends Cubit<OurProductStates> {
         path: path ,
         token: token,
       ).then((value) {
+        membershipTypeList = [];
         print(value.data);
-        value.data['MembershipTypes'].forEach((element) {
+        value.data.forEach((element) {
           membershipTypeList.add(MembershipType.fromJson(element),);
         });
         print(membershipTypeList[0].name);

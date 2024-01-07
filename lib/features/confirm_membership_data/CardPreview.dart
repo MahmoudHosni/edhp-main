@@ -15,11 +15,25 @@ import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
-class CardPreview extends StatelessWidget{
-  ScreenshotController screenshotController = ScreenshotController();
+class CardPreview extends StatefulWidget{
   final SubscriptionRequest subscriptionRequest;
 
   CardPreview({required this.subscriptionRequest});
+
+  @override
+  State<CardPreview> createState() => _CardPreviewState();
+}
+
+class _CardPreviewState extends State<CardPreview> {
+  ScreenshotController screenshotController = ScreenshotController();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 120), () {
+      screenshotController.capture(pixelRatio: MediaQuery.of(context).devicePixelRatio).then((image) => _saved(image, context));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +57,10 @@ class CardPreview extends StatelessWidget{
           children: [
             Screenshot(
                     controller: screenshotController,
-                    child: CardPreviewWidget(subscriptionRequest: subscriptionRequest)),
+                    child: CardPreviewWidget(subscriptionRequest: widget.subscriptionRequest)),
             DefaultButton(
               function: () {
-                screenshotController
-                    .capture(
-                    pixelRatio: MediaQuery.of(context).devicePixelRatio)
-                // context.getDeviceType() == DeviceType.Phone ? 3.5 : 2.5)
-                    .then((image) => _saved(image, context));
+                screenshotController.capture(pixelRatio: MediaQuery.of(context).devicePixelRatio).then((image) => _saved(image, context));
               },
               text: StringsManager.saveandshare,
               redius: 10,
@@ -71,5 +81,4 @@ class CardPreview extends StatelessWidget{
   onGetPath(String path) {
     Share.shareXFiles([XFile(path)]);
   }
-
 }
