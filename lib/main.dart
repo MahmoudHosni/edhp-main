@@ -27,11 +27,12 @@ void main() async{
   await CacheHelper.init();
   // bool ? rememberMe = await CacheHelper.getData(key: 'rememberMe');
   token = await CacheHelper.getData(key: 'token');
-  // print(rememberMe);
   print(token);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.black12, // navigation bar color
-    statusBarColor: Colors.grey, // status bar color
+    systemNavigationBarColor: AppColors.secondNew.withAlpha(10), // navigation bar color
+    statusBarColor: AppColors.secondNew.withAlpha(10), // status bar color
+    statusBarIconBrightness: Brightness.dark, // status bar icon color
+    systemNavigationBarIconBrightness: Brightness.dark, // color of navigation controls
   ));
   runApp(MyApp(
     // rememberMe: rememberMe,
@@ -77,7 +78,6 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
-
           theme: ThemeData(
                   brightness: Brightness.light,
                   primarySwatch: generateMaterialColor(color:const Color(0xff2e2c53)),
@@ -88,12 +88,11 @@ class MyApp extends StatelessWidget {
                   focusColor: generateMaterialColor(color: const Color(0xff1f355d)),
                   indicatorColor: generateMaterialColor(color: Colors.black54),
                   dialogBackgroundColor: generateMaterialColor(color: const Color(0xffDB8C8A).withAlpha(255)),
-
-          appBarTheme: const AppBarTheme(
-            backgroundColor: AppColors.whiteColor,
-            shadowColor:  AppColors.whiteColor,
-            elevation: 0,
-          )
+                  appBarTheme: const AppBarTheme(
+                    backgroundColor: AppColors.whiteColor,
+                    shadowColor:  AppColors.whiteColor,
+                    elevation: 0,
+                  )
         ),
         routerConfig:
         // (accessToken == null)?

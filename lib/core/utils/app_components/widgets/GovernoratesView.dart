@@ -13,16 +13,8 @@ class GovernoratesView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 2,
-          child: Container(
+    return  Container(
             height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColors.boxesColor,
-            ),
             child: DropdownButtonFormField2<String>(
               isExpanded: true,
               decoration:  const InputDecoration(
@@ -71,11 +63,7 @@ class GovernoratesView extends StatelessWidget{
                 padding: EdgeInsets.symmetric(horizontal: 16),
               ),
             ),
-          ),
-        ),
-        const Expanded(flex: 1,child: Text('المحافظة' , style: Styles.textStyle14W400, textAlign: TextAlign.end,)),
-      ],
-    );
+          );
   }
 
 }

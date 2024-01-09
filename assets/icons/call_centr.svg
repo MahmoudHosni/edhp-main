@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="148" height="124" viewBox="0 0 148 124">
+  <g id="Group_55296" data-name="Group 55296" transform="translate(-140 -401)">
+    <circle id="Ellipse_13" data-name="Ellipse 13" cx="62" cy="62" r="62" transform="translate(152 401)" fill="#f5fafc"/>
+    <text id="خدمة_العملاء" data-name="خدمة العملاء" transform="translate(214 495.644)" fill="#303134" font-size="28" font-family="SSTArabic-Roman, SST Arabic"><tspan x="-73" y="0">خدمة العملاء</tspan></text>
+    <g id="setting_spport" transform="translate(185.061 401.855)">
+      <path id="Path_8632" data-name="Path 8632" d="M4.5,45.233V28.94a24.44,24.44,0,1,1,48.88,0V45.233" fill="none" stroke="#b7cee6" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <path id="Path_8633" data-name="Path 8633" d="M53.38,34.578a5.431,5.431,0,0,1-5.431,5.431H45.233A5.431,5.431,0,0,1,39.8,34.578V26.431A5.431,5.431,0,0,1,45.233,21H53.38Zm-48.88,0a5.431,5.431,0,0,0,5.431,5.431h2.716a5.431,5.431,0,0,0,5.431-5.431V26.431A5.431,5.431,0,0,0,12.647,21H4.5Z" transform="translate(0 13.371)" fill="none" stroke="#b7cee6" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    </g>
+  </g>
+</svg>

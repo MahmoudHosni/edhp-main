@@ -70,6 +70,12 @@ abstract class Styles {
       fontFamily: 'Tajawal'
   );
 
+  static const textStyle10W500 = TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Tajawal'
+  );
+
   static const textStyle9W400 = TextStyle(
       fontSize: 9,
       fontWeight: FontWeight.w400,
@@ -79,6 +85,12 @@ abstract class Styles {
   static const textStyle8W400 = TextStyle(
       fontSize: 8,
       fontWeight: FontWeight.w400,
+      fontFamily: 'Tajawal'
+  );
+
+  static const textStyle8W500 = TextStyle(
+      fontSize: 8,
+      fontWeight: FontWeight.w500,
       fontFamily: 'Tajawal'
   );
 

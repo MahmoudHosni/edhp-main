@@ -1,10 +1,14 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
+import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
+import 'package:edhp/core/utils/app_components/widgets/InputViewWithLabel.dart';
+import 'package:edhp/core/utils/app_components/widgets/NextButton.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/UserSexType.dart';
+import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -12,10 +16,8 @@ import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/membership_data/widgets/membership_text_form_field.dart';
 import 'package:edhp/features/organization_membership/organization_membership_data/cubit/cubit.dart';
 import 'package:edhp/features/organization_membership/organization_membership_data/cubit/states.dart';
-import 'package:edhp/features/organization_membership/select_the_company/cubit/cubit.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
-import 'package:edhp/models/validate_organization_member_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,19 +63,12 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
       // TODO: implement listener
     },
     builder: (context, state) {
-
-      return SafeArea(
-        child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: SingleChildScrollView(
+      return ViewContainer(title: StringsManager.memberShips,body: SingleChildScrollView(
               child: Column(
                 children: [
-                  const CustomStepOneAppBar(),
-                  const Text('بيانات عضوية الشركة' , style: Styles.textStyle20W500,),
-                  const SizedBox(
-                    height: 40,
-                  ),
+                  const SizedBox(height: 11,),
+                  const Text('بيانات عضوية الشركة' , style: Styles.textStyle16W500,),
+                  const SizedBox(height: 20,),
 
                   MembershipTextFormField(maxLength: 14,error: identityNumberController.text.length==14?'':"",onSummit: (value) {
                     if(value!=null && value.length==14){
@@ -111,6 +106,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     textInputType: TextInputType.number,
                     nameOfField: 'الرقم القومي',
                   ),
+                  const SizedBox(height: 10,),
                   MembershipTextFormField(maxLength: 15,error: membershipNumberController.text.length==14?'':"",
                     onSummit: (value) {
                       if(value!=null && value.length<3){
@@ -127,11 +123,12 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     textInputType: TextInputType.text,
                     nameOfField: 'رقم العضوية',
                   ),
-                  GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack : onSelectGovernorate,stateID: stateID),
+                  const SizedBox(height: 10,),
+                  InputViewWithLabel(subview: GovernoratesView(states: cubit?.subscriptionInfoLookupsModel?.states,callBack: onSelectGovernorate,stateID: stateID),nameOfField: 'المحافظة',),
                   const SizedBox(
                     height: 10,
                   ),
-                  GovernorateRegionsView(cities: cities,callBack : onSelectCity),
+                  InputViewWithLabel(subview: GovernorateRegionsView(cities: cities,callBack: onSelectCity),nameOfField: 'المنطقة',),
                   const SizedBox(
                     height: 10,
                   ),
@@ -151,16 +148,15 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                     textInputType: TextInputType.text,
                     nameOfField: 'العنوان',
                   ),
-                  UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack: onSelectGender,gender: gender),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10,),
+                  InputViewWithLabel(subview: UserSexType(genderList: cubit?.subscriptionInfoLookupsModel?.genderList,callBack:onSelectGender,gender: gender),nameOfField: 'النوع',),
+                  const SizedBox(height: 10,),
 
-                  Row(
+                  InputViewWithLabel(subview:Row(
                     children: [
                       IconButton(
                         onPressed: (){
-                          selectDate(context);
+                          selectDate(context,);
                         },
                         icon: SvgPicture.asset(AppPaths.dateIconSvg),
                       ),
@@ -168,8 +164,8 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                         flex: 6,
                         child: DefaultTextFormFieldWithoutLabel(maxLen: 11,error: birthDate.text.length>=7?'':"",
                           controller: birthDate,
-                          keyboardType: TextInputType.text,
-                          validation: (value){
+                          keyboardType: TextInputType.text,onChange: (value) {
+                            print("onChange");
                             if(value != null && value.length>7) {
                               setState(() {
                                 birthDate.text = value;
@@ -180,18 +176,15 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                               return 'برجاء ادخال تاريخ الميلاد بصورة صحيحة';
                             }
                           },
+                          validation: (value){
+                            print("validation");
+                          },
                           isClickable: false,
                         ),
                       ),
-                      const Expanded(flex: 4,child: Text('تاريخ الميلاد' , style: Styles.textStyle14W400, textAlign: TextAlign.end,)),
                     ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  ),nameOfField: 'تاريخ الميلاد',),
+                  const SizedBox(height: 16,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: Row(
@@ -201,30 +194,25 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                             onTap: (){
                               cubit?.getNationalIDImageFromGallery();
                             },
-                            child: Container(
-                              height: 100,
+                            child:Container(height: 50,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: AppColors.whiteColor,
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: AppColors.lightGrayColor,
-                                      blurRadius: 1,
-                                    ),
-                                  ]
+                                borderRadius: BorderRadius.circular(10.0),border: Border.all(color: AppColors.cardBorderNew),
+                                color:  AppColors.cardNew,
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 2.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                padding: const EdgeInsets.all(3),
+                                child: Row(
                                   children: [
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
                                     cubit?.nationalIdImage==null?
-                                        SvgPicture.asset(AppPaths.notationIdIconSvg):
-                                        ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.nationalIdImage!,width: 65,height: 65,)) ,
+                                    SvgPicture.asset(AppPaths.personalIdIconSvg):
+                                    ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.nationalIdImage!,width: 65,height: 65,)) ,
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    const Text('قم برفع صورة بطاقة الرقم القومي' , style: Styles.textStyle8W400,textAlign: TextAlign.center,)
+                                    Expanded(child: const Text('ارفق البطاقة الشخصية' , style: Styles.textStyle8W500,textAlign: TextAlign.end,))
                                   ],
                                 ),
                               ),
@@ -239,31 +227,28 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                             onTap: (){
                               cubit?.getPersonalImageFromGallery();
                             },
-                            child: Container(
-                              height: 100,
+                            child: Container(height: 50,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: AppColors.whiteColor,
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: AppColors.lightGrayColor,
-                                      blurRadius: 1,
-                                    ),
-                                  ]
+                                borderRadius: BorderRadius.circular(10.0),border: Border.all(color: AppColors.cardBorderNew),
+                                color:  AppColors.cardNew,
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 2.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    cubit?.personalImage==null?
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(3),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      cubit?.personalImage==null?
                                       SvgPicture.asset(AppPaths.notationIdIconSvg):
                                       ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.personalImage!,width: 65,height: 65,)) ,
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text('قم برفع صورة لك' , style: Styles.textStyle9W400,)
-                                  ],
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Expanded(child: const Text('ارفق صورة لك' , style: Styles.textStyle8W500,textAlign: TextAlign.end,))
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -277,33 +262,30 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   ),
                   InkWell(
                     onTap: (){
-                      cubit?.getOrganizationCardFromGallery ();
+                      cubit?.getOrganizationCardFromGallery();
                     },
-                    child: Container(
-                      height: 110, padding: EdgeInsets.all(2),
+                    child: Container(height: 50,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: AppColors.whiteColor,
-                          boxShadow: const [
-                            BoxShadow(
-                              color: AppColors.lightGrayColor,
-                              blurRadius: 1,
-                            ),
-                          ]
+                        borderRadius: BorderRadius.circular(10.0),border: Border.all(color: AppColors.cardBorderNew),
+                        color:  AppColors.cardNew,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            cubit?.orgCardImage==null?
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(3),
+                          child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              cubit?.orgCardImage==null?
                               SvgPicture.asset(AppPaths.notationIdIconSvg):
-                              ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.orgCardImage!,width: 80,height: 65,)) ,
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const Text('قم برفع صورة كارنية العضوية للمؤسسة' , style: Styles.textStyle8W400,)
-                          ],
+                              ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),child: Image.file(cubit!.orgCardImage!,width: 65,height: 65,)) ,
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Expanded(child: const Text('قم برفع صورة كارنية العضوية للمؤسسة'  , style: Styles.textStyle8W500,textAlign: TextAlign.end,))
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -311,21 +293,21 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   const SizedBox(
                     height: 30,
                   ),
-                  DefaultButton(
-                    function: (){
-                      validateAndContinue();
-                    },
-                    text: 'متابعة' ,
-                    height: 45,
-                  ),
+                  Row(children:[
+                    Container(alignment: Alignment.bottomLeft,
+                      child: NextButton(function: (){
+                        validateAndContinue();
+                      }, text: StringsManager.select , height: 45,width: 120,),),
+                    const SizedBox(width: 8,),
+                    Container(width: 35,height:35,child: BackCircleButton(),),
+                  ],),
                   const SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
+
                 ],
               ),
             ),
-          ),
-        ),
       );
     },
 );

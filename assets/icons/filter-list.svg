@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44.4" height="44.4" viewBox="0 0 44.4 44.4">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0dbbd6"/>
+      <stop offset="1" stop-color="#339dfa"/>
+    </linearGradient>
+    <filter id="Icon_material-filter-list" x="1.25" y="9.233" width="41.9" height="33.934" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="filter-list" transform="translate(-29.093 -132.8)">
+    <path id="help_BG" data-name="help BG" d="M0,22.2A22.2,22.2,0,1,1,22.2,44.4,22.2,22.2,0,0,1,0,22.2Z" transform="translate(29.093 132.8)" fill="url(#linear-gradient)"/>
+    <g transform="matrix(1, 0, 0, 1, 29.09, 132.8)" filter="url(#Icon_material-filter-list)">
+      <path id="Icon_material-filter-list-2" data-name="Icon material-filter-list" d="M13.795,24.934h5.311V22.278H13.795ZM4.5,9v2.656H28.4V9Zm3.983,9.295H24.417V15.639H8.483Z" transform="translate(5.75 6.23)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

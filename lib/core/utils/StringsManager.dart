@@ -14,12 +14,22 @@ class StringsManager {
   static const String yourHealthProfile = 'ملفك الطبي';
   static const String selectJahah = 'اختر الهيئة التابع لها';
   static const String selectCompany = 'اختر الشركه التابع لها';
-  static const String select= 'اختر';
+  static const String select= 'التالى';
   static const String insuranceCompany = 'شركة التأمين';
-  static const String individual = 'فردي';
-  static const String jahat = 'هيئات';
+  static const String individual = 'أفراد';
+  static const String jahat = 'مؤسسات';
   static const String resumeMemberShipData = 'إستكمال بيانات الأعضاء';
+  static const String individualMemberShip = 'عضوية الافراد';
   static const String membershipCards = 'بطاقات العضويات' ;
   static const String medicalAdvices = 'نصائح طبية' ;
+  static const String medicalFile = 'الملف الطبي' ;
+  static const String callCenter = 'خدمة العملاء' ;
+  static const String settings = 'الاعدادات' ;
 
+
+  static const String memberShips = 'العضويات' ;
+  static const String previewMembership = 'معاينة البطاقة' ;
+
+  static const String companyName = 'أسم الشركة';//
+  static const String jahatName = 'أسم الهيئة';
 }

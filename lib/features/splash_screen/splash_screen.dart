@@ -36,33 +36,34 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: height / 30,
-            ),
-            AnimatedBuilder(
-              builder: (context, child) => SlideTransition(
-                position: slidingAnimation,
-                child: SvgPicture.asset(
-                  AppPaths.logoPath ,
-                  width: width / 1.5,
-                ),
-              ),
-              animation: slidingAnimation,
-            ),
-          ],
-        ),
-      ),
+    return Container(width: width,height: height,
+      child: Image.asset('assets/images/splash.jpg',fit: BoxFit.fitWidth,)
+        
+        
+        // Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   crossAxisAlignment: CrossAxisAlignment.stretch,
+        //   children: [
+        //     SizedBox(
+        //       height: height / 30,
+        //     ),
+        //     AnimatedBuilder(
+        //       builder: (context, child) => SlideTransition(
+        //         position: slidingAnimation,
+        //         child: SvgPicture.asset(
+        //           AppPaths.logoPath ,
+        //           width: width / 1.5,
+        //         ),
+        //       ),
+        //       animation: slidingAnimation,
+        //     ),
+        //   ],
+        // ),
     );
   }
 
   void initSlidingAnimation() {
-    animationController = AnimationController(vsync: this , duration: const Duration(seconds: 3));
+    animationController = AnimationController(vsync: this , duration: const Duration(seconds: 1));
     slidingAnimation = Tween<Offset>(begin: const Offset(0, 10), end: Offset.zero,).animate(animationController);
     animationController.forward();
   }

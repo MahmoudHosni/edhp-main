@@ -20,6 +20,12 @@ class LayoutScreen extends StatefulWidget {
 }
 
 class _LayoutScreenState extends State<LayoutScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -31,20 +37,29 @@ class _LayoutScreenState extends State<LayoutScreen> {
           }
         },
         builder: (context, state) {
-          return SafeArea(
-            child: Scaffold(
+          return Stack(
+            children: <Widget>[
+          Image.asset("assets/images/bg.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.fill,
+          ), Scaffold(backgroundColor: Colors.transparent,
               body: screens[currentIndex],
-              bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                items: bottomNavigationBarItems,
-                selectedItemColor: AppColors.primaryBlueColor,
-                unselectedItemColor: AppColors.lightGrayColor,
-                onTap: (index){
-                  changeBottomIndex(index);
-                },
-                currentIndex: currentIndex,
+              bottomNavigationBar: Container(padding: const EdgeInsets.only(left: 2,top: 2,right: 2),
+                decoration: BoxDecoration(color: Colors.white,border: Border.all(color: AppColors.secondNew,width: 0.12),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12),),),
+                child: BottomNavigationBar(backgroundColor: Colors.transparent,elevation: 0,
+                  type: BottomNavigationBarType.fixed,
+                  items: bottomNavigationBarItems,
+                  selectedItemColor: AppColors.primaryBlueColor,
+                  unselectedItemColor: AppColors.unselectedColor,
+                  onTap: (index){
+                    changeBottomIndex(index);
+                  },
+                  currentIndex: currentIndex,
+                ),
               ),
-            ),
+            )],
           );
         },
       ),
@@ -62,105 +77,26 @@ class _LayoutScreenState extends State<LayoutScreen> {
 
   List<BottomNavigationBarItem> bottomNavigationBarItems = [
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.settingsIconSvg ,),
+      icon: SvgPicture.asset(AppPaths.settingsIconOffSvg ,),activeIcon: SvgPicture.asset(AppPaths.settingsIconSvg ,),
       label: 'الاعدادات',
     ),
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.callCenterIconSvg),
+      icon: SvgPicture.asset(AppPaths.callCenterIconOffSvg),activeIcon: SvgPicture.asset(AppPaths.callCenterIconSvg ,),
       label: 'خدمة العملاء',
     ),
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.medicalFileIconSvg),
+      icon: SvgPicture.asset(AppPaths.medicalFileIconOffSvg),activeIcon: SvgPicture.asset(AppPaths.medicalFileIconSvg ,),
       label: 'الملف الطبي',
     ),
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.homeIconSvg , color: AppColors.primaryBlueColor,),
+      icon: SvgPicture.asset(AppPaths.homeIconOffSvg ,),activeIcon: SvgPicture.asset(AppPaths.homeIconSvg ,),
       label: 'الرئيسية',
     ),
   ];
 
   void changeBottomIndex(int index){
-    currentIndex = index;
-    if(index == 3){
-      bottomNavigationBarItems = [
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.settingsIconSvg ),
-          label: 'الاعدادات',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.callCenterIconSvg),
-          label: 'خدمة العملاء',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.medicalFileIconSvg),
-          label: 'الملف الطبي',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.homeIconSvg , color: AppColors.primaryBlueColor,),
-          label: 'الرئيسية',
-        ),
-      ];
-    }else if(index ==2){
-      bottomNavigationBarItems = [
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.settingsIconSvg ,),
-          label: 'الاعدادات',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.callCenterIconSvg),
-          label: 'خدمة العملاء',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.medicalFileIconSvg,  color: AppColors.primaryBlueColor,),
-          label: 'الملف الطبي',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.homeIconSvg ,),
-          label: 'الرئيسية',
-        ),
-      ];
-    }else if(index ==1){
-      bottomNavigationBarItems = [
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.settingsIconSvg ,),
-          label: 'الاعدادات',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.callCenterIconSvg ,  color: AppColors.primaryBlueColor,),
-          label: 'خدمة العملاء',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.medicalFileIconSvg),
-          label: 'الملف الطبي',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.homeIconSvg ,),
-          label: 'الرئيسية',
-        ),
-      ];
-    }else{
-      bottomNavigationBarItems = [
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.settingsIconSvg , color: AppColors.primaryBlueColor,),
-          label: 'الاعدادات',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.callCenterIconSvg),
-          label: 'خدمة العملاء',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.medicalFileIconSvg),
-          label: 'الملف الطبي',
-        ),
-        BottomNavigationBarItem(
-          icon: SvgPicture.asset(AppPaths.homeIconSvg ,),
-          label: 'الرئيسية',
-        ),
-      ];
-    }
     setState(() {
-
+      currentIndex = index;
     });
-    // emit(ChangeBottomNavigationBarState());
   }
 }

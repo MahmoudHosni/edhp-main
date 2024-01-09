@@ -13,19 +13,13 @@ class TermsAndConditionsContainer extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: AppColors.whiteColor,
-            boxShadow: const [
-              BoxShadow(
-                color: AppColors.lightGrayColor,
-                blurRadius: 1,
-              ),
-            ]
+            color: AppColors.whiteLightNew,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 18.0 , horizontal: 14),
           child: Column(
             children: [
-              const Text('الشروط والأحكام' , style: Styles.textStyle16W500,),
+              Container(child: Text('الشروط والأحكام' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),alignment: Alignment.centerRight),
               const SizedBox(
                 height: 20,
               ),
@@ -36,7 +30,7 @@ class TermsAndConditionsContainer extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text('لقد قرأت جميع الشرط والأحكام وأوافق عليهم' , style: Styles.textStyle10W400.copyWith(color: AppColors.lightGrayColor),),
+                  Text('لقد قرأت جميع الشرط والأحكام وأوافق عليهم' , style: Styles.textStyle10W400.copyWith(color: AppColors.secondNew),),
                   const SizedBox(
                     width: 8,
                   ),
@@ -52,12 +46,12 @@ class TermsAndConditionsContainer extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(2.0),
                               border: Border.all(
-                                  color: AppColors.lightGrayColor,
+                                  color: AppColors.secondNew,
                                   width: 1
                               )
                           ),
                         ),
-                        const Icon(Icons.check , color: AppColors.lightGrayColor, size: 18,)
+                        const Icon(Icons.check , color: AppColors.secondNew, size: 18,)
                       ],
                     ),
                   )

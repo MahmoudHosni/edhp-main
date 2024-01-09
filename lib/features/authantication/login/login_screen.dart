@@ -16,13 +16,24 @@ import 'widgets/or_divider.dart';
 import 'widgets/remember_me_row.dart';
 import 'widgets/row_of_register_apps.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneNumberController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

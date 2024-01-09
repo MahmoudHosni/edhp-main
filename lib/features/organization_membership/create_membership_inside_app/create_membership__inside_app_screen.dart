@@ -59,7 +59,7 @@ class CreateMembershipInsideAppScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 10.0),
                           child: Column(
                             children: [
-                              Image.asset(AppPaths.companyImage),
+                              SvgPicture.asset(AppPaths.companyImage),
                               const SizedBox(
                                 height: 5,
                               ),

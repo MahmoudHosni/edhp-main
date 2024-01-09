@@ -1,5 +1,4 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +11,8 @@ class GovernorateRegionsView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 2,
-          child: Container(
+    return Container(
             height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColors.boxesColor,
-            ),
             child: DropdownButtonFormField2<String>(
               isExpanded: true,
               decoration:  InputDecoration(
@@ -32,7 +23,6 @@ class GovernorateRegionsView extends StatelessWidget{
                 alignment: AlignmentDirectional.centerEnd,
                 child: Text(
                   'اختار المنطقة',
-                  // subscriptionInfoDTOModel.gender == 1 ? 'ذكر' : 'انثى',
                   style: Styles.textStyle14W400,
                 ),
               ),
@@ -71,11 +61,7 @@ class GovernorateRegionsView extends StatelessWidget{
                 padding: EdgeInsets.symmetric(horizontal: 16),
               ),
             ),
-          ),
-        ),
-        const Expanded(flex: 1,child: Text('المنطقة' , style: Styles.textStyle14W400, textAlign: TextAlign.end,)),
-      ],
-    );
+          );
   }
 
 }

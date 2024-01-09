@@ -3,7 +3,11 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
+import 'package:edhp/core/utils/app_components/widgets/NextButton.dart';
+import 'package:edhp/core/utils/app_components/widgets/SharedAppBar.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
+import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -11,6 +15,7 @@ import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_paths.dart';
@@ -26,13 +31,9 @@ class SelectTheCompanyScreen extends StatefulWidget {
 
 class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
   TextEditingController notationIdController = TextEditingController();
-
   TextEditingController clubNumberController = TextEditingController();
-
   final formKey = GlobalKey<FormState>();
-
   int organizationID=-1;
-
   String organizationName='';
 
   @override
@@ -42,25 +43,17 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
       // TODO: implement listener
     },
     builder: (context, state) {
-      return SafeArea(
-        child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 26.0),
-            child: Column(
+      return ViewContainer(title: StringsManager.memberShips,body:   Column(
               children: [
-                const BackCustomAppBar(),
-                const SizedBox(
-                  height: 25,
-                ),
-                const Text(StringsManager.insuranceCompany , style: Styles.textStyle20W500,),
-                const SizedBox(height: 10,),
-                Container(width: double.infinity,child: const Text(StringsManager.selectCompany , style: Styles.textStyle14W400,textAlign: TextAlign.right,)),
+                SizedBox(height: 11,),
+                const Text(StringsManager.insuranceCompany , style: Styles.textStyle15W500,),
+                const SizedBox(height: 6,),
+                Container(width: double.infinity,child: const Text(StringsManager.selectCompany , style: Styles.textStyle10W400,textAlign: TextAlign.center,)),
                 const SizedBox(height: 15,),
                 if(state is CompanyItemLoadingState)
                   const CircularProgressIndicator(color: AppColors.primaryBlueColor),
                 Expanded(
-                  child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2 , crossAxisSpacing: 20),
+                  child: ListView.builder(shrinkWrap: true,
                     itemBuilder: (_, index) => InkWell(
                       onTap: (){
                         setState(() {
@@ -72,8 +65,8 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0 , horizontal: 1.0),
                         child: Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? AppColors.primaryBlueColor : AppColors.whiteColor,
+                              borderRadius: BorderRadius.circular(10.0),border: Border.all(color: AppColors.cardBorderNew),
+                              color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? AppColors.unselectedColor : AppColors.cardNew,
                               boxShadow: const [
                                 BoxShadow(
                                   color: AppColors.lightGrayColor,
@@ -81,21 +74,24 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                                 ),
                               ]
                           ),
-                          child:  Container(padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                          child:  Container(padding: EdgeInsets.all(8),
+                              child: Row(mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),
                                     child: CachedNetworkImage(
                                         imageUrl:'$baseUrl${EndPoint.imgPath}?referenceTypeId=7&referenceId=${CompanyItemCubit.get(context).organizationItemsList[index].iD}&id=${Random().nextInt(100000)}',
                                         fit: BoxFit.fill,height: 85,width: 85,
-                                        placeholder: (context, url) =>  Image.asset(AppPaths.companyImage,width: 85,height: 85,),
-                                        errorWidget: (context, url, error) => Image.asset(AppPaths.companyImage,width: 85,height: 85,)), ) ,
+                                        placeholder: (context, url) =>  SvgPicture.asset(AppPaths.companyImage,width: 85,height: 85,),
+                                        errorWidget: (context, url, error) => SvgPicture.asset(AppPaths.companyImage,width: 85,height: 85,)), ) ,
 
-                                  const SizedBox(height: 2,),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(8.0,0,8,0),
-                                    child: Text(CompanyItemCubit.get(context).organizationItemsList[index].name.toString() ,textAlign: TextAlign.center,
-                                      style: Styles.textStyle13W400.copyWith(color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? Colors.white : Colors.black),maxLines: 2,),
+                                  const Spacer(),
+                                  Column(crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(StringsManager.companyName , style: Styles.textStyle13W500.copyWith(color: AppColors.textColorBlue),),
+                                      const SizedBox(height: 5,),
+                                      Text(CompanyItemCubit.get(context).organizationItemsList[index].name.toString() ,textAlign: TextAlign.start,
+                                        style: Styles.textStyle13W500.copyWith(color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? Colors.white : AppColors.secondNew),maxLines: 2,),
+                                    ],
                                   )
                                 ],
                               ),
@@ -109,111 +105,33 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 25,
                 ),
-                DefaultButton(backgroundColor: (organizationID > 0) ? AppColors.primaryBlueColor : Colors.grey,
-                  function: () {
-                    if(organizationID<=0){
-                      ShowToast.showToast('برجاء اختيار شركة التأمين بصورة صحيحة');
-                    }else{
-                      var subscriptionRequest = SubscriptionRequest();
-                      subscriptionRequest.MedicalCompanyID = organizationID;
-                      subscriptionRequest.MedicalCompanyName = organizationName;
-                      GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
-                    }
-                  },
-                  text: StringsManager.select,
-                  redius: 10,
+
+                Row(children: [
+                  Container(alignment: Alignment.bottomLeft,
+                  child: NextButton(backgroundColor: (organizationID > 0) ? AppColors.secondNew : Colors.grey,
+                    function: () {
+                      if(organizationID<=0){
+                        ShowToast.showToast('برجاء اختيار شركة التأمين بصورة صحيحة');
+                      }else{
+                        var subscriptionRequest = SubscriptionRequest();
+                        subscriptionRequest.MedicalCompanyID = organizationID;
+                        subscriptionRequest.MedicalCompanyName = organizationName;
+                        GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
+                      }
+                    },
+                    text: StringsManager.select,width: 120,fontSize: 13,
+                    redius: 32,
+                  ),
                 ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(10.0),
-                //       color: AppColors.whiteColor,
-                //       boxShadow: const [
-                //         BoxShadow(
-                //           color: AppColors.lightGrayColor,
-                //           blurRadius: 1,
-                //         ),
-                //       ]
-                //   ),
-                //   child: Padding(
-                //     padding: const EdgeInsets.symmetric(vertical: 20.0 , horizontal: 15.0),
-                //     child: Form(
-                //       key: formKey,
-                //       child: Column(
-                //         children: [
-                //           Row(
-                //             children: [
-                //               Expanded(
-                //                 flex: 3,
-                //                 child: DefaultTextFormFieldWithoutLabel(
-                //                   controller: notationIdController,
-                //                   keyboardType: TextInputType.number,
-                //                   validation: (value){
-                //                     if(value!.isEmpty){
-                //                       return 'Please enter your notation ID';
-                //                     }else{
-                //                       return null;
-                //                     }
-                //                   },
-                //                 ),
-                //               ),
-                //               const Expanded(flex: 2,child: Text('الرقم القومي' , style: Styles.textStyle16W500, textAlign: TextAlign.end,))
-                //             ],
-                //           ),
-                //           const SizedBox(
-                //             height: 20,
-                //           ),
-                //           Row(
-                //             children: [
-                //               Expanded(
-                //                 flex: 3,
-                //                 child: DefaultTextFormFieldWithoutLabel(
-                //                   controller: clubNumberController,
-                //                   keyboardType: TextInputType.number,
-                //                   validation: (value){
-                //                     if(value!.isEmpty){
-                //                       return 'Please enter your club number';
-                //                     }else{
-                //                       return null;
-                //                     }
-                //                   },
-                //                 ),
-                //               ),
-                //               const Expanded(flex: 2,child: Text('رقم النادي' , style: Styles.textStyle16W500, textAlign: TextAlign.end,))
-                //             ],
-                //           ),
-                //           const SizedBox(
-                //             height: 20,
-                //           ),
-                //           DefaultButton(
-                //             function: (){
-                //               if(formKey.currentState!.validate()){
-                //                 CompanyItemCubit.get(context).validateOrganizationMember(
-                //                   // organizationId: organizationID!,
-                //                   identityNumber: notationIdController.text.trim().toString(),
-                //                   organizationMembershipNumber: int.parse(clubNumberController.text.trim().toString()),
-                //                 ).then((value) {
-                //                   GoRouter.of(context).push(AppRouters.kOrganizationSubscriptionScreen);
-                //                 });
-                //               }
-                //             },
-                //             text: 'تحقق',
-                //           ),
-                //           if(state is ValidateOrganizationMemberLoadingState)
-                //             const SizedBox(height: 15),
-                //           if(state is ValidateOrganizationMemberLoadingState)
-                //             const CircularProgressIndicator(color: AppColors.primaryBlueColor,)
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                  const SizedBox(width: 8,),
+                  BackCircleButton(),
+                ],),
+
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 12,
+                  height: MediaQuery.of(context).size.height / 33,
                 ),
               ],
-            ),
           ),
-        ),
       );
      },
     );

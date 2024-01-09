@@ -42,18 +42,12 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius!),
-        color: AppColors.boxesColor,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+    return Container(alignment: Alignment.bottomCenter,color: Colors.transparent,height: 34,
+        margin: const EdgeInsets.fromLTRB(18, 25, 18, 0),
         child: TextFormField(
-          textAlign: TextAlign.end,maxLength: maxLen,
+          textAlign: TextAlign.center,maxLength: maxLen,
           enabled: isClickable,
-          style: Styles.textStyle14W400,
+          style: Styles.textStyle12W400,
           minLines: minLines,
           maxLines: maxLines,
           obscureText: obscureText,
@@ -63,7 +57,7 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
           validator: validation,
           onChanged: onChange,
           decoration: InputDecoration(
-            border: InputBorder.none,errorText: error,errorStyle: TextStyle(color: Colors.red),
+            border: InputBorder.none,errorText: error,errorStyle: TextStyle(color: Colors.red),counterText: '',
             prefixIcon: prefixIcon != null ? IconButton(
               onPressed: onPressedPrefixIcon,
               icon: Icon(
@@ -79,7 +73,6 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
               ),
             ): null,
           ),
-        ),
       ),
     );
   }

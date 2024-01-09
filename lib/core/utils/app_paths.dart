@@ -4,7 +4,7 @@ abstract class AppPaths {
   ///
   /// Logo Image Path
   ///
-  static const String logoPath = 'assets/logo.svg';
+  static const String logoPath = 'assets/icons/logo.svg';
   ///
   /// Registration App Icons
   ///
@@ -14,27 +14,36 @@ abstract class AppPaths {
   ///
   /// Bottom Navigation Bar Icons
   ///
-  static const String homeIconSvg = 'assets/icons/home.svg';
-  static const String medicalFileIconSvg = 'assets/icons/medical_file.svg';
-  static const String callCenterIconSvg = 'assets/icons/call_center.svg';
-  static const String settingsIconSvg = 'assets/icons/settings.svg';
+  static const String homeIconSvg = 'assets/icons/home_on.svg';
+  static const String homeIconOffSvg = 'assets/icons/home_off.svg';
+  static const String medicalFileIconSvg = 'assets/icons/user_on.svg';
+  static const String medicalFileIconOffSvg = 'assets/icons/user_off.svg';
+  static const String callCenterIconSvg = 'assets/icons/spport_on.svg';
+  static const String callCenterIconOffSvg = 'assets/icons/spport_off.svg';
+  static const String settingsIconSvg = 'assets/icons/setting_on.svg';
+  static const String settingsIconOffSvg = 'assets/icons/setting_off.svg';
   ///
   /// Icons
   ///
-  static const String editIconSvg = 'assets/icons/edit.svg';
-  static const String personIconSvg = 'assets/icons/person.svg';
+  static const String editIconSvg = 'assets/icons/camera.svg';
+  static const String personIconSvg = 'assets/icons/Iconfeather-edit-3.svg';
   static const String backIconSvg = 'assets/icons/back.svg';
   static const String downIconSvg = 'assets/icons/down.svg';
   static const String masterCardSvg = 'assets/icons/master_card.svg';
   static const String visaCardSvg = 'assets/icons/visa.png';
-  static const String notificationIconSvg = 'assets/icons/notification.svg';
+  static const String notificationIconSvg = 'assets/icons/not.svg';
+  static const String drawerIconSvg = 'assets/icons/menu.svg';
+
+  static const String aboutIconSvg = 'assets/icons/info.svg';
+
   static const String serviceIconSvg = 'assets/icons/service.svg';
-  static const String membershipIconSvg = 'assets/icons/membership.svg';
-  static const String medicalNetworkIconSvg = 'assets/icons/medical_network.svg';
-  static const String medicalRecordIconSvg = 'assets/icons/medical_record.svg';
-  static const String dateIconSvg = 'assets/icons/date.svg';
+  static const String membershipIconSvg = 'assets/icons/user-circle.svg';
+  static const String medicalNetworkIconSvg = 'assets/icons/user-md.svg';
+  static const String medicalRecordIconSvg = 'assets/icons/file-medical.svg';
+  static const String dateIconSvg = 'assets/icons/date-range.svg';
   static const String imageIconSvg = 'assets/icons/image.svg';
-  static const String notationIdIconSvg = 'assets/icons/notation_id.svg';
+  static const String notationIdIconSvg = 'assets/icons/id-card.svg';
+  static const String personalIdIconSvg = 'assets/icons/address-card.svg';//
   static const String medicalProfileFileIconSvg = 'assets/icons/medical_profile.svg';
   static const String bloodTypeIcon = 'assets/icons/blood_type.svg';
   static const String genderIcon = 'assets/icons/gender.svg';
@@ -44,8 +53,8 @@ abstract class AppPaths {
   ///
   /// Images
   ///
-  static const String individualImage = 'assets/images/individual.png';
-  static const String companyImage = 'assets/images/company.png';
+  static const String individualImage = 'assets/icons/a_1.svg';
+  static const String companyImage = 'assets/icons/a_2.svg';
 
   ///
   /// Home Image

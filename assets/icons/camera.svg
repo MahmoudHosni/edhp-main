@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34.287" height="34.518" viewBox="0 0 34.287 34.518">
+  <defs>
+    <filter id="Icon_awesome-camera" x="0" y="2.267" width="34.287" height="32.251" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="camera" transform="translate(-377.856 -40)">
+    <path id="help_BG" data-name="help BG" d="M0,15A15,15,0,1,1,15,30,15,15,0,0,1,0,15Z" transform="translate(380 40)" fill="#157de6"/>
+    <g transform="matrix(1, 0, 0, 1, 377.86, 40)" filter="url(#Icon_awesome-camera)">
+      <path id="Icon_awesome-camera-2" data-name="Icon awesome-camera" d="M16.287,5.813v9.161A1.527,1.527,0,0,1,14.76,16.5H1.527A1.527,1.527,0,0,1,0,14.974V5.813A1.527,1.527,0,0,1,1.527,4.286h2.8l.391-1.047A1.525,1.525,0,0,1,6.146,2.25h3.992a1.525,1.525,0,0,1,1.428.989l.394,1.047h2.8A1.527,1.527,0,0,1,16.287,5.813Zm-4.326,4.581a3.817,3.817,0,1,0-3.817,3.817A3.82,3.82,0,0,0,11.961,10.393Zm-1.018,0a2.8,2.8,0,1,1-2.8-2.8A2.8,2.8,0,0,1,10.943,10.393Z" transform="translate(9 6.02)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

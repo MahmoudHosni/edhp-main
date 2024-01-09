@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="124" viewBox="0 0 144 124">
+  <g id="Group_55296" data-name="Group 55296" transform="translate(-142 -401)">
+    <circle id="Ellipse_13" data-name="Ellipse 13" cx="62" cy="62" r="62" transform="translate(152 401)" fill="#f5fafc"/>
+    <text id="الملف_الطبي" data-name="الملف الطبي" transform="translate(214 495.644)" fill="#303134" font-size="28" font-family="SSTArabic-Roman, SST Arabic"><tspan x="-71" y="0">الملف الطبي</tspan></text>
+    <g id="user-profile" transform="translate(188 406.355)">
+      <path id="Path_3726" data-name="Path 3726" d="M19.718,6.491a8.727,8.727,0,1,1-8.727,8.727,8.727,8.727,0,0,1,8.727-8.727m0-3.491A12.218,12.218,0,1,0,31.936,15.218,12.218,12.218,0,0,0,19.718,3Z" transform="translate(-2.264 -3)" fill="#b7cee6"/>
+      <path id="Path_3727" data-name="Path 3727" d="M37.909,47.945H34.418V39.218a8.727,8.727,0,0,0-8.727-8.727H15.218a8.727,8.727,0,0,0-8.727,8.727v8.727H3V39.218A12.218,12.218,0,0,1,15.218,27H25.691A12.218,12.218,0,0,1,37.909,39.218Z" transform="translate(-3 0.927)" fill="#b7cee6"/>
+      <path id="Path_3728" data-name="Path 3728" d="M33,6H50.455V9.491H33Z" transform="translate(1.909 -2.509)" fill="#b7cee6"/>
+      <path id="Path_3729" data-name="Path 3729" d="M33,13.5H50.455v3.491H33Z" transform="translate(1.909 -1.282)" fill="#b7cee6"/>
+      <path id="Path_3730" data-name="Path 3730" d="M33,21H45.218v3.491H33Z" transform="translate(1.909 -0.055)" fill="#b7cee6"/>
+    </g>
+  </g>
+</svg>

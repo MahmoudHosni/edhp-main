@@ -1,3 +1,4 @@
+import 'package:edhp/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
@@ -25,27 +26,23 @@ class MembershipTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: DefaultTextFormFieldWithoutLabel(maxLen: maxLength,error: error,
-                controller: controller,onSubmit: onSummit,
-                keyboardType: textInputType,
-                validation: validation,onChange: validation,
-                isClickable: isClickable,
-              ),
-            ),
-
-            Expanded(flex: 1,child: Text(nameOfField , style: Styles.textStyle14W400, textAlign: TextAlign.end,)),
-          ],
+    return SizedBox(height: 70,
+      child: Stack(
+            children: [
+              Container(margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(45),color: Colors.transparent,border: Border.all(color: AppColors.secondNew)
+                  ),alignment: Alignment.center,
+                  child:DefaultTextFormFieldWithoutLabel(maxLen: maxLength,error: error,
+                            controller: controller,onSubmit: onSummit,
+                            keyboardType: textInputType,
+                            validation: validation,onChange: validation,
+                            isClickable: isClickable,
+                          ),
+                        ),
+              Align(child: Container(height: 15,width: 100,margin: EdgeInsets.fromLTRB(3, 0, 25, 35),padding: EdgeInsets.fromLTRB(0, 0, 8, 0)
+                ,color: Colors.white,child: Text(nameOfField , style: Styles.textStyle10W400.copyWith(color: AppColors.secondNew),textAlign: TextAlign.end,)),alignment: Alignment.centerRight),
+            ],
         ),
-        const SizedBox(
-          height: 10,
-        ),
-      ],
     );
   }
 }

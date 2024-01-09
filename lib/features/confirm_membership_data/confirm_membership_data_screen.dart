@@ -1,5 +1,11 @@
 import 'package:edhp/core/network/cache_helper.dart';
+import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
+import 'package:edhp/core/utils/app_components/widgets/ConfirmLeftValue.dart';
+import 'package:edhp/core/utils/app_components/widgets/ConfirmRightTitle.dart';
+import 'package:edhp/core/utils/app_components/widgets/NextButton.dart';
+import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -47,21 +53,15 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
           }
         },
         builder: (context, state) {
-          return SafeArea(
-             child: Scaffold(
-              body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: SingleChildScrollView(
+          return ViewContainer(title: StringsManager.memberShips,body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const CustomStepTwoAppBar(),
-
                     if(state == ConfirmMembershipLoadingState())
                       const CircularProgressIndicator(color: AppColors.primaryBlueColor,),
 
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 18.0),
-                      child: Center(child: Text('تأكيد البيانات' , style: Styles.textStyle20W500,)),
+                      child: Center(child: Text('تأكيد البيانات' , style: Styles.textStyle16W500,)),
                     ),
                     const SizedBox(
                       height: 4,
@@ -78,36 +78,58 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                       ),
                     ),
                     const SizedBox(
-                      height: 34,
+                      height: 20,
                     ),
-                    ConfirmDataFieldAndValueItem(field: 'الإسم', value: (CacheHelper.getData(key: 'profile') )),
-                    ConfirmDataFieldAndValueItem(field: 'رقم الهاتف', value: CacheHelper.getData(key: 'name')),
-                    ConfirmDataFieldAndValueItem(field: 'الجنس', value: widget.subscriptionRequest.Gender==1?genderItems[0]:genderItems[1]),
-                    ConfirmDataFieldAndValueItem(field: 'الرقم القومي', value: widget.subscriptionRequest?.IdentityNumber ??''),
-                    ConfirmDataFieldAndValueItem(field: 'المبلغ', value: widget.subscriptionRequest.Cost ??''),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
+                      Expanded(child: ConfirmLeftValue(vSide: CacheHelper.getData(key: 'profile') ),flex: 1,),
+                      SizedBox(width: 7,),
+                      ConfirmRightTitle(title:  'الإسم'),
+                    ],),
+                    SizedBox(height: 8,),
+                    Row(children: [
+                      Expanded(child: ConfirmLeftValue(vSide: CacheHelper.getData(key: 'name') ),flex: 1,),
+                      SizedBox(width: 7,),
+                      ConfirmRightTitle(title:  'رقم الهاتف'),
+                    ],),
+                    SizedBox(height: 8,),
+                    Row(children: [
+                      Expanded(child: ConfirmLeftValue(vSide: widget.subscriptionRequest.Gender==1?genderItems[0]:genderItems[1] ),flex: 1,),
+                      SizedBox(width: 7,),
+                      ConfirmRightTitle(title:  'الجنس'),
+                    ],),
+                    SizedBox(height: 8,),
+                    Row(children: [
+                      Expanded(child: ConfirmLeftValue(vSide: widget.subscriptionRequest?.IdentityNumber ??'' ),flex: 1,),
+                      SizedBox(width: 7,),
+                      ConfirmRightTitle(title:  'الرقم القومي'),
+                    ],),
+                    SizedBox(height: 8,),
+                    Row(children: [
+                      Expanded(child: ConfirmLeftValue(vSide: widget.subscriptionRequest.Cost ??''),flex: 1,),
+                      SizedBox(width: 7,),
+                      ConfirmRightTitle(title:  'المبلغ'),
+                    ],),
+                    SizedBox(height: 8,),
+
+
                     const TermsAndConditionsContainer(),
                     const SizedBox(
                       height: 32,
                     ),
-                    DefaultButton(
-                      function: (){
-                        cubit.requestSubscription(widget.subscriptionRequest);
-                        // if(int.parse(widget.subscriptionRequest.Cost??'0')>0){
-                        //   GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen,extra: widget.subscriptionRequest);
-                        // }else{
-                        //   GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
-                        // }
-                      },
-                      text: 'الدفع',
-                    ),
+                    Row(children:[
+                      Container(alignment: Alignment.bottomLeft,
+                        child: NextButton(function: (){
+                          cubit.requestSubscription(widget.subscriptionRequest);
+                        }, text: 'تأكيد' , height: 45,width: 120,),),
+                      const SizedBox(width: 8,),
+                      Container(width: 35,height:35,child: BackCircleButton(),),
+                    ],),
                     const SizedBox(
-                      height: 32,
+                      height: 10,
                     ),
                   ],
                 ),
               ),
-            ),
-          ),
         );
     });
   }

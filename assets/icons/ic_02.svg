@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="82" height="82" viewBox="0 0 82 82">
+  <defs>
+    <filter id="help_BG" x="0" y="0" width="82" height="82" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#b7cee6"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.502"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="Icon_awesome-user-friends" x="12.714" y="19.267" width="56.571" height="45" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#5465dd"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="ic_02" transform="translate(-173 -501)">
+    <g transform="matrix(1, 0, 0, 1, 173, 501)" filter="url(#help_BG)">
+      <path id="help_BG-2" data-name="help BG" d="M0,32A32,32,0,1,1,32,64,32,32,0,0,1,0,32Z" transform="translate(9 6)" fill="#3c54f6" opacity="0.5"/>
+    </g>
+    <path id="help_BG-3" data-name="help BG" d="M0,24.233A24.233,24.233,0,1,1,24.233,48.467,24.233,24.233,0,0,1,0,24.233Z" transform="translate(192.239 515.533)" opacity="0.15" fill="url(#linear-gradient)"/>
+    <path id="help_BG-4" data-name="help BG" d="M0,15.84A15.84,15.84,0,1,0,15.84,0,15.84,15.84,0,0,0,0,15.84Z" transform="translate(187.293 519.087)" opacity="0.23" fill="url(#linear-gradient-2)"/>
+    <g transform="matrix(1, 0, 0, 1, 173, 501)" filter="url(#Icon_awesome-user-friends)">
+      <path id="Icon_awesome-user-friends-2" data-name="Icon awesome-user-friends" d="M11.571,15.75A6.75,6.75,0,1,0,4.821,9,6.747,6.747,0,0,0,11.571,15.75ZM16.2,17.679h-.5a9.319,9.319,0,0,1-8.257,0h-.5A6.945,6.945,0,0,0,0,24.621v1.736A2.894,2.894,0,0,0,2.893,29.25H20.25a2.894,2.894,0,0,0,2.893-2.893V24.621A6.945,6.945,0,0,0,16.2,17.679ZM28.929,15.75a5.786,5.786,0,1,0-5.786-5.786A5.787,5.787,0,0,0,28.929,15.75Zm2.893,1.929h-.229a7.6,7.6,0,0,1-5.328,0h-.229a6.694,6.694,0,0,0-3.357.928,8.82,8.82,0,0,1,2.393,6.015v2.314c0,.133-.03.259-.036.386H35.679a2.894,2.894,0,0,0,2.893-2.893,6.747,6.747,0,0,0-6.75-6.75Z" transform="translate(21.71 23.02)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

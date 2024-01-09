@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="473" height="245" viewBox="0 0 473 245">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.572" y1="1" x2="0.575" y2="-0.036" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0367cc"/>
+      <stop offset="1" stop-color="#0dbbd6"/>
+    </linearGradient>
+    <filter id="bg_up" x="0" y="0" width="473" height="245" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.071"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#bg_up)">
+    <path id="bg_up-2" data-name="bg_up" d="M0,0H428a0,0,0,0,1,0,0V170a30,30,0,0,1-30,30H30A30,30,0,0,1,0,170V0A0,0,0,0,1,0,0Z" transform="translate(22.5 22.5)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

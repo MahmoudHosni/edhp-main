@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="82" height="82" viewBox="0 0 82 82">
+  <defs>
+    <filter id="help_BG" x="0" y="0" width="82" height="82" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#b7cee6"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.502"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="Icon_material-info" x="12.767" y="13.533" width="56.467" height="56.467" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#964545" flood-opacity="0.388"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="ic_01" transform="translate(-307 -501)">
+    <g transform="matrix(1, 0, 0, 1, 307, 501)" filter="url(#help_BG)">
+      <path id="help_BG-2" data-name="help BG" d="M0,32A32,32,0,1,1,32,64,32,32,0,0,1,0,32Z" transform="translate(9 6)" fill="#fe5051" opacity="0.5"/>
+    </g>
+    <path id="help_BG-3" data-name="help BG" d="M0,24.233A24.233,24.233,0,1,1,24.233,48.467,24.233,24.233,0,0,1,0,24.233Z" transform="translate(326.24 515.533)" opacity="0.15" fill="url(#linear-gradient)"/>
+    <path id="help_BG-4" data-name="help BG" d="M0,15.84A15.84,15.84,0,1,0,15.84,0,15.84,15.84,0,0,0,0,15.84Z" transform="translate(321.293 519.087)" opacity="0.23" fill="url(#linear-gradient-2)"/>
+    <g transform="matrix(1, 0, 0, 1, 307, 501)" filter="url(#Icon_material-info)">
+      <path id="Icon_material-info-2" data-name="Icon material-info" d="M22.233,3A19.233,19.233,0,1,0,41.467,22.233,19.24,19.24,0,0,0,22.233,3Zm1.923,28.85H20.31V20.31h3.847Zm0-15.387H20.31V12.617h3.847Z" transform="translate(18.77 16.53)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

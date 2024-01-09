@@ -1,4 +1,6 @@
+import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
@@ -6,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/network/end_point.dart';
 import '../layout/cubit/cubit.dart';
 import '../layout/cubit/states.dart';
 import '../profile/cubit/get_profile_cubit.dart';
@@ -28,22 +29,18 @@ class SettingScreen extends StatelessWidget {
       builder: (context, state) {
         LayoutCubit cubit = LayoutCubit.get(context);
         if(!isLoaded || state is !GetProfileSuccessfullyState) {
-          return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: SingleChildScrollView(
+          return ViewContainer(title: StringsManager.settings,body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 24,
-                ),
+
                 Center(
                   child: Stack(
                     alignment: Alignment.bottomRight,
                     children: [
                       Container(
-                        width: 125,
-                        height: 125,
+                        width: 95,
+                        height: 95,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                         ),
@@ -51,17 +48,10 @@ class SettingScreen extends StatelessWidget {
                         child: Image.file(GetProfileCubit.get(context).profileImage!,
                           fit: BoxFit.fill,),
                       ),
-                      Container(
-                        width: 38,
-                        height: 38,
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryBlueColor,
-                          borderRadius: BorderRadius.circular(5.0)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset(AppPaths.editIconSvg,),
-                        ),
+                      Container(padding: EdgeInsets.fromLTRB(9, 9, 0, 0),
+                        width: 45,
+                        height: 45,
+                        child: SvgPicture.asset(AppPaths.editIconSvg,),
                       )
                     ],
                   ),
@@ -69,64 +59,48 @@ class SettingScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(GetProfileCubit.get(context).userProfileModel!.profileName.toString() , style: Styles.textStyle14W400,),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    SvgPicture.asset(AppPaths.editIconSvg , color: AppColors.primaryBlueColor, width: 12,),
-                  ],
-                ),
+                Text(GetProfileCubit.get(context).userProfileModel!.profileName.toString() , style: Styles.textStyle14W400.copyWith(color: AppColors.secondNew),),
                 const SizedBox(
-                  height: 14,
+                  height: 10,
                 ),
-                Text(GetProfileCubit.get(context).userProfileModel!.userName.toString(), style: Styles.textStyle13W400,),
+                Text(GetProfileCubit.get(context).userProfileModel!.userName.toString(), style: Styles.textStyle13W400.copyWith(color: AppColors.unselectedColor),),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 30,
+                  height: MediaQuery.of(context).size.height / 36,
                 ),
                 InkWell(
                   onTap: (){
                     GoRouter.of(context).push(AppRouters.kEditProfileScreen);
                   },
-                  child: Padding(
+                  child: Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: 260,padding: const EdgeInsets.all(8),
+                    height: 54,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
+                    child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const Icon(Icons.arrow_back_ios),
+                        SvgPicture.asset('assets/icons/previous.svg'),
                         const Spacer(),
-                        const Text('تعديل الملف الشخصي' , style: Styles.textStyle15W500,),
+                        const Text('تعديل الملف الشخصي' , style: Styles.textStyle12W400,),
                         const SizedBox(
-                          width: 20,
+                          width: 10,
                         ),
                         SvgPicture.asset(AppPaths.personIconSvg),
                       ],
                     ),
-                  ),
+                  )),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 40,
+                  height: MediaQuery.of(context).size.height / 50,
                 ),
-                const Align(
+                Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Text('الإشعارات والتنبيهات' , style: Styles.textStyle15W500,),
+                  child: Text('الإشعارات والتنبيهات' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 8,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.whiteColor,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: AppColors.boxesColor,
-                        blurRadius: 5
-                      )
-                    ]
-                  ),
+                Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: double.infinity,padding: const EdgeInsets.all(8),
+                  height: 52,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
@@ -140,32 +114,23 @@ class SettingScreen extends StatelessWidget {
                           activeTrackColor: AppColors.primaryBlueColor,
                         ),
                         const Spacer(),
-                        const Text('تفعيل الإشعارات والتنبيهات' , style: Styles.textStyle12W400,),
+                        Text('تفعيل الإشعارات والتنبيهات' , style: Styles.textStyle12W400.copyWith(color: AppColors.textColorBlack),),
                       ],
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 35,
+                  height: MediaQuery.of(context).size.height / 40,
                 ),
-                const Align(
+                Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Text('المؤشرات الحيوية' , style: Styles.textStyle15W500,),
+                  child: Text('المؤشرات الحيوية' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),
                 ),
                 SizedBox(
-                  height:  5,
+                  height:  8,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.whiteColor,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: AppColors.boxesColor,
-                            blurRadius: 5
-                        )
-                      ]
-                  ),
+                Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: double.infinity,padding: const EdgeInsets.all(8),
+                  height: 52,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
@@ -187,56 +152,26 @@ class SettingScreen extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 35,
                 ),
-                const Align(
+                Align(
                   alignment: AlignmentDirectional.centerEnd,
-                  child: Text('اللغة المفضلة' , style: Styles.textStyle15W500,),
+                  child: Text('اللغة المفضلة' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width/1.48,
-                  height: 46,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                      color: cubit.isArabic ? AppColors.whiteColor : AppColors.primaryBlueColor,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: AppColors.boxesColor,
-                            blurRadius: 5
-                        )
-                      ]
-                  ),
+                  width: 220,
+                  height: 40,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      InkWell(
-                        onTap: (){
-                          cubit.changeLanguage(true);
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/3,
-                          height: 46,
-                          decoration: BoxDecoration(
-                            color: cubit.isArabic? AppColors.primaryBlueColor : AppColors.whiteColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(child: Text('العربية' , style: Styles.textStyle15W500.copyWith(color: cubit.isArabic ? AppColors.whiteColor : AppColors.blackColor),)),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: (){
-                          cubit.changeLanguage(false);
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/3,
-                          height: 46,
-                          decoration: BoxDecoration(
-                            color: cubit.isArabic? AppColors.whiteColor : AppColors.primaryBlueColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(child: Text('الإنجليزية' , style: Styles.textStyle15W500.copyWith(color: cubit.isArabic ? AppColors.blackColor : AppColors.whiteColor),)),
-                        ),
-                      ),
+                      Container(width: 95,padding: EdgeInsets.all(5),alignment: Alignment.center,
+                          decoration: BoxDecoration(color: AppColors.whiteLightNew,borderRadius: BorderRadius.only(topLeft: Radius.circular(32),bottomLeft:Radius.circular(32) )),
+                          child:  Text('English' , style: Styles.textStyle12W400.copyWith(color: AppColors.secondNew),)),
+                      SizedBox(width: 1,),
+                      Container(width: 95,padding: EdgeInsets.all(5),alignment: Alignment.center,
+                          decoration: BoxDecoration(color: AppColors.secondNew,borderRadius: BorderRadius.only(topRight: Radius.circular(32),bottomRight:Radius.circular(32) )),
+                          child:  Text('العربية' , style: Styles.textStyle12W400.copyWith(color: AppColors.whiteLightNew),)),
                     ],
                   ),
                 ),

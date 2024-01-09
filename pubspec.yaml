@@ -52,6 +52,41 @@ dependencies:
   fluttertoast: ^8.2.4
   screenshot: ^2.1.0
   share_plus: ^6.0.0
+#  flutter_native_splash: ^2.2.13
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon_new.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/app_icon_new.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+  windows:
+    generate: true
+    image_path: "assets/images/app_icon_new.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/images/app_icon_new.png"
+
+#flutter_native_splash:
+#  color: "#24345d"
+#  image: assets/images/splash.jpg
+#  branding: assets/images/app_icon_new.png
+#  color_dark: "#24345d"
+#  image_dark: assets/images/splash.jpg
+#  branding_dark: assets/images/app_icon_new.png
+#
+#  android_12:
+#    image: assets/images/app_icon_new.png
+#    icon_background_color: "#24345d"
+#    image_dark: assets/images/app_icon_new.png
+#    icon_background_color_dark: "#24345d"
+#  fullscreen: true
 
 dev_dependencies:
   flutter_test:

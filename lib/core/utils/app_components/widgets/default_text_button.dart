@@ -23,7 +23,7 @@ class DefaultTextButton extends StatelessWidget {
         style: TextStyle(
           color: textColor,
           fontWeight: FontWeight.w400,
-          fontSize: 12.5,
+          fontSize: 11.0,
           fontFamily: 'Tajawal'
         ),
       ),
