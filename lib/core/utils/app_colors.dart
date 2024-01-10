@@ -13,12 +13,15 @@ abstract class AppColors {
   static const Color neutralGrayColor = Color(0xFF9098B1);
 
   // new colors
+  static const Color bgColorNew = Color(0xffF9F9F9);
   static const Color primaryNew = Color(0xff0367CC);
   static const Color secondNew = Color(0xff0DBBD6);
+  static const Color thirdNew = Color(0xff329DF9);
   static const Color whiteLightNew = Color(0xffF5FAFC);
   static const Color cardNew = Color(0xfff5fafc);
   static const Color cardBorderNew = Color(0xffedf3f9);
   static const Color textColorBlue = Color(0xff157DE6);
+  static const Color blue = Color(0xff339DFA);
   static const Color textColorBlack = Color(0xff303134);
   // static const Color
 }

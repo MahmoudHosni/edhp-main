@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.846" height="63.859" viewBox="0 0 65.846 63.859">
+  <defs>
+    <filter id="Rectangle_2359" x="0" y="0" width="65.846" height="63.859" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#bcbcbc" flood-opacity="0.439"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="login_apple" transform="translate(12 9)">
+    <g transform="matrix(1, 0, 0, 1, -12, -9)" filter="url(#Rectangle_2359)">
+      <rect id="Rectangle_2359-2" data-name="Rectangle 2359" width="41.846" height="39.859" rx="10" transform="translate(12 9)"/>
+    </g>
+    <path id="login_apple-2" data-name="login_apple" d="M14.925,13.264a4.344,4.344,0,0,1,2.327-3.946A5,5,0,0,0,13.31,7.243c-1.652-.13-3.457.963-4.118.963-.7,0-2.3-.917-3.555-.917-2.6.042-5.356,2.071-5.356,6.2a11.6,11.6,0,0,0,.67,3.778c.6,1.708,2.745,5.9,4.988,5.826,1.173-.028,2-.833,3.527-.833,1.48,0,2.247.833,3.555.833,2.261-.033,4.206-3.839,4.774-5.551a4.613,4.613,0,0,1-2.871-4.276Zm-2.634-7.64A4.383,4.383,0,0,0,13.408,2.25a4.934,4.934,0,0,0-3.159,1.624A4.451,4.451,0,0,0,9.057,7.22a3.908,3.908,0,0,0,3.234-1.6Z" transform="translate(11.885 7.259)" fill="#fff"/>
+  </g>
+</svg>

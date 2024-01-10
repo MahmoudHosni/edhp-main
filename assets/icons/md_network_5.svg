@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="161" height="139" viewBox="0 0 161 139">
+  <defs>
+    <filter id="Rectangle_26896" x="0" y="0" width="161" height="139" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0dbbd6"/>
+      <stop offset="1" stop-color="#339dfa"/>
+    </linearGradient>
+  </defs>
+  <g id="_005" data-name="005" transform="translate(-26.5 -112.5)">
+    <g transform="matrix(1, 0, 0, 1, 26.5, 112.5)" filter="url(#Rectangle_26896)">
+      <rect id="Rectangle_26896-2" data-name="Rectangle 26896" width="116" height="94" rx="20" transform="translate(22.5 22.5)" fill="#fff"/>
+    </g>
+    <path id="Icon_awesome-stethoscope" data-name="Icon awesome-stethoscope" d="M42.265,10.587a6.048,6.048,0,0,0-2.93,11.287V32.518c0,5.417-4.746,9.831-10.588,9.831-5.672,0-10.323-4.169-10.578-9.378A15.165,15.165,0,0,0,30.25,18.149V3.459a2.267,2.267,0,0,0-1.824-2.222L22.48.047a2.263,2.263,0,0,0-2.666,1.777l-.3,1.484a2.263,2.263,0,0,0,1.777,2.666l2.9.577V18.027a9.075,9.075,0,1,1-18.15.113V6.56l2.9-.577A2.263,2.263,0,0,0,10.72,3.317l-.293-1.484A2.263,2.263,0,0,0,7.761.056L1.824,1.228A2.278,2.278,0,0,0,0,3.459v14.69A15.148,15.148,0,0,0,12.11,32.972c.246,8.546,7.61,15.428,16.628,15.428,9.17,0,16.638-7.128,16.638-15.881V21.874a6.049,6.049,0,0,0-3.11-11.287Zm.085,7.563a1.513,1.513,0,1,1,1.513-1.513A1.517,1.517,0,0,1,42.35,18.149Z" transform="translate(83 157.998)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

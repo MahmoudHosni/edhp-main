@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="161" height="139" viewBox="0 0 161 139">
+  <defs>
+    <filter id="Rectangle_26896" x="0" y="0" width="161" height="139" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0dbbd6"/>
+      <stop offset="1" stop-color="#339dfa"/>
+    </linearGradient>
+  </defs>
+  <g id="_001" data-name="001" transform="translate(-26.5 -112.5)">
+    <g transform="matrix(1, 0, 0, 1, 26.5, 112.5)" filter="url(#Rectangle_26896)">
+      <rect id="Rectangle_26896-2" data-name="Rectangle 26896" width="116" height="94" rx="20" transform="translate(22.5 22.5)" fill="#fff"/>
+    </g>
+    <path id="Icon_awesome-hospital-symbol" data-name="Icon awesome-hospital-symbol" d="M27.582,0A27.582,27.582,0,1,0,55.165,27.582,27.58,27.58,0,0,0,27.582,0ZM39.65,40.511a.864.864,0,0,1-.862.862H33.616a.864.864,0,0,1-.862-.862V31.03H22.411v9.481a.864.864,0,0,1-.862.862H16.377a.864.864,0,0,1-.862-.862V14.653a.864.864,0,0,1,.862-.862h5.172a.864.864,0,0,1,.862.862v9.481H32.754V14.653a.864.864,0,0,1,.862-.862h5.172a.864.864,0,0,1,.862.862Z" transform="translate(79 155)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

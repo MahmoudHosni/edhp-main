@@ -10,12 +10,14 @@ class RowOfRegisterApps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(child: ClickableRegisterAppContainerItem(appLogoPath: AppPaths.facebookLogoPath,),onTap: (){
           
         }),
+        const SizedBox(width: 15,),
         ClickableRegisterAppContainerItem(appLogoPath: AppPaths.googleLogoPath),
+        const SizedBox(width: 15,),
         ClickableRegisterAppContainerItem(appLogoPath: AppPaths.appleLogoPath),
       ],
     );

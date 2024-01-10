@@ -72,7 +72,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     const SettingScreen(),
     const CallCenterScreen(),
     const MedicalFileScreen(),
-    const HomeScreen(),
+    HomeScreen(),
   ];
 
   List<BottomNavigationBarItem> bottomNavigationBarItems = [

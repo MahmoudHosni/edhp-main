@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="161" height="139" viewBox="0 0 161 139">
+  <defs>
+    <filter id="Rectangle_26896" x="0" y="0" width="161" height="139" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0dbbd6"/>
+      <stop offset="1" stop-color="#339dfa"/>
+    </linearGradient>
+  </defs>
+  <g id="_002" data-name="002" transform="translate(-26.5 -112.5)">
+    <g transform="matrix(1, 0, 0, 1, 26.5, 112.5)" filter="url(#Rectangle_26896)">
+      <rect id="Rectangle_26896-2" data-name="Rectangle 26896" width="116" height="94" rx="20" transform="translate(22.5 22.5)" fill="#fff"/>
+    </g>
+    <path id="Icon_awesome-user-md" data-name="Icon awesome-user-md" d="M24.2,27.657A13.829,13.829,0,1,0,10.372,13.829,13.828,13.828,0,0,0,24.2,27.657ZM11.236,45.808a2.593,2.593,0,1,0,2.593-2.593A2.587,2.587,0,0,0,11.236,45.808ZM34.572,31.179v5.294a8.656,8.656,0,0,1,6.914,8.47v4.505a1.734,1.734,0,0,1-1.394,1.7l-3.479.691a.86.86,0,0,1-1.016-.681l-.335-1.7a.855.855,0,0,1,.681-1.016l2.085-.421V44.943c0-6.785-10.372-7.033-10.372.205v2.885l2.085.421a.876.876,0,0,1,.681,1.016l-.335,1.7a.876.876,0,0,1-1.016.681L25.7,51.393a1.726,1.726,0,0,1-1.491-1.718V44.943a8.665,8.665,0,0,1,6.914-8.47V31.59c-.238.076-.475.119-.713.205a18.69,18.69,0,0,1-12.4,0,11.94,11.94,0,0,0-2.442-.562v8.816a6.05,6.05,0,1,1-3.457,0V31.363A14.483,14.483,0,0,0,0,45.635v4.84a4.846,4.846,0,0,0,4.84,4.84H43.56a4.846,4.846,0,0,0,4.84-4.84v-4.84A14.5,14.5,0,0,0,34.572,31.179Z" transform="translate(83 155)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

@@ -1,4 +1,5 @@
 import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/app_components/widgets/EditTextView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -60,44 +61,38 @@ class _LoginScreenState extends State<LoginScreen> {
         builder: (context, state) {
           LoginCubit cubit = LoginCubit.get(context);
           return SafeArea(
-            child: Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: SingleChildScrollView(
+            child: Scaffold(backgroundColor: AppColors.whiteColor,
+              body: SingleChildScrollView(
                   child: Form(
                     key: formKey,
                     child: Column(
                       children: [
-                        const SizedBox(height: 40,),
+                        Align(child: Image.asset(AppPaths.upperLoginPart,fit: BoxFit.scaleDown,width: 350,),alignment: Alignment.topLeft),
+                        const SizedBox(height: 12,),
+                        Text(StringsManager.loginToAccount, style: Styles.textStyle14W500.copyWith(color: AppColors.primaryBlueColor),textAlign: TextAlign.center,),
+                        const SizedBox(height: 12,),
 
-                        Center(child: SvgPicture.asset(AppPaths.logoPath),),
-
-                        const SizedBox(height: 28,),
-
-                        const Text(StringsManager.rayaaTitle, style: Styles.textStyle195W500,textAlign: TextAlign.center),
-
-                        const SizedBox(height: 8,),
-
-                        Text(StringsManager.loginToAccount, style: Styles.textStyle12W400.copyWith(color: const Color(0xFF333333)),textAlign: TextAlign.center,),
-
-                        const SizedBox(height: 22,),
-
-                        DefaultTextFormField(
-                          controller: phoneNumberController,
-                          keyboardType: TextInputType.text,
-                          validation: (value) {
-                            if(value!.isEmpty) {
-                              return 'Phone Number must be not empty';
-                            }
-                            return null;
-                          },
-                          fieldName: StringsManager.phoneNumber,
-                          suffixIcon: Icons.call_outlined,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20,5,20,8),
+                          child: EditTextView(
+                            controller: phoneNumberController,
+                            keyboardType: TextInputType.text,
+                            validation: (value) {
+                              if(value!.isEmpty) {
+                                return 'Phone Number must be not empty';
+                              }
+                              return null;
+                            },
+                            fieldName: StringsManager.phoneNumber,
+                            suffixIcon: Icons.call_outlined,
+                          ),
                         ),
 
-                        const SizedBox(height: 15,),
+                        const SizedBox(height: 12,),
 
-                        DefaultTextFormField(
+                        Padding(
+                            padding: const EdgeInsets.fromLTRB(20,5,20,8),
+                            child: EditTextView(
                           controller: passwordController,
                           keyboardType: TextInputType.text,
                           validation: (value) {
@@ -113,51 +108,55 @@ class _LoginScreenState extends State<LoginScreen> {
                             cubit.changePasswordVisibility();
                           },
                           obscureText: cubit.isPassword,
-                        ),
-                        const RememberMeRow(),
+                        )),
+                        Padding(
+                            padding: const EdgeInsets.fromLTRB(20,5,20,8),
+                            child: const RememberMeRow()),
                         const SizedBox(height: 10,),
                         if(state is LoginLoadingState)
                           const CircularProgressIndicator(color: AppColors.primaryBlueColor,),
                         if(state is LoginLoadingState)
                           const SizedBox(height: 26,),
-                        DefaultButton(
-                          function: () {
-                            if(formKey.currentState!.validate()){
-                              cubit.login(
-                                username: phoneNumberController.text.trim(),
-                                password: passwordController.text.trim(),
-                              );
-                            }
-                          },
-                          text: StringsManager.enterApp,
-                          redius: 10,
-                        ),
-                        const SizedBox(height: 16,),
-                        const OrDivider(),
-                        const SizedBox(height: 16,),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20,5,20,8),
+                          child: DefaultButton(backgroundColor: AppColors.blue,
+                            function: () {
+                              if(formKey.currentState!.validate()){
+                                cubit.login(
+                                  username: phoneNumberController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
+                              }
+                            },
+                            text: StringsManager.enterApp,
+                            redius: 32,
+                        )),
+                        const SizedBox(height: 10,),
+                        Text('أو سجل الدخول بواسطة',style: Styles.textStyle10W400.copyWith(color: AppColors.secondNew),),
+                        const SizedBox(height: 10,),
                         const RowOfRegisterApps(),
-                        const SizedBox(height: 16,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            DefaultTextButton(
-                              text: StringsManager.register,
+                            DefaultTextButton(textColor: AppColors.thirdNew,
+                              text: StringsManager.registernow,
                               function: () {
                                 GoRouter.of(context).push(
                                     AppRouters.kSignUpScreen);
                               },
                             ),
                             Text(StringsManager.notHaveAccount,
-                              style: Styles.textStyle14W400.copyWith(
+                              style: Styles.textStyle13W400.copyWith(
                                   color: AppColors.lightGrayColor),),
                           ],
                         ),
+
+                        Container(child: SvgPicture.asset(AppPaths.downLoginPart),width: double.infinity,alignment: Alignment.bottomCenter,),
                       ],
                     ),
                   ),
                 ),
               ),
-            ),
           );
         },
       ),

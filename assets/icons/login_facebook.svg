@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65.846" height="63.859" viewBox="0 0 65.846 63.859">
+  <defs>
+    <filter id="Rectangle_26980" x="0" y="0" width="65.846" height="63.859" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#bcbcbc" flood-opacity="0.439"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="login_facebook" transform="translate(18.818 9)">
+    <g transform="matrix(1, 0, 0, 1, -18.82, -9)" filter="url(#Rectangle_26980)">
+      <rect id="Rectangle_26980-2" data-name="Rectangle 26980" width="41.846" height="39.859" rx="10" transform="translate(12 9)" fill="#fff"/>
+    </g>
+    <path id="Icon_simple-facebook" data-name="Icon simple-facebook" d="M24.4,12.2a12.2,12.2,0,1,0-14.1,12.051V15.725H7.2V12.2h3.1V9.511c0-3.057,1.821-4.746,4.608-4.746A18.76,18.76,0,0,1,17.631,5v3H16.093A1.763,1.763,0,0,0,14.1,9.91V12.2h3.383l-.541,3.526H14.1v8.524A12.2,12.2,0,0,0,24.4,12.2Z" transform="translate(1.831 7.805)" fill="#157de6"/>
+  </g>
+</svg>

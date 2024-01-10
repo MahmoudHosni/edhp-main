@@ -10,24 +10,7 @@ class ClickableRegisterAppContainerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 55,
-      height: 55,
-      decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow:  const [
-          BoxShadow(
-              blurRadius: 10.0,
-              color: AppColors.neutralGrayColor,
-              offset: Offset(1 , 1.0)
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: SvgPicture.asset(appLogoPath),
-      ),
+    return Material(elevation: 28,shadowColor: Colors.white54,child: SvgPicture.asset(appLogoPath,),color: Colors.transparent,
     );
   }
 }

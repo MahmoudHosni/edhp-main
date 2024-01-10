@@ -2,16 +2,25 @@
 class StringsManager {
   static const String saveandshare = 'حفظ و مشاركة';
   static const String rayaaTitle = 'الشبكة المصرية للرعاية الصحية ترحب بكم';
-  static const String loginToAccount = 'سجل دخول للدخول لحسابك';
+  static const String loginToAccount = 'تسجيل دخول';
   static const String phoneNumber = 'رقم الهاتف';
   static const String enterApp = 'دخول';
   static const String register = 'سجل';
-  static const String notHaveAccount = 'ليس لديك حساب ؟';
+  static const String registernow = ' سجل الأن';
+  static const String personalProfile = 'الملف الشخصي';
+
+  static const String notHaveAccount = 'لا يوجد لديك حساب فى المنصة ؟';
   static const String name = "الإسم";
   static const String password = 'كلمة السر';
   static const String resetPassword = "إعادة تعين كلمة المرور";
   static const String categories = 'التصنيفات';
   static const String yourHealthProfile = 'ملفك الطبي';
+
+  static const String healthNetwork = 'الشبكة الطبية';
+  static const String showAll = ' < عرض الكل';
+
+
+
   static const String selectJahah = 'اختر الهيئة التابع لها';
   static const String selectCompany = 'اختر الشركه التابع لها';
   static const String select= 'التالى';

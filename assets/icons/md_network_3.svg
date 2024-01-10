@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="161" height="139" viewBox="0 0 161 139">
+  <defs>
+    <filter id="Rectangle_26896" x="0" y="0" width="161" height="139" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.4"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0dbbd6"/>
+      <stop offset="1" stop-color="#339dfa"/>
+    </linearGradient>
+  </defs>
+  <g id="_003" data-name="003" transform="translate(-26.5 -112.5)">
+    <g transform="matrix(1, 0, 0, 1, 26.5, 112.5)" filter="url(#Rectangle_26896)">
+      <rect id="Rectangle_26896-2" data-name="Rectangle 26896" width="116" height="94" rx="20" transform="translate(22.5 22.5)" fill="#fff"/>
+    </g>
+    <g id="Microscope" transform="translate(75.605 150.874)">
+      <path id="Path_50819" data-name="Path 50819" d="M23.775,17.542c-.192-2.083-2.494-5.8-5.059-9.544a.25.25,0,0,0-.411,0c-2.565,3.744-4.867,7.461-5.059,9.544a5.31,5.31,0,1,0,10.529,0Zm-3.328,2.144h-.968v.968a.968.968,0,1,1-1.936,0v-.968h-.968a.968.968,0,0,1,0-1.936h.968v-.968a.968.968,0,1,1,1.936,0v.968h.968a.968.968,0,0,1,0,1.936Z" transform="translate(0 -0.107)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_26938" data-name="Rectangle 26938" width="11.619" height="2.905" rx="0.5" transform="translate(18.511 40.298)" fill="url(#linear-gradient)"/>
+      <path id="Path_50820" data-name="Path 50820" d="M44.826,56.886v1.936a.479.479,0,0,1-.484.484H24.009a.486.486,0,0,1-.484-.484V56.886a.485.485,0,0,1,.484-.484h7.726V54.243a15.571,15.571,0,0,0,4.841.01V56.4h7.765a.479.479,0,0,1,.484.484Z" transform="translate(-0.328 -1.58)" fill="url(#linear-gradient)"/>
+      <path id="Path_50821" data-name="Path 50821" d="M48.172,37.594c0,13.618-17.486,19.161-25.377,8.259h5.422A10.16,10.16,0,0,0,41.191,30.284a4.8,4.8,0,0,0,2.13-3.292,13.945,13.945,0,0,1,4.851,10.6Z" transform="translate(-0.305 -0.714)" fill="url(#linear-gradient)"/>
+      <path id="Path_50822" data-name="Path 50822" d="M46.859,14.167,41.137,21.5a4.75,4.75,0,0,0-2.5-.7,4.847,4.847,0,0,0-3.418,8.278l-2.459,3.147a1.939,1.939,0,0,1-2.721.329l-3.631-2.837a1.929,1.929,0,0,1-.339-2.711L40.179,8.948A1.939,1.939,0,0,1,42.9,8.619l3.631,2.837a1.928,1.928,0,0,1,.329,2.711Z" transform="translate(-0.396 -0.117)" fill="url(#linear-gradient)"/>
+      <path id="Path_50823" data-name="Path 50823" d="M28.833,34.858l-.552.707a.48.48,0,0,1-.678.087l-2.914-2.285a.48.48,0,0,1-.087-.678l.552-.707c.01,0,.019.01.029.019l3.631,2.837Z" transform="translate(-0.359 -0.873)" fill="url(#linear-gradient)"/>
+      <path id="Path_50824" data-name="Path 50824" d="M50.363,9.228l-1.627.978c-.33-.381-4.246-3.4-4.541-3.553l.552-1.811a.457.457,0,0,1,.736-.2l4.9,3.824a.466.466,0,0,1-.019.765Z" transform="translate(-0.985)" fill="url(#linear-gradient)"/>
+      <circle id="Ellipse_14" data-name="Ellipse 14" cx="2.905" cy="2.905" r="2.905" transform="translate(35.338 22.618)" fill="url(#linear-gradient)"/>
+    </g>
+  </g>
+</svg>

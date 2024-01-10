@@ -1,0 +1,25 @@
+<svg id="bg00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="119.345" viewBox="0 0 360 119.345">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.039" x2="0.692" y2="0.689" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff8723"/>
+      <stop offset="1" stop-color="#ffaf28"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.039" x2="0.692" y2="0.689" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0367cc"/>
+      <stop offset="1" stop-color="#0dbbd6"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect id="Mask" width="360" height="119.345" rx="20" fill="url(#linear-gradient)"/>
+    </clipPath>
+  </defs>
+  <rect id="Mask-2" data-name="Mask" width="360" height="119.345" rx="20" fill="url(#linear-gradient-2)"/>
+  <g id="up" clip-path="url(#clip-path)">
+    <g id="Group_3_Copy" data-name="Group 3 Copy" transform="translate(235.938 -20.795)" opacity="0.4">
+      <path id="Path_3" data-name="Path 3" d="M0,65l36,93.724,95.625-2.387L130.5,0Z" transform="translate(13.966 15.136)" fill="#5a51f3"/>
+      <path id="Path_3-2" data-name="Path 3" d="M0,65l36,93.724,95.625-2.387L130.5,0Z" transform="translate(0)" fill="#7063f1" opacity="0.28"/>
+    </g>
+    <g id="Group_3" data-name="Group 3" transform="translate(264.063 -11.82)">
+      <path id="Path_3-3" data-name="Path 3" d="M0,76.381l24.188,73.2H151.875V0Z" transform="translate(0 0)" fill="#157de6" opacity="0.34"/>
+    </g>
+  </g>
+</svg>

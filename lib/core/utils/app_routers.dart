@@ -4,6 +4,7 @@ import 'package:edhp/features/confirm_membership_data/CardPreview.dart';
 import 'package:edhp/features/confirm_membership_data/confirm_membership_data_screen.dart';
 import 'package:edhp/features/create_membership/create_membership_screen.dart';
 import 'package:edhp/features/edit_profile/edit_profile_screen.dart';
+import 'package:edhp/features/home/widgets/MedicalNetworkView.dart';
 import 'package:edhp/features/home/widgets/MemberShipPreview.dart';
 import 'package:edhp/features/insurance_companies/SelectInsuranceCompany.dart';
 import 'package:edhp/features/layout/layout_screen.dart';
@@ -57,6 +58,7 @@ abstract class AppRouters {
   static const kCreateMembershipInsideAppScreen = '/createMembershipInsideAppScreen';
   static const kSelectInsuranceCompany = '/SelectInsuranceCompany';
   static const kMedicalAdvices = '/MedicalAdvices';
+  static const kMedicalNetworkView = '/MedicalNetworkView';
 
   static final baseRouter = GoRouter(redirect: (context, state) {
     String _token = CacheHelper.getData(key: 'token') ??'';
@@ -175,7 +177,10 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kMedicalAdvices ,
-        builder: (context , state) => MedicalAdvices())
+        builder: (context , state) => MedicalAdvices()),
+      GoRoute(
+          path: kMedicalNetworkView ,
+          builder: (context , state) => MedicalNetworkView()),
     ],
   );
 

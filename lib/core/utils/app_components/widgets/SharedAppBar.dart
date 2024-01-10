@@ -1,12 +1,15 @@
 
 
 import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
+import 'package:edhp/core/utils/app_components/widgets/BackCircleSmall.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
-AppBar getSharedAppBar(BuildContext context){
+AppBar getSharedAppBar(BuildContext context, GlobalKey<ScaffoldState> key){
   return AppBar(backgroundColor: Colors.transparent,
     iconTheme: const IconThemeData(color: AppColors.blackColor),
     elevation: 0,
@@ -21,7 +24,7 @@ AppBar getSharedAppBar(BuildContext context){
     actions: [
       IconButton(
         onPressed: (){
-          Scaffold.of(context).openDrawer();
+          key.currentState!.openDrawer();
         },
         icon: SvgPicture.asset(AppPaths.drawerIconSvg),
       ),
@@ -42,9 +45,13 @@ AppBar getSharedAppBarWithBack(BuildContext context,String title){
       icon: SvgPicture.asset(AppPaths.notificationIconSvg),
     ),
     actions: [
+      // Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: BackCircleSmall(),
+      // ),
       IconButton(
         onPressed: (){
-          Scaffold.of(context).openDrawer();
+          GoRouter.of(context).pop();
         },
         icon: SvgPicture.asset(AppPaths.drawerIconSvg),
       ),

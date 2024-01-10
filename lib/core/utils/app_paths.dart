@@ -5,12 +5,16 @@ abstract class AppPaths {
   /// Logo Image Path
   ///
   static const String logoPath = 'assets/icons/logo.svg';
+  static const String upperLoginPart = 'assets/icons/up_img.png';
+  static const String downLoginPart = 'assets/icons/down_img.svg';
+
+
   ///
   /// Registration App Icons
   ///
-  static const String facebookLogoPath = 'assets/images/facebook.svg';
-  static const String googleLogoPath = 'assets/images/google.svg';
-  static const String appleLogoPath = 'assets/images/apple.svg';
+  static const String facebookLogoPath = 'assets/icons/login_facebook.svg';
+  static const String googleLogoPath = 'assets/icons/login_google.svg';
+  static const String appleLogoPath = 'assets/icons/login_apple.svg';
   ///
   /// Bottom Navigation Bar Icons
   ///
