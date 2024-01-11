@@ -57,17 +57,17 @@ class HomeScreen extends StatelessWidget {
                                     SearchBarView(),
 
                                     const SizedBox(
-                                      height: 28,
+                                      height: 35,
                                     ),
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width,
-                                      height: MediaQuery.of(context).size.height / 5,
+                                      height: MediaQuery.of(context).size.height / 4.5,
                                       child: Stack(
                                         children: [
                                           Container(
                                               clipBehavior: Clip.antiAlias,
                                               width: MediaQuery.of(context).size.width,
-                                              height: MediaQuery.of(context).size.height / 5,
+                                              height: MediaQuery.of(context).size.height / 4.5,
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(10.0),
                                               ),
@@ -148,12 +148,12 @@ class HomeScreen extends StatelessWidget {
                                     const SizedBox(
                                       height: 6,
                                     ),
-                                    SizedBox(height: 120,
+                                    SizedBox(height: 150,
                                       child: ListView.builder(scrollDirection: Axis.horizontal,reverse: true,itemCount: HealthyNetwork.length,itemBuilder: (BuildContext context, int index) {
-                                              return Container(margin: EdgeInsets.all(8),width: 100,height: 120,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
+                                              return Container(margin: EdgeInsets.all(8),width: 100,height: 150,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
                                                       child: InkWell(child:Column(mainAxisAlignment: MainAxisAlignment.center,children: [
                                                         SvgPicture.asset('assets/icons/ico_${index+1}.svg'),
-                                                        SizedBox(height: 14,),
+                                                        SizedBox(height: 25,),
                                                         Text(HealthyNetwork.elementAt(index),style: Styles.textStyle12W500.copyWith(color: AppColors.thirdNew),)
                                                       ]),onTap: () {
                                                         openUrl(HealthyNetworkLinks.elementAt(index));

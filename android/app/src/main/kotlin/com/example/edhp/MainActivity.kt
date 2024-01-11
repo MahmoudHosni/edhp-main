@@ -1,4 +1,4 @@
-package com.example.edhp
+package com.edhp
 
 import io.flutter.embedding.android.FlutterActivity
 

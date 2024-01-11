@@ -53,7 +53,7 @@ AppBar getSharedAppBarWithBack(BuildContext context,String title){
         onPressed: (){
           GoRouter.of(context).pop();
         },
-        icon: SvgPicture.asset(AppPaths.drawerIconSvg),
+        icon: Image.asset('assets/images/back_btn.png'),
       ),
     ],
   );
