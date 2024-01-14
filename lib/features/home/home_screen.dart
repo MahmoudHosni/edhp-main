@@ -139,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                                       children: [
                                         InkWell(child:Text(StringsManager.showAll , style: Styles.textStyle11W500.copyWith(color: AppColors.secondNew),),
                                         onTap: () {
-                                          GoRouter.of(context).push(AppRouters.kMedicalNetworkView);
+                                          GoRouter.of(context).push(AppRouters.kMedicalNetworkScreen);
                                         },),
                                         const Spacer(),
                                         const Text(StringsManager.healthNetwork , style: Styles.textStyle14W500,),

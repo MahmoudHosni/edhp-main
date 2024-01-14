@@ -15,7 +15,7 @@ void openUrl(String url) async {
 
 final HealthyNetwork =[
   "مستشفيات",
-  "أطباء",
+  "أطبــــــاء",
   "معامل تحاليل",
   "مراكز أشعة",
   "أجهزة طبية",

@@ -37,6 +37,7 @@ AppBar getSharedAppBarWithBack(BuildContext context,String title){
     iconTheme: const IconThemeData(color: AppColors.blackColor),
     elevation: 0,
     centerTitle: true,
+    scrolledUnderElevation: 0.0,
     title: Text(title,style: Styles.textStyle16W500.copyWith(color: AppColors.whiteLightNew),),titleSpacing: 0,
     leading: IconButton(
       onPressed: (){
