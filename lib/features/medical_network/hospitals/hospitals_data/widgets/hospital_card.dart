@@ -12,78 +12,77 @@ class HospitalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Padding(
+      padding: const EdgeInsetsDirectional.symmetric(vertical: 12),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.only(top: 12, bottom: 12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: 90,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(45),
-                    border: Border.all(
-                      color: AppColors.unselectedColor,
-                      width: 1,
-                    ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsetsDirectional.all(20),
-                    child: Image(
-                      image: NetworkImage(
-                        'https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 90,
+                height: 90,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(45),
+                  border: Border.all(
+                    color: AppColors.unselectedColor,
+                    width: 1,
                   ),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'مركز',
-                        style: Styles.textStyle195W500.copyWith(
-                            color: AppColors.textColorBlue, fontSize: 16),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'المستوى',
-                              style: Styles.textStyle195W500.copyWith(
-                                  color: AppColors.secondNew, fontSize: 16),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          RatingBarIndicator(
-                            rating: 2.75,
-                            itemBuilder: (context, index) => const Icon(
-                              Icons.star,
-                              color: AppColors.secondNew,
-                            ),
-                            itemCount: 5,
-                            itemSize: 20.0,
-                            direction: Axis.horizontal,
-                            unratedColor: AppColors.lightGray,
-                          ),
-                        ],
-                      ),
-                    ],
+                child: const Padding(
+                  padding: EdgeInsetsDirectional.all(20),
+                  child: Image(
+                    image: NetworkImage(
+                      'https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp',
+                    ),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'مركز',
+                      style: Styles.textStyle195W500.copyWith(
+                          color: AppColors.textColorBlue, fontSize: 16),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'المستوى',
+                            style: Styles.textStyle195W500.copyWith(
+                                color: AppColors.secondNew, fontSize: 16),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        RatingBarIndicator(
+                          rating: 2.75,
+                          itemBuilder: (context, index) => const Icon(
+                            Icons.star,
+                            color: AppColors.secondNew,
+                          ),
+                          itemCount: 5,
+                          itemSize: 20.0,
+                          direction: Axis.horizontal,
+                          unratedColor: AppColors.lightGray,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
+          const SizedBox(height: 12),
           Row(children: [
             SvgPicture.asset(AppImages.location),
             const SizedBox(width: 12),
@@ -135,7 +134,6 @@ class HospitalCard extends StatelessWidget {
               ),
             ),
           ],),
-          const SizedBox(height: 12,),
         ],
       ),
     );

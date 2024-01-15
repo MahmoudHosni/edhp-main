@@ -5,6 +5,7 @@ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/custom_drop_down.dart';
 import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/features/medical_network/doctors/doctors_specialties/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 
 class DoctorsSpecialtiesScreen extends StatelessWidget {
@@ -75,6 +76,20 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                     style: Styles.textStyle195W500
                         .copyWith(color: AppColors.whiteColor, fontSize: 20),
                   ),
+                ),
+              ),
+              const SizedBox(height: 28),
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) => InkWell(
+                    child: DoctorCard(),
+                    onTap: () {},
+                  ),
+                  separatorBuilder: (context, index) => Container(
+                    height: 1,
+                    color: AppColors.unselectedColor,
+                  ),
+                  itemCount: 10,
                 ),
               ),
             ],
