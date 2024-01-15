@@ -43,16 +43,24 @@ class StringsManager {
   static const String jahatName = 'أسم الهيئة';
 
   ///Medical Network
-  static const String hospitals = 'مستشفيات';
-  static const String doctors = 'أطبـــــــاء';
-  static const String labs = 'معامل تحاليل';
-  static const String radiologyCenters = 'مراكز آشعة';
-  static const String medicalDevices = 'أجهزة طبية';
-  static const String pharmacies = 'صيدليات';
-  static const String hospitalsData = 'بيانات المستشفيات';
-  static const String doctorsSpecialties = 'تخصصات الأطباء';
-  static const String labsData = 'بيانات معامل التحاليل';
-  static const String radiologyCentersData = 'بيانات مراكز الآشعة';
-  static const String pharmaciesData = 'بيانات الصيدليات';
-  static const String medicalDevicesData = 'بيانات الأجهزة الطبية';
+  static const String hospitals = 'hospitals';
+  static const String doctors = 'doctors';
+  static const String labs = 'labs';
+  static const String radiologyCenters = 'radiology centers';
+  static const String medicalDevices = 'medical devices';
+  static const String pharmacies = 'pharmacies';
+  static const String hospitalsData = 'hospitals data';
+  static const String doctorsSpecialties = 'doctors specialties';
+  static const String labsData = 'labs data';
+  static const String radiologyCentersData = 'radiology centers data';
+  static const String pharmaciesData = 'pharmacies data';
+  static const String medicalDevicesData = 'medical devices data';
+  static const String selectGovernorate = 'select governorate';
+  static const String selectLevel = 'select level';
+  static const String services = 'services';
+  static const String searchByName = 'search by name';
+  static const String closestToYou = 'closest to you';
+  static const String selectRegion = 'select region';
+  static const String degree = 'degree';
+  static const String searchByNameOrSpeciality = 'search by name / specialty';
 }

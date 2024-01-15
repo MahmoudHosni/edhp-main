@@ -1,7 +1,9 @@
-import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
+import 'package:edhp/core/utils/app_components/widgets/custom_drop_down.dart';
+import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -11,30 +13,64 @@ class RadiologyCentersDataScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewContainer(
-        title: StringsManager.radiologyCenters,
-        body: Column(
-          children: [
-            Text(
-              StringsManager.radiologyCentersData,
-              style: Styles.textStyle195W500
-                  .copyWith(color: AppColors.blackColor, fontSize: 20),
-            ),
-            CustomDropdown(
-              hintText: 'Select job role',
-              items: [
-                Text(
-                  'fdsjk',
-                  style: TextStyle(color: Colors.red),
+        title: StringsManager.radiologyCenters.tr(),
+        body: Padding(
+          padding: const EdgeInsetsDirectional.only(
+              top: 16, start: 4, end: 4, bottom: 4),
+          child: Column(
+            children: [
+              Text(
+                StringsManager.radiologyCentersData.tr(),
+                style: Styles.textStyle195W500
+                    .copyWith(color: AppColors.blackColor, fontSize: 20),
+              ),
+              const SizedBox(height: 20),
+              EHDPDropDown(
+                list: ['من'],
+                hintText: StringsManager.selectGovernorate.tr(),
+                valueChanged: (value) {},
+              ),
+              const SizedBox(height: 4),
+              EHDPDropDown(
+                list: ['من'],
+                hintText: StringsManager.selectRegion.tr(),
+                valueChanged: (value) {},
+              ),
+              const SizedBox(height: 4),
+              EHDPDropDown(
+                list: ['من'],
+                hintText: StringsManager.services.tr(),
+                valueChanged: (value) {},
+              ),
+              const SizedBox(height: 4),
+              SearchableTextFormField(
+                controller: TextEditingController(),
+                hintText: StringsManager.searchByName.tr(),
+                valueChanged: (searchText) {},
+              ),
+              const SizedBox(height: 20),
+              Container(
+                height: 52,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(26),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [AppColors.secondNew, AppColors.primaryNew],
+                  ),
                 ),
-                'kfggf',
-                'مياتيات'
-              ],
-              onChanged: (value) {
-                print(value);
-              },
-            ),
-            // DefaultTextButton(text: '', function: function)
-          ],
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    StringsManager.closestToYou.tr(),
+                    style: Styles.textStyle195W500
+                        .copyWith(color: AppColors.whiteColor, fontSize: 20),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }

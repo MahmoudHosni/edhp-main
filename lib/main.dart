@@ -18,6 +18,7 @@ import 'core/network/dio_helper.dart';
 import 'core/utils/bloc_observer/bloc_observer.dart';
 import 'features/organization_membership/organization_membership_data/cubit/cubit.dart';
 import 'features/organization_membership/select_the_company/cubit/cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 void main() async{
@@ -25,6 +26,7 @@ void main() async{
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
+  await EasyLocalization.ensureInitialized();
   // bool ? rememberMe = await CacheHelper.getData(key: 'rememberMe');
   token = await CacheHelper.getData(key: 'token');
   print(token);
@@ -34,9 +36,13 @@ void main() async{
     statusBarIconBrightness: Brightness.dark, // status bar icon color
     systemNavigationBarIconBrightness: Brightness.dark, // color of navigation controls
   ));
-  runApp(MyApp(
-    // rememberMe: rememberMe,
-    accessToken: token,));
+
+  runApp(EasyLocalization(
+      supportedLocales: const [Locale('ar'), Locale('en')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('ar'),
+      startLocale: const Locale('ar'),
+      child: MyApp(accessToken: token,)),);
 }
 
 class MyApp extends StatelessWidget {
@@ -78,6 +84,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
           theme: ThemeData(
                   brightness: Brightness.light,
                   primarySwatch: generateMaterialColor(color:const Color(0xff2e2c53)),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 
@@ -13,27 +14,27 @@ class MedicalNetworkEntity {
 
 final List<MedicalNetworkEntity> medicalNetworkList = [
   MedicalNetworkEntity(
-    title: StringsManager.hospitals,
+    title: StringsManager.hospitals.tr(),
     router: AppRouters.kHospitalsDataScreen,
   ),
   MedicalNetworkEntity(
-    title: StringsManager.doctors,
+    title: StringsManager.doctors.tr(),
     router: AppRouters.kDoctorsSpecialtiesScreen,
   ),
   MedicalNetworkEntity(
-    title: StringsManager.labs,
+    title: StringsManager.labs.tr(),
     router: AppRouters.kLabsDataScreen,
   ),
   MedicalNetworkEntity(
-    title: StringsManager.radiologyCenters,
+    title: StringsManager.radiologyCenters.tr(),
     router: AppRouters.kRadiologyCentersDataScreen,
   ),
   MedicalNetworkEntity(
-    title: StringsManager.medicalDevices,
+    title: StringsManager.medicalDevices.tr(),
     router: AppRouters.kMedicalDevicesDataScreen,
   ),
   MedicalNetworkEntity(
-    title: StringsManager.pharmacies,
+    title: StringsManager.pharmacies.tr(),
     router: AppRouters.kPharmaciesDataScreen,
   ),
 ];

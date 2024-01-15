@@ -56,6 +56,7 @@ dependencies:
 #  flutter_native_splash: ^2.2.13
   flutter_launcher_icons: ^0.13.1
   animated_custom_dropdown: 3.0.0
+  easy_localization: ^3.0.3
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -117,6 +118,7 @@ flutter:
     - assets/images/
     - assets/
     - assets/icons/
+    - assets/translations/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
