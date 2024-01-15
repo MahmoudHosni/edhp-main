@@ -63,4 +63,5 @@ class StringsManager {
   static const String selectRegion = 'select region';
   static const String degree = 'degree';
   static const String searchByNameOrSpeciality = 'search by name / specialty';
+  static const String branches = 'branches';
 }

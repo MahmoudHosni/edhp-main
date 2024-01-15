@@ -6,6 +6,7 @@ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/custom_drop_down.dart';
 import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/features/medical_network/medical_center_card.dart';
 import 'package:flutter/material.dart';
 
 class PharmaciesDataScreen extends StatelessWidget {
@@ -48,6 +49,14 @@ class PharmaciesDataScreen extends StatelessWidget {
                 height: 52,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(26),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.lightGrayColor.withOpacity(0.25),
+                      blurRadius: 40,
+                      spreadRadius: 12,
+                      offset: const Offset(0, 12),
+                    )
+                  ],
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -62,6 +71,16 @@ class PharmaciesDataScreen extends StatelessWidget {
                     style: Styles.textStyle195W500
                         .copyWith(color: AppColors.whiteColor, fontSize: 20),
                   ),
+                ),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) => MedicalCenterCard(),
+                  separatorBuilder: (context, index) => Container(
+                    height: 1,
+                    color: AppColors.unselectedColor,
+                  ),
+                  itemCount: 10,
                 ),
               ),
             ],

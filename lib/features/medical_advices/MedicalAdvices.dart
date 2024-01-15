@@ -50,7 +50,7 @@ class MedicalAdviceCard extends StatelessWidget{
   Widget build(BuildContext context) {
       return Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: double.infinity,padding: const EdgeInsets.all(8),
         height: 75,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
-      child: Text(item.name ??'',style: Styles.textStyle13W500.copyWith(color: AppColors.textColorBlack),textAlign: TextAlign.right,));
+      child: Text(item.name ??'',style: Styles.textStyle13W500.copyWith(color: AppColors.blackColor),textAlign: TextAlign.right,));
   }
 
 }

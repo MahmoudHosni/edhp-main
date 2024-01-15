@@ -53,6 +53,14 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                 height: 52,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(26),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.lightGrayColor.withOpacity(0.25),
+                      blurRadius: 40,
+                      spreadRadius: 12,
+                      offset: const Offset(0, 12),
+                    )
+                  ],
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,

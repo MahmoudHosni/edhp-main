@@ -122,7 +122,7 @@ class SettingScreen extends StatelessWidget {
                             activeTrackColor: AppColors.primaryBlueColor,
                           ),
                           const Spacer(),
-                          Text('تفعيل الإشعارات والتنبيهات' , style: Styles.textStyle12W400.copyWith(color: AppColors.textColorBlack),),
+                          Text('تفعيل الإشعارات والتنبيهات' , style: Styles.textStyle12W400.copyWith(color: AppColors.blackColor),),
                         ],
                       ),
                     ),
