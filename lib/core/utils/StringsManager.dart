@@ -41,4 +41,18 @@ class StringsManager {
 
   static const String companyName = 'أسم الشركة';//
   static const String jahatName = 'أسم الهيئة';
+
+  ///Medical Network
+  static const String hospitals = 'مستشفيات';
+  static const String doctors = 'أطبـــــــاء';
+  static const String labs = 'معامل تحاليل';
+  static const String radiologyCenters = 'مراكز آشعة';
+  static const String medicalDevices = 'أجهزة طبية';
+  static const String pharmacies = 'صيدليات';
+  static const String hospitalsData = 'بيانات المستشفيات';
+  static const String doctorsSpecialties = 'تخصصات الأطباء';
+  static const String labsData = 'بيانات معامل التحاليل';
+  static const String radiologyCentersData = 'بيانات مراكز الآشعة';
+  static const String pharmaciesData = 'بيانات الصيدليات';
+  static const String medicalDevicesData = 'بيانات الأجهزة الطبية';
 }

@@ -13,6 +13,7 @@ import 'package:edhp/features/drawer/drawer_components.dart';
 import 'package:edhp/features/home/widgets/SearchBarView.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/features/layout/cubit/states.dart';
+import 'package:edhp/models/medical_network_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -149,14 +150,16 @@ class HomeScreen extends StatelessWidget {
                                       height: 6,
                                     ),
                                     SizedBox(height: 150,
-                                      child: ListView.builder(scrollDirection: Axis.horizontal,reverse: true,itemCount: HealthyNetwork.length,itemBuilder: (BuildContext context, int index) {
+                                      child: ListView.builder(scrollDirection: Axis.horizontal,reverse: true,itemCount: medicalNetworkList.length,itemBuilder: (BuildContext context, int index) {
                                               return Container(margin: EdgeInsets.all(8),width: 100,height: 150,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
                                                       child: InkWell(child:Column(mainAxisAlignment: MainAxisAlignment.center,children: [
                                                         SvgPicture.asset('assets/icons/ico_${index+1}.svg'),
                                                         SizedBox(height: 25,),
-                                                        Text(HealthyNetwork.elementAt(index),style: Styles.textStyle12W500.copyWith(color: AppColors.thirdNew),)
+                                                        Text(medicalNetworkList[index].title,style: Styles.textStyle12W500.copyWith(color: AppColors.thirdNew),)
                                                       ]),onTap: () {
-                                                        openUrl(HealthyNetworkLinks.elementAt(index));
+                                                        print('object');
+                                                        print(medicalNetworkList[index].router);
+                                                        GoRouter.of(context).push(medicalNetworkList[index].router);
                                                       }),);
                                       }),
                                     ),

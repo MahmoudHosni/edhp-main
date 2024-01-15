@@ -8,7 +8,13 @@ import 'package:edhp/features/home/widgets/MemberShipPreview.dart';
 import 'package:edhp/features/insurance_companies/SelectInsuranceCompany.dart';
 import 'package:edhp/features/layout/layout_screen.dart';
 import 'package:edhp/features/medical_advices/MedicalAdvices.dart';
+import 'package:edhp/features/medical_network/doctors/doctors_specialties/doctors_specialties_screen.dart';
+import 'package:edhp/features/medical_network/hospitals/hospitals_data/hospitals_data_screen.dart';
+import 'package:edhp/features/medical_network/labs/labs_data/labs_data_screen.dart';
 import 'package:edhp/features/medical_network/medical_network_screen.dart';
+import 'package:edhp/features/medical_network/medicl_devices/medical_devices_data/medicl_devices_data_screen.dart';
+import 'package:edhp/features/medical_network/pharmacies/pharmacies_data/pharmacies_data_screen.dart';
+import 'package:edhp/features/medical_network/radiology_centers/radiology_centers_data/radiology_centers_data_screen.dart';
 import 'package:edhp/features/medical_record/medical_record_screen.dart';
 import 'package:edhp/features/membership_data/membership_data_screen.dart';
 import 'package:edhp/features/otp/otp_screen.dart';
@@ -43,6 +49,12 @@ abstract class AppRouters {
   static const kMemberShipTypes = '/memberShipTypes';
   static const kCreateMembershipScreen = '/createMembershipScreen';
   static const kMedicalNetworkScreen = '/medicalNetworkScreen';
+  static const kHospitalsDataScreen = '/hospitalsDataScreen';
+  static const kDoctorsSpecialtiesScreen = '/doctorsSpecialtiesScreen';
+  static const kLabsDataScreen = '/labsDataScreen';
+  static const kRadiologyCentersDataScreen = '/radiologyCentersDataScreen';
+  static const kMedicalDevicesDataScreen = '/medicalDevicesDataScreen';
+  static const kPharmaciesDataScreen = '/pharmaciesDataScreen';
   static const kMedicalRecordScreen = '/medicalRecordScreen';
   static const kSelectCompanyScreen = '/selectCompanyScreen';
   static const kMembershipDataScreen = '/membershipDataScreen';
@@ -127,7 +139,31 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kMedicalNetworkScreen ,
-        builder: (context, state) => MedicalNetworkScreen(),
+        builder: (context, state) => const MedicalNetworkScreen(),
+      ),
+      GoRoute(
+        path: kHospitalsDataScreen ,
+        builder: (context, state) => const HospitalsDataScreen(),
+      ),
+      GoRoute(
+        path: kDoctorsSpecialtiesScreen ,
+        builder: (context, state) => const DoctorsSpecialtiesScreen(),
+      ),
+      GoRoute(
+        path: kLabsDataScreen ,
+        builder: (context, state) => const LabsDataScreen(),
+      ),
+      GoRoute(
+        path: kRadiologyCentersDataScreen ,
+        builder: (context, state) => const RadiologyCentersDataScreen(),
+      ),
+      GoRoute(
+        path: kMedicalDevicesDataScreen ,
+        builder: (context, state) => const MedicalDevicesDataScreen(),
+      ),
+      GoRoute(
+        path: kPharmaciesDataScreen ,
+        builder: (context, state) => const PharmaciesDataScreen(),
       ),
       GoRoute(
         path: kMedicalRecordScreen ,
@@ -216,10 +252,6 @@ abstract class AppRouters {
       GoRoute(
         path: kCreateMembershipScreen,
         builder: (context, state) => CreateMembershipScreen(subscriptionRequest: state.extra as SubscriptionRequest),
-      ),
-      GoRoute(
-        path: kMedicalNetworkScreen ,
-        builder: (context, state) => MedicalNetworkScreen(),
       ),
       GoRoute(
         path: kMedicalRecordScreen ,
