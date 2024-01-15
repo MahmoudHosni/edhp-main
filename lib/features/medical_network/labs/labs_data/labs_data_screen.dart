@@ -59,7 +59,7 @@ class LabsDataScreen extends StatelessWidget {
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [AppColors.secondNew, AppColors.primaryNew],
+                    colors: [AppColors.secondNew, AppColors.blue],
                   ),
                 ),
                 width: double.infinity,
@@ -74,7 +74,10 @@ class LabsDataScreen extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.separated(
-                  itemBuilder: (context, index) => MedicalCenterCard(),
+                  itemBuilder: (context, index) => InkWell(
+                    child: MedicalCenterCard(),
+                    onTap: () {},
+                  ),
                   separatorBuilder: (context, index) => Container(
                     height: 1,
                     color: AppColors.unselectedColor,

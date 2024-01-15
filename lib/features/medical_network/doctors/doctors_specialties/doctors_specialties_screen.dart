@@ -64,7 +64,7 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [AppColors.secondNew, AppColors.primaryNew],
+                    colors: [AppColors.secondNew, AppColors.blue],
                   ),
                 ),
                 width: double.infinity,

@@ -5,6 +5,7 @@ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/custom_drop_down.dart';
 import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/features/medical_network/hospitals/hospitals_data/widgets/hospital_card.dart';
 import 'package:edhp/features/medical_network/medical_center_card.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,7 @@ class HospitalsDataScreen extends StatelessWidget {
                   gradient: const LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [AppColors.secondNew, AppColors.primaryNew],
+                    colors: [AppColors.secondNew, AppColors.blue],
                   ),
                 ),
                 width: double.infinity,
@@ -81,7 +82,10 @@ class HospitalsDataScreen extends StatelessWidget {
               const SizedBox(height: 28),
               Expanded(
                 child: ListView.separated(
-                  itemBuilder: (context, index) => Container(),
+                  itemBuilder: (context, index) => InkWell(
+                    child: HospitalCard(),
+                    onTap: () {},
+                  ),
                   separatorBuilder: (context, index) => Container(
                     height: 1,
                     color: AppColors.unselectedColor,
