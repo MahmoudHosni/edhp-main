@@ -14,13 +14,13 @@ import 'package:edhp/features/medical_network/doctors/nearest_doctors/nearest_do
 import 'package:edhp/features/medical_network/hospitals/hospitals_data/hospitals_data_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/nearest_hospitals/nearest_hospitals_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/outpatient_clinics/outpatient_clinics_screen.dart';
-import 'package:edhp/features/medical_network/labs/labs_data/labs_data_screen.dart';
+import 'package:edhp/features/medical_network/medical_centers_data/labs/labs_data_screen.dart';
+import 'package:edhp/features/medical_network/medical_centers_data/medicl_devices/medicl_devices_data_screen.dart';
+import 'package:edhp/features/medical_network/medical_centers_data/pharmacies/pharmacies_data_screen.dart';
+import 'package:edhp/features/medical_network/medical_centers_data/radiology_centers/radiology_centers_data_screen.dart';
 import 'package:edhp/features/medical_network/medical_cernter_services/medical_cernter_services_screen.dart';
 import 'package:edhp/features/medical_network/medical_network_screen.dart';
-import 'package:edhp/features/medical_network/medicl_devices/medical_devices_data/medicl_devices_data_screen.dart';
 import 'package:edhp/features/medical_network/nearest_medical_centers/nearest_medical_centers_screen.dart';
-import 'package:edhp/features/medical_network/pharmacies/pharmacies_data/pharmacies_data_screen.dart';
-import 'package:edhp/features/medical_network/radiology_centers/radiology_centers_data/radiology_centers_data_screen.dart';
 import 'package:edhp/features/medical_record/medical_record_screen.dart';
 import 'package:edhp/features/membership_data/membership_data_screen.dart';
 import 'package:edhp/features/otp/otp_screen.dart';
