@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_images.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class MedicalCenterCard extends StatelessWidget {
   const MedicalCenterCard({super.key});
@@ -51,7 +53,6 @@ class MedicalCenterCard extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -69,24 +70,25 @@ class MedicalCenterCard extends StatelessWidget {
                         Container(
                           height: 32,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.lightGrayColor.withOpacity(0.25),
-                                blurRadius: 4,
-                                spreadRadius: 1,
-                                offset: const Offset(1, 1),
-                              )
-                            ],
-                            color: AppColors.secondNew
-                          ),
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.lightGrayColor
+                                      .withOpacity(0.25),
+                                  blurRadius: 4,
+                                  spreadRadius: 1,
+                                  offset: const Offset(1, 1),
+                                )
+                              ],
+                              color: AppColors.secondNew),
                           width: 80,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () => GoRouter.of(context)
+                                .push(AppRouters.kMedicalCenterBranchesScreen),
                             child: Text(
                               StringsManager.branches.tr(),
-                              style: Styles.textStyle195W500
-                                  .copyWith(color: AppColors.whiteColor, fontSize: 14),
+                              style: Styles.textStyle195W500.copyWith(
+                                  color: AppColors.whiteColor, fontSize: 14),
                             ),
                           ),
                         ),
@@ -97,34 +99,40 @@ class MedicalCenterCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12,),
-          Row(children: [
-            SvgPicture.asset(AppImages.location),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                'معمل المختبر',
-                style: Styles.textStyle195W500.copyWith(
-                    color: AppColors.blackColor, fontSize: 16),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+          const SizedBox(
+            height: 12,
+          ),
+          Row(
+            children: [
+              SvgPicture.asset(AppImages.location),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  'معمل المختبر',
+                  style: Styles.textStyle195W500
+                      .copyWith(color: AppColors.blackColor, fontSize: 16),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-          ],),
-          const SizedBox(height: 4,),
-          Row(children: [
-            SvgPicture.asset(AppImages.phone),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                '01143653252 - 01122355458 - 01266665445',
-                style: Styles.textStyle195W500.copyWith(
-                    color: AppColors.secondNew, fontSize: 16),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              SvgPicture.asset(AppImages.phone),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  '01143653252 - 01122355458 - 01266665445',
+                  style: Styles.textStyle195W500
+                      .copyWith(color: AppColors.secondNew, fontSize: 16),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-          ],),
+            ],
+          ),
         ],
       ),
     );

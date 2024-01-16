@@ -8,6 +8,7 @@ import 'package:edhp/features/home/widgets/MemberShipPreview.dart';
 import 'package:edhp/features/insurance_companies/SelectInsuranceCompany.dart';
 import 'package:edhp/features/layout/layout_screen.dart';
 import 'package:edhp/features/medical_advices/MedicalAdvices.dart';
+import 'package:edhp/features/medical_network/branches/medical_center_branches_screen.dart';
 import 'package:edhp/features/medical_network/doctors/doctors_specialties/doctors_specialties_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/hospitals_data/hospitals_data_screen.dart';
 import 'package:edhp/features/medical_network/labs/labs_data/labs_data_screen.dart';
@@ -55,6 +56,7 @@ abstract class AppRouters {
   static const kRadiologyCentersDataScreen = '/radiologyCentersDataScreen';
   static const kMedicalDevicesDataScreen = '/medicalDevicesDataScreen';
   static const kPharmaciesDataScreen = '/pharmaciesDataScreen';
+  static const kMedicalCenterBranchesScreen = '/medicalCenterBranchesScreen';
   static const kMedicalRecordScreen = '/medicalRecordScreen';
   static const kSelectCompanyScreen = '/selectCompanyScreen';
   static const kMembershipDataScreen = '/membershipDataScreen';
@@ -164,6 +166,10 @@ abstract class AppRouters {
       GoRoute(
         path: kPharmaciesDataScreen ,
         builder: (context, state) => const PharmaciesDataScreen(),
+      ),
+      GoRoute(
+        path: kMedicalCenterBranchesScreen ,
+        builder: (context, state) => const MedicalCenterBranchesScreen(),
       ),
       GoRoute(
         path: kMedicalRecordScreen ,

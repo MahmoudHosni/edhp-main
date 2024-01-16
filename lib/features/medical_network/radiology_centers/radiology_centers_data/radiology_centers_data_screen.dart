@@ -5,7 +5,7 @@ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/custom_drop_down.dart';
 import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
-import 'package:edhp/features/medical_network/medical_center_card.dart';
+import 'package:edhp/features/medical_network/widgets/medical_center_card.dart';
 import 'package:flutter/material.dart';
 
 class RadiologyCentersDataScreen extends StatelessWidget {
