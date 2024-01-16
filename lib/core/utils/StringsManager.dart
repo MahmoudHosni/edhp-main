@@ -66,4 +66,7 @@ class StringsManager {
   static const String branches = 'branches';
   static const String outpatientClinics = 'outpatient clinics';
   static const String details = 'details';
+  static const String searchByClinic = 'search by clinic';
+  static const String clinicClassifications = 'clinic classifications';
+  static const String recentlySearched = 'recently searched';
 }

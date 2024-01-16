@@ -2,10 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_images.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class HospitalCard extends StatelessWidget {
   const HospitalCard({super.key});
@@ -125,7 +127,7 @@ class HospitalCard extends StatelessWidget {
               ),
               width: 120,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () => GoRouter.of(context).push(AppRouters.kOutpatientClinicsScreen),
                 child: Text(
                   StringsManager.outpatientClinics.tr(),
                   style: Styles.textStyle195W500
