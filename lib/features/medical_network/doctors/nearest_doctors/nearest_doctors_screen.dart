@@ -6,16 +6,15 @@ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class NearestHospitalsScreen extends StatelessWidget {
-  const NearestHospitalsScreen({super.key});
+class NearestDoctorsScreen extends StatelessWidget {
+  const NearestDoctorsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ViewContainer(
-        title: StringsManager.hospitals.tr(),
+        title: StringsManager.doctors.tr(),
         body: Padding(
           padding: const EdgeInsetsDirectional.only(top: 16, bottom: 4),
           child: Column(
@@ -75,38 +74,20 @@ class NearestHospitalsScreen extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 8),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          'المستوى',
-                                          style: Styles.textStyle195W500.copyWith(
-                                              color: AppColors.secondNew, fontSize: 16),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      RatingBarIndicator(
-                                        rating: 2.75,
-                                        itemBuilder: (context, index) => const Icon(
-                                          Icons.star,
-                                          color: AppColors.secondNew,
-                                        ),
-                                        itemCount: 5,
-                                        itemSize: 20.0,
-                                        direction: Axis.horizontal,
-                                        unratedColor: AppColors.lightGray,
-                                      ),
-                                    ],
+                                  Text(
+                                    'المستوى',
+                                    style: Styles.textStyle195W500.copyWith(
+                                        color: AppColors.secondNew, fontSize: 16),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 8),
                                   Text(
                                     'شارع الخليفة المأمون',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.blackColor,
                                         fontSize: 20),
-                                    maxLines: 2,
+                                    maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 20),
@@ -175,80 +156,50 @@ class NearestHospitalsScreen extends StatelessWidget {
                                       )
                                     ],
                                   ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    'شارع الخليفة المأمون',
+                                    style: Styles.textStyle195W500.copyWith(
+                                        color: AppColors.blackColor,
+                                        fontSize: 14),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                   const Spacer(),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          height: 52,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(26),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: AppColors.lightGrayColor
-                                                    .withOpacity(0.25),
-                                                blurRadius: 1,
-                                                spreadRadius: 1,
-                                                offset: const Offset(0, 1),
-                                              )
-                                            ],
-                                            gradient: const LinearGradient(
-                                              begin: Alignment.topLeft,
-                                              end: Alignment.bottomRight,
-                                              colors: [
-                                                AppColors.secondNew,
-                                                AppColors.blue
-                                              ],
-                                            ),
-                                          ),
-                                          child: TextButton(
-                                            onPressed: () {},
-                                            child: Text(
-                                              StringsManager.services.tr(),
-                                              style: Styles.textStyle195W500.copyWith(
-                                                  color: AppColors.whiteColor,
-                                                  fontSize: 20),
-                                            ),
-                                          ),
+                                  Center(
+                                    child: Container(
+                                      height: 52,
+                                      width: 244,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(26),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColors.lightGrayColor
+                                                .withOpacity(0.25),
+                                            blurRadius: 1,
+                                            spreadRadius: 1,
+                                            offset: const Offset(0, 1),
+                                          )
+                                        ],
+                                        gradient: const LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            AppColors.secondNew,
+                                            AppColors.blue
+                                          ],
                                         ),
                                       ),
-                                      const SizedBox(width: 12,),
-                                      Expanded(
-                                        child: Container(
-                                          height: 52,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(26),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: AppColors.lightGrayColor
-                                                    .withOpacity(0.25),
-                                                blurRadius: 1,
-                                                spreadRadius: 1,
-                                                offset: const Offset(0, 1),
-                                              )
-                                            ],
-                                            gradient: const LinearGradient(
-                                              begin: Alignment.topRight,
-                                              end: Alignment.bottomLeft,
-                                              colors: [
-                                                AppColors.secondNew,
-                                                AppColors.blue
-                                              ],
-                                            ),
-                                          ),
-                                          child: TextButton(
-                                            onPressed: () {},
-                                            child: Text(
-                                              StringsManager.clinics.tr(),
-                                              style: Styles.textStyle195W500.copyWith(
-                                                  color: AppColors.whiteColor,
-                                                  fontSize: 20),
-                                            ),
-                                          ),
+                                      child: TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          StringsManager.callClinic.tr(),
+                                          style: Styles.textStyle195W500.copyWith(
+                                              color: AppColors.whiteColor,
+                                              fontSize: 20),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ],
                               ),

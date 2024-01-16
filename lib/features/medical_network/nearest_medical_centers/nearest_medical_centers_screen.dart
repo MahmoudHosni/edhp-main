@@ -158,36 +158,38 @@ class NearestMedicalCentersScreen extends StatelessWidget {
                                     ],
                                   ),
                                   const Spacer(),
-                                  Container(
-                                    height: 52,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(26),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: AppColors.lightGrayColor
-                                              .withOpacity(0.25),
-                                          blurRadius: 1,
-                                          spreadRadius: 1,
-                                          offset: const Offset(0, 1),
-                                        )
-                                      ],
-                                      gradient: const LinearGradient(
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                        colors: [
-                                          AppColors.secondNew,
-                                          AppColors.blue
+                                  Center(
+                                    child: Container(
+                                      height: 52,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(26),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColors.lightGrayColor
+                                                .withOpacity(0.25),
+                                            blurRadius: 1,
+                                            spreadRadius: 1,
+                                            offset: const Offset(0, 1),
+                                          )
                                         ],
+                                        gradient: const LinearGradient(
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                          colors: [
+                                            AppColors.secondNew,
+                                            AppColors.blue
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    width: 244,
-                                    child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        StringsManager.contactLab.tr(),
-                                        style: Styles.textStyle195W500.copyWith(
-                                            color: AppColors.whiteColor,
-                                            fontSize: 20),
+                                      width: 244,
+                                      child: TextButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          StringsManager.callLab.tr(),
+                                          style: Styles.textStyle195W500.copyWith(
+                                              color: AppColors.whiteColor,
+                                              fontSize: 20),
+                                        ),
                                       ),
                                     ),
                                   ),
