@@ -4,10 +4,12 @@ import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/custom_drop_down.dart';
 import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/medical_network/hospitals/hospitals_data/widgets/hospital_card.dart';
 import 'package:edhp/features/medical_network/widgets/medical_center_card.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HospitalsDataScreen extends StatelessWidget {
   const HospitalsDataScreen({super.key});
@@ -71,7 +73,7 @@ class HospitalsDataScreen extends StatelessWidget {
                 ),
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => GoRouter.of(context).push(AppRouters.kNearestHospitalsScreen),
                   child: Text(
                     StringsManager.closestToYou.tr(),
                     style: Styles.textStyle195W500
