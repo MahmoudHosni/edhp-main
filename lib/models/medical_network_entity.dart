@@ -38,3 +38,15 @@ final List<MedicalNetworkEntity> medicalNetworkList = [
     router: AppRouters.kPharmaciesDataScreen,
   ),
 ];
+
+class MedicalCenterEntity {
+  final MedicalCenterType medicalCenterType;
+  final String title;
+
+  MedicalCenterEntity({
+    required this.medicalCenterType,
+    required this.title,
+  });
+}
+
+enum MedicalCenterType { labs, radiologyCenters, pharmacies, medicalDevices }

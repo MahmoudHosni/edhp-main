@@ -15,6 +15,7 @@ import 'package:edhp/features/medical_network/hospitals/hospitals_data/hospitals
 import 'package:edhp/features/medical_network/hospitals/nearest_hospitals/nearest_hospitals_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/outpatient_clinics/outpatient_clinics_screen.dart';
 import 'package:edhp/features/medical_network/labs/labs_data/labs_data_screen.dart';
+import 'package:edhp/features/medical_network/medical_cernter_services/medical_cernter_services_screen.dart';
 import 'package:edhp/features/medical_network/medical_network_screen.dart';
 import 'package:edhp/features/medical_network/medicl_devices/medical_devices_data/medicl_devices_data_screen.dart';
 import 'package:edhp/features/medical_network/nearest_medical_centers/nearest_medical_centers_screen.dart';
@@ -28,6 +29,7 @@ import 'package:edhp/features/service/MemberShipTypes.dart';
 import 'package:edhp/features/service/service_screen.dart';
 import 'package:edhp/features/splash_screen/splash_screen.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
+import 'package:edhp/models/medical_network_entity.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/add_relatives/add_relatives_screen.dart';
 import '../../features/authantication/forget_password/forget_password_screen.dart';
@@ -65,6 +67,7 @@ abstract class AppRouters {
   static const kNearestMedicalCentersScreen = '/nearestMedicalCentersScreen';
   static const kNearestHospitalsScreen = '/nearestHospitalsScreen';
   static const kNearestDoctorsScreen = '/nearestDoctorsScreen';
+  static const kMedicalCenterServicesScreen = '/medicalCenterServicesScreen';
   static const kMedicalRecordScreen = '/medicalRecordScreen';
   static const kSelectCompanyScreen = '/selectCompanyScreen';
   static const kMembershipDataScreen = '/membershipDataScreen';
@@ -177,7 +180,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kMedicalCenterBranchesScreen ,
-        builder: (context, state) => const MedicalCenterBranchesScreen(),
+        builder: (context, state) => MedicalCenterBranchesScreen(medicalCenterEntity: state.extra as MedicalCenterEntity,),
       ),
       GoRoute(
         path: kOutpatientClinicsScreen ,
@@ -185,7 +188,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kNearestMedicalCentersScreen ,
-        builder: (context, state) => const NearestMedicalCentersScreen(),
+        builder: (context, state) => NearestMedicalCentersScreen(medicalCenterEntity: state.extra as MedicalCenterEntity,),
       ),
       GoRoute(
         path: kNearestHospitalsScreen ,
@@ -194,6 +197,10 @@ abstract class AppRouters {
       GoRoute(
         path: kNearestDoctorsScreen ,
         builder: (context, state) => const NearestDoctorsScreen(),
+      ),
+      GoRoute(
+        path: kMedicalCenterServicesScreen ,
+        builder: (context, state) => MedicalCenterServicesScreen(medicalCenterEntity: state.extra as MedicalCenterEntity,),
       ),
       GoRoute(
         path: kMedicalRecordScreen ,

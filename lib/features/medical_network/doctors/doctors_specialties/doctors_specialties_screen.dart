@@ -29,19 +29,19 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               EHDPDropDown(
-                list: ['من'],
+                list: ['بيانات متغيرة', 'بيانات متغيرة', 'بيانات متغيرة'],
                 hintText: StringsManager.selectGovernorate.tr(),
                 valueChanged: (value) {},
               ),
               const SizedBox(height: 4),
               EHDPDropDown(
-                list: ['من'],
+                list: ['بيانات متغيرة', 'بيانات متغيرة', 'بيانات متغيرة'],
                 hintText: StringsManager.selectRegion.tr(),
                 valueChanged: (value) {},
               ),
               const SizedBox(height: 4),
               EHDPDropDown(
-                list: ['من'],
+                list: ['بيانات متغيرة', 'بيانات متغيرة', 'بيانات متغيرة'],
                 hintText: StringsManager.degree.tr(),
                 valueChanged: (value) {},
               ),
@@ -86,7 +86,8 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                 child: ListView.separated(
                   itemBuilder: (context, index) => InkWell(
                     child: DoctorCard(),
-                    onTap: () {},
+                    onTap: () => GoRouter.of(context)
+                        .push(AppRouters.kNearestDoctorsScreen),
                   ),
                   separatorBuilder: (context, index) => Container(
                     height: 1,

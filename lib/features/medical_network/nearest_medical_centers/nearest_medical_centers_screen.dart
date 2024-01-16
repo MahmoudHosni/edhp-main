@@ -3,18 +3,26 @@ import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_images.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/models/medical_network_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class NearestMedicalCentersScreen extends StatelessWidget {
-  const NearestMedicalCentersScreen({super.key});
+  const NearestMedicalCentersScreen({
+    super.key,
+    required this.medicalCenterEntity,
+  });
+
+  final MedicalCenterEntity medicalCenterEntity;
 
   @override
   Widget build(BuildContext context) {
     return ViewContainer(
-        title: StringsManager.radiologyCenters.tr(),
+        title: medicalCenterEntity.title,
         body: Padding(
           padding: const EdgeInsetsDirectional.only(top: 16, bottom: 4),
           child: Column(
@@ -66,7 +74,7 @@ class NearestMedicalCentersScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'معمل المختبر',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.textColorBlue,
                                         fontSize: 20),
@@ -75,7 +83,7 @@ class NearestMedicalCentersScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    '01123254663',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.secondNew,
                                         fontSize: 20),
@@ -84,7 +92,7 @@ class NearestMedicalCentersScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'شارع الخليفة المأمون',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.blackColor,
                                         fontSize: 20),
@@ -101,7 +109,8 @@ class NearestMedicalCentersScreen extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               SvgPicture.asset(AppImages
                                                   .locationPlaceholder),
@@ -130,10 +139,10 @@ class NearestMedicalCentersScreen extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              SvgPicture.asset(
-                                                  AppImages.clock),
+                                              SvgPicture.asset(AppImages.clock),
                                               const SizedBox(width: 8),
                                               Text(
                                                 '04:36 PM',
@@ -183,12 +192,46 @@ class NearestMedicalCentersScreen extends StatelessWidget {
                                       ),
                                       width: 244,
                                       child: TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          switch (medicalCenterEntity
+                                              .medicalCenterType) {
+                                            case MedicalCenterType.pharmacies:
+                                              break;
+                                            case MedicalCenterType.labs:
+                                              break;
+                                            case MedicalCenterType
+                                                  .radiologyCenters:
+                                              GoRouter.of(context).push(
+                                                AppRouters
+                                                    .kMedicalCenterServicesScreen,
+                                                extra: medicalCenterEntity,
+                                              );
+                                            case MedicalCenterType
+                                                  .medicalDevices:
+                                              GoRouter.of(context).push(
+                                                AppRouters
+                                                    .kMedicalCenterServicesScreen,
+                                                extra: medicalCenterEntity,
+                                              );
+                                          }
+                                        },
                                         child: Text(
-                                          StringsManager.callLab.tr(),
-                                          style: Styles.textStyle195W500.copyWith(
-                                              color: AppColors.whiteColor,
-                                              fontSize: 20),
+                                          medicalCenterEntity
+                                                      .medicalCenterType ==
+                                                  MedicalCenterType.labs
+                                              ? StringsManager.callLab.tr()
+                                              : medicalCenterEntity
+                                                          .medicalCenterType ==
+                                                      MedicalCenterType
+                                                          .pharmacies
+                                                  ? StringsManager.callPharmacy
+                                                      .tr()
+                                                  : StringsManager.services
+                                                      .tr(),
+                                          style: Styles.textStyle195W500
+                                              .copyWith(
+                                                  color: AppColors.whiteColor,
+                                                  fontSize: 20),
                                         ),
                                       ),
                                     ),

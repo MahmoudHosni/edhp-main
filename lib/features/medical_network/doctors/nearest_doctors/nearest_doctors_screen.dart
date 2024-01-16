@@ -66,7 +66,7 @@ class NearestDoctorsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'معمل المختبر',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.textColorBlue,
                                         fontSize: 20),
@@ -75,7 +75,7 @@ class NearestDoctorsScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'المستوى',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.secondNew, fontSize: 16),
                                     maxLines: 1,
@@ -83,7 +83,7 @@ class NearestDoctorsScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    'شارع الخليفة المأمون',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.blackColor,
                                         fontSize: 20),
@@ -158,7 +158,7 @@ class NearestDoctorsScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 20),
                                   Text(
-                                    'شارع الخليفة المأمون',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.blackColor,
                                         fontSize: 14),

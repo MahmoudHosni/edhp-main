@@ -4,13 +4,19 @@ import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/models/medical_network_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class MedicalCenterCard extends StatelessWidget {
-  const MedicalCenterCard({super.key});
+  const MedicalCenterCard({
+    super.key,
+    required this.medicalCenterEntity,
+  });
+
+  final MedicalCenterEntity medicalCenterEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,7 @@ class MedicalCenterCard extends StatelessWidget {
                   padding: EdgeInsetsDirectional.all(20),
                   child: Image(
                     image: NetworkImage(
-                      'https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp',
+                      'بيانات متغيرة',
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -47,7 +53,7 @@ class MedicalCenterCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'مركز',
+                      'بيانات متغيرة',
                       style: Styles.textStyle195W500.copyWith(
                           color: AppColors.textColorBlue, fontSize: 16),
                       maxLines: 1,
@@ -83,8 +89,9 @@ class MedicalCenterCard extends StatelessWidget {
                               color: AppColors.secondNew),
                           width: 80,
                           child: TextButton(
-                            onPressed: () => GoRouter.of(context)
-                                .push(AppRouters.kMedicalCenterBranchesScreen),
+                            onPressed: () => GoRouter.of(context).push(
+                                AppRouters.kMedicalCenterBranchesScreen,
+                                extra: medicalCenterEntity),
                             child: Text(
                               StringsManager.branches.tr(),
                               style: Styles.textStyle195W500.copyWith(
@@ -108,7 +115,7 @@ class MedicalCenterCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'معمل المختبر',
+                  'بيانات متغيرة',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.blackColor, fontSize: 16),
                   maxLines: 1,
@@ -124,7 +131,7 @@ class MedicalCenterCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '01143653252 - 01122355458 - 01266665445',
+                  'بيانات متغيرة',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.secondNew, fontSize: 16),
                   maxLines: 1,

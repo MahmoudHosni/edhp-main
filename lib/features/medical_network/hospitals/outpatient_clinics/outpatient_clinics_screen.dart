@@ -54,7 +54,7 @@ class OutpatientClinicsScreen extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'أنف وأذن وحنجرة',
+                        'بيانات متغيرة',
                         style: Styles.textStyle195W500.copyWith(
                             color: AppColors.lightGrayColor, fontSize: 12),
                         maxLines: 1,
@@ -117,13 +117,13 @@ class OutpatientClinicsScreen extends StatelessWidget {
                           children: [
                             Image(
                               image: NetworkImage(
-                                  'https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp'),
+                                  'بيانات متغيرة'),
                             ),
                             const SizedBox(
                               height: 8,
                             ),
                             Text(
-                              'اسنان',
+                              'بيانات متغيرة',
                               style: Styles.textStyle195W500.copyWith(
                                   color: AppColors.whiteColor, fontSize: 12),
                               maxLines: 2,

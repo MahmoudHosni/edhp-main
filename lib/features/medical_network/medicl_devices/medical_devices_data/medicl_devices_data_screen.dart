@@ -7,6 +7,7 @@ import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_fiel
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/medical_network/widgets/medical_center_card.dart';
+import 'package:edhp/models/medical_network_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,7 +30,7 @@ class MedicalDevicesDataScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               EHDPDropDown(
-                list: ['من'],
+                list: ['بيانات متغيرة', 'بيانات متغيرة', 'بيانات متغيرة'],
                 hintText: StringsManager.selectGovernorate.tr(),
                 valueChanged: (value) {},
               ),
@@ -60,8 +61,13 @@ class MedicalDevicesDataScreen extends StatelessWidget {
                 ),
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () => GoRouter.of(context)
-                      .push(AppRouters.kNearestMedicalCentersScreen),
+                  onPressed: () => GoRouter.of(context).push(
+                    AppRouters.kNearestMedicalCentersScreen,
+                    extra: MedicalCenterEntity(
+                      medicalCenterType: MedicalCenterType.medicalDevices,
+                      title: StringsManager.medicalDevices.tr(),
+                    ),
+                  ),
                   child: Text(
                     StringsManager.closestToYou.tr(),
                     style: Styles.textStyle195W500
@@ -72,8 +78,19 @@ class MedicalDevicesDataScreen extends StatelessWidget {
               Expanded(
                 child: ListView.separated(
                   itemBuilder: (context, index) => InkWell(
-                    child: MedicalCenterCard(),
-                    onTap: () {},
+                    child: MedicalCenterCard(
+                      medicalCenterEntity: MedicalCenterEntity(
+                        medicalCenterType: MedicalCenterType.medicalDevices,
+                        title: StringsManager.medicalDevices.tr(),
+                      ),
+                    ),
+                    onTap: () => GoRouter.of(context).push(
+                      AppRouters.kNearestMedicalCentersScreen,
+                      extra: MedicalCenterEntity(
+                        medicalCenterType: MedicalCenterType.medicalDevices,
+                        title: StringsManager.medicalDevices.tr(),
+                      ),
+                    ),
                   ),
                   separatorBuilder: (context, index) => Container(
                     height: 1,

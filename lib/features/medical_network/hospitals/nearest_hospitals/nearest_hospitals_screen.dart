@@ -4,10 +4,12 @@ import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_images.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class NearestHospitalsScreen extends StatelessWidget {
   const NearestHospitalsScreen({super.key});
@@ -67,7 +69,7 @@ class NearestHospitalsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'معمل المختبر',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.textColorBlue,
                                         fontSize: 20),
@@ -76,20 +78,24 @@ class NearestHospitalsScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 8),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          'المستوى',
-                                          style: Styles.textStyle195W500.copyWith(
-                                              color: AppColors.secondNew, fontSize: 16),
+                                          'بيانات متغيرة',
+                                          style: Styles.textStyle195W500
+                                              .copyWith(
+                                                  color: AppColors.secondNew,
+                                                  fontSize: 16),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
                                       RatingBarIndicator(
                                         rating: 2.75,
-                                        itemBuilder: (context, index) => const Icon(
+                                        itemBuilder: (context, index) =>
+                                            const Icon(
                                           Icons.star,
                                           color: AppColors.secondNew,
                                         ),
@@ -102,7 +108,7 @@ class NearestHospitalsScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 12),
                                   Text(
-                                    'شارع الخليفة المأمون',
+                                    'بيانات متغيرة',
                                     style: Styles.textStyle195W500.copyWith(
                                         color: AppColors.blackColor,
                                         fontSize: 20),
@@ -112,14 +118,15 @@ class NearestHospitalsScreen extends StatelessWidget {
                                   const SizedBox(height: 20),
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               SvgPicture.asset(AppImages
                                                   .locationPlaceholder),
@@ -128,9 +135,9 @@ class NearestHospitalsScreen extends StatelessWidget {
                                                 '3.7 km',
                                                 style: Styles.textStyle195W500
                                                     .copyWith(
-                                                    color: AppColors
-                                                        .blackColor,
-                                                    fontSize: 20),
+                                                        color: AppColors
+                                                            .blackColor,
+                                                        fontSize: 20),
                                               ),
                                             ],
                                           ),
@@ -138,28 +145,28 @@ class NearestHospitalsScreen extends StatelessWidget {
                                             StringsManager.distance.tr(),
                                             style: Styles.textStyle195W500
                                                 .copyWith(
-                                                color: AppColors.secondNew,
-                                                fontSize: 12),
+                                                    color: AppColors.secondNew,
+                                                    fontSize: 12),
                                           ),
                                         ],
                                       ),
                                       Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              SvgPicture.asset(
-                                                  AppImages.clock),
+                                              SvgPicture.asset(AppImages.clock),
                                               const SizedBox(width: 8),
                                               Text(
                                                 '04:36 PM',
                                                 style: Styles.textStyle195W500
                                                     .copyWith(
-                                                    color: AppColors
-                                                        .blackColor,
-                                                    fontSize: 20),
+                                                        color: AppColors
+                                                            .blackColor,
+                                                        fontSize: 20),
                                               ),
                                             ],
                                           ),
@@ -167,9 +174,9 @@ class NearestHospitalsScreen extends StatelessWidget {
                                             StringsManager.expectedTime.tr(),
                                             style: Styles.textStyle195W500
                                                 .copyWith(
-                                                color:
-                                                AppColors.textColorBlue,
-                                                fontSize: 12),
+                                                    color:
+                                                        AppColors.textColorBlue,
+                                                    fontSize: 12),
                                           ),
                                         ],
                                       )
@@ -183,7 +190,8 @@ class NearestHospitalsScreen extends StatelessWidget {
                                         child: Container(
                                           height: 52,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(26),
+                                            borderRadius:
+                                                BorderRadius.circular(26),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: AppColors.lightGrayColor
@@ -206,19 +214,24 @@ class NearestHospitalsScreen extends StatelessWidget {
                                             onPressed: () {},
                                             child: Text(
                                               StringsManager.services.tr(),
-                                              style: Styles.textStyle195W500.copyWith(
-                                                  color: AppColors.whiteColor,
-                                                  fontSize: 20),
+                                              style: Styles.textStyle195W500
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.whiteColor,
+                                                      fontSize: 20),
                                             ),
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 12,),
+                                      const SizedBox(
+                                        width: 12,
+                                      ),
                                       Expanded(
                                         child: Container(
                                           height: 52,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(26),
+                                            borderRadius:
+                                                BorderRadius.circular(26),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: AppColors.lightGrayColor
@@ -238,12 +251,17 @@ class NearestHospitalsScreen extends StatelessWidget {
                                             ),
                                           ),
                                           child: TextButton(
-                                            onPressed: () {},
+                                            onPressed: () => GoRouter.of(
+                                                    context)
+                                                .push(AppRouters
+                                                    .kOutpatientClinicsScreen),
                                             child: Text(
                                               StringsManager.clinics.tr(),
-                                              style: Styles.textStyle195W500.copyWith(
-                                                  color: AppColors.whiteColor,
-                                                  fontSize: 20),
+                                              style: Styles.textStyle195W500
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.whiteColor,
+                                                      fontSize: 20),
                                             ),
                                           ),
                                         ),

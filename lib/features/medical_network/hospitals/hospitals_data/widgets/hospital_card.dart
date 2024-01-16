@@ -35,7 +35,7 @@ class HospitalCard extends StatelessWidget {
                   padding: EdgeInsetsDirectional.all(20),
                   child: Image(
                     image: NetworkImage(
-                      'https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp',
+                      'بيانات متغيرة',
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -47,7 +47,7 @@ class HospitalCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'مركز',
+                      'بيانات متغيرة',
                       style: Styles.textStyle195W500.copyWith(
                           color: AppColors.textColorBlue, fontSize: 16),
                       maxLines: 1,
@@ -59,7 +59,7 @@ class HospitalCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'المستوى',
+                            'بيانات متغيرة',
                             style: Styles.textStyle195W500.copyWith(
                                 color: AppColors.secondNew, fontSize: 16),
                             maxLines: 1,
@@ -90,7 +90,7 @@ class HospitalCard extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'معمل المختبر',
+                'بيانات متغيرة',
                 style: Styles.textStyle195W500.copyWith(
                     color: AppColors.blackColor, fontSize: 16),
                 maxLines: 1,
@@ -104,7 +104,7 @@ class HospitalCard extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                '01143653252',
+                'بيانات متغيرة',
                 style: Styles.textStyle195W500.copyWith(
                     color: AppColors.secondNew, fontSize: 16),
                 maxLines: 1,

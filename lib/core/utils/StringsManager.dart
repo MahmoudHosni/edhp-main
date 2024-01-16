@@ -75,4 +75,6 @@ class StringsManager {
   static const String callLab = 'call the lab';
   static const String callPharmacy = 'call the pharmacy';
   static const String callClinic = 'call the clinic';
+  static const String radiologyCenterServices = 'radiology center services';
+  static const String medicalDevicesServices = 'medical devices services';
 }

@@ -27,7 +27,7 @@ class DoctorCard extends StatelessWidget {
               padding: EdgeInsetsDirectional.all(20),
               child: Image(
                 image: NetworkImage(
-                  'https://www.gardenia.net/wp-content/uploads/2023/05/types-of-flowers.webp',
+                  'بيانات متغيرة',
                 ),
                 fit: BoxFit.cover,
               ),
@@ -41,7 +41,7 @@ class DoctorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'مركز',
+                  'بيانات متغيرة',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.textColorBlue, fontSize: 16),
                   maxLines: 1,
@@ -49,7 +49,7 @@ class DoctorCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'المستوى',
+                  'بيانات متغيرة',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.secondNew, fontSize: 16),
                   maxLines: 1,
@@ -60,7 +60,7 @@ class DoctorCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'مركز',
+                        'بيانات متغيرة',
                         style: Styles.textStyle195W500
                             .copyWith(color: AppColors.blackColor, fontSize: 16),
                         maxLines: 1,

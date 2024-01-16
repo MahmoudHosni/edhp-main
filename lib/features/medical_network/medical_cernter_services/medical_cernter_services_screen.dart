@@ -4,22 +4,31 @@ import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/models/medical_network_entity.dart';
 import 'package:flutter/material.dart';
 
 class MedicalCenterServicesScreen extends StatelessWidget {
-  const MedicalCenterServicesScreen({super.key});
+  const MedicalCenterServicesScreen({
+    super.key,
+    required this.medicalCenterEntity,
+  });
+
+  final MedicalCenterEntity medicalCenterEntity;
 
   @override
   Widget build(BuildContext context) {
     return ViewContainer(
-        title: 'بيانات لوكال',
+        title: medicalCenterEntity.title,
         body: Padding(
           padding: const EdgeInsetsDirectional.only(
               top: 16, start: 4, end: 4, bottom: 4),
           child: Column(
             children: [
               Text(
-                'بيانات لوكال',
+                medicalCenterEntity.medicalCenterType ==
+                        MedicalCenterType.radiologyCenters
+                    ? StringsManager.radiologyCenterServices.tr()
+                    : StringsManager.medicalDevicesServices.tr(),
                 style: Styles.textStyle195W500
                     .copyWith(color: AppColors.blackColor, fontSize: 20),
               ),
@@ -35,7 +44,7 @@ class MedicalCenterServicesScreen extends StatelessWidget {
                   itemBuilder: (context, index) => InkWell(
                     child: Padding(
                       padding:
-                      const EdgeInsetsDirectional.symmetric(vertical: 12),
+                          const EdgeInsetsDirectional.symmetric(vertical: 12),
                       child: Text(
                         'بيانات متغيرة',
                         style: Styles.textStyle195W500.copyWith(

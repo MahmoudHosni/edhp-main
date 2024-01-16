@@ -1,26 +1,30 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/models/medical_network_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MedicalCenterBranchesScreen extends StatelessWidget {
-  const MedicalCenterBranchesScreen({super.key});
+  const MedicalCenterBranchesScreen({
+    super.key,
+    required this.medicalCenterEntity,
+  });
+
+  final MedicalCenterEntity medicalCenterEntity;
 
   @override
   Widget build(BuildContext context) {
     return ViewContainer(
-        title: StringsManager.radiologyCenters.tr(),
+        title: medicalCenterEntity.title,
         body: Padding(
           padding: const EdgeInsetsDirectional.only(
               top: 16, start: 4, end: 4, bottom: 4),
           child: Column(
             children: [
               Text(
-                'فرع كذا',
+                'بيانات لوكال',
                 style: Styles.textStyle195W500
                     .copyWith(color: AppColors.blackColor, fontSize: 20),
               ),
@@ -35,7 +39,7 @@ class MedicalCenterBranchesScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'مركز',
+                            'بيانات متغيرة',
                             style: Styles.textStyle195W500.copyWith(
                                 color: AppColors.textColorBlue, fontSize: 16),
                             maxLines: 1,
@@ -48,7 +52,7 @@ class MedicalCenterBranchesScreen extends StatelessWidget {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Text(
-                                  'معمل المختبر',
+                                  'بيانات متغيرة',
                                   style: Styles.textStyle195W500.copyWith(
                                       color: AppColors.blackColor,
                                       fontSize: 16),
@@ -66,7 +70,7 @@ class MedicalCenterBranchesScreen extends StatelessWidget {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Text(
-                                  '01143653252',
+                                  'بيانات متغيرة',
                                   style: Styles.textStyle195W500.copyWith(
                                       color: AppColors.secondNew, fontSize: 16),
                                   maxLines: 1,
