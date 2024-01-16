@@ -4,9 +4,11 @@ import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/custom_drop_down.dart';
 import 'package:edhp/core/utils/app_components/widgets/searchable_text_form_field.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/medical_network/widgets/medical_center_card.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LabsDataScreen extends StatelessWidget {
   const LabsDataScreen({super.key});
@@ -64,7 +66,8 @@ class LabsDataScreen extends StatelessWidget {
                 ),
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => GoRouter.of(context)
+                      .push(AppRouters.kNearestMedicalCentersScreen),
                   child: Text(
                     StringsManager.closestToYou.tr(),
                     style: Styles.textStyle195W500

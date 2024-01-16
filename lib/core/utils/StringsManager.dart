@@ -69,4 +69,8 @@ class StringsManager {
   static const String searchByClinic = 'search by clinic';
   static const String clinicClassifications = 'clinic classifications';
   static const String recentlySearched = 'recently searched';
+  static const String distance = 'distance';
+  static const String expectedTime = 'expected time';
+  static const String contactLab = 'contact the lab';
+  static const String contactPharmacy = 'contact the pharmacy';
 }

@@ -10,11 +10,12 @@ import 'package:edhp/features/layout/layout_screen.dart';
 import 'package:edhp/features/medical_advices/MedicalAdvices.dart';
 import 'package:edhp/features/medical_network/branches/medical_center_branches_screen.dart';
 import 'package:edhp/features/medical_network/doctors/doctors_specialties/doctors_specialties_screen.dart';
-import 'package:edhp/features/medical_network/doctors/outpatient_clinics/outpatient_clinics_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/hospitals_data/hospitals_data_screen.dart';
+import 'package:edhp/features/medical_network/hospitals/outpatient_clinics/outpatient_clinics_screen.dart';
 import 'package:edhp/features/medical_network/labs/labs_data/labs_data_screen.dart';
 import 'package:edhp/features/medical_network/medical_network_screen.dart';
 import 'package:edhp/features/medical_network/medicl_devices/medical_devices_data/medicl_devices_data_screen.dart';
+import 'package:edhp/features/medical_network/nearest_medical_centers/nearest_medical_centers_screen.dart';
 import 'package:edhp/features/medical_network/pharmacies/pharmacies_data/pharmacies_data_screen.dart';
 import 'package:edhp/features/medical_network/radiology_centers/radiology_centers_data/radiology_centers_data_screen.dart';
 import 'package:edhp/features/medical_record/medical_record_screen.dart';
@@ -59,6 +60,7 @@ abstract class AppRouters {
   static const kPharmaciesDataScreen = '/pharmaciesDataScreen';
   static const kMedicalCenterBranchesScreen = '/medicalCenterBranchesScreen';
   static const kOutpatientClinicsScreen = '/outpatientClinicsScreen';
+  static const kNearestMedicalCentersScreen = '/nearestMedicalCentersScreen';
   static const kMedicalRecordScreen = '/medicalRecordScreen';
   static const kSelectCompanyScreen = '/selectCompanyScreen';
   static const kMembershipDataScreen = '/membershipDataScreen';
@@ -176,6 +178,10 @@ abstract class AppRouters {
       GoRoute(
         path: kOutpatientClinicsScreen ,
         builder: (context, state) => const OutpatientClinicsScreen(),
+      ),
+      GoRoute(
+        path: kNearestMedicalCentersScreen ,
+        builder: (context, state) => const NearestMedicalCentersScreen(),
       ),
       GoRoute(
         path: kMedicalRecordScreen ,
