@@ -3,7 +3,7 @@ import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:flutter/material.dart';
 
-class EHDPDropDown extends StatelessWidget {
+class EHDPDropDown<T> extends StatelessWidget {
   const EHDPDropDown({
     super.key,
     required this.list,
