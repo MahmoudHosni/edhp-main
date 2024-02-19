@@ -12,7 +12,7 @@ class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
 
   static RadiologyCentersDataCubit get(context) => BlocProvider.of(context);
 
-  List<ListStatesEntity> governorates = [ListStatesEntity(id: 0, name: '')];
+  List<GovernorateEntity> governorates = [GovernorateEntity(id: 0, name: '')];
   List<AreasEntity> areas = [AreasEntity(id: 0, name: '')];
 
   int _governorateId = 0;
@@ -29,8 +29,9 @@ class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
 
   _getGovernorates() {
     DioHelper.getData(path: EndPoint.getGovernorates).then((governorates) {
+      final governoratesList = governorates.data as List;
       this.governorates =
-          GovernorateEntity.fromJson(governorates.data).listStates;
+          governoratesList.map((i) => GovernorateEntity.fromJson(i)).toList();
       emit(RadiologyCentersDataGetGovernoratesState());
     }).catchError(
       (error) {
