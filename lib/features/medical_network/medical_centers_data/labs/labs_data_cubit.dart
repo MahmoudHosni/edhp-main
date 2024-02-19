@@ -3,10 +3,12 @@ import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/features/medical_network/medical_centers_data/labs/labs_data_states.dart';
 import 'package:edhp/models/areas_entity.dart';
 import 'package:edhp/models/governorate_entity.dart';
+import 'package:edhp/models/service_provider_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LabsDataCubit extends Cubit<LabsDataStates> {
   LabsDataCubit() : super(LabsDataInitialStates()) {
+    _getLabs();
     _getGovernorates();
   }
 
@@ -14,6 +16,7 @@ class LabsDataCubit extends Cubit<LabsDataStates> {
 
   List<GovernorateEntity> governorates = [GovernorateEntity(id: 0, name: '')];
   List<AreasEntity> areas = [AreasEntity(id: 0, name: '')];
+  List<ServiceProviderEntity> labs = [];
 
   int _governorateId = 0;
   int _areaId = 0;
@@ -27,13 +30,35 @@ class LabsDataCubit extends Cubit<LabsDataStates> {
     _areaId = id;
   }
 
+  _getLabs() {
+    DioHelper.getData(
+      path: EndPoint.getServiceProvider,
+      queryParameters: {'Type': 1005},
+    ).then(
+      (labs) {
+        final labsList = labs.data as List;
+        this.labs =
+            labsList.map((i) => ServiceProviderEntity.fromJson(i)).toList();
+        emit(LabsDataGetLabsState());
+      },
+    ).catchError(
+      (error) {
+        emit(LabsDataLoadErrorState());
+      },
+    );
+  }
+
   _getGovernorates() {
-    DioHelper.getData(path: EndPoint.getGovernorates).then((governorates) {
-      final governoratesList = governorates.data as List;
-      this.governorates =
-          governoratesList.map((i) => GovernorateEntity.fromJson(i)).toList();
-      emit(LabsDataGetGovernoratesState());
-    }).catchError(
+    DioHelper.getData(
+      path: EndPoint.getGovernorates,
+    ).then(
+      (governorates) {
+        final governoratesList = governorates.data as List;
+        this.governorates =
+            governoratesList.map((i) => GovernorateEntity.fromJson(i)).toList();
+        emit(LabsDataGetGovernoratesState());
+      },
+    ).catchError(
       (error) {
         emit(LabsDataLoadErrorState());
       },

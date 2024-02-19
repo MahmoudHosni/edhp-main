@@ -43,4 +43,5 @@ class EndPoint {
       '/apiUserInterface/GetMySubscriptions';
   static const String getGovernorates = '/apiStates/GetList';
   static const String getAreas = '/ApiCity/GetListByStateID';
+  static const String getServiceProvider = '/APIAndriodServicePorvider/GetSerivcePorviderBYType';
 }

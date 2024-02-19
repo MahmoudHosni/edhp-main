@@ -5,6 +5,7 @@ import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/models/medical_network_entity.dart';
+import 'package:edhp/models/service_provider_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,9 +15,11 @@ class MedicalCenterCard extends StatelessWidget {
   const MedicalCenterCard({
     super.key,
     required this.medicalCenterEntity,
+    required this.serviceProviderEntity,
   });
 
   final MedicalCenterEntity medicalCenterEntity;
+  final ServiceProviderEntity serviceProviderEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +40,11 @@ class MedicalCenterCard extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: const Padding(
-                  padding: EdgeInsetsDirectional.all(20),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.all(20),
                   child: Image(
                     image: NetworkImage(
-                      'بيانات متغيرة',
+                      serviceProviderEntity.photoPath ?? '',
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -53,7 +56,7 @@ class MedicalCenterCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'بيانات متغيرة',
+                      serviceProviderEntity.name ?? '',
                       style: Styles.textStyle195W500.copyWith(
                           color: AppColors.textColorBlue, fontSize: 16),
                       maxLines: 1,
@@ -63,7 +66,7 @@ class MedicalCenterCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RatingBarIndicator(
-                          rating: 2.75,
+                          rating: serviceProviderEntity.rating?.toDouble() ?? 0,
                           itemBuilder: (context, index) => const Icon(
                             Icons.star,
                             color: AppColors.secondNew,
@@ -115,7 +118,7 @@ class MedicalCenterCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'بيانات متغيرة',
+                  serviceProviderEntity.address ?? '',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.blackColor, fontSize: 16),
                   maxLines: 1,
@@ -131,7 +134,7 @@ class MedicalCenterCard extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  'بيانات متغيرة',
+                  '${serviceProviderEntity.telephone ?? ''} ${serviceProviderEntity.telephoneTwo ?? ''} ${serviceProviderEntity.telephoneThree ?? ''}',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.secondNew, fontSize: 16),
                   maxLines: 1,

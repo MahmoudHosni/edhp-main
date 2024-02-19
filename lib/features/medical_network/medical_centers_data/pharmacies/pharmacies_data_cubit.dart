@@ -3,10 +3,12 @@ import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/features/medical_network/medical_centers_data/pharmacies/pharmacies_states.dart';
 import 'package:edhp/models/areas_entity.dart';
 import 'package:edhp/models/governorate_entity.dart';
+import 'package:edhp/models/service_provider_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PharmaciesDataCubit extends Cubit<PharmaciesDataStates> {
   PharmaciesDataCubit() : super(PharmaciesDataInitialState()) {
+    _getPharmacies();
     _getGovernorates();
   }
 
@@ -14,6 +16,7 @@ class PharmaciesDataCubit extends Cubit<PharmaciesDataStates> {
 
   List<GovernorateEntity> governorates = [GovernorateEntity(id: 0, name: '')];
   List<AreasEntity> areas = [AreasEntity(id: 0, name: '')];
+  List<ServiceProviderEntity> pharmacies = [];
 
   int _governorateId = 0;
   int _areaId = 0;
@@ -25,6 +28,24 @@ class PharmaciesDataCubit extends Cubit<PharmaciesDataStates> {
 
   selectArea({required int id}) {
     _areaId = id;
+  }
+
+  _getPharmacies() {
+    DioHelper.getData(
+      path: EndPoint.getServiceProvider,
+      queryParameters: {'Type': 1007},
+    ).then(
+      (pharmacies) {
+        final labsList = pharmacies.data as List;
+        this.pharmacies =
+            labsList.map((i) => ServiceProviderEntity.fromJson(i)).toList();
+        emit(PharmaciesDataGetPharmaciesState());
+      },
+    ).catchError(
+      (error) {
+        emit(PharmaciesDataLoadErrorState());
+      },
+    );
   }
 
   _getGovernorates() {

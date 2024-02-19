@@ -3,10 +3,12 @@ import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/features/medical_network/medical_centers_data/radiology_centers/radiology_centers_data_states.dart';
 import 'package:edhp/models/areas_entity.dart';
 import 'package:edhp/models/governorate_entity.dart';
+import 'package:edhp/models/service_provider_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
   RadiologyCentersDataCubit() : super(RadiologyCentersDataInitialState()) {
+    _getRadiologyCenters();
     _getGovernorates();
   }
 
@@ -14,6 +16,7 @@ class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
 
   List<GovernorateEntity> governorates = [GovernorateEntity(id: 0, name: '')];
   List<AreasEntity> areas = [AreasEntity(id: 0, name: '')];
+  List<ServiceProviderEntity> radiologyCenters = [];
 
   int _governorateId = 0;
   int _areaId = 0;
@@ -25,6 +28,24 @@ class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
 
   selectArea({required int id}) {
     _areaId = id;
+  }
+
+  _getRadiologyCenters() {
+    DioHelper.getData(
+      path: EndPoint.getServiceProvider,
+      queryParameters: {'Type': 1006},
+    ).then(
+      (radiologyCenters) {
+        final labsList = radiologyCenters.data as List;
+        this.radiologyCenters =
+            labsList.map((i) => ServiceProviderEntity.fromJson(i)).toList();
+        emit(RadiologyCentersDataGetRadiologyCentersState());
+      },
+    ).catchError(
+      (error) {
+        emit(RadiologyCentersDataLoadErrorState());
+      },
+    );
   }
 
   _getGovernorates() {

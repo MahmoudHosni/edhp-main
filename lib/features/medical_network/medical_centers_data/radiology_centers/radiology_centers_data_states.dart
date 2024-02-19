@@ -6,4 +6,6 @@ class RadiologyCentersDataGetGovernoratesState extends RadiologyCentersDataState
 
 class RadiologyCentersDataGetAreasState extends RadiologyCentersDataStates {}
 
+class RadiologyCentersDataGetRadiologyCentersState extends RadiologyCentersDataStates {}
+
 class RadiologyCentersDataLoadErrorState extends RadiologyCentersDataStates {}

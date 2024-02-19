@@ -106,6 +106,7 @@ class LabsDataScreen extends StatelessWidget {
                               medicalCenterType: MedicalCenterType.labs,
                               title: StringsManager.labs.tr(),
                             ),
+                            serviceProviderEntity: cubit.labs[index],
                           ),
                           onTap: () => GoRouter.of(context).push(
                             AppRouters.kNearestMedicalCentersScreen,
@@ -119,7 +120,7 @@ class LabsDataScreen extends StatelessWidget {
                           height: 1,
                           color: AppColors.unselectedColor,
                         ),
-                        itemCount: 10,
+                        itemCount: cubit.labs.length,
                       ),
                     ),
                   ],
