@@ -8,7 +8,7 @@ class CallCenterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewContainer(title: StringsManager.callCenter,body: Center(
+    return ViewContainer(title: StringsManager.callCenter,showBack: false,body: Center(
       child: SvgPicture.asset('assets/icons/call_centr.svg'),
     ));
   }

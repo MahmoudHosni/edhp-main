@@ -2,7 +2,7 @@
 class ResultObject{
   int SubscriptionTypeID = 0;
   int OrganizationID = 0;
-  int OrganizationMembershipNumber = 0;
+  String OrganizationMembershipNumber = '';
   int MedicalCompanyID = 0;
   int MembershipTypeID = 0;
   String SubscriptionStartDate = '';
@@ -13,6 +13,9 @@ class ResultObject{
   int Gender = 1;
   int TotalPrice = 0;
   String BirthDate = '';
+  String MembershipTypeName='';
+  String OrganizationName='';
+  String MedicalCompanyName='';
 
   ResultObject({required this.SubscriptionTypeID,required this.OrganizationID,
                 required this.OrganizationMembershipNumber,required this.MedicalCompanyID,required this.MembershipTypeID,
@@ -29,6 +32,11 @@ class ResultObject{
     SubscriptionStartDate = json['SubscriptionStartDate'];
     SubscriptionEndDate = json['SubscriptionEndDate'];
     SubscriptionNumber = json['SubscriptionNumber'];
+
+    MembershipTypeName = json['MembershipTypeName'];
+    OrganizationName = json['OrganizationName'];
+    MedicalCompanyName = json['MedicalCompanyName'];
+
     StateID = json['StateID'];
     CityID = json['CityID'];
     TotalPrice = json['TotalPrice'];

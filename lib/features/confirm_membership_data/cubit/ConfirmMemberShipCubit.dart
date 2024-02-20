@@ -63,19 +63,19 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
       data: formData,
       token: CacheHelper.getData(key: 'token'),
     ).then((value) {
-      print(value.data);
+      // print(value.data);
       ConfirmResponse res = ConfirmResponse.fromJson(value.data);
       if(res.IsSuccess) {
         ShowToast.showToastGreen('تم الاشتراك بنجاح');
         emit(ConfirmMembershipSuccessState(response: res));
       }else{
         ShowToast.showToast(res.Message);
-        emit(ConfirmMembershipErrorState());
+        emit(ConfirmMembershipErrorState(error: res.Message));
       }
     }).catchError((error) {
       print(error.toString());
       ShowToast.showToast(error.toString());
-      emit(ConfirmMembershipErrorState());
+      emit(ConfirmMembershipErrorState(error: error.toString()));
     });
   }
 }

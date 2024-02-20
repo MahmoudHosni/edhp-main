@@ -1,8 +1,5 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
-import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
-import 'package:edhp/core/utils/app_components/widgets/NextButton.dart';
-import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -49,6 +46,7 @@ class _CreateMembershipScreenState extends State<CreateMembershipScreen> {
                         setState(() {
                           widget.subscriptionRequest.SubscriptionTypeID = 1;
                           type = 1;
+                          GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: widget.subscriptionRequest);
                         });
                       },
                       child: Container(
@@ -77,6 +75,7 @@ class _CreateMembershipScreenState extends State<CreateMembershipScreen> {
                         setState(() {
                           widget.subscriptionRequest.SubscriptionTypeID = 2;
                           type = 2;
+                          GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: widget.subscriptionRequest);
                         });
                       },
                       child:Container(
@@ -102,27 +101,27 @@ class _CreateMembershipScreenState extends State<CreateMembershipScreen> {
                 height: MediaQuery.of(context).size.height / 25,
               ),
 
-              Row(children: [
-                Container(alignment: Alignment.bottomLeft,
-                  child: NextButton(backgroundColor: (type > 0) ? AppColors.secondNew : Colors.grey,
-                    function: () {
-                      if(type<=0){
-                        ShowToast.showToast('برجاء اختيار نوع العضوية بصورة صحيحة');
-                      }else{
-                        if(type==2){
-                          GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: widget.subscriptionRequest);
-                        }else {
-                          GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: widget.subscriptionRequest);
-                        }
-                      }
-                    },
-                    text: StringsManager.select,width: 120,fontSize: 13,
-                    redius: 32,
-                  ),
-                ),
-                const SizedBox(width: 8,),
-                BackCircleButton(),
-              ],),
+              // Row(children: [
+              //   Container(alignment: Alignment.bottomLeft,
+              //     child: NextButton(backgroundColor: (type > 0) ? AppColors.secondNew : Colors.grey,
+              //       function: () {
+              //         if(type<=0){
+              //           ShowToast.showToast('برجاء اختيار نوع العضوية بصورة صحيحة');
+              //         }else{
+              //           if(type==2){
+              //             GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: widget.subscriptionRequest);
+              //           }else {
+              //             GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: widget.subscriptionRequest);
+              //           }
+              //         }
+              //       },
+              //       text: StringsManager.select,width: 120,fontSize: 13,
+              //       redius: 32,
+              //     ),
+              //   ),
+              //   const SizedBox(width: 8,),
+              //   BackCircleButton(),
+              // ],),
             ],
         ),
       ),

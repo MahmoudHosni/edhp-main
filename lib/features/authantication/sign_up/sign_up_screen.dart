@@ -1,12 +1,16 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/EditTextView.dart';
 import 'package:edhp/core/utils/app_routers.dart';
+import 'package:edhp/features/authantication/login/widgets/LoginFacebookButton.dart';
+import 'package:edhp/features/authantication/login/widgets/clickable_register_app_container_item.dart';
 import 'package:edhp/features/authantication/sign_up/cubit/cubit.dart';
 import 'package:edhp/features/authantication/sign_up/cubit/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_components/widgets/default_button.dart';
 import '../../../../core/utils/app_components/widgets/default_text_button.dart';
@@ -65,21 +69,37 @@ class SignUpScreen extends StatelessWidget {
                                 suffixIcon: Icons.person_outline,
                         )),
                       const SizedBox(height: 10,),
-                      Padding(
-                              padding: const EdgeInsets.fromLTRB(20,5,20,8),
-                              child: EditTextView(
-                                    controller: phoneNumberController,
-                                    keyboardType: TextInputType.number,
-                                    validation: (value){
-                                      if(value!.isEmpty){
-                                        return 'Please enter your mobile number to sign up';
-                                      }else {
-                                        return null;
-                                      }
-                                    },
-                                    fieldName: 'رقم الهاتف',
-                                    suffixIcon: Icons.call_outlined,
-                      )),
+                      Padding(padding: EdgeInsets.fromLTRB(20, 5, 20, 8),
+                        child: IntlPhoneField(
+                          decoration: InputDecoration(
+                            labelText: StringsManager.phoneNumber,
+                            fillColor: Colors.white,
+                          ),
+                          initialCountryCode: 'EG',
+                          pickerDialogStyle:PickerDialogStyle(backgroundColor: Colors.white,
+                              countryCodeStyle: TextStyle(color: Colors.blue),
+                              countryNameStyle: TextStyle(color: Colors.black)),
+                          onChanged: (phone) {
+                            phoneNumberController.text = phone.completeNumber;
+                          },
+                        ),
+                      ),
+
+                      // Padding(
+                      //         padding: const EdgeInsets.fromLTRB(20,5,20,8),
+                      //         child: EditTextView(
+                      //               controller: phoneNumberController,
+                      //               keyboardType: TextInputType.number,
+                      //               validation: (value){
+                      //                 if(value!.isEmpty){
+                      //                   return 'Please enter your mobile number to sign up';
+                      //                 }else {
+                      //                   return null;
+                      //                 }
+                      //               },
+                      //               fieldName: 'رقم الهاتف',
+                      //               suffixIcon: Icons.call_outlined,
+                      // )),
                       const SizedBox(height: 10,),
                       Padding(
                           padding: const EdgeInsets.fromLTRB(20,5,20,8),
@@ -140,9 +160,18 @@ class SignUpScreen extends StatelessWidget {
                         redius: 10,
                       )),
                       const SizedBox(height: 10,),
-                      Text('أو سجل الدخول بواسطة',style: Styles.textStyle10W400.copyWith(color: AppColors.secondNew),),
-                      const SizedBox(height: 10,),
-                      const RowOfRegisterApps(),
+                      // Text('أو سجل الدخول بواسطة',style: Styles.textStyle10W400.copyWith(color: AppColors.secondNew),),
+                      // const SizedBox(height: 10,),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     LoginFacebookBtton(willUsedInLogin: false),
+                      //     const SizedBox(width: 15,),
+                      //     ClickableRegisterAppContainerItem(appLogoPath: AppPaths.googleLogoPath),
+                      //     const SizedBox(width: 15,),
+                      //     ClickableRegisterAppContainerItem(appLogoPath: AppPaths.appleLogoPath),
+                      //   ],
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

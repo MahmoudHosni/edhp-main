@@ -32,7 +32,7 @@ class SettingScreen extends StatelessWidget {
       builder: (context, state) {
         LayoutCubit cubit = LayoutCubit.get(context);
         if(!isLoaded || state is !GetProfileSuccessfullyState) {
-          return ViewContainer(title: StringsManager.settings,body: Container(height: double.infinity,
+          return ViewContainer(title: StringsManager.settings,showBack: false,body: Container(height: double.infinity,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,13 +48,24 @@ class SettingScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(100),
                           ),
                           clipBehavior: Clip.antiAlias,
-                          child: CachedNetworkImage(
-                            imageUrl: '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                          child: Image.network(
+                            '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
                             fit: BoxFit.cover,
                             width: 80,
                             height: 80,
-                            placeholder: (context, url) =>  Image.asset(AppPaths.profileImage, fit: BoxFit.cover,),
-                            errorWidget: (context, url, error) => Image.asset(AppPaths.profileImage, fit: BoxFit.cover,)),
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         Container(padding: EdgeInsets.fromLTRB(9, 9, 0, 0),
                           width: 45,
@@ -71,13 +82,15 @@ class SettingScreen extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(GetProfileCubit.get(context).userProfileModel!.userName.toString(), style: Styles.textStyle13W400.copyWith(color: AppColors.unselectedColor),),
+                  (memberShips!=null && memberShips.length>0)?
+                  Text(memberShips[0].SubscriptionNumber , style: Styles.textStyle13W400.copyWith(color: AppColors.unselectedColor),):SizedBox(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 36,
                   ),
                   InkWell(
                     onTap: (){
-                      GoRouter.of(context).push(AppRouters.kEditProfileScreen);
+                      print("Memberships :::: ${memberShips.length}");
+                      GoRouter.of(context).push(AppRouters.kEditProfileScreen,extra: memberShips.length>0? memberShips[0]:null);
                     },
                     child: Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: 260,padding: const EdgeInsets.all(8),
                       height: 54,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),

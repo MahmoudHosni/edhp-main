@@ -9,6 +9,10 @@ class ConfirmMembershipSuccessState extends ConfirmMembershipState{
     ConfirmMembershipSuccessState({required this.response});
 }
 
-class ConfirmMembershipErrorState extends ConfirmMembershipState{   }
+class ConfirmMembershipErrorState extends ConfirmMembershipState{
+    String error;
+
+    ConfirmMembershipErrorState({required this.error});
+}
 
 class ConfirmMembershipLoadingState extends ConfirmMembershipState{}

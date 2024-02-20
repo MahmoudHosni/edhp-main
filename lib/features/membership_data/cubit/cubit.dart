@@ -16,15 +16,12 @@ class MembershipDataCubit extends Cubit<MembershipDataStates>{
   static MembershipDataCubit get(BuildContext context) => BlocProvider.of(context);
 
   DateTime ? selectedDate;
-
-
-
   File ? profileImage;
   var picker = ImagePicker();
   var imagePath;
 
-  Future getProfileImageFromGallery()async{
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future getProfileImageFromGallery(ImageSource source)async{
+    final pickedFile = await picker.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
       profileImage = File(pickedFile.path);
       imagePath = profileImage;
@@ -41,8 +38,8 @@ class MembershipDataCubit extends Cubit<MembershipDataStates>{
   var pickerNotationId = ImagePicker();
   var NotationIdImagePath;
 
-  Future getNotationIdImageFromGallery()async{
-    final pickedFile = await pickerNotationId.pickImage(source: ImageSource.gallery);
+  Future getNotationIdImageFromGallery(ImageSource source)async{
+    final pickedFile = await pickerNotationId.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
       notationIdImage = File(pickedFile.path);
       NotationIdImagePath = notationIdImage;

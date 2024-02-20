@@ -1,7 +1,12 @@
+import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/edit_profile/cubit/cubit.dart';
+import 'package:edhp/features/home/cubit/MemberShipsResponse.dart';
+import 'package:edhp/features/home/widgets/MemberShipCard.dart';
+import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
 import 'package:edhp/features/settings/widgets/edit_image.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +19,15 @@ import '../../core/utils/styles/styles.dart';
 import 'cubit/state.dart';
 
 class EditProfileScreen extends StatelessWidget {
+  MemberShipsResponse? memberShip;
   TextEditingController nameController = TextEditingController();
-
   TextEditingController usernameController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController identityNumberController = TextEditingController();
-
   TextEditingController phoneNumberController = TextEditingController();
-
   var formKey = GlobalKey<FormState>();
+
+  EditProfileScreen({this.memberShip});
 
   @override
   Widget build(BuildContext context) {
@@ -61,24 +64,9 @@ class EditProfileScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              actions: [
-                InkWell(
-                  onTap: (){
-                    GoRouter.of(context).pop();
-                    GetProfileCubit.get(context).getProfile();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Center(child: Text('رجوع' , style: Styles.textStyle16W500.copyWith(color: AppColors.lightGrayColor),)),
-                  ),
-                ),
-              ],
-            ),
-            body: SafeArea(
+          return ViewContainer(title: StringsManager.editProfile,body:SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child:  SingleChildScrollView(
                   child: Form(
                     key: formKey,
@@ -102,57 +90,36 @@ class EditProfileScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 8,),
-                        Text(GetProfileCubit.get(context).userProfileModel!.userName.toString() , style: Styles.textStyle16W400,),
+                        (memberShips!=null && memberShips.length>0)?
+                        Text(memberShips[0].SubscriptionNumber , style: Styles.textStyle16W400,):SizedBox(),
                         const SizedBox(height: 8,),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width ,
-                          height: MediaQuery.of(context).size.height / 3.45,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Image.asset(AppPaths.cardImage,width: 1100),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: SizedBox(
-                                      height: MediaQuery.of(context).size.height / 8,
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(5.0,0,0,5),
-                                        child: Text(
-                                          nameController.text.trim().toString() ,
-                                          style: Styles.textStyle13W500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        (memberShip!=null && memberShips.isNotEmpty)?SizedBox(
+                              width: MediaQuery.of(context).size.width ,
+                              height: MediaQuery.of(context).size.height / 3.7,
+                              child: MemberShipCard(memberShip: memberShips[0],scaler: 1.5,spaceTop: 32,)
+                            ): const SizedBox(),
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 25,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الإسم' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(maxLen:  100,error: nameController.text.length==14?'':"",
-                          controller: nameController,onChange: (value) => {
-                              nameController.text = value
-                          },
-                          keyboardType: TextInputType.text,
-                          validation: (value){
-                            if(value!.isEmpty){
-                              return 'name must be not empty';
-                            }
-                            return null;
-                          },
+                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen:  100,error: nameController.text.length==14?'':"",
+                            controller: nameController,onChange: (value) => {
+                                nameController.text = value
+                            },
+                            keyboardType: TextInputType.text,
+                            validation: (value){
+                              if(value!.isEmpty){
+                                return 'name must be not empty';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
                         const SizedBox(
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('اسم المستخدم' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(maxLen : 100,error: usernameController.text.length==14?'':"",
+                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen : 100,error: usernameController.text.length==14?'':"",
                           controller: usernameController,
                           keyboardType: TextInputType.text,
                           validation: (value){
@@ -161,13 +128,12 @@ class EditProfileScreen extends StatelessWidget {
                             }
                             return null;
                           },
-                          prefixIcon: Icons.visibility_outlined,
-                        ),
+                        )),
                         const SizedBox(
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الرقم القومي' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(maxLen: 100,error: identityNumberController.text.length==14?'':"",
+                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: identityNumberController.text.length==14?'':"",
                           controller: identityNumberController,
                           keyboardType: TextInputType.text,
                           validation: (value){
@@ -176,12 +142,12 @@ class EditProfileScreen extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
+                        )),
                         const SizedBox(
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('البريد الالكتروني' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(maxLen: 100,error: emailController.text.length==14?'':"",
+                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: emailController.text.length==14?'':"",
                           controller: emailController,
                           keyboardType: TextInputType.text,
                           validation: (value){
@@ -190,12 +156,12 @@ class EditProfileScreen extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
+                        )),
                         const SizedBox(
                           height: 15,
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('رقم الهاتف' , style: Styles.textStyle16W500,),),
-                        DefaultTextFormFieldWithoutLabel(maxLen: 100,error: phoneNumberController.text.length==14?'':"",
+                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: phoneNumberController.text.length==14?'':"",
                           controller: phoneNumberController,
                           keyboardType: TextInputType.number,
                           validation: (value){
@@ -204,7 +170,7 @@ class EditProfileScreen extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
+                        )),
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 20,
                         ),
@@ -244,5 +210,9 @@ class EditProfileScreen extends StatelessWidget {
         },
     ),
 );
+  }
+
+  Container getContainer({required DefaultTextFormFieldWithoutLabel child}){
+    return Container(margin: EdgeInsets.fromLTRB(0, 5, 0, 5),alignment: Alignment.center,height: 65,decoration: BoxDecoration(border: Border.all(color: Colors.blue,width: 0.8,),borderRadius: BorderRadius.all(Radius.circular(12))),child: child,);
   }
 }

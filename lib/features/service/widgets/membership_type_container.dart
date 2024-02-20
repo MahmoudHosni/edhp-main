@@ -12,8 +12,9 @@ class MembershipTypeContainer extends StatelessWidget {
   final String name;
   final String description;
   final int id;
+  final bool clickable;
   final SubscriptionRequest subscriptionRequest;
-  const MembershipTypeContainer({super.key, required this.price, required this.name , required this.description, required this.id,required this.subscriptionRequest});
+  const MembershipTypeContainer({super.key, required this.price, required this.name , required this.description, required this.id,required this.subscriptionRequest,required this.clickable});
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +59,16 @@ class MembershipTypeContainer extends StatelessWidget {
           ),
           DefaultButton(
             function: (){
-              subscriptionRequest.MembershipTypeID = id;
-              subscriptionRequest.MembershipTypeName = name;
-              subscriptionRequest.Cost = price;
-              GoRouter.of(context).push(AppRouters.kConfirmMembershipDataScreen,extra: subscriptionRequest);
+              if(clickable) {
+                subscriptionRequest.MembershipTypeID = id;
+                subscriptionRequest.MembershipTypeName = name;
+                subscriptionRequest.Cost = price;
+                GoRouter.of(context).push(
+                    AppRouters.kConfirmMembershipDataScreen,
+                    extra: subscriptionRequest);
+              }else{
+                GoRouter.of(context).push(AppRouters.kSelectCompanyScreen);
+              }
             },
             text: 'اختر عضويتك',
             backgroundColor: id % 2 == 0 ? AppColors.whiteColor : AppColors.primaryBlueColor,

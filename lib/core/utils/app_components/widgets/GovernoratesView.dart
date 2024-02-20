@@ -34,7 +34,7 @@ class GovernoratesView extends StatelessWidget{
                   alignment: AlignmentDirectional.centerEnd,
                   child: Text(
                       item.name ??'' ,
-                      style: Styles.textStyle14W400.copyWith(color: Colors.black)
+                      style: Styles.textStyle16W500.copyWith(color: Colors.black)
                   ),
                 ),
               ))
@@ -56,7 +56,7 @@ class GovernoratesView extends StatelessWidget{
               dropdownStyleData: DropdownStyleData(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.grey
+                    color: Colors.white
                 ),
               ),
               menuItemStyleData: const MenuItemStyleData(

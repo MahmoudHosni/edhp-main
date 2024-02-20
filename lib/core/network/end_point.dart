@@ -7,7 +7,7 @@ class EndPoint {
   static const String register = '/apiAccount/Register';
   static const String getProfile = '/apiUserInterface/GetProfile';
   static const String updateProfile = '/apiUserInterface/UpdateProfile';
-  static const String getOrganizations = '/apiPublicUserInterface/GetOrganizations';
+  static const String getOrganizations = '/apiUserInterface/GetOrganizations';
   static const String getMedicalCompanies = '/apiUserInterface/GetMICs';
   static const String updateProfileImage = '/apiAttachments/UpdateProfileImage';
   static const String validateOrganizationMember = '/apiAccount/ValidateOrganizationMember';

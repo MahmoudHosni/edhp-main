@@ -1,7 +1,5 @@
-import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:edhp/core/network/cache_helper.dart';
-import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/slide_panel/views/slide_panel.dart';
@@ -10,14 +8,15 @@ import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/drawer/drawer_components.dart';
+import 'package:edhp/features/home/widgets/MemberShipCard.dart';
 import 'package:edhp/features/home/widgets/SearchBarView.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/features/layout/cubit/states.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:screenshot/screenshot.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -62,43 +61,49 @@ class HomeScreen extends StatelessWidget {
                                     SizedBox(
                                       width: MediaQuery.of(context).size.width,
                                       height: MediaQuery.of(context).size.height / 4.5,
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                              clipBehavior: Clip.antiAlias,
-                                              width: MediaQuery.of(context).size.width,
-                                              height: MediaQuery.of(context).size.height / 4.5,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10.0),
+                                      child:
+                                           CarouselSlider(
+                                                  items: [
+                                                    for(String image in LayoutCubit.get(context).adsImage)
+                                                      Container(
+                                                          clipBehavior: Clip.antiAlias,
+                                                          width: MediaQuery.of(context).size.width,
+                                                          height: MediaQuery.of(context).size.height / 4.5,
+                                                          decoration: BoxDecoration(
+                                                            borderRadius: BorderRadius.circular(10.0),
+                                                          ),
+                                                          child: Image.network(image,
+                                                                  fit: BoxFit.fill,
+                                                                  loadingBuilder: (BuildContext context, Widget child,
+                                                                      ImageChunkEvent? loadingProgress) {
+                                                                    if (loadingProgress == null) return child;
+                                                                    return Center(
+                                                                      child: CircularProgressIndicator(
+                                                                        value: loadingProgress.expectedTotalBytes != null
+                                                                            ? loadingProgress.cumulativeBytesLoaded /
+                                                                            loadingProgress.expectedTotalBytes!
+                                                                            : null,
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                )),
+                                                  ],
+                                                  options: CarouselOptions(
+                                                    height: 450,
+                                                    aspectRatio: 18/9,
+                                                    viewportFraction: 0.9,
+                                                    initialPage: 0,
+                                                    enableInfiniteScroll: true,
+                                                    reverse: false,
+                                                    autoPlay: true,
+                                                    autoPlayInterval: const Duration(seconds: 3),
+                                                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                                                    autoPlayCurve: Curves.fastOutSlowIn,
+                                                    enlargeCenterPage: true,
+                                                    enlargeFactor: 0.6,
+                                                    scrollDirection: Axis.horizontal,
+                                                  )
                                               ),
-                                              child: CachedNetworkImage(
-                                                  imageUrl:LayoutCubit.get(context).adsImage.length>0 ? LayoutCubit.get(context).adsImage[LayoutCubit.get(context).index!] :EndPoint.staticAds,
-                                                  fit: BoxFit.fill,
-                                                  placeholder: (context, url) =>  Image.network( EndPoint.staticAds, fit: BoxFit.cover,),
-                                                  errorWidget: (context, url, error) => Image.network( EndPoint.staticAds, fit: BoxFit.cover,))
-                                          ),
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: IconButton(
-                                              onPressed: (){
-                                                LayoutCubit.get(context).changeAdsImageRightIcon();
-                                              },
-                                              icon: const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.whiteColor, size: 25,
-                                                  shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 8.0)]),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: IconButton(
-                                              onPressed: (){
-                                                LayoutCubit.get(context).changeAdsImageRightIcon();
-                                              },
-                                              icon: const Icon(Icons.arrow_back_ios, color: AppColors.whiteColor, size: 25,
-                                                  shadows: <Shadow>[Shadow(color: Colors.black, blurRadius: 8.0)]),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
                                     ),
                                     const SizedBox(
                                       height: 20,
@@ -113,12 +118,14 @@ class HomeScreen extends StatelessWidget {
                                             Text('عن المنصة',style: Styles.textStyle12W500.copyWith(color: Color(0xffFEA6A7)),)
                                           ]),),
 
-                                        Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
+                                        InkWell(child: Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
                                           child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
                                             SvgPicture.asset('assets/icons/ic_02.svg',width: 70,),
                                             SizedBox(height: 20,),
                                             Text('العضويات',style: Styles.textStyle12W500.copyWith(color: Color(0xff9CA8FA)),)
-                                          ]),),
+                                          ]),),onTap: (){
+                                          GoRouter.of(context).push(AppRouters.kServiceScreen,extra: SubscriptionRequest());
+                                        }),
 
 
                                         InkWell(child: Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
@@ -165,13 +172,15 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               )),slideHandlerWidth: 7,
                                   slidePanelHeight: 170,
-                                  slidePanelWidth: 195,
+                                  slidePanelWidth: 250,
                                   slideOffBodyTap: true,
                                   leftPanelVisible: true,
                                   rightPanelVisible: false, leftSlide: Container(padding: const EdgeInsets.all(5),
                                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: AppColors.boxesColor,),
                                       child: InkWell(child: Center(child:
-                                      CacheHelper.getData(key: 'MemberShipCard')!=null?Image.file(File(CacheHelper.getData(key: 'MemberShipCard')),fit: BoxFit.fill,height: 145,width: 190,):SizedBox()),
+                                      (memberShips!=null && memberShips.length>0)?
+                                            MemberShipCard(memberShip: memberShips[0],scaler: 1,spaceTop: 28,)
+                                          : SizedBox()),
                                                     onTap: () {
                                                       GoRouter.of(context).push(AppRouters.kMemberShipPreview);
                                                     },

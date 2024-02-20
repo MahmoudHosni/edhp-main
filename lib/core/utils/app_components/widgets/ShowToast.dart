@@ -11,7 +11,7 @@ class ShowToast{
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 14.0);
   }
 
   static void showToastGreen(String msg) {
@@ -22,6 +22,6 @@ class ShowToast{
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.lightGreen,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 14.0);
   }
 }

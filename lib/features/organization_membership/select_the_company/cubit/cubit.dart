@@ -17,12 +17,14 @@ class CompanyItemCubit extends Cubit<CompanyItemsStates> {
 
   List<GetOrganizationItem> organizationItemsList = [];
   Future getOrganizations() async{
+    organizationItemsList.clear();
     emit(CompanyItemLoadingState());
     if(organizationItemsList!.isEmpty) {
       await DioHelper.getData(
         path: EndPoint.getMedicalCompanies,
         token: CacheHelper.getData(key: 'token'),
       ).then((value) {
+        organizationItemsList.clear();
         print(value.data);
         value.data.forEach((element) {
           organizationItemsList.add(GetOrganizationItem.fromJson(element));

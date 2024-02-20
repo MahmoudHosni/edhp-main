@@ -59,6 +59,10 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                         setState(() {
                           organizationID = CompanyItemCubit.get(context).organizationItemsList[index].iD ??-1;
                           organizationName = CompanyItemCubit.get(context).organizationItemsList[index].name ??'';
+                          var subscriptionRequest = SubscriptionRequest();
+                          subscriptionRequest.MedicalCompanyID = organizationID;
+                          subscriptionRequest.MedicalCompanyName = organizationName;
+                          GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
                         });
                       },
                       child: Padding(
@@ -78,19 +82,30 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                               child: Row(mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),
-                                    child: CachedNetworkImage(
-                                        imageUrl:'$baseUrl${EndPoint.imgPath}?referenceTypeId=7&referenceId=${CompanyItemCubit.get(context).organizationItemsList[index].iD}&id=${Random().nextInt(100000)}',
+                                    child: Image.network(
+                                        '$baseUrl${EndPoint.imgPath}?referenceTypeId=7&referenceId=${CompanyItemCubit.get(context).organizationItemsList[index].iD}&id=${Random().nextInt(100000)}',
                                         fit: BoxFit.fill,height: 85,width: 85,
-                                        placeholder: (context, url) =>  SvgPicture.asset(AppPaths.companyImage,width: 85,height: 85,),
-                                        errorWidget: (context, url, error) => SvgPicture.asset(AppPaths.companyImage,width: 85,height: 85,)), ) ,
+                                      loadingBuilder: (BuildContext context, Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded /
+                                                loadingProgress.expectedTotalBytes!
+                                                : null,
+                                          ),
+                                        );
+                                      },
+                                    ), ) ,
 
                                   const Spacer(),
                                   Column(crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Text(StringsManager.companyName , style: Styles.textStyle13W500.copyWith(color: AppColors.textColorBlue),),
+                                      Text(StringsManager.companyName , style: Styles.textStyle12W500.copyWith(color: AppColors.textColorBlue),),
                                       const SizedBox(height: 5,),
                                       Text(CompanyItemCubit.get(context).organizationItemsList[index].name.toString() ,textAlign: TextAlign.start,
-                                        style: Styles.textStyle13W500.copyWith(color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? Colors.white : AppColors.secondNew),maxLines: 2,),
+                                        style: Styles.textStyle14W500.copyWith(color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? Colors.white : AppColors.secondNew),maxLines: 2,),
                                     ],
                                   )
                                 ],
@@ -106,26 +121,26 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                   height: MediaQuery.of(context).size.height / 25,
                 ),
 
-                Row(children: [
-                  Container(alignment: Alignment.bottomLeft,
-                  child: NextButton(backgroundColor: (organizationID > 0) ? AppColors.secondNew : Colors.grey,
-                    function: () {
-                      if(organizationID<=0){
-                        ShowToast.showToast('برجاء اختيار شركة التأمين بصورة صحيحة');
-                      }else{
-                        var subscriptionRequest = SubscriptionRequest();
-                        subscriptionRequest.MedicalCompanyID = organizationID;
-                        subscriptionRequest.MedicalCompanyName = organizationName;
-                        GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
-                      }
-                    },
-                    text: StringsManager.select,width: 120,fontSize: 13,
-                    redius: 32,
-                  ),
-                ),
-                  const SizedBox(width: 8,),
-                  BackCircleButton(),
-                ],),
+                // Row(children: [
+                //   Container(alignment: Alignment.bottomLeft,
+                //   child: NextButton(backgroundColor: (organizationID > 0) ? AppColors.secondNew : Colors.grey,
+                //     function: () {
+                //       if(organizationID<=0){
+                //         ShowToast.showToast('برجاء اختيار شركة التأمين بصورة صحيحة');
+                //       }else{
+                //         var subscriptionRequest = SubscriptionRequest();
+                //         subscriptionRequest.MedicalCompanyID = organizationID;
+                //         subscriptionRequest.MedicalCompanyName = organizationName;
+                //         GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
+                //       }
+                //     },
+                //     text: StringsManager.select,width: 120,fontSize: 13,
+                //     redius: 32,
+                //   ),
+                // ),
+                //   const SizedBox(width: 8,),
+                //   BackCircleButton(),
+                // ],),
 
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 33,

@@ -2,13 +2,17 @@ import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/features/confirm_membership_data/CardPreview.dart';
 import 'package:edhp/features/confirm_membership_data/confirm_membership_data_screen.dart';
+import 'package:edhp/features/confirm_membership_data/cubit/ConfirmResponse.dart';
 import 'package:edhp/features/create_membership/create_membership_screen.dart';
 import 'package:edhp/features/edit_profile/edit_profile_screen.dart';
+import 'package:edhp/features/home/cubit/MemberShipsResponse.dart';
+import 'package:edhp/features/home/widgets/DescriptionView.dart';
 import 'package:edhp/features/home/widgets/MedicalNetworkView.dart';
 import 'package:edhp/features/home/widgets/MemberShipPreview.dart';
 import 'package:edhp/features/insurance_companies/SelectInsuranceCompany.dart';
 import 'package:edhp/features/layout/layout_screen.dart';
 import 'package:edhp/features/medical_advices/MedicalAdvices.dart';
+import 'package:edhp/features/medical_file/medical_file_screen.dart';
 import 'package:edhp/features/medical_network/medical_network_screen.dart';
 import 'package:edhp/features/medical_record/medical_record_screen.dart';
 import 'package:edhp/features/membership_data/membership_data_screen.dart';
@@ -45,6 +49,7 @@ abstract class AppRouters {
   static const kCreateMembershipScreen = '/createMembershipScreen';
   static const kMedicalNetworkScreen = '/medicalNetworkScreen';
   static const kMedicalRecordScreen = '/medicalRecordScreen';
+  static const kMedicalFileScreen = '/medicalFileScreen';
   static const kSelectCompanyScreen = '/selectCompanyScreen';
   static const kMembershipDataScreen = '/membershipDataScreen';
   static const kConfirmMembershipDataScreen = '/confirmMembershipDataScreen';
@@ -59,6 +64,7 @@ abstract class AppRouters {
   static const kSelectInsuranceCompany = '/SelectInsuranceCompany';
   static const kMedicalAdvices = '/MedicalAdvices';
   static const kMedicalNetworkView = '/MedicalNetworkView';
+  static const kShowFileContent = "/DescriptionView";
 
   static final baseRouter = GoRouter(redirect: (context, state) {
     String _token = CacheHelper.getData(key: 'token') ??'';
@@ -113,7 +119,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kEditProfileScreen,
-        builder: (context, state) => EditProfileScreen(),
+        builder: (context, state) => EditProfileScreen(memberShip: state.extra!=null? (state.extra as MemberShipsResponse) : null,),
       ),
       GoRoute(
         path: kServiceScreen,
@@ -136,6 +142,10 @@ abstract class AppRouters {
         builder: (context, state) => MedicalRecordScreen(),
       ),
       GoRoute(
+        path: kMedicalFileScreen ,
+        builder: (context, state) => MedicalFileScreen(),
+      ),
+      GoRoute(
         path: kSelectCompanyScreen ,
         builder: (context, state) => SelectTheCompanyScreen(),
       ),
@@ -153,7 +163,7 @@ abstract class AppRouters {
       ),//kCardPreviewScreen
       GoRoute(
         path: kCardPreviewScreen,
-        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as ConfirmResponse),
       ),//MemberShipPreview
       GoRoute(
         path: kMemberShipPreview,
@@ -181,6 +191,9 @@ abstract class AppRouters {
       GoRoute(
           path: kMedicalNetworkView ,
           builder: (context , state) => MedicalNetworkView()),
+      GoRoute(
+          path: kShowFileContent ,
+          builder: (context , state) => DescriptionView(fileName: (state.extra as List<String>)[0], title: (state.extra as List<String>)[1])),
     ],
   );
 
@@ -212,7 +225,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kEditProfileScreen,
-        builder: (context, state) => EditProfileScreen(),
+        builder: (context, state) => EditProfileScreen(memberShip: state.extra!=null? (state.extra as MemberShipsResponse) : null),
       ),
       GoRoute(
         path: kServiceScreen,
@@ -229,6 +242,10 @@ abstract class AppRouters {
       GoRoute(
         path: kMedicalRecordScreen ,
         builder: (context, state) => MedicalRecordScreen(),
+      ),
+      GoRoute(
+        path: kMedicalFileScreen ,
+        builder: (context, state) => MedicalFileScreen(),
       ),
       GoRoute(
         path: kSelectCompanyScreen ,
@@ -248,7 +265,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kCardPreviewScreen,
-        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as ConfirmResponse),
       ),
       GoRoute(
         path: kMemberShipPreview,

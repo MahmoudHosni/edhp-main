@@ -1,9 +1,14 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/EditTextView.dart';
+import 'package:edhp/features/authantication/login/widgets/LoginFacebookButton.dart';
+import 'package:edhp/features/authantication/login/widgets/clickable_register_app_container_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_components/widgets/default_button.dart';
 import '../../../../core/utils/app_components/widgets/default_text_button.dart';
@@ -13,7 +18,6 @@ import '../../../../core/utils/app_routers.dart';
 import '../../../../core/utils/styles/styles.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
-import 'widgets/or_divider.dart';
 import 'widgets/remember_me_row.dart';
 import 'widgets/row_of_register_apps.dart';
 
@@ -26,9 +30,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneNumberController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -72,21 +74,36 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(StringsManager.loginToAccount, style: Styles.textStyle14W500.copyWith(color: AppColors.primaryBlueColor),textAlign: TextAlign.center,),
                         const SizedBox(height: 12,),
 
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20,5,20,8),
-                          child: EditTextView(
-                            controller: phoneNumberController,
-                            keyboardType: TextInputType.text,
-                            validation: (value) {
-                              if(value!.isEmpty) {
-                                return 'Phone Number must be not empty';
-                              }
-                              return null;
+                        Padding(padding: EdgeInsets.fromLTRB(20, 5, 20, 8),
+                          child: IntlPhoneField(
+                            decoration: InputDecoration(
+                              labelText: StringsManager.phoneNumber,
+                              fillColor: Colors.white,
+                            ),
+                            initialCountryCode: 'EG',
+                            pickerDialogStyle:PickerDialogStyle(backgroundColor: Colors.white,
+                                countryCodeStyle: TextStyle(color: Colors.blue),
+                                countryNameStyle: TextStyle(color: Colors.black)),
+                            onChanged: (phone) {
+                              phoneNumberController.text = phone.completeNumber;
                             },
-                            fieldName: StringsManager.phoneNumber,
-                            suffixIcon: Icons.call_outlined,
                           ),
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.fromLTRB(20,5,20,8),
+                        //   child: EditTextView(
+                        //     controller: phoneNumberController,
+                        //     keyboardType: TextInputType.text,
+                        //     validation: (value) {
+                        //       if(value!.isEmpty) {
+                        //         return 'Phone Number must be not empty';
+                        //       }
+                        //       return null;
+                        //     },
+                        //     fieldName: StringsManager.phoneNumber,
+                        //     suffixIcon: Icons.call_outlined,
+                        //   ),
+                        // ),
 
                         const SizedBox(height: 12,),
 
@@ -132,9 +149,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             redius: 32,
                         )),
                         const SizedBox(height: 10,),
-                        Text('أو سجل الدخول بواسطة',style: Styles.textStyle10W400.copyWith(color: AppColors.secondNew),),
-                        const SizedBox(height: 10,),
-                        const RowOfRegisterApps(),
+                        // Text('أو سجل الدخول بواسطة',style: Styles.textStyle10W400.copyWith(color: AppColors.secondNew),),
+                        // const SizedBox(height: 10,),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     LoginFacebookBtton(willUsedInLogin: true),
+                        //     const SizedBox(width: 15,),
+                        //     ClickableRegisterAppContainerItem(appLogoPath: AppPaths.googleLogoPath),
+                        //     const SizedBox(width: 15,),
+                        //     ClickableRegisterAppContainerItem(appLogoPath: AppPaths.appleLogoPath),
+                        //   ],
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

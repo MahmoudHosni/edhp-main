@@ -8,7 +8,7 @@ class MedicalFileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewContainer(title: StringsManager.medicalFile,body: Center(
+    return ViewContainer(title: StringsManager.medicalFile,showBack: false,body: Center(
       child: SvgPicture.asset('assets/icons/md1_file.svg'),
     ));
   }

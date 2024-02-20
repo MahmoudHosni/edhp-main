@@ -33,3 +33,5 @@ class GetNewAccessTokenErrorState extends LayoutStates {}
 class AdvertisementStateLoadError extends LayoutStates{}
 
 class AdvertisementStateLoadSuccess extends LayoutStates{}
+
+class MemberShipsStateLoadSuccess extends LayoutStates{}

@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
 import '../../membership_data/widgets/custom_step_one_app_bar.dart';
 
@@ -109,7 +110,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   const SizedBox(height: 10,),
                   MembershipTextFormField(maxLength: 15,error: membershipNumberController.text.length==14?'':"",
                     onSummit: (value) {
-                      if(value!=null && value.length<3){
+                      if(value!=null && value.length>1){
                         widget.subscriptionRequest.OrganizationMembershipNumber = value;
                       }else{
                         ShowToast.showToast('برجاء ادخال رقم العضوية بصورة صحيحة');
@@ -134,7 +135,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   ),
                   MembershipTextFormField(maxLength: 100,error: address.text.length==14?'':"",
                     onSummit: (value) {
-                      if(value!=null && (value?.length ??0) >20){
+                      if(value!=null && (value?.length ??0) >10){
                         widget.subscriptionRequest.Address = value;
                       }else{
                         ShowToast.showToast('برجاء ادخال العنوان بشكل صحيح');
@@ -192,7 +193,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              cubit?.getNationalIDImageFromGallery();
+                              _showChoiceDialog(context,cubit!.getNationalIDImageFromGallery,);
                             },
                             child:Container(height: 50,
                               decoration: BoxDecoration(
@@ -225,7 +226,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                         Expanded(
                           child: InkWell(
                             onTap: (){
-                              cubit?.getPersonalImageFromGallery();
+                              _showChoiceDialog(context,cubit!.getPersonalImageFromGallery,);
                             },
                             child: Container(height: 50,
                               decoration: BoxDecoration(
@@ -262,7 +263,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                   ),
                   InkWell(
                     onTap: (){
-                      cubit?.getOrganizationCardFromGallery();
+                      _showChoiceDialog(context,cubit!.getOrganizationCardFromGallery,);
                     },
                     child: Container(height: 50,
                       decoration: BoxDecoration(
@@ -393,5 +394,47 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
       cities  = cubit?.subscriptionInfoLookupsModel?.Cities?.where((element) => element.StateID == widget.subscriptionRequest?.StateID).toList() ??[];
       print(cities.length.toString());
     });
+  }
+
+  Future<void>_showChoiceDialog(BuildContext context,Function callBack)
+  {
+    return showDialog(context: context,builder: (BuildContext context){
+
+      return AlertDialog(backgroundColor: Colors.blue,
+        title: Text("اختر",style: TextStyle(color: Colors.white),),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              Divider(height: 1,color: Colors.white,),
+              ListTile(
+                onTap: (){
+                  callBack(ImageSource.gallery);
+                  Navigator.pop(context);
+                },
+                title: Text("معرض الصور",style: Styles.textStyle13W500.copyWith(color: Colors.white),),
+                leading: Icon(Icons.image,color: Colors.white,),
+              ),
+
+              Divider(height: 1,color: Colors.white,),
+              ListTile(
+                onTap: (){
+                  callBack(ImageSource.camera);
+                  Navigator.pop(context);
+                },
+                title: Text("الكاميرا",style: Styles.textStyle13W500.copyWith(color: Colors.white)),
+                leading: Icon(Icons.camera,color: Colors.white,),
+              ),
+            ],
+          ),
+        ),);
+    });
+  }
+
+  @override
+  void dispose() {
+    cubit?.personalImage=null;
+    cubit?.nationalIdImage=null;
+    cubit?.orgCardImage=null;
+    super.dispose();
   }
 }

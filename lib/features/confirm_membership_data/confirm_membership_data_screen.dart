@@ -6,19 +6,15 @@ import 'package:edhp/core/utils/app_components/widgets/ConfirmLeftValue.dart';
 import 'package:edhp/core/utils/app_components/widgets/ConfirmRightTitle.dart';
 import 'package:edhp/core/utils/app_components/widgets/NextButton.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
-import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMemberShipCubit.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMembershipState.dart';
-import 'package:edhp/features/confirm_membership_data/widgets/custom_step_two_app_bar.dart';
-import 'package:edhp/features/confirm_membership_data/widgets/terms_and_conditions_container.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/utils/styles/styles.dart';
-import 'widgets/confirm_data_field_and_value_item.dart';
 
 class ConfirmMembershipDataScreen extends StatefulWidget {
   final SubscriptionRequest subscriptionRequest;
@@ -31,6 +27,7 @@ class ConfirmMembershipDataScreen extends StatefulWidget {
 
 class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScreen> {
   late ConfirmMemberShipCubit cubit;
+  var msg = "";
 
   @override
   void initState() {
@@ -44,17 +41,19 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
         listener: (context, state) {
           if(state is ConfirmMembershipSuccessState){
             if(int.parse(widget.subscriptionRequest.Cost??'0')>0){
-              GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen,extra: widget.subscriptionRequest);
+              msg = state.response.Message;
+              GoRouter.of(context).push(AppRouters.kPaymentMembershipScreen,extra: state.response);
             }else{
-              GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
+              msg = state.response.Message;
+              GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: state.response);
             }
           }else if(state is ConfirmMembershipErrorState){
-            GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
+            showError(state.error);
+           // GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
           }
         },
         builder: (context, state) {
-          return ViewContainer(title: StringsManager.memberShips,body: SingleChildScrollView(
-                child: Column(
+          return ViewContainer(title: StringsManager.memberShips,body:   Column(
                   children: [
                     if(state == ConfirmMembershipLoadingState())
                       const CircularProgressIndicator(color: AppColors.primaryBlueColor,),
@@ -112,7 +111,7 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                     SizedBox(height: 8,),
 
 
-                    const TermsAndConditionsContainer(),
+                    // const TermsAndConditionsContainer(),
                     const SizedBox(
                       height: 32,
                     ),
@@ -127,10 +126,17 @@ class _ConfirmMembershipDataScreenState extends State<ConfirmMembershipDataScree
                     const SizedBox(
                       height: 10,
                     ),
+
+                    Text(msg,style: Styles.textStyle12W400)
                   ],
                 ),
-              ),
         );
+    });
+  }
+
+  void showError(String error) {
+    setState(() {
+      msg = error;
     });
   }
 }

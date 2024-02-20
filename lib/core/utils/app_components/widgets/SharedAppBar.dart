@@ -32,7 +32,7 @@ AppBar getSharedAppBar(BuildContext context, GlobalKey<ScaffoldState> key){
   );
 }
 
-AppBar getSharedAppBarWithBack(BuildContext context,String title){
+AppBar getSharedAppBarWithBack(BuildContext context,String title,bool showBack){
   return AppBar(backgroundColor: Colors.transparent,
     iconTheme: const IconThemeData(color: AppColors.blackColor),
     elevation: 0,
@@ -49,12 +49,13 @@ AppBar getSharedAppBarWithBack(BuildContext context,String title){
       //   padding: const EdgeInsets.all(8.0),
       //   child: BackCircleSmall(),
       // ),
+      showBack?
       IconButton(
         onPressed: (){
           GoRouter.of(context).pop();
         },
         icon: Image.asset('assets/images/back_btn.png'),
-      ),
+      ) : const SizedBox(),
     ],
   );
 }

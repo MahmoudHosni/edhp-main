@@ -24,8 +24,8 @@ class OrganizationMembershipDataCubit extends Cubit<OrganizationMembershipDataSt
   var nationalIdImagePath;
   var orgCardImagePath;
 
-  Future getOrganizationCardFromGallery()async{
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future getOrganizationCardFromGallery(ImageSource source)async{
+    final pickedFile = await picker.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
       orgCardImage = File(pickedFile.path);
       orgCardImagePath = pickedFile.path;
@@ -39,8 +39,8 @@ class OrganizationMembershipDataCubit extends Cubit<OrganizationMembershipDataSt
   }
 
 
-  Future getPersonalImageFromGallery()async{
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future getPersonalImageFromGallery(ImageSource source)async{
+    final pickedFile = await picker.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
       personalImage = File(pickedFile.path);
       personalImagePath = pickedFile.path;
@@ -53,8 +53,8 @@ class OrganizationMembershipDataCubit extends Cubit<OrganizationMembershipDataSt
     }
   }
 
-  Future getNationalIDImageFromGallery()async{
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future getNationalIDImageFromGallery(ImageSource source)async{
+    final pickedFile = await picker.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
       nationalIdImage = File(pickedFile.path);
       nationalIdImagePath = pickedFile.path;

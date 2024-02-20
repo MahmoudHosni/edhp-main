@@ -47,13 +47,14 @@ class EditProfileCubit extends Cubit<EditProfileStates> {
   var picker = ImagePicker();
   var imagePath;
 
-  Future getProfileImageFromGallery()async{
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  Future getProfileImageFromGallery(ImageSource source)async{
+    final pickedFile = await picker.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
       profileImage = File(pickedFile.path);
       imagePath = profileImage;
       print('Path of Image:');
       print(pickedFile.path);
+      uploadFileToServer(imagePath);
       emit(EditProfileImagePickedSuccessState());
     }else{
       print('No Image Picked');

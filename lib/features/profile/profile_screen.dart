@@ -32,13 +32,23 @@ class ProfileScreen extends StatelessWidget {
                         child: Container(width: 80, height: 80,
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),),
                           clipBehavior: Clip.antiAlias,
-                          child: CachedNetworkImage(
-                            imageUrl: '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                          child: Image.network(
+                            '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
                             fit: BoxFit.cover,
                             width: 80,
                             height: 80,
-                            placeholder: (context, url) =>  Image.asset(AppPaths.profileImage, fit: BoxFit.cover,),
-                            errorWidget: (context, url, error) => Image.asset(AppPaths.profileImage, fit: BoxFit.cover,),
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
                         ),
                       )),
                       const SizedBox(
@@ -48,8 +58,8 @@ class ProfileScreen extends StatelessWidget {
                       ConfirmDataFieldAndValueItem(field: 'اسم المستخدم', value: cubit.userProfileModel!.userName!.toString()),
                       ConfirmDataFieldAndValueItem(field: 'رقم الهاتف', value: cubit.userProfileModel!.mobileNumber!.toString()),
                       ConfirmDataFieldAndValueItem(field: 'البريد الالكتروني', value: cubit.userProfileModel!.email!.toString()),
-                      ConfirmDataFieldAndValueItem(field: 'الرقم القومي', value: cubit.userProfileModel!.identityNumber.toString()),
-                      ConfirmDataFieldAndValueItem(field: 'الجنس', value: cubit.userProfileModel!.gender! == 1 ? 'ذكر' : 'انثى'),
+                      (cubit.userProfileModel!.identityNumber??'').length>2 ? ConfirmDataFieldAndValueItem(field: 'الرقم القومي', value: cubit.userProfileModel!.identityNumber.toString()):SizedBox(),
+                      ConfirmDataFieldAndValueItem(field: 'النوع', value: cubit.userProfileModel!.gender! == 1 ? 'ذكر' : 'انثى'),
                       SizedBox(
                         height: MediaQuery.of(context).size.height/15,
                       ),

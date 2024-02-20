@@ -1,5 +1,6 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/features/service/widgets/membership_type_container.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
@@ -39,25 +40,12 @@ class _ServiceScreenState extends State<ServiceScreen> {
     return BlocConsumer<OurProductCubit, OurProductStates>(
       listener: (context, state) {      },
       builder: (context, state) {
-        return SafeArea(
+        return ViewContainer(title: StringsManager.membershipCards,body:SafeArea(
           child: Scaffold(
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36.0),
               child: Column(
                 children: [
-                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      children: [
-                        Spacer(),
-                        Text(StringsManager.membershipCards , style: Styles.textStyle20W500 , textAlign: TextAlign.center),
-                        Spacer(),
-                        BackCustomAppBar(),
-                      ],
-                    ),
-                  ),
-                  if(state is OurProductLoadingState)
-                    const CircularProgressIndicator(color: AppColors.primaryBlueColor),
                   Expanded(
                     child: ListView.separated(
                         itemBuilder: (context, index) => MembershipTypeContainer(
@@ -65,6 +53,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
                           name: cubit.membershipTypeList[index].name.toString(),
                           description: cubit.membershipTypeList[index].description.toString(),
                           id: cubit.membershipTypeList[index].iD??0,subscriptionRequest: widget.subscriptionRequest,
+                          clickable: (widget.subscriptionRequest.SubscriptionTypeID ??0) >0,
                         ),
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 30,
@@ -76,7 +65,7 @@ class _ServiceScreenState extends State<ServiceScreen> {
               ),
             ),
           ),
-        );
+        ));
       },
     );
   }

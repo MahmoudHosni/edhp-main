@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_constants.dart';
+import 'package:edhp/features/home/cubit/MemberShipsResponse.dart';
 import 'package:edhp/features/layout/cubit/states.dart';
 import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
 import 'package:edhp/models/Advertisement.dart';
@@ -14,12 +15,15 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import '../../../core/network/cache_helper.dart';
 
+List<MemberShipsResponse> memberShips=[];
+
 class LayoutCubit extends Cubit<LayoutStates>{
   LayoutCubit() : super(LayoutInitialState());
 
   static LayoutCubit get(BuildContext context) => BlocProvider.of(context);
 
   List<Advertisement> advertisements = [];
+
   bool switchOfNotification = true;
   void changeSwitchOfNotification(bool value){
     switchOfNotification = value;
@@ -62,6 +66,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
   Future loadData(BuildContext context) async{
     getProfile(context);
     getAdvertisements(context);
+    getMySubscriptions();
   }
 
   Future getProfile(BuildContext context) async {
@@ -169,6 +174,22 @@ class LayoutCubit extends Cubit<LayoutStates>{
       token: CacheHelper.getData(key: 'token'),
     ).then((value) {
 
+    }).catchError((error) {
+      print(error.toString());
+      emit(GetNewAccessTokenErrorState());
+    });
+  }
+
+  Future getMySubscriptions() async {
+    await DioHelper.getData(
+      path: EndPoint.getMySubscriptions ,
+      token: CacheHelper.getData(key: 'token'),
+    ).then((value) {
+      print("::::::: getMySubscriptions ::::::::");
+      value.data.forEach((element) {
+        memberShips.add(MemberShipsResponse.fromJson(element));
+      });
+      emit(MemberShipsStateLoadSuccess());
     }).catchError((error) {
       print(error.toString());
       emit(GetNewAccessTokenErrorState());

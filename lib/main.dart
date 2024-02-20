@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
@@ -34,6 +35,7 @@ void main() async{
     statusBarIconBrightness: Brightness.dark, // status bar icon color
     systemNavigationBarIconBrightness: Brightness.dark, // color of navigation controls
   ));
+  HttpOverrides.global=new MyHttpoverrides();
   runApp(MyApp(
     // rememberMe: rememberMe,
     accessToken: token,));
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CompanyItemCubit()..getOrganizations(),
         ),
         BlocProvider(
-            create: (context)=> InsuranceCompaniesCubit()..getCompanies()),
+            create: (context)=> InsuranceCompaniesCubit()),
         BlocProvider(
           create: (context) => GetProfileCubit()..getProfile(),
         ),
@@ -135,4 +137,13 @@ class MyApp extends StatelessWidget {
       shadeValue(color.green, factor),
       shadeValue(color.blue, factor),
       1);
+}
+
+class MyHttpoverrides extends HttpOverrides{
+
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=>true;
+  }
 }
