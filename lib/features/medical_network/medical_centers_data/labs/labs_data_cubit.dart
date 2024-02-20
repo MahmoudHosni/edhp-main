@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LabsDataCubit extends Cubit<LabsDataStates> {
   LabsDataCubit() : super(LabsDataInitialStates()) {
-    _getLabs();
+    _getLabs(_governorateId, _areaId, _searchText);
     _getGovernorates();
   }
 
@@ -20,20 +20,37 @@ class LabsDataCubit extends Cubit<LabsDataStates> {
 
   int _governorateId = 0;
   int _areaId = 0;
+  String _searchText = '';
 
   selectGovernorate({required int id}) {
     _governorateId = id;
+    _getLabs(_governorateId, _areaId, _searchText);
     _getAreas(governorateId: id);
   }
 
   selectArea({required int id}) {
     _areaId = id;
+    _getLabs(_governorateId, _areaId, _searchText);
   }
 
-  _getLabs() {
+  search({required String searchText}) {
+    _searchText = searchText;
+    _getLabs(_governorateId, _areaId, _searchText);
+  }
+
+  _getLabs(
+    int governorateId,
+    int areaId,
+    String searchText,
+  ) {
     DioHelper.getData(
       path: EndPoint.getServiceProvider,
-      queryParameters: {'Type': 1005},
+      queryParameters: {
+        'Type': 1005,
+        'GovID': governorateId,
+        'cityId': areaId,
+        'name': searchText,
+      },
     ).then(
       (labs) {
         final labsList = labs.data as List;

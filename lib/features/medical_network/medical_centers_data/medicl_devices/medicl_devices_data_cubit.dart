@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MedicalDevicesDataCubit extends Cubit<MedicalDevicesDataStates> {
   MedicalDevicesDataCubit() : super(MedicalDevicesDataInitialState()) {
-    _getMedicalDevices();
+    _getMedicalDevices(_governorateId, _searchText);
     _getGovernorates();
   }
 
@@ -17,15 +17,29 @@ class MedicalDevicesDataCubit extends Cubit<MedicalDevicesDataStates> {
   List<ServiceProviderEntity> medicalDevices = [];
 
   int _governorateId = 0;
+  String _searchText = '';
 
   selectGovernorate({required int id}) {
     _governorateId = id;
+    _getMedicalDevices(_governorateId, _searchText);
   }
 
-  _getMedicalDevices() {
+  search({required String searchText}) {
+    _searchText = searchText;
+    _getMedicalDevices(_governorateId, _searchText);
+  }
+
+  _getMedicalDevices(
+    int governorateId,
+    String searchText,
+  ) {
     DioHelper.getData(
       path: EndPoint.getServiceProvider,
-      queryParameters: {'Type': 1011},
+      queryParameters: {
+        'Type': 1011,
+        'GovID': governorateId,
+        'name': searchText,
+      },
     ).then(
       (medicalDevices) {
         final labsList = medicalDevices.data as List;

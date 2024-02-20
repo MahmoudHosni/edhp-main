@@ -14,9 +14,14 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
   List<GovernorateEntity> governorates = [GovernorateEntity(id: 0, name: '')];
 
   int _governorateId = 0;
+  String _searchText = '';
 
   selectGovernorate({required int id}) {
     _governorateId = id;
+  }
+
+  search({required String searchText}) {
+    _searchText = searchText;
   }
 
   _getGovernorates() {

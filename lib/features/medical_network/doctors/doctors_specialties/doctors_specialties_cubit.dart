@@ -17,6 +17,7 @@ class DoctorsSpecialtiesCubit extends Cubit<DoctorsSpecialtiesStates> {
 
   int _governorateId = 0;
   int _areaId = 0;
+  String _searchText = '';
 
   selectGovernorate({required int id}) {
     _governorateId = id;
@@ -25,6 +26,10 @@ class DoctorsSpecialtiesCubit extends Cubit<DoctorsSpecialtiesStates> {
 
   selectArea({required int id}) {
     _areaId = id;
+  }
+
+  search({required String searchText}) {
+    _searchText = searchText;
   }
 
   _getGovernorates() {

@@ -14,7 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DoctorsSpecialtiesScreen extends StatelessWidget {
-  const DoctorsSpecialtiesScreen({super.key});
+  DoctorsSpecialtiesScreen({super.key});
+
+  final searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +66,10 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     SearchableTextFormField(
-                      controller: TextEditingController(),
+                      controller: searchController,
                       hintText: StringsManager.searchByNameOrSpeciality.tr(),
-                      valueChanged: (searchText) {},
+                      valueChanged: (searchText) =>
+                          cubit.search(searchText: searchText),
                     ),
                     const SizedBox(height: 20),
                     Container(

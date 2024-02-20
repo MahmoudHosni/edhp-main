@@ -76,34 +76,38 @@ abstract class AppRouters {
   static const kCardPreviewScreen = '/cardPreviewScreen';
   static const kMemberShipPreview = '/memberShipPreview';
   static const kProfileScreen = '/profileScreen';
-  static const kOrganizationMembershipDataScreen = '/organizationMembershipDataScreen';
+  static const kOrganizationMembershipDataScreen =
+      '/organizationMembershipDataScreen';
   static const kAddRelativesScreen = '/addRelativesScreen';
-  static const kOrganizationSubscriptionScreen = '/organizationSubscriptionScreen';
-  static const kCreateMembershipInsideAppScreen = '/createMembershipInsideAppScreen';
+  static const kOrganizationSubscriptionScreen =
+      '/organizationSubscriptionScreen';
+  static const kCreateMembershipInsideAppScreen =
+      '/createMembershipInsideAppScreen';
   static const kSelectInsuranceCompany = '/SelectInsuranceCompany';
   static const kMedicalAdvices = '/MedicalAdvices';
 
-  static final baseRouter = GoRouter(redirect: (context, state) {
-    String _token = CacheHelper.getData(key: 'token') ??'';
-    print(_token);
-    if(state.fullPath == kLoginScreen){
-      if ((_token?.length ??0) >0){
-        token = _token;
-        return kLayoutScreen;
-      }else {
-        return kLoginScreen;
+  static final baseRouter = GoRouter(
+    redirect: (context, state) {
+      String _token = CacheHelper.getData(key: 'token') ?? '';
+      print(_token);
+      if (state.fullPath == kLoginScreen) {
+        if ((_token?.length ?? 0) > 0) {
+          token = _token;
+          return kLayoutScreen;
+        } else {
+          return kLoginScreen;
+        }
+      } else {
+        return state.fullPath;
       }
-    }else{
-      return state.fullPath;
-    }
-  },
+    },
     routes: [
       GoRoute(
-        path: kCreateMembershipInsideAppScreen ,
+        path: kCreateMembershipInsideAppScreen,
         builder: (context, state) => const CreateMembershipInsideAppScreen(),
       ),
       GoRoute(
-        path: kOrganizationSubscriptionScreen ,
+        path: kOrganizationSubscriptionScreen,
         builder: (context, state) => OrganizationSubscriptionScreen(),
       ),
       GoRoute(
@@ -140,7 +144,8 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kServiceScreen,
-        builder: (context, state) => ServiceScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => ServiceScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kMemberShipTypes,
@@ -148,107 +153,119 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kCreateMembershipScreen,
-        builder: (context, state) => CreateMembershipScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => CreateMembershipScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
-        path: kMedicalNetworkScreen ,
+        path: kMedicalNetworkScreen,
         builder: (context, state) => const MedicalNetworkScreen(),
       ),
       GoRoute(
-        path: kHospitalsDataScreen ,
-        builder: (context, state) => const HospitalsDataScreen(),
+        path: kHospitalsDataScreen,
+        builder: (context, state) => HospitalsDataScreen(),
       ),
       GoRoute(
-        path: kDoctorsSpecialtiesScreen ,
-        builder: (context, state) => const DoctorsSpecialtiesScreen(),
+        path: kDoctorsSpecialtiesScreen,
+        builder: (context, state) => DoctorsSpecialtiesScreen(),
       ),
       GoRoute(
-        path: kLabsDataScreen ,
-        builder: (context, state) => const LabsDataScreen(),
+        path: kLabsDataScreen,
+        builder: (context, state) => LabsDataScreen(),
       ),
       GoRoute(
-        path: kRadiologyCentersDataScreen ,
-        builder: (context, state) => const RadiologyCentersDataScreen(),
+        path: kRadiologyCentersDataScreen,
+        builder: (context, state) => RadiologyCentersDataScreen(),
       ),
       GoRoute(
-        path: kMedicalDevicesDataScreen ,
-        builder: (context, state) => const MedicalDevicesDataScreen(),
+        path: kMedicalDevicesDataScreen,
+        builder: (context, state) => MedicalDevicesDataScreen(),
       ),
       GoRoute(
-        path: kPharmaciesDataScreen ,
-        builder: (context, state) => const PharmaciesDataScreen(),
+        path: kPharmaciesDataScreen,
+        builder: (context, state) => PharmaciesDataScreen(),
       ),
       GoRoute(
-        path: kMedicalCenterBranchesScreen ,
-        builder: (context, state) => MedicalCenterBranchesScreen(medicalCenterEntity: state.extra as MedicalCenterEntity,),
+        path: kMedicalCenterBranchesScreen,
+        builder: (context, state) => MedicalCenterBranchesScreen(
+          medicalCenterEntity: state.extra as MedicalCenterEntity,
+        ),
       ),
       GoRoute(
-        path: kOutpatientClinicsScreen ,
+        path: kOutpatientClinicsScreen,
         builder: (context, state) => const OutpatientClinicsScreen(),
       ),
       GoRoute(
-        path: kNearestMedicalCentersScreen ,
-        builder: (context, state) => NearestMedicalCentersScreen(medicalCenterEntity: state.extra as MedicalCenterEntity,),
+        path: kNearestMedicalCentersScreen,
+        builder: (context, state) => NearestMedicalCentersScreen(
+          medicalCenterEntity: state.extra as MedicalCenterEntity,
+        ),
       ),
       GoRoute(
-        path: kNearestHospitalsScreen ,
+        path: kNearestHospitalsScreen,
         builder: (context, state) => const NearestHospitalsScreen(),
       ),
       GoRoute(
-        path: kNearestDoctorsScreen ,
+        path: kNearestDoctorsScreen,
         builder: (context, state) => const NearestDoctorsScreen(),
       ),
       GoRoute(
-        path: kMedicalCenterServicesScreen ,
-        builder: (context, state) => MedicalCenterServicesScreen(medicalCenterEntity: state.extra as MedicalCenterEntity,),
+        path: kMedicalCenterServicesScreen,
+        builder: (context, state) => MedicalCenterServicesScreen(
+          medicalCenterEntity: state.extra as MedicalCenterEntity,
+        ),
       ),
       GoRoute(
-        path: kMedicalRecordScreen ,
+        path: kMedicalRecordScreen,
         builder: (context, state) => MedicalRecordScreen(),
       ),
       GoRoute(
-        path: kSelectCompanyScreen ,
+        path: kSelectCompanyScreen,
         builder: (context, state) => SelectTheCompanyScreen(),
       ),
       GoRoute(
-        path: kMembershipDataScreen ,
-        builder: (context, state) => MembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        path: kMembershipDataScreen,
+        builder: (context, state) => MembershipDataScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kConfirmMembershipDataScreen,
-        builder: (context, state) => ConfirmMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => ConfirmMembershipDataScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kPaymentMembershipScreen,
-        builder: (context, state) => PaymentScreen(subscriptionRequest: state.extra as SubscriptionRequest),
-      ),//kCardPreviewScreen
+        builder: (context, state) => PaymentScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
+      ), //kCardPreviewScreen
       GoRoute(
         path: kCardPreviewScreen,
-        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
-      ),//MemberShipPreview
+        builder: (context, state) => CardPreview(
+            subscriptionRequest: state.extra as SubscriptionRequest),
+      ), //MemberShipPreview
       GoRoute(
         path: kMemberShipPreview,
         builder: (context, state) => MemberShipPreview(),
       ),
       GoRoute(
-        path: kProfileScreen ,
+        path: kProfileScreen,
         builder: (context, state) => ProfileScreen(),
       ),
       GoRoute(
-        path: kOrganizationMembershipDataScreen ,
-        builder: (context, state) => OrganizationMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        path: kOrganizationMembershipDataScreen,
+        builder: (context, state) => OrganizationMembershipDataScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
-        path: kAddRelativesScreen ,
+        path: kAddRelativesScreen,
         builder: (context, state) => AddRelativesScreen(),
-      ),//
+      ), //
       GoRoute(
-        path: kSelectInsuranceCompany ,
-        builder: (context, state) => SelectInsuranceCompany(subscriptionRequest: state.extra as SubscriptionRequest),
+        path: kSelectInsuranceCompany,
+        builder: (context, state) => SelectInsuranceCompany(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
-        path: kMedicalAdvices ,
-        builder: (context , state) => MedicalAdvices()),
+          path: kMedicalAdvices, builder: (context, state) => MedicalAdvices()),
     ],
   );
 
@@ -284,50 +301,57 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kServiceScreen,
-        builder: (context, state) => ServiceScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => ServiceScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kCreateMembershipScreen,
-        builder: (context, state) => CreateMembershipScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => CreateMembershipScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
-        path: kMedicalRecordScreen ,
+        path: kMedicalRecordScreen,
         builder: (context, state) => MedicalRecordScreen(),
       ),
       GoRoute(
-        path: kSelectCompanyScreen ,
+        path: kSelectCompanyScreen,
         builder: (context, state) => SelectTheCompanyScreen(),
       ),
       GoRoute(
-        path: kMembershipDataScreen ,
-        builder: (context, state) => MembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        path: kMembershipDataScreen,
+        builder: (context, state) => MembershipDataScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kConfirmMembershipDataScreen,
-        builder: (context, state) => ConfirmMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => ConfirmMembershipDataScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kPaymentMembershipScreen,
-        builder: (context, state) => PaymentScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => PaymentScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kCardPreviewScreen,
-        builder: (context, state) => CardPreview(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => CardPreview(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kMemberShipPreview,
         builder: (context, state) => MemberShipPreview(),
       ),
       GoRoute(
-        path: kProfileScreen ,
+        path: kProfileScreen,
         builder: (context, state) => ProfileScreen(),
       ),
       GoRoute(
-        path: kOrganizationMembershipDataScreen ,
-        builder: (context, state) => OrganizationMembershipDataScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        path: kOrganizationMembershipDataScreen,
+        builder: (context, state) => OrganizationMembershipDataScreen(
+            subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
-        path: kAddRelativesScreen ,
+        path: kAddRelativesScreen,
         builder: (context, state) => AddRelativesScreen(),
       )
     ],
