@@ -102,30 +102,36 @@ class LabsDataScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => InkWell(
-                          child: MedicalCenterCard(
-                            medicalCenterEntity: MedicalCenterEntity(
-                              medicalCenterType: MedicalCenterType.labs,
-                              title: StringsManager.labs.tr(),
+                      child: state is LabsDataLoadingState
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryBlueColor,
+                              ),
+                            )
+                          : ListView.separated(
+                              itemBuilder: (context, index) => InkWell(
+                                child: MedicalCenterCard(
+                                  medicalCenterEntity: MedicalCenterEntity(
+                                    medicalCenterType: MedicalCenterType.labs,
+                                    title: StringsManager.labs.tr(),
+                                  ),
+                                  serviceProviderEntity: cubit.labs[index],
+                                ),
+                                onTap: () => GoRouter.of(context).push(
+                                  AppRouters.kNearestMedicalCentersScreen,
+                                  extra: MedicalCenterEntity(
+                                    medicalCenterType: MedicalCenterType.labs,
+                                    title: StringsManager.labs.tr(),
+                                  ),
+                                ),
+                              ),
+                              separatorBuilder: (context, index) => Container(
+                                height: 1,
+                                color: AppColors.unselectedColor,
+                              ),
+                              itemCount: cubit.labs.length,
                             ),
-                            serviceProviderEntity: cubit.labs[index],
-                          ),
-                          onTap: () => GoRouter.of(context).push(
-                            AppRouters.kNearestMedicalCentersScreen,
-                            extra: MedicalCenterEntity(
-                              medicalCenterType: MedicalCenterType.labs,
-                              title: StringsManager.labs.tr(),
-                            ),
-                          ),
-                        ),
-                        separatorBuilder: (context, index) => Container(
-                          height: 1,
-                          color: AppColors.unselectedColor,
-                        ),
-                        itemCount: cubit.labs.length,
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ));

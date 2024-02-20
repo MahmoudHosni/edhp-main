@@ -15,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class RadiologyCentersDataScreen extends StatelessWidget {
-   RadiologyCentersDataScreen({super.key});
+  RadiologyCentersDataScreen({super.key});
 
   final searchController = TextEditingController();
 
@@ -70,7 +70,8 @@ class RadiologyCentersDataScreen extends StatelessWidget {
                     SearchableTextFormField(
                       controller: searchController,
                       hintText: StringsManager.searchByName.tr(),
-                      valueChanged: (searchText) => cubit.search(searchText: searchText),
+                      valueChanged: (searchText) =>
+                          cubit.search(searchText: searchText),
                     ),
                     const SizedBox(height: 20),
                     Container(
@@ -109,33 +110,39 @@ class RadiologyCentersDataScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => InkWell(
-                          child: MedicalCenterCard(
-                            medicalCenterEntity: MedicalCenterEntity(
-                              medicalCenterType:
-                                  MedicalCenterType.radiologyCenters,
-                              title: StringsManager.radiologyCenters.tr(),
+                      child: state is RadiologyCentersDataLoadingState
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryBlueColor,
+                              ),
+                            )
+                          : ListView.separated(
+                              itemBuilder: (context, index) => InkWell(
+                                child: MedicalCenterCard(
+                                  medicalCenterEntity: MedicalCenterEntity(
+                                    medicalCenterType:
+                                        MedicalCenterType.radiologyCenters,
+                                    title: StringsManager.radiologyCenters.tr(),
+                                  ),
+                                  serviceProviderEntity:
+                                      cubit.radiologyCenters[index],
+                                ),
+                                onTap: () => GoRouter.of(context).push(
+                                  AppRouters.kNearestMedicalCentersScreen,
+                                  extra: MedicalCenterEntity(
+                                    medicalCenterType:
+                                        MedicalCenterType.radiologyCenters,
+                                    title: StringsManager.radiologyCenters.tr(),
+                                  ),
+                                ),
+                              ),
+                              separatorBuilder: (context, index) => Container(
+                                height: 1,
+                                color: AppColors.unselectedColor,
+                              ),
+                              itemCount: cubit.radiologyCenters.length,
                             ),
-                            serviceProviderEntity:
-                                cubit.radiologyCenters[index],
-                          ),
-                          onTap: () => GoRouter.of(context).push(
-                            AppRouters.kNearestMedicalCentersScreen,
-                            extra: MedicalCenterEntity(
-                              medicalCenterType:
-                                  MedicalCenterType.radiologyCenters,
-                              title: StringsManager.radiologyCenters.tr(),
-                            ),
-                          ),
-                        ),
-                        separatorBuilder: (context, index) => Container(
-                          height: 1,
-                          color: AppColors.unselectedColor,
-                        ),
-                        itemCount: cubit.radiologyCenters.length,
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ));

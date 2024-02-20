@@ -33,6 +33,7 @@ class MedicalDevicesDataCubit extends Cubit<MedicalDevicesDataStates> {
     int governorateId,
     String searchText,
   ) {
+    emit(MedicalDevicesDataLoadingState());
     DioHelper.getData(
       path: EndPoint.getServiceProvider,
       queryParameters: {

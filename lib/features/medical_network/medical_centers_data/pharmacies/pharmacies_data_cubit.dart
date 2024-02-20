@@ -43,6 +43,7 @@ class PharmaciesDataCubit extends Cubit<PharmaciesDataStates> {
     int areaId,
     String searchText,
   ) {
+    emit(PharmaciesDataLoadingState());
     DioHelper.getData(
       path: EndPoint.getServiceProvider,
       queryParameters: {

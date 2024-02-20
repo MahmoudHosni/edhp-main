@@ -2,6 +2,8 @@ abstract class RadiologyCentersDataStates {}
 
 class RadiologyCentersDataInitialState extends RadiologyCentersDataStates {}
 
+class RadiologyCentersDataLoadingState extends RadiologyCentersDataStates {}
+
 class RadiologyCentersDataGetGovernoratesState extends RadiologyCentersDataStates {}
 
 class RadiologyCentersDataGetAreasState extends RadiologyCentersDataStates {}

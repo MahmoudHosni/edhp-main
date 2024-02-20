@@ -1,6 +1,8 @@
 abstract class LabsDataStates {}
 
-class LabsDataInitialStates extends LabsDataStates {}
+class LabsDataInitialState extends LabsDataStates {}
+
+class LabsDataLoadingState extends LabsDataStates {}
 
 class LabsDataGetGovernoratesState extends LabsDataStates {}
 

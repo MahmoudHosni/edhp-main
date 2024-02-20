@@ -92,32 +92,43 @@ class MedicalDevicesDataScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => InkWell(
-                          child: MedicalCenterCard(
-                            medicalCenterEntity: MedicalCenterEntity(
-                              medicalCenterType:
-                                  MedicalCenterType.medicalDevices,
-                              title: StringsManager.medicalDevices.tr(),
-                            ),
-                            serviceProviderEntity: cubit.medicalDevices[index],
-                          ),
-                          onTap: () => GoRouter.of(context).push(
-                            AppRouters.kNearestMedicalCentersScreen,
-                            extra: MedicalCenterEntity(
-                              medicalCenterType:
-                                  MedicalCenterType.medicalDevices,
-                              title: StringsManager.medicalDevices.tr(),
-                            ),
-                          ),
-                        ),
-                        separatorBuilder: (context, index) => Container(
-                          height: 1,
-                          color: AppColors.unselectedColor,
-                        ),
-                        itemCount: cubit.medicalDevices.length,
-                      ),
-                    ),
+                            child: state is MedicalDevicesDataLoadingState
+                                ? const Center(
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.primaryBlueColor,
+                                    ),
+                                  )
+                                : ListView.separated(
+                                    itemBuilder: (context, index) => InkWell(
+                                      child: MedicalCenterCard(
+                                        medicalCenterEntity:
+                                            MedicalCenterEntity(
+                                          medicalCenterType:
+                                              MedicalCenterType.medicalDevices,
+                                          title: StringsManager.medicalDevices
+                                              .tr(),
+                                        ),
+                                        serviceProviderEntity:
+                                            cubit.medicalDevices[index],
+                                      ),
+                                      onTap: () => GoRouter.of(context).push(
+                                        AppRouters.kNearestMedicalCentersScreen,
+                                        extra: MedicalCenterEntity(
+                                          medicalCenterType:
+                                              MedicalCenterType.medicalDevices,
+                                          title: StringsManager.medicalDevices
+                                              .tr(),
+                                        ),
+                                      ),
+                                    ),
+                                    separatorBuilder: (context, index) =>
+                                        Container(
+                                      height: 1,
+                                      color: AppColors.unselectedColor,
+                                    ),
+                                    itemCount: cubit.medicalDevices.length,
+                                  ),
+                          )
                   ],
                 ),
               ));

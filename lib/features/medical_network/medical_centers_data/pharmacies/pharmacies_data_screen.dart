@@ -102,30 +102,39 @@ class PharmaciesDataScreen extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => InkWell(
-                          child: MedicalCenterCard(
-                            medicalCenterEntity: MedicalCenterEntity(
-                              medicalCenterType: MedicalCenterType.pharmacies,
-                              title: StringsManager.pharmacies.tr(),
+                      child: state is PharmaciesDataLoadingState
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryBlueColor,
+                              ),
+                            )
+                          : ListView.separated(
+                              itemBuilder: (context, index) => InkWell(
+                                child: MedicalCenterCard(
+                                  medicalCenterEntity: MedicalCenterEntity(
+                                    medicalCenterType:
+                                        MedicalCenterType.pharmacies,
+                                    title: StringsManager.pharmacies.tr(),
+                                  ),
+                                  serviceProviderEntity:
+                                      cubit.pharmacies[index],
+                                ),
+                                onTap: () => GoRouter.of(context).push(
+                                  AppRouters.kNearestMedicalCentersScreen,
+                                  extra: MedicalCenterEntity(
+                                    medicalCenterType:
+                                        MedicalCenterType.pharmacies,
+                                    title: StringsManager.pharmacies.tr(),
+                                  ),
+                                ),
+                              ),
+                              separatorBuilder: (context, index) => Container(
+                                height: 1,
+                                color: AppColors.unselectedColor,
+                              ),
+                              itemCount: cubit.pharmacies.length,
                             ),
-                            serviceProviderEntity: cubit.pharmacies[index],
-                          ),
-                          onTap: () => GoRouter.of(context).push(
-                            AppRouters.kNearestMedicalCentersScreen,
-                            extra: MedicalCenterEntity(
-                              medicalCenterType: MedicalCenterType.pharmacies,
-                              title: StringsManager.pharmacies.tr(),
-                            ),
-                          ),
-                        ),
-                        separatorBuilder: (context, index) => Container(
-                          height: 1,
-                          color: AppColors.unselectedColor,
-                        ),
-                        itemCount: cubit.pharmacies.length,
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ));

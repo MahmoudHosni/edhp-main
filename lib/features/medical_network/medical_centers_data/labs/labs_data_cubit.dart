@@ -7,7 +7,7 @@ import 'package:edhp/models/service_provider_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LabsDataCubit extends Cubit<LabsDataStates> {
-  LabsDataCubit() : super(LabsDataInitialStates()) {
+  LabsDataCubit() : super(LabsDataInitialState()) {
     _getLabs(_governorateId, _areaId, _searchText);
     _getGovernorates();
   }
@@ -43,6 +43,7 @@ class LabsDataCubit extends Cubit<LabsDataStates> {
     int areaId,
     String searchText,
   ) {
+    emit(LabsDataLoadingState());
     DioHelper.getData(
       path: EndPoint.getServiceProvider,
       queryParameters: {

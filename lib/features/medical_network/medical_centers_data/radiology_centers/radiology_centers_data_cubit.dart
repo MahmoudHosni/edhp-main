@@ -43,6 +43,7 @@ class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
     int areaId,
     String searchText,
   ) {
+    emit(RadiologyCentersDataLoadingState());
     DioHelper.getData(
       path: EndPoint.getServiceProvider,
       queryParameters: {
