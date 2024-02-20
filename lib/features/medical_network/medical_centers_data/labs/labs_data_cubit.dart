@@ -24,6 +24,7 @@ class LabsDataCubit extends Cubit<LabsDataStates> {
 
   selectGovernorate({required int id}) {
     _governorateId = id;
+    _areaId = 0;
     _getLabs(_governorateId, _areaId, _searchText);
     _getAreas(governorateId: id);
   }

@@ -24,6 +24,7 @@ class PharmaciesDataCubit extends Cubit<PharmaciesDataStates> {
 
   selectGovernorate({required int id}) {
     _governorateId = id;
+    _areaId = 0;
     _getPharmacies(_governorateId, _areaId, _searchText);
     _getAreas(governorateId: id);
   }

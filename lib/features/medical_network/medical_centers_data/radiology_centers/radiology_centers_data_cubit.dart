@@ -24,6 +24,7 @@ class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
 
   selectGovernorate({required int id}) {
     _governorateId = id;
+    _areaId = 0;
     _getRadiologyCenters(_governorateId, _areaId, _searchText);
     _getAreas(governorateId: id);
   }
