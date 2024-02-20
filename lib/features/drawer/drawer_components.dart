@@ -12,12 +12,15 @@ import '../../core/utils/app_colors.dart';
 import '../../core/utils/styles/styles.dart';
 
 class DrawerAppHeader extends StatelessWidget {
-
   final String image;
   final String name;
   final String username;
 
-  DrawerAppHeader({super.key, required this.image, required this.name, required this.username});
+  DrawerAppHeader(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -26,43 +29,61 @@ class DrawerAppHeader extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 2.62,
       child: Column(
         children: [
-          SizedBox(height: 30,),
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: CachedNetworkImage(
-                    imageUrl: '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
-                    fit: BoxFit.cover,
-                    width: 80,
-                    height: 80,
-                    placeholder: (context, url) =>  Image.asset(AppPaths.profileImage, fit: BoxFit.cover,),
-                    errorWidget: (context, url, error) => Image.asset(AppPaths.profileImage, fit: BoxFit.cover,))
+          SizedBox(
+            height: 30,
           ),
+          Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: CachedNetworkImage(
+                  imageUrl:
+                      '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                  fit: BoxFit.cover,
+                  width: 80,
+                  height: 80,
+                  placeholder: (context, url) => Image.asset(
+                        AppPaths.profileImage,
+                        fit: BoxFit.cover,
+                      ),
+                  errorWidget: (context, url, error) => Image.asset(
+                        AppPaths.profileImage,
+                        fit: BoxFit.cover,
+                      ))),
           const SizedBox(
             height: 4,
           ),
-          Text(name , style: Styles.textStyle13W400.copyWith(color: Colors.white),),
+          Text(
+            name,
+            style: Styles.textStyle13W400.copyWith(color: Colors.white),
+          ),
           const SizedBox(
             height: 5,
           ),
-          Text(username , style: Styles.textStyle11W400.copyWith(color: Colors.white),),
+          Text(
+            username,
+            style: Styles.textStyle11W400.copyWith(color: Colors.white),
+          ),
           const SizedBox(
             height: 8,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: DefaultButton(backgroundColor: Color(0xffF5FAFC),fontSize: 12,textColor: Color(0xff0DBBD6),redius: 20,
-              function: (){
+            child: DefaultButton(
+              backgroundColor: Color(0xffF5FAFC),
+              fontSize: 12,
+              textColor: Color(0xff0DBBD6),
+              redius: 20,
+              function: () {
                 GoRouter.of(context).push(AppRouters.kProfileScreen);
               },
-              text: 'الملف الشخصي' , height: 40,),
+              text: 'الملف الشخصي',
+              height: 40,
+            ),
           ),
-
-
         ],
       ),
     );
@@ -70,31 +91,40 @@ class DrawerAppHeader extends StatelessWidget {
 }
 
 class ClickableDrawerItem extends StatelessWidget {
-
   final String text;
   final String svgIcon;
   final String pathLocationScreen;
 
-  const ClickableDrawerItem({super.key, required this.text, required this.svgIcon, required this.pathLocationScreen});
+  const ClickableDrawerItem(
+      {super.key,
+      required this.text,
+      required this.svgIcon,
+      required this.pathLocationScreen});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 36.0),
       child: InkWell(
-        onTap: (){
+        onTap: () {
           GoRouter.of(context).push(pathLocationScreen);
         },
         child: Padding(
-          padding: const EdgeInsets.only(top: 2.0 , bottom: 2.0),
+          padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(text , style: Styles.textStyle14W500.copyWith(color: AppColors.whiteLightNew,fontSize: 12.5),),
+              SvgPicture.asset(
+                svgIcon,
+                width: 18,
+              ),
               const SizedBox(
                 width: 10,
               ),
-              SvgPicture.asset(svgIcon , width: 18,),
+              Text(
+                text,
+                style: Styles.textStyle14W500
+                    .copyWith(color: AppColors.whiteLightNew, fontSize: 12.5),
+              ),
             ],
           ),
         ),
@@ -110,65 +140,102 @@ class DrawerAppList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ClickableDrawerItem(text: 'عن المنصة', svgIcon: AppPaths.aboutIconSvg ,
+        const ClickableDrawerItem(
+            text: 'عن المنصة',
+            svgIcon: AppPaths.aboutIconSvg,
             pathLocationScreen: AppRouters.kServiceScreen),
-        SizedBox(height: 12,),
-        const ClickableDrawerItem(text: 'إشتراكات العضويات', svgIcon: AppPaths.membershipIconSvg ,
-            pathLocationScreen: AppRouters.kSelectCompanyScreen),//kSelectCompanyScreenAppRouters.kCreateMembershipInsideAppScreen
-        SizedBox(height: 12,),
-        const ClickableDrawerItem(text: 'الشبكة الطبية', svgIcon: AppPaths.medicalNetworkIconSvg, pathLocationScreen: AppRouters.kMedicalNetworkScreen),
-        SizedBox(height: 12,),
-        const ClickableDrawerItem(text: 'السجل المرضي', svgIcon: AppPaths.medicalRecordIconSvg, pathLocationScreen: AppRouters.kMedicalRecordScreen),
-        SizedBox(height: 12,),
-        // const ClickableDrawerItem(text: 'منتجاتنا', svgIcon: AppPaths.serviceIconSvg ,
-        //     pathLocationScreen: AppRouters.kServiceScreen),
-        //
-        // const Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 30.0),
-        //   child: Divider(color: AppColors.neutralGrayColor, thickness: 0.9),
-        // ),
-
-        // const Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 30.0),
-        //   child: Divider(color: AppColors.neutralGrayColor, thickness: 0.9),
-        // ),
-        //
-        //
-        // const Padding(
-        //   padding: EdgeInsets.symmetric(horizontal: 30.0),
-        //   child: Divider(color: AppColors.neutralGrayColor, thickness: 0.9),
-        // ),
-
-        SizedBox(height: 17,),
+        SizedBox(
+          height: 20,
+        ),
+        const ClickableDrawerItem(
+            text: 'إشتراكات العضويات',
+            svgIcon: AppPaths.membershipIconSvg,
+            pathLocationScreen: AppRouters.kSelectCompanyScreen),
+        //kSelectCompanyScreenAppRouters.kCreateMembershipInsideAppScreen
+        SizedBox(
+          height: 20,
+        ),
+        const ClickableDrawerItem(
+            text: 'الشبكة الطبية',
+            svgIcon: AppPaths.medicalNetworkIconSvg,
+            pathLocationScreen: AppRouters.kMedicalNetworkScreen),
+        SizedBox(
+          height: 20,
+        ),
+        const ClickableDrawerItem(
+            text: 'السجل المرضي',
+            svgIcon: AppPaths.medicalRecordIconSvg,
+            pathLocationScreen: AppRouters.kMedicalRecordScreen),
+        SizedBox(
+          height: 20,
+        ),
+        SizedBox(
+          height: 17,
+        ),
         Container(
           width: 220,
           height: 40,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(width: 95,padding: EdgeInsets.all(5),alignment: Alignment.center,
-                  decoration: BoxDecoration(color: AppColors.whiteLightNew,borderRadius: BorderRadius.only(topLeft: Radius.circular(32),bottomLeft:Radius.circular(32) )),
-                  child:  Text('English' , style: Styles.textStyle13W400.copyWith(color: AppColors.secondNew),)),
-              SizedBox(width: 1,),
-              Container(width: 95,padding: EdgeInsets.all(5),alignment: Alignment.center,
-                  decoration: BoxDecoration(color: AppColors.whiteLightNew,borderRadius: BorderRadius.only(topRight: Radius.circular(32),bottomRight:Radius.circular(32) )),
-                  child:  Text('العربية' , style: Styles.textStyle13W400.copyWith(color: AppColors.secondNew),)),
+              Container(
+                  width: 95,
+                  padding: EdgeInsets.all(5),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: AppColors.whiteLightNew,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(32),
+                          bottomRight: Radius.circular(32))),
+                  child: Text(
+                    'العربية',
+                    style: Styles.textStyle13W400
+                        .copyWith(color: AppColors.secondNew),
+                  )),
+              SizedBox(
+                width: 1,
+              ),
+              Container(
+                  width: 95,
+                  padding: EdgeInsets.all(5),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: AppColors.whiteLightNew,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(32),
+                          bottomLeft: Radius.circular(32))),
+                  child: Text(
+                    'English',
+                    style: Styles.textStyle13W400
+                        .copyWith(color: AppColors.secondNew),
+                  )),
             ],
           ),
         ),
-        const SizedBox(height: 12,),
+        const SizedBox(
+          height: 12,
+        ),
         InkWell(
-          onTap: (){
+          onTap: () {
             CacheHelper.saveData(key: 'token', value: '');
             GoRouter.of(context).pushReplacement(AppRouters.kLoginScreen);
           },
-          child: Container(alignment: Alignment.center,
+          child: Container(
+            alignment: Alignment.center,
             width: 150,
             height: 40,
-            decoration: BoxDecoration(color: Colors.transparent,
-              borderRadius: BorderRadius.circular(32.0),border: Border.all(color: AppColors.whiteLightNew,width: 1),shape: BoxShape.rectangle,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(32.0),
+              border: Border.all(color: AppColors.whiteLightNew, width: 1),
+              shape: BoxShape.rectangle,
             ),
-            child: Text('تسجيل الخروج' , style: Styles.textStyle12W400.copyWith(color: AppColors.whiteLightNew,backgroundColor: Colors.transparent),),
+            child: Text(
+              'تسجيل الخروج',
+              style: Styles.textStyle12W400.copyWith(
+                  color: AppColors.whiteLightNew,
+                  backgroundColor: Colors.transparent),
+            ),
           ),
         ),
       ],
@@ -181,12 +248,24 @@ class DrawerAppFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DefaultTextButton(text: 'سياسة الخصوصية', function: (){},textColor: AppColors.whiteLightNew,),
-              const Text("|",style: TextStyle(color: AppColors.whiteLightNew)),
-              DefaultTextButton(text: 'الشروط والأحكام', function: (){},textColor: AppColors.whiteLightNew),
-            ],
-        ),flex: 1,);
+    return Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DefaultTextButton(
+              text: 'الشروط والأحكام',
+              function: () {},
+              textColor: AppColors.whiteLightNew),
+          const Text("|", style: TextStyle(color: AppColors.whiteLightNew)),
+          DefaultTextButton(
+            text: 'سياسة الخصوصية',
+            function: () {},
+            textColor: AppColors.whiteLightNew,
+          ),
+        ],
+      ),
+      flex: 1,
+    );
   }
 }

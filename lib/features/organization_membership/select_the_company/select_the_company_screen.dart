@@ -33,107 +33,188 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
   TextEditingController notationIdController = TextEditingController();
   TextEditingController clubNumberController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  int organizationID=-1;
-  String organizationName='';
+  int organizationID = -1;
+  String organizationName = '';
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CompanyItemCubit, CompanyItemsStates>(
-    listener: (context, state) {
-      // TODO: implement listener
-    },
-    builder: (context, state) {
-      return ViewContainer(title: StringsManager.memberShips,body:   Column(
-              children: [
-                SizedBox(height: 11,),
-                const Text(StringsManager.insuranceCompany , style: Styles.textStyle15W500,),
-                const SizedBox(height: 6,),
-                Container(width: double.infinity,child: const Text(StringsManager.selectCompany , style: Styles.textStyle10W400,textAlign: TextAlign.center,)),
-                const SizedBox(height: 15,),
-                if(state is CompanyItemLoadingState)
-                  const CircularProgressIndicator(color: AppColors.primaryBlueColor),
-                Expanded(
-                  child: ListView.builder(shrinkWrap: true,
-                    itemBuilder: (_, index) => InkWell(
-                      onTap: (){
-                        setState(() {
-                          organizationID = CompanyItemCubit.get(context).organizationItemsList[index].iD ??-1;
-                          organizationName = CompanyItemCubit.get(context).organizationItemsList[index].name ??'';
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0 , horizontal: 1.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),border: Border.all(color: AppColors.cardBorderNew),
-                              color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? AppColors.unselectedColor : AppColors.cardNew,
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: AppColors.lightGrayColor,
-                                  blurRadius: 1,
-                                ),
-                              ]
-                          ),
-                          child:  Container(padding: EdgeInsets.all(8),
-                              child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ClipRRect(borderRadius: BorderRadius.all(Radius.circular(12)),
-                                    child: CachedNetworkImage(
-                                        imageUrl:'$baseUrl${EndPoint.imgPath}?referenceTypeId=7&referenceId=${CompanyItemCubit.get(context).organizationItemsList[index].iD}&id=${Random().nextInt(100000)}',
-                                        fit: BoxFit.fill,height: 85,width: 85,
-                                        placeholder: (context, url) =>  SvgPicture.asset(AppPaths.companyImage,width: 85,height: 85,),
-                                        errorWidget: (context, url, error) => SvgPicture.asset(AppPaths.companyImage,width: 85,height: 85,)), ) ,
-
-                                  const Spacer(),
-                                  Column(crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(StringsManager.companyName , style: Styles.textStyle13W500.copyWith(color: AppColors.textColorBlue),),
-                                      const SizedBox(height: 5,),
-                                      Text(CompanyItemCubit.get(context).organizationItemsList[index].name.toString() ,textAlign: TextAlign.start,
-                                        style: Styles.textStyle13W500.copyWith(color: organizationID ==CompanyItemCubit.get(context).organizationItemsList[index].iD ? Colors.white : AppColors.secondNew),maxLines: 2,),
-                                    ],
-                                  )
-                                ],
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return ViewContainer(
+          title: StringsManager.memberShips,
+          body: Column(
+            children: [
+              SizedBox(
+                height: 11,
+              ),
+              const Text(
+                StringsManager.insuranceCompany,
+                style: Styles.textStyle15W500,
+              ),
+              const SizedBox(
+                height: 6,
+              ),
+              Container(
+                  width: double.infinity,
+                  child: const Text(
+                    StringsManager.selectCompany,
+                    style: Styles.textStyle10W400,
+                    textAlign: TextAlign.center,
+                  )),
+              const SizedBox(
+                height: 15,
+              ),
+              if (state is CompanyItemLoadingState)
+                const CircularProgressIndicator(
+                    color: AppColors.primaryBlueColor),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (_, index) => InkWell(
+                    onTap: () {
+                      setState(() {
+                        organizationID = CompanyItemCubit.get(context)
+                                .organizationItemsList[index]
+                                .iD ??
+                            -1;
+                        organizationName = CompanyItemCubit.get(context)
+                                .organizationItemsList[index]
+                                .name ??
+                            '';
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 1.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(color: AppColors.cardBorderNew),
+                            color: organizationID ==
+                                    CompanyItemCubit.get(context)
+                                        .organizationItemsList[index]
+                                        .iD
+                                ? AppColors.unselectedColor
+                                : AppColors.cardNew,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: AppColors.lightGrayColor,
+                                blurRadius: 1,
                               ),
-                            ),
+                            ]),
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                child: CachedNetworkImage(
+                                    imageUrl:
+                                        '$baseUrl${EndPoint.imgPath}?referenceTypeId=7&referenceId=${CompanyItemCubit.get(context).organizationItemsList[index].iD}&id=${Random().nextInt(100000)}',
+                                    fit: BoxFit.fill,
+                                    height: 85,
+                                    width: 85,
+                                    placeholder: (context, url) =>
+                                        SvgPicture.asset(
+                                          AppPaths.companyImage,
+                                          width: 85,
+                                          height: 85,
+                                        ),
+                                    errorWidget: (context, url, error) =>
+                                        SvgPicture.asset(
+                                          AppPaths.companyImage,
+                                          width: 85,
+                                          height: 85,
+                                        )),
+                              ),
+                              const Spacer(),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    StringsManager.companyName,
+                                    style: Styles.textStyle13W500.copyWith(
+                                        color: AppColors.textColorBlue),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    CompanyItemCubit.get(context)
+                                        .organizationItemsList[index]
+                                        .name
+                                        .toString(),
+                                    textAlign: TextAlign.start,
+                                    style: Styles.textStyle13W500.copyWith(
+                                        color: organizationID ==
+                                                CompanyItemCubit.get(context)
+                                                    .organizationItemsList[
+                                                        index]
+                                                    .iD
+                                            ? Colors.white
+                                            : AppColors.secondNew),
+                                    maxLines: 2,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    itemCount: CompanyItemCubit.get(context).organizationItemsList.length,
                   ),
+                  itemCount: CompanyItemCubit.get(context)
+                      .organizationItemsList
+                      .length,
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 25,
-                ),
-
-                Row(children: [
-                  Container(alignment: Alignment.bottomLeft,
-                  child: NextButton(backgroundColor: (organizationID > 0) ? AppColors.secondNew : Colors.grey,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 25,
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  BackCircleButton(),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  NextButton(
+                    backgroundColor: (organizationID > 0)
+                        ? AppColors.secondNew
+                        : Colors.grey,
                     function: () {
-                      if(organizationID<=0){
-                        ShowToast.showToast('برجاء اختيار شركة التأمين بصورة صحيحة');
-                      }else{
+                      if (organizationID <= 0) {
+                        ShowToast.showToast(
+                            'برجاء اختيار شركة التأمين بصورة صحيحة');
+                      } else {
                         var subscriptionRequest = SubscriptionRequest();
                         subscriptionRequest.MedicalCompanyID = organizationID;
-                        subscriptionRequest.MedicalCompanyName = organizationName;
-                        GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
+                        subscriptionRequest.MedicalCompanyName =
+                            organizationName;
+                        GoRouter.of(context).push(
+                            AppRouters.kCreateMembershipScreen,
+                            extra: subscriptionRequest);
                       }
                     },
-                    text: StringsManager.select,width: 120,fontSize: 13,
+                    text: StringsManager.select,
+                    width: 120,
+                    fontSize: 13,
                     redius: 32,
                   ),
-                ),
-                  const SizedBox(width: 8,),
-                  BackCircleButton(),
-                ],),
-
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 33,
-                ),
-              ],
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 33,
+              ),
+            ],
           ),
-      );
-     },
+        );
+      },
     );
   }
 }

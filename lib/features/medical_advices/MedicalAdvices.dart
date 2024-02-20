@@ -9,48 +9,64 @@ import 'package:edhp/models/Medical.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MedicalAdvices extends StatelessWidget{
-
+class MedicalAdvices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => MedicalAdvicesCubit()..getAdvices(),
-        child: BlocConsumer<MedicalAdvicesCubit, MedicalAdvicesState>(
-          listener: (context, state) {       },
+      create: (context) => MedicalAdvicesCubit()..getAdvices(),
+      child: BlocConsumer<MedicalAdvicesCubit, MedicalAdvicesState>(
+          listener: (context, state) {},
           builder: (context, state) {
             MedicalAdvicesCubit cubit = MedicalAdvicesCubit.get(context);
-            return ViewContainer(title: StringsManager.medicalAdvices,body: Column(
-                    children: [
-                      const SizedBox(height: 35,),
-                      if(state is MedicalAdvicesLoadingState)
-                        const CircularProgressIndicator(color: AppColors.primaryBlueColor),
-                      Expanded(
-                        child: ListView.separated(
-                          itemBuilder: (context, index) => MedicalAdviceCard(item : cubit.medicalLst![index]),
-                          separatorBuilder: (context, index) => const SizedBox(
-                            height: 8,
-                          ),
-                          itemCount: cubit.medicalLst?.length ??0,
-                        ),
-                      ),
-                    ],
+            return ViewContainer(
+              title: StringsManager.medicalAdvices,
+              body: Column(
+                children: [
+                  const SizedBox(
+                    height: 35,
                   ),
+                  if (state is MedicalAdvicesLoadingState)
+                    const CircularProgressIndicator(
+                        color: AppColors.primaryBlueColor),
+                  Expanded(
+                    child: ListView.separated(
+                      itemBuilder: (context, index) =>
+                          MedicalAdviceCard(item: cubit.medicalLst![index]),
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 8,
+                      ),
+                      itemCount: cubit.medicalLst?.length ?? 0,
+                    ),
+                  ),
+                ],
+              ),
             );
           }),
     );
   }
 }
 
-class MedicalAdviceCard extends StatelessWidget{
+class MedicalAdviceCard extends StatelessWidget {
   final MedicalAdvice item;
 
   MedicalAdviceCard({required this.item});
 
   @override
   Widget build(BuildContext context) {
-      return Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: double.infinity,padding: const EdgeInsets.all(8),
-        height: 75,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
-      child: Text(item.name ??'',style: Styles.textStyle13W500.copyWith(color: AppColors.blackColor),textAlign: TextAlign.right,));
+    return Container(
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+        width: double.infinity,
+        padding: const EdgeInsets.all(8),
+        height: 75,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: AppColors.whiteLightNew,
+            border: Border.all(color: AppColors.cardBorderNew, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(25))),
+        child: Text(
+          item.name ?? '',
+          style: Styles.textStyle13W500.copyWith(color: AppColors.blackColor),
+          textAlign: TextAlign.right,
+        ));
   }
-
 }
