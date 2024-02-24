@@ -134,7 +134,7 @@ class EditProfileScreen extends StatelessWidget {
                         ),
                         const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الرقم القومي' , style: Styles.textStyle16W500,),),
                         getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: identityNumberController.text.length==14?'':"",
-                          controller: identityNumberController,
+                          controller: identityNumberController,isClickable: false,
                           keyboardType: TextInputType.text,
                           validation: (value){
                             if(value!.isEmpty){

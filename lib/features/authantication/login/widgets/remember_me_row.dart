@@ -21,13 +21,13 @@ class RememberMeRow extends StatelessWidget {
       builder: (context, state) {
         return Row(
           children: [
-            DefaultTextButton(
-              function: () {
-                GoRouter.of(context).push(AppRouters.kForgetPasswordScreen);
-              },
-              text: 'نسيت كلمة السر؟',
-              textColor: AppColors.primaryBlueColor,
-            ),
+            // DefaultTextButton(
+            //   function: () {
+            //     GoRouter.of(context).push(AppRouters.kForgetPasswordScreen);
+            //   },
+            //   text: 'نسيت كلمة السر؟',
+            //   textColor: AppColors.primaryBlueColor,
+            // ),
             const Spacer(),
             Text('تذكرني', style: Styles.textStyle12W400.copyWith(
                 color: AppColors.lightGrayColor),),
