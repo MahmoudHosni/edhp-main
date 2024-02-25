@@ -38,7 +38,7 @@ class SettingScreen extends StatelessWidget {
               height: double.infinity,
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
                       child: Stack(
@@ -87,26 +87,30 @@ class SettingScreen extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    Text(
-                      GetProfileCubit.get(context)
-                          .userProfileModel!
-                          .profileName
-                          .toString(),
-                      style: Styles.textStyle14W400
-                          .copyWith(color: AppColors.secondNew),
+                    Center(
+                      child: Text(
+                        GetProfileCubit.get(context)
+                            .userProfileModel!
+                            .profileName
+                            .toString(),
+                        style: Styles.textStyle14W400
+                            .copyWith(color: AppColors.secondNew),
+                      ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 8,
                     ),
                     (memberShips != null && memberShips.length > 0)
-                        ? Text(
-                            memberShips[0].SubscriptionNumber,
-                            style: Styles.textStyle13W400
-                                .copyWith(color: AppColors.unselectedColor),
+                        ? Center(
+                            child: Text(
+                              memberShips[0].SubscriptionNumber,
+                              style: Styles.textStyle13W400
+                                  .copyWith(color: AppColors.unselectedColor),
+                            ),
                           )
                         : SizedBox(),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 36,
+                    const SizedBox(
+                      height: 28,
                     ),
                     InkWell(
                       onTap: () {
@@ -115,182 +119,163 @@ class SettingScreen extends StatelessWidget {
                             extra:
                                 memberShips.length > 0 ? memberShips[0] : null);
                       },
-                      child: Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                          width: 260,
-                          padding: const EdgeInsets.all(8),
-                          height: 54,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: AppColors.whiteLightNew,
-                              border: Border.all(
-                                  color: AppColors.cardBorderNew, width: 1),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25))),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 52),
+                        child: Container(
+                            padding: const EdgeInsetsDirectional.symmetric(
+                                horizontal: 12),
+                            height: 52,
+                            decoration: BoxDecoration(
+                                color: AppColors.whiteLightNew,
+                                border: Border.all(
+                                    color: AppColors.cardBorderNew, width: 1),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(26))),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                SvgPicture.asset('assets/icons/previous.svg'),
-                                const Spacer(),
+                                SvgPicture.asset(AppPaths.personIconSvg),
+                                const SizedBox(width: 8),
                                 const Text(
                                   'تعديل الملف الشخصي',
                                   style: Styles.textStyle12W400,
                                 ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                SvgPicture.asset(AppPaths.personIconSvg),
+                                const Spacer(),
+                                SvgPicture.asset('assets/icons/previous.svg'),
                               ],
-                            ),
-                          )),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 50,
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text(
-                        'الإشعارات والتنبيهات',
-                        style: Styles.textStyle14W500
-                            .copyWith(color: AppColors.secondNew),
+                            )),
                       ),
                     ),
                     const SizedBox(
-                      height: 8,
+                      height: 28,
+                    ),
+                    Text(
+                      'الإشعارات والتنبيهات',
+                      style: Styles.textStyle14W500
+                          .copyWith(color: AppColors.secondNew),
+                    ),
+                    const SizedBox(
+                      height: 12,
                     ),
                     Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(8),
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 12),
                       height: 52,
-                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                           color: AppColors.whiteLightNew,
                           border: Border.all(
                               color: AppColors.cardBorderNew, width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Row(
-                          children: [
-                            Switch(
-                              value: cubit.switchOfNotification,
-                              onChanged: (bool value) {
-                                cubit.changeSwitchOfNotification(value);
-                              },
-                              activeColor: AppColors.whiteColor,
-                              activeTrackColor: AppColors.primaryBlueColor,
-                            ),
-                            const Spacer(),
-                            Text(
-                              'تفعيل الإشعارات والتنبيهات',
-                              style: Styles.textStyle12W400
-                                  .copyWith(color: AppColors.blackColor),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 40,
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text(
-                        'المؤشرات الحيوية',
-                        style: Styles.textStyle14W500
-                            .copyWith(color: AppColors.secondNew),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(8),
-                      height: 52,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: AppColors.whiteLightNew,
-                          border: Border.all(
-                              color: AppColors.cardBorderNew, width: 1),
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Row(
-                          children: [
-                            Switch(
-                              value: cubit.switchOfFingerPrint,
-                              onChanged: (bool value) {
-                                cubit.changeSwitchOfFingerPrint(value);
-                              },
-                              activeColor: AppColors.whiteColor,
-                              activeTrackColor: AppColors.primaryBlueColor,
-                            ),
-                            const Spacer(),
-                            const Text(
-                              'تفعيل بصمة اللإصبع عند الدخول',
-                              style: Styles.textStyle12W400,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 35,
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text(
-                        'اللغة المفضلة',
-                        style: Styles.textStyle14W500
-                            .copyWith(color: AppColors.secondNew),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: 220,
-                      height: 40,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(26))),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                              width: 95,
-                              padding: EdgeInsets.all(5),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: AppColors.whiteLightNew,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(32),
-                                      bottomLeft: Radius.circular(32))),
-                              child: Text(
-                                'English',
-                                style: Styles.textStyle12W400
-                                    .copyWith(color: AppColors.secondNew),
-                              )),
-                          SizedBox(
-                            width: 1,
+                          Text(
+                            'تفعيل الإشعارات والتنبيهات',
+                            style: Styles.textStyle12W400
+                                .copyWith(color: AppColors.blackColor),
                           ),
-                          Container(
-                              width: 95,
-                              padding: EdgeInsets.all(5),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: AppColors.secondNew,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(32),
-                                      bottomRight: Radius.circular(32))),
-                              child: Text(
-                                'العربية',
-                                style: Styles.textStyle12W400
-                                    .copyWith(color: AppColors.whiteLightNew),
-                              )),
+                          const Spacer(),
+                          Switch(
+                            value: cubit.switchOfNotification,
+                            onChanged: (bool value) {
+                              cubit.changeSwitchOfNotification(value);
+                            },
+                            activeColor: AppColors.whiteColor,
+                            activeTrackColor: AppColors.primaryBlueColor,
+                          ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Text(
+                      'المؤشرات الحيوية',
+                      style: Styles.textStyle14W500
+                          .copyWith(color: AppColors.secondNew),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 12),
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppColors.whiteLightNew,
+                          border: Border.all(
+                              color: AppColors.cardBorderNew, width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(26))),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'تفعيل بصمة اللإصبع عند الدخول',
+                            style: Styles.textStyle12W400,
+                          ),
+                          const Spacer(),
+                          Switch(
+                            value: cubit.switchOfFingerPrint,
+                            onChanged: (bool value) {
+                              cubit.changeSwitchOfFingerPrint(value);
+                            },
+                            activeColor: AppColors.whiteColor,
+                            activeTrackColor: AppColors.primaryBlueColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Text(
+                      'اللغة المفضلة',
+                      style: Styles.textStyle14W500
+                          .copyWith(color: AppColors.secondNew),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 220,
+                        height: 44,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                width: 95,
+                                padding: EdgeInsets.all(5),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.secondNew,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(32),
+                                        bottomRight: Radius.circular(32))),
+                                child: Text(
+                                  'العربية',
+                                  style: Styles.textStyle12W400
+                                      .copyWith(color: AppColors.whiteLightNew),
+                                )),
+                            SizedBox(
+                              width: 1,
+                            ),
+                            Container(
+                                width: 95,
+                                padding: EdgeInsets.all(5),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.whiteLightNew,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(32),
+                                        bottomLeft: Radius.circular(32))),
+                                child: Text(
+                                  'English',
+                                  style: Styles.textStyle12W400
+                                      .copyWith(color: AppColors.secondNew),
+                                )),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(

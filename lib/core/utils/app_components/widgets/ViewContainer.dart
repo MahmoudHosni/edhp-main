@@ -23,8 +23,8 @@ class ViewContainer extends StatelessWidget {
         appBar: getSharedAppBarWithBack(context, title, showBack),
         body: Container(
             margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(25),

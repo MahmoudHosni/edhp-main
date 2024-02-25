@@ -70,11 +70,10 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           SearchBarView(),
                           const SizedBox(
-                            height: 32,
+                            height: 40,
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height / 4.5,
                             child: CarouselSlider(
                                 items: [
                                   for (String image
@@ -115,20 +114,15 @@ class HomeScreen extends StatelessWidget {
                                         )),
                                 ],
                                 options: CarouselOptions(
-                                  height: 450,
-                                  aspectRatio: 18 / 9,
-                                  viewportFraction: 0.9,
-                                  initialPage: 0,
+                                  enlargeFactor: 0.22,
+                                  viewportFraction: 0.85,
+                                  enlargeCenterPage: true,
                                   enableInfiniteScroll: true,
-                                  reverse: false,
                                   autoPlay: true,
                                   autoPlayInterval: const Duration(seconds: 3),
                                   autoPlayAnimationDuration:
                                       Duration(milliseconds: 800),
                                   autoPlayCurve: Curves.fastOutSlowIn,
-                                  enlargeCenterPage: true,
-                                  enlargeFactor: 0.6,
-                                  scrollDirection: Axis.horizontal,
                                 )),
                           ),
                           const SizedBox(
