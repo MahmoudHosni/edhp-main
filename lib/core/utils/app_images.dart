@@ -4,4 +4,5 @@ class AppImages {
   static const String location = 'assets/icons/location-filled.svg';
   static const String clock = 'assets/icons/Clock.svg';
   static const String locationPlaceholder = 'assets/icons/placeholder.svg';
+  static const String medicalNetwork = 'assets/icons/user-md.svg';
 }

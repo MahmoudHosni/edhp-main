@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
+import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_button.dart';
+import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
@@ -177,6 +180,12 @@ class DrawerAppList extends StatelessWidget {
         getSeparatorView(),
         // const ClickableDrawerItem(text: 'الشبكة الطبية', svgIcon: AppPaths.medicalNetworkIconSvg, pathLocationScreen: AppRouters.kMedicalNetworkScreen),
         // SizedBox(height: 12,),
+        ClickableDrawerItem(
+            text: StringsManager.medicalNetwork.tr(),
+            svgIcon: AppImages.medicalNetwork,
+            pathLocationScreen: AppRouters.kMedicalNetworkScreen,
+            checkForMembership: false),
+        getSeparatorView(),
         const ClickableDrawerItem(
             text: 'السجل المرضي',
             svgIcon: AppPaths.medicalRecordIconSvg,

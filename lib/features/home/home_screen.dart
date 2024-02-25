@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
@@ -134,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                               Expanded(
                                 child: Container(
                                   height: 140,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(12))),
@@ -237,8 +238,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              const Text(
-                                StringsManager.healthNetwork,
+                              Text(
+                                StringsManager.medicalNetwork.tr(),
                                 style: Styles.textStyle14W500,
                               ),
                               const Spacer(),
@@ -263,13 +264,13 @@ class HomeScreen extends StatelessWidget {
                             child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
                                 itemCount: medicalNetworkList.length,
-                                separatorBuilder: (_, __) => SizedBox(
+                                separatorBuilder: (_, __) => const SizedBox(
                                       width: 8,
                                     ),
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
                                     width: 112,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(12))),
@@ -280,7 +281,7 @@ class HomeScreen extends StatelessWidget {
                                             children: [
                                               SvgPicture.asset(
                                                   'assets/icons/ico_${index + 1}.svg'),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 25,
                                               ),
                                               Text(
@@ -292,15 +293,34 @@ class HomeScreen extends StatelessWidget {
                                               )
                                             ]),
                                         onTap: () {
-                                          openUrl(HealthyNetworkLinks.elementAt(
-                                              index));
+                                          switch (medicalNetworkList[index]
+                                              .router) {
+                                            case AppRouters
+                                                  .kHospitalsDataScreen:
+                                            case AppRouters
+                                                  .kDoctorsSpecialtiesScreen:
+                                              openUrl(
+                                                  HealthyNetworkLinks.elementAt(
+                                                      index));
+                                            case AppRouters.kLabsDataScreen:
+                                              GoRouter.of(context).push(
+                                                  AppRouters.kLabsDataScreen);
+                                            case AppRouters
+                                                  .kRadiologyCentersDataScreen:
+                                              GoRouter.of(context).push(AppRouters
+                                                  .kRadiologyCentersDataScreen);
+                                            case AppRouters
+                                                  .kMedicalDevicesDataScreen:
+                                            case AppRouters
+                                                  .kPharmaciesDataScreen:
+                                              openUrl(
+                                                  HealthyNetworkLinks.elementAt(
+                                                      index));
+                                          }
                                         }),
                                   );
                                 }),
                           ),
-                          const SizedBox(
-                            height: 8,
-                          )
                         ],
                       ),
                     )),

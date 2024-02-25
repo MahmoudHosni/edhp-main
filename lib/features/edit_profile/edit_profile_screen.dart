@@ -31,32 +31,39 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    nameController.text = GetProfileCubit.get(context).userProfileModel!.profileName.toString();
-    usernameController.text = GetProfileCubit.get(context).userProfileModel!.userName.toString();
-    emailController.text = GetProfileCubit.get(context).userProfileModel!.email.toString();
-    identityNumberController.text = GetProfileCubit.get(context).userProfileModel?.identityNumber?.toString() ??'';
-    phoneNumberController.text = GetProfileCubit.get(context).userProfileModel!.mobileNumber.toString();
+    nameController.text =
+        GetProfileCubit.get(context).userProfileModel!.profileName.toString();
+    usernameController.text =
+        GetProfileCubit.get(context).userProfileModel!.userName.toString();
+    emailController.text =
+        GetProfileCubit.get(context).userProfileModel!.email.toString();
+    identityNumberController.text = GetProfileCubit.get(context)
+            .userProfileModel
+            ?.identityNumber
+            ?.toString() ??
+        '';
+    phoneNumberController.text =
+        GetProfileCubit.get(context).userProfileModel!.mobileNumber.toString();
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => EditProfileCubit(),
+          create: (context) => EditProfileCubit(),
         ),
       ],
       child: BlocConsumer<EditProfileCubit, EditProfileStates>(
         listener: (context, state) {
-          if(state is EditProfileSuccessfullyState){
+          if (state is EditProfileSuccessfullyState) {
             GetProfileCubit.get(context).getProfile();
           }
-          if(state is UploadProfileImageSuccessfullyState){
+          if (state is UploadProfileImageSuccessfullyState) {
             final snackBar = SnackBar(
               backgroundColor: AppColors.primaryBlueColor,
               content: const Text('Your Profile Image Has Been Uploaded!'),
               action: SnackBarAction(
                 label: 'Ok',
                 textColor: AppColors.whiteColor,
-                onPressed: () {
-                },
+                onPressed: () {},
               ),
             );
             GetProfileCubit.get(context).getImageProfile();
@@ -64,155 +71,235 @@ class EditProfileScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return ViewContainer(title: StringsManager.editProfile,body:SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child:  SingleChildScrollView(
-                  child: Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 4,
+          return ViewContainer(
+            title: StringsManager.editProfile,
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      const EditImage(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            GetProfileCubit.get(context)
+                                .userProfileModel!
+                                .profileName
+                                .toString(),
+                            style: Styles.textStyle16W400,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          SvgPicture.asset(
+                            AppPaths.editIconSvg,
+                            color: AppColors.primaryBlueColor,
+                            width: 12,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      (memberShips != null && memberShips.length > 0)
+                          ? Center(
+                            child: Text(
+                                memberShips[0].SubscriptionNumber,
+                                style: Styles.textStyle16W400,
+                              ),
+                          )
+                          : SizedBox(),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      (memberShip != null && memberShips.isNotEmpty)
+                          ? SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              height:
+                                  MediaQuery.of(context).size.height / 3.7,
+                              child: MemberShipCard(
+                                memberShip: memberShips[0],
+                                scaler: 1.5,
+                                spaceTop: 32,
+                              ))
+                          : const SizedBox(),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 25,
+                      ),
+                      const Text(
+                        'الإسم',
+                        style: Styles.textStyle16W500,
+                      ),
+                      getContainer(
+                        child: DefaultTextFormFieldWithoutLabel(
+                          maxLen: 100,
+                          error: nameController.text.length == 14 ? '' : "",
+                          controller: nameController,
+                          onChange: (value) => {nameController.text = value},
+                          keyboardType: TextInputType.text,
+                          validation: (value) {
+                            if (value!.isEmpty) {
+                              return 'name must be not empty';
+                            }
+                            return null;
+                          },
                         ),
-                        const EditImage(),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(GetProfileCubit.get(context).userProfileModel!.profileName.toString() , style: Styles.textStyle16W400,),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            SvgPicture.asset(AppPaths.editIconSvg , color: AppColors.primaryBlueColor, width: 12,),
-                          ],
-                        ),
-                        const SizedBox(height: 8,),
-                        (memberShips!=null && memberShips.length>0)?
-                        Text(memberShips[0].SubscriptionNumber , style: Styles.textStyle16W400,):SizedBox(),
-                        const SizedBox(height: 8,),
-                        (memberShip!=null && memberShips.isNotEmpty)?SizedBox(
-                              width: MediaQuery.of(context).size.width ,
-                              height: MediaQuery.of(context).size.height / 3.7,
-                              child: MemberShipCard(memberShip: memberShips[0],scaler: 1.5,spaceTop: 32,)
-                            ): const SizedBox(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 25,
-                        ),
-                        const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الإسم' , style: Styles.textStyle16W500,),),
-                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen:  100,error: nameController.text.length==14?'':"",
-                            controller: nameController,onChange: (value) => {
-                                nameController.text = value
-                            },
-                            keyboardType: TextInputType.text,
-                            validation: (value){
-                              if(value!.isEmpty){
-                                return 'name must be not empty';
-                              }
-                              return null;
-                            },
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Text(
+                        'اسم المستخدم',
+                        style: Styles.textStyle16W500,
+                      ),
+                      getContainer(
+                          child: DefaultTextFormFieldWithoutLabel(
+                        maxLen: 100,
+                        error: usernameController.text.length == 14 ? '' : "",
+                        controller: usernameController,
+                        keyboardType: TextInputType.text,
+                        validation: (value) {
+                          if (value!.isEmpty) {
+                            return 'username must be not empty';
+                          }
+                          return null;
+                        },
+                      )),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Text(
+                        'الرقم القومي',
+                        style: Styles.textStyle16W500,
+                      ),
+                      getContainer(
+                          child: DefaultTextFormFieldWithoutLabel(
+                        maxLen: 100,
+                        error: identityNumberController.text.length == 14
+                            ? ''
+                            : "",
+                        controller: identityNumberController,
+                        isClickable: false,
+                        keyboardType: TextInputType.text,
+                        validation: (value) {
+                          if (value!.isEmpty) {
+                            return 'identity number must be not empty';
+                          }
+                          return null;
+                        },
+                      )),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Text(
+                        'البريد الالكتروني',
+                        style: Styles.textStyle16W500,
+                      ),
+                      getContainer(
+                          child: DefaultTextFormFieldWithoutLabel(
+                        maxLen: 100,
+                        error: emailController.text.length == 14 ? '' : "",
+                        controller: emailController,
+                        keyboardType: TextInputType.text,
+                        validation: (value) {
+                          if (value!.isEmpty) {
+                            return 'email must be not empty';
+                          }
+                          return null;
+                        },
+                      )),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Text(
+                        'رقم الهاتف',
+                        style: Styles.textStyle16W500,
+                      ),
+                      getContainer(
+                          child: DefaultTextFormFieldWithoutLabel(
+                        maxLen: 100,
+                        error:
+                            phoneNumberController.text.length == 14 ? '' : "",
+                        controller: phoneNumberController,
+                        keyboardType: TextInputType.number,
+                        validation: (value) {
+                          if (value!.isEmpty) {
+                            return 'phone number must be not empty';
+                          }
+                          return null;
+                        },
+                      )),
+                      const SizedBox(
+                        height: 36,
+                      ),
+                      if (state is EditProfileLoadingState)
+                        const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryBlueColor,
                           ),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Align(alignment: AlignmentDirectional.centerEnd,child: Text('اسم المستخدم' , style: Styles.textStyle16W500,),),
-                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen : 100,error: usernameController.text.length==14?'':"",
-                          controller: usernameController,
-                          keyboardType: TextInputType.text,
-                          validation: (value){
-                            if(value!.isEmpty){
-                              return 'username must be not empty';
-                            }
-                            return null;
-                          },
-                        )),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Align(alignment: AlignmentDirectional.centerEnd,child: Text('الرقم القومي' , style: Styles.textStyle16W500,),),
-                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: identityNumberController.text.length==14?'':"",
-                          controller: identityNumberController,isClickable: false,
-                          keyboardType: TextInputType.text,
-                          validation: (value){
-                            if(value!.isEmpty){
-                              return 'identity number must be not empty';
-                            }
-                            return null;
-                          },
-                        )),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Align(alignment: AlignmentDirectional.centerEnd,child: Text('البريد الالكتروني' , style: Styles.textStyle16W500,),),
-                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: emailController.text.length==14?'':"",
-                          controller: emailController,
-                          keyboardType: TextInputType.text,
-                          validation: (value){
-                            if(value!.isEmpty){
-                              return 'email must be not empty';
-                            }
-                            return null;
-                          },
-                        )),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Align(alignment: AlignmentDirectional.centerEnd,child: Text('رقم الهاتف' , style: Styles.textStyle16W500,),),
-                        getContainer(child: DefaultTextFormFieldWithoutLabel(maxLen: 100,error: phoneNumberController.text.length==14?'':"",
-                          controller: phoneNumberController,
-                          keyboardType: TextInputType.number,
-                          validation: (value){
-                            if(value!.isEmpty){
-                              return 'phone number must be not empty';
-                            }
-                            return null;
-                          },
-                        )),
+                      if (state is EditProfileLoadingState)
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 20,
                         ),
-                        if(state is EditProfileLoadingState)
-                          const CircularProgressIndicator(color: AppColors.primaryBlueColor,),
-                        if(state is EditProfileLoadingState)
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height / 20,
-                          ),
-                        DefaultButton(
-                          function: (){
-                            if(formKey.currentState!.validate()){
-                              EditProfileCubit.get(context).editProfile(
-                                  name: nameController.text,
-                                  username: usernameController.text,
-                                  mobileNumber: phoneNumberController.text,
-                                  email: emailController.text,
-                                  identityNumber: identityNumberController.text,
-                              ).then((value) {
-                                GetProfileCubit cubit = GetProfileCubit.get(context);
-                                cubit.getProfile();
-                                GoRouter.of(context).push(AppRouters.kLayoutScreen);
-                              });
-                            }
-                          },
-                          text: 'حفظ التغييرات' ,
-                          redius: 10,
-                        ),
-                        SizedBox(height: 18,)
-                      ],
-                    ),
+                      DefaultButton(
+                        function: () {
+                          if (formKey.currentState!.validate()) {
+                            EditProfileCubit.get(context)
+                                .editProfile(
+                              name: nameController.text,
+                              username: usernameController.text,
+                              mobileNumber: phoneNumberController.text,
+                              email: emailController.text,
+                              identityNumber: identityNumberController.text,
+                            )
+                                .then((value) {
+                              GetProfileCubit cubit =
+                                  GetProfileCubit.get(context);
+                              cubit.getProfile();
+                              GoRouter.of(context)
+                                  .push(AppRouters.kLayoutScreen);
+                            });
+                          }
+                        },
+                        text: 'حفظ التغييرات',
+                        redius: 10,
+                      ),
+                      SizedBox(
+                        height: 18,
+                      )
+                    ],
                   ),
                 ),
               ),
             ),
           );
         },
-    ),
-);
+      ),
+    );
   }
 
-  Container getContainer({required DefaultTextFormFieldWithoutLabel child}){
-    return Container(margin: EdgeInsets.fromLTRB(0, 5, 0, 5),alignment: Alignment.center,height: 65,decoration: BoxDecoration(border: Border.all(color: Colors.blue,width: 0.8,),borderRadius: BorderRadius.all(Radius.circular(12))),child: child,);
+  Container getContainer({required DefaultTextFormFieldWithoutLabel child}) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+      alignment: Alignment.center,
+      height: 65,
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.blue,
+            width: 0.8,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(12))),
+      child: child,
+    );
   }
 }

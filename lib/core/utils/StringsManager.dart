@@ -17,7 +17,6 @@ class StringsManager {
   static const String categories = 'التصنيفات';
   static const String yourHealthProfile = 'ملفك الطبي';
 
-  static const String healthNetwork = 'الشبكة الطبية';
   static const String showAll = 'عرض الكل >';
 
 
@@ -44,6 +43,7 @@ class StringsManager {
   static const String jahatName = 'أسم الهيئة';
 
   ///Medical Network
+  static const String medicalNetwork = 'medicalNetwork';
   static const String hospitals = 'hospitals';
   static const String doctors = 'doctors';
   static const String labs = 'labs';
