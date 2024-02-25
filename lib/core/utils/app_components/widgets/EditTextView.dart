@@ -48,37 +48,33 @@ class EditTextView extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: TextFormField(
-          textAlign: TextAlign.end,
-          enabled: isClickable,
-          minLines: minLines,
-          maxLines: maxLines,
-          obscureText: obscureText,
-          controller: controller,
-          keyboardType: keyboardType,
-          onFieldSubmitted: onSubmit,
-          validator: validation,
-          onChanged: onChange,
-          decoration: InputDecoration(
-            hintText: fieldName,
-            hintStyle: hintStyle,prefixIconColor: Colors.blue,suffixIconColor: Colors.blue,iconColor: Colors.blue,
-            prefixIcon: prefixIcon != null ? IconButton(
-              onPressed: onPressedPrefixIcon,
-              icon: Icon(
-                prefixIcon ,
-                color: AppColors.secondNew,
-              ),
-            ) : null,
-            suffixIcon:  suffixIcon != null ? IconButton(
-              onPressed: onPressedSuffixIcon,
-              icon: Icon(
-                suffixIcon,
-                color: AppColors.secondNew,
-              ),
-            ): null,
-          ),
+      child: TextFormField(
+        enabled: isClickable,
+        minLines: minLines,
+        maxLines: maxLines,
+        obscureText: obscureText,
+        controller: controller,
+        keyboardType: keyboardType,
+        onFieldSubmitted: onSubmit,
+        validator: validation,
+        onChanged: onChange,
+        decoration: InputDecoration(
+          hintText: fieldName,
+          hintStyle: hintStyle,prefixIconColor: Colors.blue,suffixIconColor: Colors.blue,iconColor: Colors.blue,
+          prefixIcon: prefixIcon != null ? IconButton(
+            onPressed: onPressedPrefixIcon,
+            icon: Icon(
+              prefixIcon ,
+              color: AppColors.secondNew,
+            ),
+          ) : null,
+          suffixIcon:  suffixIcon != null ? IconButton(
+            onPressed: onPressedSuffixIcon,
+            icon: Icon(
+              suffixIcon,
+              color: AppColors.secondNew,
+            ),
+          ): null,
         ),
       ),
     );
