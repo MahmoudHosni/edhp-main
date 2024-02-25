@@ -22,6 +22,6 @@ abstract class AppColors {
   static const Color cardBorderNew = Color(0xffedf3f9);
   static const Color textColorBlue = Color(0xff157DE6);
   static const Color blue = Color(0xff339DFA);
-  static const Color textColorBlack = Color(0xff303134);
+  static const Color lightGray = Color(0xffD6D6D6);
   // static const Color
 }

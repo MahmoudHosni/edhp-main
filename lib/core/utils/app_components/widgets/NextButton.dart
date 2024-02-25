@@ -26,28 +26,37 @@ class NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: height,alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(redius),gradient: LinearGradient(
+        height: height,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(redius),
+          gradient: const LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: <Color>[
-              AppColors.secondNew,
-              AppColors.primaryNew
-            ],
-          ),
-      ),
-      width: width,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center,children: [
-        Icon(Icons.arrow_back_ios,color: Colors.white,size: 16,),
-        MaterialButton(
-          onPressed: function,minWidth: 50,
-          child: Text(
-            text.toUpperCase(),
-            style: TextStyle(color: textColor, fontSize: fontSize , fontFamily: 'Tajawal'),
+            colors: <Color>[AppColors.secondNew, AppColors.primaryNew],
           ),
         ),
-      ],)
-    );
+        width: width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MaterialButton(
+              onPressed: function,
+              minWidth: 50,
+              child: Text(
+                text.toUpperCase(),
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: fontSize,
+                    fontFamily: 'Tajawal'),
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+              size: 16,
+            ),
+          ],
+        ));
   }
 }

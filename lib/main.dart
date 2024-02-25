@@ -19,88 +19,99 @@ import 'core/network/dio_helper.dart';
 import 'core/utils/bloc_observer/bloc_observer.dart';
 import 'features/organization_membership/organization_membership_data/cubit/cubit.dart';
 import 'features/organization_membership/select_the_company/cubit/cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   DioHelper.init();
   await CacheHelper.init();
+  await EasyLocalization.ensureInitialized();
   // bool ? rememberMe = await CacheHelper.getData(key: 'rememberMe');
   token = await CacheHelper.getData(key: 'token');
   print(token);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: AppColors.secondNew.withAlpha(10), // navigation bar color
-    statusBarColor: AppColors.secondNew.withAlpha(10), // status bar color
-    statusBarIconBrightness: Brightness.dark, // status bar icon color
-    systemNavigationBarIconBrightness: Brightness.dark, // color of navigation controls
+    systemNavigationBarColor: AppColors.secondNew.withAlpha(10),
+    // navigation bar color
+    statusBarColor: AppColors.secondNew.withAlpha(10),
+    // status bar color
+    statusBarIconBrightness: Brightness.dark,
+    // status bar icon color
+    systemNavigationBarIconBrightness:
+        Brightness.dark, // color of navigation controls
   ));
-  HttpOverrides.global=new MyHttpoverrides();
-  runApp(MyApp(
-    // rememberMe: rememberMe,
-    accessToken: token,));
+  HttpOverrides.global = new MyHttpoverrides();
+  runApp(
+    EasyLocalization(
+        supportedLocales: const [Locale('ar'), Locale('en')],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('ar'),
+        startLocale: const Locale('ar'),
+        child: MyApp(
+          accessToken: token,
+        )),
+  );
 }
 
 class MyApp extends StatelessWidget {
   // bool ? rememberMe;
-  String ? accessToken;
-  MyApp({
-    // required this.rememberMe ,
-    required this.accessToken ,super.key});
+  String? accessToken;
+
+  MyApp(
+      {
+      // required this.rememberMe ,
+      required this.accessToken,
+      super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => CompanyItemCubit()..getOrganizations(),
         ),
-        BlocProvider(
-            create: (context)=> InsuranceCompaniesCubit()),
+        BlocProvider(create: (context) => InsuranceCompaniesCubit()),
         BlocProvider(
           create: (context) => GetProfileCubit()..getProfile(),
         ),
         BlocProvider(
           create: (context) => OurProductCubit(),
         ),
-        BlocProvider(
-          create: (context) => OrganizationMembershipDataCubit()
-        ),//
-        BlocProvider(
-            create: (context) => ConfirmMemberShipCubit()
-        ),
-        BlocProvider(
-            create: (context) => MembershipDataCubit()
-        ),
-        BlocProvider(
-            create: (context) => MedicalAdvicesCubit()
-        )
+        BlocProvider(create: (context) => OrganizationMembershipDataCubit()), //
+        BlocProvider(create: (context) => ConfirmMemberShipCubit()),
+        BlocProvider(create: (context) => MembershipDataCubit()),
+        BlocProvider(create: (context) => MedicalAdvicesCubit())
       ],
       child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-                  brightness: Brightness.light,
-                  primarySwatch: generateMaterialColor(color:const Color(0xff2e2c53)),
-                  scaffoldBackgroundColor: Colors.white,
-                  backgroundColor: generateMaterialColor(color: const Color(0xffFFF8EE)),
-                  cardColor: generateMaterialColor(color: const Color(0xffF5F5F5)),
-                  // buttonColor: generateMaterialColor(color: const Color(0xffF5F5F5)),
-                  focusColor: generateMaterialColor(color: const Color(0xff1f355d)),
-                  indicatorColor: generateMaterialColor(color: Colors.black54),
-                  dialogBackgroundColor: generateMaterialColor(color: const Color(0xffDB8C8A).withAlpha(255)),
-                  appBarTheme: const AppBarTheme(
-                    backgroundColor: AppColors.whiteColor,
-                    shadowColor:  AppColors.whiteColor,
-                    elevation: 0,
-                  )
-        ),
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        theme: ThemeData(
+            brightness: Brightness.light,
+            primarySwatch:
+                generateMaterialColor(color: const Color(0xff2e2c53)),
+            scaffoldBackgroundColor: Colors.white,
+            backgroundColor:
+                generateMaterialColor(color: const Color(0xffFFF8EE)),
+            cardColor: generateMaterialColor(color: const Color(0xffF5F5F5)),
+            // buttonColor: generateMaterialColor(color: const Color(0xffF5F5F5)),
+            focusColor: generateMaterialColor(color: const Color(0xff1f355d)),
+            indicatorColor: generateMaterialColor(color: Colors.black54),
+            dialogBackgroundColor: generateMaterialColor(
+                color: const Color(0xffDB8C8A).withAlpha(255)),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.whiteColor,
+              shadowColor: AppColors.whiteColor,
+              elevation: 0,
+            )),
         routerConfig:
-        // (accessToken == null)?
-        AppRouters.baseRouter
-            // : AppRouters.skipLoginRouter,
-       , title: 'EDHP',
+            // (accessToken == null)?
+            AppRouters.baseRouter
+        // : AppRouters.skipLoginRouter,
+        ,
+        title: 'EDHP',
       ),
     );
   }
@@ -139,11 +150,11 @@ class MyApp extends StatelessWidget {
       1);
 }
 
-class MyHttpoverrides extends HttpOverrides{
-
+class MyHttpoverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=>true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

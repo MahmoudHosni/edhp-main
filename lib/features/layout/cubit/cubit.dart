@@ -15,9 +15,9 @@ import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import '../../../core/network/cache_helper.dart';
 
-List<MemberShipsResponse> memberShips=[];
+List<MemberShipsResponse> memberShips = [];
 
-class LayoutCubit extends Cubit<LayoutStates>{
+class LayoutCubit extends Cubit<LayoutStates> {
   LayoutCubit() : super(LayoutInitialState());
 
   static LayoutCubit get(BuildContext context) => BlocProvider.of(context);
@@ -25,34 +25,38 @@ class LayoutCubit extends Cubit<LayoutStates>{
   List<Advertisement> advertisements = [];
 
   bool switchOfNotification = true;
-  void changeSwitchOfNotification(bool value){
+
+  void changeSwitchOfNotification(bool value) {
     switchOfNotification = value;
     emit(ChangeNotificationSettingsState());
   }
 
   bool switchOfFingerPrint = true;
-  void changeSwitchOfFingerPrint(bool value){
+
+  void changeSwitchOfFingerPrint(bool value) {
     switchOfFingerPrint = value;
     emit(ChangeFingerPrintUponLoginSettingsState());
   }
 
   bool isArabic = true;
-  void changeLanguage(bool value){
+
+  void changeLanguage(bool value) {
     isArabic = value;
     emit(ChangeLanguageSettingsState());
   }
 
   Future getAdvertisements(BuildContext context) async {
     await DioHelper.getData(
-      path: EndPoint.getAdvertisements ,
+      path: EndPoint.getAdvertisements,
       token: CacheHelper.getData(key: 'token'),
     ).then((value) {
-      advertisements=[];
+      advertisements = [];
       adsImage = [];
       value.data.forEach((element) {
         var adv = Advertisement.fromJson(element);
         print(adv.iD.toString());
-        adsImage.add('$baseUrl${EndPoint.imgPath}?referenceTypeId=4&referenceId=${adv.iD}&id=${Random().nextInt(100000)}');
+        adsImage.add(
+            '$baseUrl${EndPoint.imgPath}?referenceTypeId=4&referenceId=${adv.iD}&id=${Random().nextInt(100000)}');
         advertisements?.add(adv);
       });
 
@@ -63,7 +67,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
     });
   }
 
-  Future loadData(BuildContext context) async{
+  Future loadData(BuildContext context) async {
     getProfile(context);
     getAdvertisements(context);
     getMySubscriptions();
@@ -72,17 +76,30 @@ class LayoutCubit extends Cubit<LayoutStates>{
   Future getProfile(BuildContext context) async {
     emit(GetProfileLoadingState());
     await DioHelper.getData(
-      path: EndPoint.getProfile ,
+      path: EndPoint.getProfile,
       token: CacheHelper.getData(key: 'token'),
     ).then((value) {
       print(value.data);
-      GetProfileCubit.get(context).userProfileModel = GetUserProfile.fromJson(value.data);
+      GetProfileCubit.get(context).userProfileModel =
+          GetUserProfile.fromJson(value.data);
       print(GetProfileCubit.get(context).userProfileModel!.userName);
-      CacheHelper.saveData(key: 'name', value: GetProfileCubit.get(context).userProfileModel?.userName??'');
-      CacheHelper.saveData(key: 'profile', value: GetProfileCubit.get(context).userProfileModel?.profileName);
-      CacheHelper.saveData(key: 'id', value: GetProfileCubit.get(context).userProfileModel?.profileID);
-      CacheHelper.saveData(key: 'email', value: GetProfileCubit.get(context).userProfileModel?.email??'');
-      CacheHelper.saveData(key: 'identity', value: GetProfileCubit.get(context).userProfileModel?.identityNumber??'');
+      CacheHelper.saveData(
+          key: 'name',
+          value: GetProfileCubit.get(context).userProfileModel?.userName ?? '');
+      CacheHelper.saveData(
+          key: 'profile',
+          value: GetProfileCubit.get(context).userProfileModel?.profileName);
+      CacheHelper.saveData(
+          key: 'id',
+          value: GetProfileCubit.get(context).userProfileModel?.profileID);
+      CacheHelper.saveData(
+          key: 'email',
+          value: GetProfileCubit.get(context).userProfileModel?.email ?? '');
+      CacheHelper.saveData(
+          key: 'identity',
+          value:
+              GetProfileCubit.get(context).userProfileModel?.identityNumber ??
+                  '');
       emit(GetProfileSuccessfullyState());
       getAdvertisements(context);
       getImageProfile(context);
@@ -97,18 +114,18 @@ class LayoutCubit extends Cubit<LayoutStates>{
     try {
       final response = await http.get(
         Uri.parse(
-            '$baseUrl${EndPoint
-                .imageProfile}?referenceTypeId=1&referenceId=${GetProfileCubit.get(context).userProfileModel!
-                .profileID}'),
+            '$baseUrl${EndPoint.imageProfile}?referenceTypeId=1&referenceId=${GetProfileCubit.get(context).userProfileModel!.profileID}'),
         headers: {'Access-Token': token!},
       );
       final dir = await getTemporaryDirectory();
       var filename = '${dir.path}/image.png';
       // Save to filesystem
       GetProfileCubit.get(context).profileImage = File(filename);
-      await GetProfileCubit.get(context).profileImage?.writeAsBytes(response.bodyBytes);
+      await GetProfileCubit.get(context)
+          .profileImage
+          ?.writeAsBytes(response.bodyBytes);
       emit(GetProfileImageSuccessfullyState());
-    }catch(e){
+    } catch (e) {
       print(e.toString());
       emit(GetProfileImageErrorState());
     }
@@ -132,7 +149,6 @@ class LayoutCubit extends Cubit<LayoutStates>{
     //   print(error.toString());
     //   emit(GetProfileImageErrorState());
     // });
-
   }
 
   List<String> adsImage = [
@@ -143,8 +159,9 @@ class LayoutCubit extends Cubit<LayoutStates>{
     // 'https://elements-cover-images-0.imgix.net/ba74bcfa-aa7c-43e6-b726-2bba7733d5fb?auto=compress%2Cformat&w=1370&fit=max&s=f2de7d383a6ab16de8dd4ebf90382d68'
   ];
   Random random = Random();
-  int ? index = 0;
-  void changeAdsImageRightIcon(){
+  int? index = 0;
+
+  void changeAdsImageRightIcon() {
     index = random.nextInt(advertisements.length);
     emit(ChangeAdsImage());
   }
@@ -153,7 +170,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
     emit(GetNewAccessTokenLoadingState());
     print("getNewAccessToken    >>>>>>           ${token!}");
     await DioHelper.getData(
-      path: EndPoint.getNewAccessToken ,
+      path: EndPoint.getNewAccessToken,
       token: token,
     ).then((value) {
       print('token : ${value.data['ResultObject']['AccessToken']}');
@@ -170,11 +187,9 @@ class LayoutCubit extends Cubit<LayoutStates>{
 
   Future getStaticData(BuildContext context) async {
     await DioHelper.getData(
-      path: EndPoint.getStaticData ,
+      path: EndPoint.getStaticData,
       token: CacheHelper.getData(key: 'token'),
-    ).then((value) {
-
-    }).catchError((error) {
+    ).then((value) {}).catchError((error) {
       print(error.toString());
       emit(GetNewAccessTokenErrorState());
     });
@@ -182,7 +197,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
 
   Future getMySubscriptions() async {
     await DioHelper.getData(
-      path: EndPoint.getMySubscriptions ,
+      path: EndPoint.getMySubscriptions,
       token: CacheHelper.getData(key: 'token'),
     ).then((value) {
       print("::::::: getMySubscriptions ::::::::");

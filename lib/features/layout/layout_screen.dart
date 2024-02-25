@@ -20,7 +20,6 @@ class LayoutScreen extends StatefulWidget {
 }
 
 class _LayoutScreenState extends State<LayoutScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -32,69 +31,98 @@ class _LayoutScreenState extends State<LayoutScreen> {
       create: (context) => LayoutCubit()..getNewAccessToken(context),
       child: BlocConsumer<LayoutCubit, LayoutStates>(
         listener: (context, state) {
-          if(state is ChangeBottomNavigationBarState){
+          if (state is ChangeBottomNavigationBarState) {
             GetProfileCubit.get(context).getProfile();
           }
         },
         builder: (context, state) {
           return Stack(
             children: <Widget>[
-          Image.asset("assets/images/bg.png",
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.fill,
-          ), Scaffold(backgroundColor: Colors.transparent,
-              body: screens[currentIndex],
-              bottomNavigationBar: Container(padding: const EdgeInsets.only(left: 2,top: 2,right: 2),
-                decoration: BoxDecoration(color: Colors.white,border: Border.all(color: AppColors.secondNew,width: 0.12),
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12),),),
-                child: BottomNavigationBar(backgroundColor: Colors.transparent,elevation: 0,
-                  type: BottomNavigationBarType.fixed,
-                  items: bottomNavigationBarItems,
-                  selectedItemColor: AppColors.primaryBlueColor,
-                  unselectedItemColor: AppColors.unselectedColor,
-                  onTap: (index){
-                    changeBottomIndex(index);
-                  },
-                  currentIndex: currentIndex,
-                ),
+              Image.asset(
+                "assets/images/bg.png",
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.fill,
               ),
-            )],
+              Scaffold(
+                backgroundColor: Colors.transparent,
+                body: screens[currentIndex],
+                bottomNavigationBar: Container(
+                  padding: const EdgeInsets.only(left: 2, top: 2, right: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: AppColors.secondNew, width: 0.12),
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(12),
+                      topLeft: Radius.circular(12),
+                    ),
+                  ),
+                  child: BottomNavigationBar(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    type: BottomNavigationBarType.fixed,
+                    items: bottomNavigationBarItems,
+                    selectedItemColor: AppColors.primaryBlueColor,
+                    unselectedItemColor: AppColors.unselectedColor,
+                    onTap: (index) {
+                      changeBottomIndex(index);
+                    },
+                    currentIndex: currentIndex,
+                  ),
+                ),
+              )
+            ],
           );
         },
       ),
     );
   }
 
-  int currentIndex = 3;
+  int currentIndex = 0;
 
   List<Widget> screens = [
-    const SettingScreen(),
-    const CallCenterScreen(),
-    const MedicalFileScreen(),
     HomeScreen(),
+    const MedicalFileScreen(),
+    const CallCenterScreen(),
+    const SettingScreen(),
   ];
 
   List<BottomNavigationBarItem> bottomNavigationBarItems = [
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.settingsIconOffSvg ,),activeIcon: SvgPicture.asset(AppPaths.settingsIconSvg ,),
-      label: 'الاعدادات',
+      icon: SvgPicture.asset(
+        AppPaths.homeIconOffSvg,
+      ),
+      activeIcon: SvgPicture.asset(
+        AppPaths.homeIconSvg,
+      ),
+      label: 'الرئيسية',
     ),
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.callCenterIconOffSvg),activeIcon: SvgPicture.asset(AppPaths.callCenterIconSvg ,),
-      label: 'خدمة العملاء',
-    ),
-    BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.medicalFileIconOffSvg),activeIcon: SvgPicture.asset(AppPaths.medicalFileIconSvg ,),
+      icon: SvgPicture.asset(AppPaths.medicalFileIconOffSvg),
+      activeIcon: SvgPicture.asset(
+        AppPaths.medicalFileIconSvg,
+      ),
       label: 'الملف الطبي',
     ),
     BottomNavigationBarItem(
-      icon: SvgPicture.asset(AppPaths.homeIconOffSvg ,),activeIcon: SvgPicture.asset(AppPaths.homeIconSvg ,),
-      label: 'الرئيسية',
+      icon: SvgPicture.asset(AppPaths.callCenterIconOffSvg),
+      activeIcon: SvgPicture.asset(
+        AppPaths.callCenterIconSvg,
+      ),
+      label: 'خدمة العملاء',
+    ),
+    BottomNavigationBarItem(
+      icon: SvgPicture.asset(
+        AppPaths.settingsIconOffSvg,
+      ),
+      activeIcon: SvgPicture.asset(
+        AppPaths.settingsIconSvg,
+      ),
+      label: 'الاعدادات',
     ),
   ];
 
-  void changeBottomIndex(int index){
+  void changeBottomIndex(int index) {
     setState(() {
       currentIndex = index;
     });
