@@ -12,117 +12,151 @@ import '../../core/utils/styles/styles.dart';
 class CreateMembershipScreen extends StatefulWidget {
   final SubscriptionRequest subscriptionRequest;
 
-  CreateMembershipScreen({super.key,required this.subscriptionRequest});
+  const CreateMembershipScreen({super.key, required this.subscriptionRequest});
 
   @override
   State<CreateMembershipScreen> createState() => _CreateMembershipScreenState();
 }
 
 class _CreateMembershipScreenState extends State<CreateMembershipScreen> {
-  int type=0;
+  int type = 0;
 
   @override
   Widget build(BuildContext context) {
     print("Company ID : ${widget.subscriptionRequest.MedicalCompanyID}");
-    return ViewContainer(title: StringsManager.memberShips,body:  SafeArea(
+    return ViewContainer(
+      title: StringsManager.memberShips,
+      body: SafeArea(
         child: Column(
-            children: [
-              const SizedBox(
-                height: 11,
-              ),
-              const Text('اختر نوع عضويتك' , style: Styles.textStyle15W500,),
-              const SizedBox(
-                height: 8,
-              ),
-              const Text(' واستمتع بخدماتنا المتنوعة' , style: Styles.textStyle10W400, textAlign: TextAlign.end,),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 20,
-              ),
-
-              Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                 InkWell(
-                      onTap: (){
-                        setState(() {
-                          widget.subscriptionRequest.SubscriptionTypeID = 1;
-                          type = 1;
-                          GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: widget.subscriptionRequest);
-                        });
-                      },
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),border: Border.all(color: AppColors.cardBorderNew),
-                              color: type==1?  AppColors.unselectedColor :  AppColors.cardNew,
+          children: [
+            const SizedBox(
+              height: 12,
+            ),
+            const Text(
+              'اختر نوع عضويتك',
+              style: Styles.textStyle15W500,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Text(
+              ' واستمتع بخدماتنا المتنوعة',
+              style: Styles.textStyle10W400,
+              textAlign: TextAlign.end,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      widget.subscriptionRequest.SubscriptionTypeID = 1;
+                      type = 1;
+                      GoRouter.of(context).push(
+                          AppRouters.kMembershipDataScreen,
+                          extra: widget.subscriptionRequest);
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: AppColors.cardBorderNew),
+                      color: type == 1
+                          ? AppColors.unselectedColor
+                          : AppColors.cardNew,
+                    ),
+                    child: Container(
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 8,
                           ),
-                          child:  Container(
-                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppPaths.individualImage,height: 105,width: 105) ,
-                                const Spacer(),
-                                Text(StringsManager.individual , style: Styles.textStyle16W500.copyWith(color: AppColors.textColorBlue),),
-                                const SizedBox(width: 8,)
-                              ],
-                            ),
+                          Text(
+                            StringsManager.individual,
+                            style: Styles.textStyle16W500
+                                .copyWith(color: AppColors.textColorBlue),
                           ),
+                          const Spacer(),
+                          SvgPicture.asset(AppPaths.individualImage,
+                              height: 105, width: 105),
+                        ],
                       ),
                     ),
-
-                  const SizedBox(
-                    height: 24,
                   ),
-                  InkWell(
-                      onTap: (){
-                        setState(() {
-                          widget.subscriptionRequest.SubscriptionTypeID = 2;
-                          type = 2;
-                          GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: widget.subscriptionRequest);
-                        });
-                      },
-                      child:Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),border: Border.all(color: AppColors.cardBorderNew),
-                              color: type==2?  AppColors.unselectedColor : AppColors.cardNew,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      widget.subscriptionRequest.SubscriptionTypeID = 2;
+                      type = 2;
+                      GoRouter.of(context).push(
+                          AppRouters.kSelectInsuranceCompany,
+                          extra: widget.subscriptionRequest);
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: AppColors.cardBorderNew),
+                      color: type == 2
+                          ? AppColors.unselectedColor
+                          : AppColors.cardNew,
+                    ),
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            width: 12,
                           ),
-                          child:  Container(
-                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(AppPaths.companyImage,height: 105,width: 105) ,
-                                const Spacer(),
-                                Text(StringsManager.jahat , style: Styles.textStyle16W500.copyWith(color: AppColors.textColorBlue),),
-                                const SizedBox(width: 8,)
-                              ],
-                            ),
+                          Text(
+                            StringsManager.jahat,
+                            style: Styles.textStyle16W500
+                                .copyWith(color: AppColors.textColorBlue),
                           ),
+                          const Spacer(),
+                          SvgPicture.asset(AppPaths.companyImage,
+                              height: 105, width: 105),
+                        ],
                       ),
+                    ),
                   ),
-                ],
-              )),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 25,
-              ),
+                ),
+              ],
+            )),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 25,
+            ),
 
-              // Row(children: [
-              //   Container(alignment: Alignment.bottomLeft,
-              //     child: NextButton(backgroundColor: (type > 0) ? AppColors.secondNew : Colors.grey,
-              //       function: () {
-              //         if(type<=0){
-              //           ShowToast.showToast('برجاء اختيار نوع العضوية بصورة صحيحة');
-              //         }else{
-              //           if(type==2){
-              //             GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: widget.subscriptionRequest);
-              //           }else {
-              //             GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: widget.subscriptionRequest);
-              //           }
-              //         }
-              //       },
-              //       text: StringsManager.select,width: 120,fontSize: 13,
-              //       redius: 32,
-              //     ),
-              //   ),
-              //   const SizedBox(width: 8,),
-              //   BackCircleButton(),
-              // ],),
-            ],
+            // Row(children: [
+            //   Container(alignment: Alignment.bottomLeft,
+            //     child: NextButton(backgroundColor: (type > 0) ? AppColors.secondNew : Colors.grey,
+            //       function: () {
+            //         if(type<=0){
+            //           ShowToast.showToast('برجاء اختيار نوع العضوية بصورة صحيحة');
+            //         }else{
+            //           if(type==2){
+            //             GoRouter.of(context).push(AppRouters.kSelectInsuranceCompany,extra: widget.subscriptionRequest);
+            //           }else {
+            //             GoRouter.of(context).push(AppRouters.kMembershipDataScreen,extra: widget.subscriptionRequest);
+            //           }
+            //         }
+            //       },
+            //       text: StringsManager.select,width: 120,fontSize: 13,
+            //       redius: 32,
+            //     ),
+            //   ),
+            //   const SizedBox(width: 8,),
+            //   BackCircleButton(),
+            // ],),
+          ],
         ),
       ),
     );

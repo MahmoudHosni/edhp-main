@@ -51,7 +51,7 @@ class NextButton extends StatelessWidget {
                     fontFamily: 'Tajawal'),
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               color: Colors.white,
               size: 16,

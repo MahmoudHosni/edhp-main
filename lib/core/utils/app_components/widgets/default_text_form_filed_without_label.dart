@@ -45,7 +45,8 @@ class DefaultTextFormFieldWithoutLabel extends StatelessWidget {
     return Container(alignment: Alignment.bottomCenter,color: Colors.transparent,height: 34,
         margin: const EdgeInsets.fromLTRB(18, 25, 18, 0),
         child: TextFormField(
-          textAlign: TextAlign.center,maxLength: maxLen,
+          textAlign: TextAlign.center,
+        maxLength: maxLen,
           enabled: isClickable,
           style: Styles.textStyle12W400,
           minLines: minLines,

@@ -13,7 +13,7 @@ class BackCircleButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(45),
               color: AppColors.whiteLightNew),
           width: 40,
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios,
             color: Colors.black12,
           )),
