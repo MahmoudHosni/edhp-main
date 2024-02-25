@@ -14,10 +14,13 @@ import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/features/layout/cubit/states.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/medical_network_entity.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:screenshot/screenshot.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -47,27 +50,27 @@ class HomeScreen extends StatelessWidget {
                 ),
                 titleSpacing: 0,
                 leading: IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(AppPaths.notificationIconSvg),
+                  onPressed: () {
+                    _key.currentState?.openDrawer();
+                  },
+                  icon: SvgPicture.asset(AppPaths.drawerIconSvg),
                 ),
                 actions: [
                   IconButton(
-                    onPressed: () {
-                      _key.currentState?.openEndDrawer();
-                    },
-                    icon: SvgPicture.asset(AppPaths.drawerIconSvg),
+                    onPressed: () {},
+                    icon: SvgPicture.asset(AppPaths.notificationIconSvg),
                   ),
                 ],
               ),
               body: SlidePanel(
                 body: Padding(
-                    padding: const EdgeInsets.fromLTRB(16.0, 12, 16, 8),
+                    padding: const EdgeInsets.fromLTRB(20.0, 12, 20, 8),
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
                           SearchBarView(),
                           const SizedBox(
-                            height: 35,
+                            height: 32,
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
@@ -129,73 +132,13 @@ class HomeScreen extends StatelessWidget {
                                 )),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 24,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                margin: EdgeInsets.all(8),
-                                width: 90,
-                                height: 140,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12))),
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/icons/ic_01.svg',
-                                        width: 70,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'عن المنصة',
-                                        style: Styles.textStyle12W500
-                                            .copyWith(color: Color(0xffFEA6A7)),
-                                      )
-                                    ]),
-                              ),
-                              InkWell(
-                                  child: Container(
-                                    margin: EdgeInsets.all(8),
-                                    width: 90,
-                                    height: 140,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(12))),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/icons/ic_02.svg',
-                                            width: 70,
-                                          ),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            'العضويات',
-                                            style: Styles.textStyle12W500
-                                                .copyWith(
-                                                    color: Color(0xff9CA8FA)),
-                                          )
-                                        ]),
-                                  ),
-                                  onTap: () {
-                                    GoRouter.of(context).push(
-                                        AppRouters.kServiceScreen,
-                                        extra: SubscriptionRequest());
-                                  }),
-                              InkWell(
+                              Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.all(8),
-                                  width: 90,
                                   height: 140,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
@@ -206,33 +149,105 @@ class HomeScreen extends StatelessWidget {
                                           MainAxisAlignment.center,
                                       children: [
                                         SvgPicture.asset(
-                                          'assets/icons/ic_03.svg',
+                                          'assets/icons/ic_01.svg',
                                           width: 70,
                                         ),
                                         SizedBox(
                                           height: 20,
                                         ),
                                         Text(
-                                          'نصائح',
+                                          'عن المنصة',
                                           style: Styles.textStyle12W500
                                               .copyWith(
-                                                  color: Color(0xff85E2C5)),
+                                                  color: Color(0xffFEA6A7)),
                                         )
                                       ]),
                                 ),
-                                onTap: () {
-                                  GoRouter.of(context)
-                                      .push(AppRouters.kMedicalAdvices);
-                                },
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                child: InkWell(
+                                    child: Container(
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12))),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/icons/ic_02.svg',
+                                              width: 70,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'العضويات',
+                                              style: Styles.textStyle12W500
+                                                  .copyWith(
+                                                      color: Color(0xff9CA8FA)),
+                                            )
+                                          ]),
+                                    ),
+                                    onTap: () {
+                                      GoRouter.of(context).push(
+                                          AppRouters.kServiceScreen,
+                                          extra: SubscriptionRequest());
+                                    }),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                child: InkWell(
+                                  child: Container(
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12))),
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            'assets/icons/ic_03.svg',
+                                            width: 70,
+                                          ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            'نصائح',
+                                            style: Styles.textStyle12W500
+                                                .copyWith(
+                                                    color: Color(0xff85E2C5)),
+                                          )
+                                        ]),
+                                  ),
+                                  onTap: () {
+                                    GoRouter.of(context)
+                                        .push(AppRouters.kMedicalAdvices);
+                                  },
+                                ),
                               ),
                             ],
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 24,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                              const Text(
+                                StringsManager.healthNetwork,
+                                style: Styles.textStyle14W500,
+                              ),
+                              const Spacer(),
                               InkWell(
                                 child: Text(
                                   StringsManager.showAll,
@@ -241,30 +256,25 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   GoRouter.of(context)
-                                      .push(AppRouters.kMedicalNetworkView);
+                                      .push(AppRouters.kMedicalNetworkScreen);
                                 },
-                              ),
-                              const Spacer(),
-                              const Text(
-                                StringsManager.healthNetwork,
-                                style: Styles.textStyle14W500,
                               ),
                             ],
                           ),
                           const SizedBox(
-                            height: 6,
+                            height: 12,
                           ),
                           SizedBox(
-                            height: 150,
-                            child: ListView.builder(
+                            height: 128,
+                            child: ListView.separated(
                                 scrollDirection: Axis.horizontal,
-                                reverse: true,
                                 itemCount: medicalNetworkList.length,
+                                separatorBuilder: (_, __) => SizedBox(
+                                      width: 8,
+                                    ),
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
-                                    margin: EdgeInsets.all(8),
-                                    width: 100,
-                                    height: 150,
+                                    width: 112,
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
@@ -326,9 +336,9 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                rightSlide: SizedBox(),
+                rightSlide: const SizedBox(),
               ),
-              endDrawer: Drawer(
+              drawer: Drawer(
                 child: Container(
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(

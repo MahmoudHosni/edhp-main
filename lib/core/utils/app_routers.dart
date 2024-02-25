@@ -90,7 +90,6 @@ abstract class AppRouters {
       '/createMembershipInsideAppScreen';
   static const kSelectInsuranceCompany = '/SelectInsuranceCompany';
   static const kMedicalAdvices = '/MedicalAdvices';
-  static const kMedicalNetworkView = '/MedicalNetworkView';
   static const kShowFileContent = "/DescriptionView";
 
   static final baseRouter = GoRouter(

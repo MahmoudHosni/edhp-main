@@ -18,7 +18,7 @@ class StringsManager {
   static const String yourHealthProfile = 'ملفك الطبي';
 
   static const String healthNetwork = 'الشبكة الطبية';
-  static const String showAll = ' < عرض الكل';
+  static const String showAll = 'عرض الكل >';
 
 
 
