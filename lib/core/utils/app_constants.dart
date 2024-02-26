@@ -13,15 +13,6 @@ void openUrl(String url) async {
     throw "Could not launch $url";
 }
 
-final HealthyNetwork =[
-  "مستشفيات",
-  "أطباء",
-  "معامل تحاليل",
-  "مراكز أشعة",
-  "أجهزة طبية",
-  "صيدليات",
-];
-
 final HealthyNetworkLinks =[
   "https://10101.tel/w/Hospitals",
   "https://10101.tel/w/Private-clinics-Ar",

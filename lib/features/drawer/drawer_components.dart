@@ -1,8 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
+import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_button.dart';
+import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
@@ -18,24 +21,31 @@ class DrawerAppHeader extends StatelessWidget {
   final String name;
   final String username;
 
-  DrawerAppHeader({super.key, required this.image, required this.name, required this.username});
+  DrawerAppHeader(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.username});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: MediaQuery.of(context).size.height / 2.62,
-      child: Column(
-        children: [
-          SizedBox(height: 30,),
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Image.network( '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsetsDirectional.only(top: 12),
+          child: Column(
+            children: [
+              Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Image.network(
+                    '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
                     fit: BoxFit.cover,
                     width: 80,
                     height: 80,
@@ -46,73 +56,100 @@ class DrawerAppHeader extends StatelessWidget {
                         child: CircularProgressIndicator(
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
+                                  loadingProgress.expectedTotalBytes!
                               : null,
                         ),
                       );
                     },
-            )
+                  )),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                name,
+                style: Styles.textStyle13W400.copyWith(color: Colors.white),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              (memberShips != null && memberShips.length > 0)
+                  ? Text(
+                      memberShips[0].SubscriptionNumber,
+                      style:
+                          Styles.textStyle11W400.copyWith(color: Colors.white),
+                    )
+                  : SizedBox(),
+              const SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                child: DefaultButton(
+                  backgroundColor: Color(0xffF5FAFC),
+                  fontSize: 12,
+                  textColor: Color(0xff0DBBD6),
+                  redius: 20,
+                  function: () {
+                    GoRouter.of(context).push(AppRouters.kProfileScreen);
+                  },
+                  text: 'الملف الشخصي',
+                  height: 40,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(name , style: Styles.textStyle13W400.copyWith(color: Colors.white),),
-          const SizedBox(
-            height: 5,
-          ),
-          (memberShips!=null && memberShips.length>0)?
-            Text(memberShips[0].SubscriptionNumber , style: Styles.textStyle11W400.copyWith(color: Colors.white),):SizedBox(),
-          const SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50.0),
-            child: DefaultButton(backgroundColor: Color(0xffF5FAFC),fontSize: 12,textColor: Color(0xff0DBBD6),redius: 20,
-              function: (){
-                GoRouter.of(context).push(AppRouters.kProfileScreen);
-              },
-              text: 'الملف الشخصي' , height: 40,),
-          ),
-        ],
+        ),
       ),
     );
   }
 }
 
 class ClickableDrawerItem extends StatelessWidget {
-  final bool checkForMembership ;
+  final bool checkForMembership;
+
   final String text;
   final String svgIcon;
   final String pathLocationScreen;
 
-  const ClickableDrawerItem({super.key, required this.text, required this.svgIcon, required this.pathLocationScreen,required this.checkForMembership});
+  const ClickableDrawerItem(
+      {super.key,
+      required this.text,
+      required this.svgIcon,
+      required this.pathLocationScreen,
+      required this.checkForMembership});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 36.0),
       child: InkWell(
-        onTap: (){
-          if(checkForMembership){
-            if(memberShips!=null && memberShips.length>0){
+        onTap: () {
+          if (checkForMembership) {
+            if (memberShips != null && memberShips.length > 0) {
               ShowToast.showToastGreen('انت بالفعل مشترك فى باقة');
-            }else{
+            } else {
               GoRouter.of(context).push(pathLocationScreen);
             }
-          }else{
+          } else {
             GoRouter.of(context).push(pathLocationScreen);
           }
         },
         child: Padding(
-          padding: const EdgeInsets.only(top: 2.0 , bottom: 2.0),
+          padding: const EdgeInsets.only(top: 2.0, bottom: 2.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(text , style: Styles.textStyle15W500.copyWith(color: AppColors.whiteLightNew,fontSize: 13.5),),
-              const SizedBox(
-                width: 10,
+              SvgPicture.asset(
+                svgIcon,
+                width: 18,
               ),
-              SvgPicture.asset(svgIcon , width: 18,),
+              const SizedBox(
+                width: 12,
+              ),
+              Text(
+                text,
+                style: Styles.textStyle15W500
+                    .copyWith(color: AppColors.whiteLightNew, fontSize: 13.5),
+              ),
             ],
           ),
         ),
@@ -128,19 +165,37 @@ class DrawerAppList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ClickableDrawerItem(text: 'عن المنصة', svgIcon: AppPaths.aboutIconSvg ,
-            pathLocationScreen: AppRouters.kServiceScreen,checkForMembership: false),
+        const ClickableDrawerItem(
+            text: 'عن المنصة',
+            svgIcon: AppPaths.aboutIconSvg,
+            pathLocationScreen: AppRouters.kServiceScreen,
+            checkForMembership: false),
         getSeparatorView(),
-        const ClickableDrawerItem(text: 'إشتراكات العضويات', svgIcon: AppPaths.membershipIconSvg ,
-            pathLocationScreen: AppRouters.kSelectCompanyScreen,checkForMembership: true),//kSelectCompanyScreenAppRouters.kCreateMembershipInsideAppScreen
+        const ClickableDrawerItem(
+            text: 'إشتراكات العضويات',
+            svgIcon: AppPaths.membershipIconSvg,
+            pathLocationScreen: AppRouters.kSelectCompanyScreen,
+            checkForMembership: true),
+        //kSelectCompanyScreenAppRouters.kCreateMembershipInsideAppScreen
         getSeparatorView(),
         // const ClickableDrawerItem(text: 'الشبكة الطبية', svgIcon: AppPaths.medicalNetworkIconSvg, pathLocationScreen: AppRouters.kMedicalNetworkScreen),
         // SizedBox(height: 12,),
-        const ClickableDrawerItem(text: 'السجل المرضي', svgIcon: AppPaths.medicalRecordIconSvg,
-            pathLocationScreen: AppRouters.kMedicalFileScreen,checkForMembership: false),
+        ClickableDrawerItem(
+            text: StringsManager.medicalNetwork.tr(),
+            svgIcon: AppImages.medicalNetwork,
+            pathLocationScreen: AppRouters.kMedicalNetworkScreen,
+            checkForMembership: false),
+        getSeparatorView(),
+        const ClickableDrawerItem(
+            text: 'السجل المرضي',
+            svgIcon: AppPaths.medicalRecordIconSvg,
+            pathLocationScreen: AppRouters.kMedicalFileScreen,
+            checkForMembership: false),
         getSeparatorView(),
 
-        SizedBox(height: 17,),
+        SizedBox(
+          height: 17,
+        ),
         // Container(
         //   width: 220,
         //   height: 40,
@@ -157,20 +212,31 @@ class DrawerAppList extends StatelessWidget {
         //     ],
         //   ),
         // ),
-        const SizedBox(height: 12,),
+        const SizedBox(
+          height: 12,
+        ),
         InkWell(
-          onTap: (){
-            memberShips=[];
+          onTap: () {
+            memberShips = [];
             CacheHelper.saveData(key: 'token', value: '');
             GoRouter.of(context).pushReplacement(AppRouters.kLoginScreen);
           },
-          child: Container(alignment: Alignment.center,
+          child: Container(
+            alignment: Alignment.center,
             width: 150,
             height: 40,
-            decoration: BoxDecoration(color: Colors.transparent,
-              borderRadius: BorderRadius.circular(32.0),border: Border.all(color: AppColors.whiteLightNew,width: 1),shape: BoxShape.rectangle,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(32.0),
+              border: Border.all(color: AppColors.whiteLightNew, width: 1),
+              shape: BoxShape.rectangle,
             ),
-            child: Text('تسجيل الخروج' , style: Styles.textStyle12W400.copyWith(color: AppColors.whiteLightNew,backgroundColor: Colors.transparent),),
+            child: Text(
+              'تسجيل الخروج',
+              style: Styles.textStyle12W400.copyWith(
+                  color: AppColors.whiteLightNew,
+                  backgroundColor: Colors.transparent),
+            ),
           ),
         ),
       ],
@@ -178,7 +244,10 @@ class DrawerAppList extends StatelessWidget {
   }
 
   getSeparatorView() {
-    return Container(padding: const EdgeInsets.all(22),child: Divider(height: 1,color: Colors.white),);
+    return Container(
+      padding: const EdgeInsets.all(22),
+      child: Divider(height: 1, color: Colors.white),
+    );
   }
 }
 
@@ -187,16 +256,30 @@ class DrawerAppFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DefaultTextButton(text: 'سياسة الخصوصية', function: (){
-                GoRouter.of(context).push(AppRouters.kShowFileContent,extra: ["personalty.txt",'سياسة الخصوصية']);
-              },textColor: AppColors.whiteLightNew,),
-              const Text("|",style: TextStyle(color: AppColors.whiteLightNew)),
-              DefaultTextButton(text: 'الشروط والأحكام', function: (){
-                GoRouter.of(context).push(AppRouters.kShowFileContent,extra: ["conditions.txt",'الشروط والأحكام']);
-              },textColor: AppColors.whiteLightNew),
-            ],
-        ),flex: 1,);
+    return Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DefaultTextButton(
+              text: 'الشروط والأحكام',
+              function: () {
+                GoRouter.of(context).push(AppRouters.kShowFileContent,
+                    extra: ["conditions.txt", 'الشروط والأحكام']);
+              },
+              textColor: AppColors.whiteLightNew),
+          const Text("|", style: TextStyle(color: AppColors.whiteLightNew)),
+          DefaultTextButton(
+            text: 'سياسة الخصوصية',
+            function: () {
+              GoRouter.of(context).push(AppRouters.kShowFileContent,
+                  extra: ["personalty.txt", 'سياسة الخصوصية']);
+            },
+            textColor: AppColors.whiteLightNew,
+          ),
+        ],
+      ),
+      flex: 1,
+    );
   }
 }

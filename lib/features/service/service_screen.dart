@@ -12,7 +12,8 @@ import 'cubit/states.dart';
 
 class ServiceScreen extends StatefulWidget {
   final SubscriptionRequest subscriptionRequest;
-  const ServiceScreen({super.key,required this.subscriptionRequest});
+
+  const ServiceScreen({super.key, required this.subscriptionRequest});
 
   @override
   State<ServiceScreen> createState() => _ServiceScreenState();
@@ -25,12 +26,13 @@ class _ServiceScreenState extends State<ServiceScreen> {
   void initState() {
     super.initState();
     cubit = OurProductCubit.get(context);
-    if(widget.subscriptionRequest.SubscriptionTypeID==2){
+    if (widget.subscriptionRequest.SubscriptionTypeID == 2) {
       cubit.getMembershipType(
-        NationalNumber: widget.subscriptionRequest.IdentityNumber,
-        OrganizationID: widget.subscriptionRequest.OrganizationID,
-        OrganizationMembershipNumber: widget.subscriptionRequest.OrganizationMembershipNumber??'');
-    }else{
+          NationalNumber: widget.subscriptionRequest.IdentityNumber,
+          OrganizationID: widget.subscriptionRequest.OrganizationID,
+          OrganizationMembershipNumber:
+              widget.subscriptionRequest.OrganizationMembershipNumber ?? '');
+    } else {
       cubit.getMembershipType();
     }
   }
@@ -38,34 +40,45 @@ class _ServiceScreenState extends State<ServiceScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<OurProductCubit, OurProductStates>(
-      listener: (context, state) {      },
+      listener: (context, state) {},
       builder: (context, state) {
-        return ViewContainer(title: StringsManager.membershipCards,body:SafeArea(
-          child: Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.separated(
-                        itemBuilder: (context, index) => MembershipTypeContainer(
-                          price: cubit.membershipTypeList[index].price.toString(),
-                          name: cubit.membershipTypeList[index].name.toString(),
-                          description: cubit.membershipTypeList[index].description.toString(),
-                          id: cubit.membershipTypeList[index].iD??0,subscriptionRequest: widget.subscriptionRequest,
-                          clickable: (widget.subscriptionRequest.SubscriptionTypeID ??0) >0,
+        return ViewContainer(
+            title: StringsManager.membershipCards,
+            body: SafeArea(
+              child: Scaffold(
+                body: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          itemBuilder: (context, index) =>
+                              MembershipTypeContainer(
+                            price: cubit.membershipTypeList[index].price
+                                .toString(),
+                            name:
+                                cubit.membershipTypeList[index].name.toString(),
+                            description: cubit
+                                .membershipTypeList[index].description
+                                .toString(),
+                            id: cubit.membershipTypeList[index].iD ?? 0,
+                            subscriptionRequest: widget.subscriptionRequest,
+                            clickable: (widget.subscriptionRequest
+                                        .SubscriptionTypeID ??
+                                    0) >
+                                0,
+                          ),
+                          separatorBuilder: (context, index) => const SizedBox(
+                            height: 30,
+                          ),
+                          itemCount: cubit.membershipTypeList.length,
                         ),
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 30,
-                        ),
-                        itemCount: cubit.membershipTypeList.length,
-                    ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ));
+            ));
       },
     );
   }

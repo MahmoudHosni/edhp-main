@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.5" height="21" viewBox="0 0 16.5 21">
+  <g id="location-filled" transform="translate(-7.5 -3)">
+    <path id="Path_51480" data-name="Path 51480" d="M15.75,3A8.26,8.26,0,0,0,7.5,11.25,8.167,8.167,0,0,0,9.162,16.2s.225.3.262.339L15.75,24l6.329-7.465c.033-.04.259-.335.259-.335v0A8.164,8.164,0,0,0,24,11.25,8.26,8.26,0,0,0,15.75,3Zm0,11.25a3,3,0,1,1,3-3,3,3,0,0,1-3,3Z" fill="#b7cee6"/>
+    <circle id="IconifyId-17e9079768a-d1151c-107" cx="3" cy="3" r="3" transform="translate(12.75 8.25)" fill="none"/>
+  </g>
+</svg>

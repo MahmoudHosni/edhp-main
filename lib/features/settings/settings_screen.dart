@@ -20,194 +20,276 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     bool isLoaded = false;
 
     return BlocConsumer<LayoutCubit, LayoutStates>(
       listener: (context, state) {
-        if(state is GetProfileSuccessfullyState){
+        if (state is GetProfileSuccessfullyState) {
           isLoaded = true;
         }
       },
       builder: (context, state) {
         LayoutCubit cubit = LayoutCubit.get(context);
-        if(!isLoaded || state is !GetProfileSuccessfullyState) {
-          return ViewContainer(title: StringsManager.settings,showBack: false,body: Container(height: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        Container(
-                          width: 95,
-                          height: 95,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          child: Image.network(
-                            '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
-                            fit: BoxFit.cover,
-                            width: 80,
-                            height: 80,
-                            loadingBuilder: (BuildContext context, Widget child,
-                                ImageChunkEvent? loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                      : null,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        Container(padding: EdgeInsets.fromLTRB(9, 9, 0, 0),
-                          width: 45,
-                          height: 45,
-                          child: SvgPicture.asset(AppPaths.editIconSvg,),
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Text(GetProfileCubit.get(context).userProfileModel!.profileName.toString() , style: Styles.textStyle14W400.copyWith(color: AppColors.secondNew),),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  (memberShips!=null && memberShips.length>0)?
-                  Text(memberShips[0].SubscriptionNumber , style: Styles.textStyle13W400.copyWith(color: AppColors.unselectedColor),):SizedBox(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 36,
-                  ),
-                  InkWell(
-                    onTap: (){
-                      print("Memberships :::: ${memberShips.length}");
-                      GoRouter.of(context).push(AppRouters.kEditProfileScreen,extra: memberShips.length>0? memberShips[0]:null);
-                    },
-                    child: Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: 260,padding: const EdgeInsets.all(8),
-                      height: 54,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
-                      child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+        if (!isLoaded || state is! GetProfileSuccessfullyState) {
+          return ViewContainer(
+            title: StringsManager.settings,
+            showBack: false,
+            body: Container(
+              height: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
                         children: [
-                          SvgPicture.asset('assets/icons/previous.svg'),
-                          const Spacer(),
-                          const Text('تعديل الملف الشخصي' , style: Styles.textStyle12W400,),
-                          const SizedBox(
-                            width: 10,
+                          Container(
+                            width: 95,
+                            height: 95,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            child: Image.network(
+                              '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                              fit: BoxFit.cover,
+                              width: 80,
+                              height: 80,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                          SvgPicture.asset(AppPaths.personIconSvg),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(9, 9, 0, 0),
+                            width: 45,
+                            height: 45,
+                            child: SvgPicture.asset(
+                              AppPaths.editIconSvg,
+                            ),
+                          )
                         ],
                       ),
-                    )),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 50,
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Text('الإشعارات والتنبيهات' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: double.infinity,padding: const EdgeInsets.all(8),
-                    height: 52,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Center(
+                      child: Text(
+                        GetProfileCubit.get(context)
+                            .userProfileModel!
+                            .profileName
+                            .toString(),
+                        style: Styles.textStyle14W400
+                            .copyWith(color: AppColors.secondNew),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    (memberShips != null && memberShips.length > 0)
+                        ? Center(
+                            child: Text(
+                              memberShips[0].SubscriptionNumber,
+                              style: Styles.textStyle13W400
+                                  .copyWith(color: AppColors.unselectedColor),
+                            ),
+                          )
+                        : SizedBox(),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        print("Memberships :::: ${memberShips.length}");
+                        GoRouter.of(context).push(AppRouters.kEditProfileScreen,
+                            extra:
+                                memberShips.length > 0 ? memberShips[0] : null);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 52),
+                        child: Container(
+                            padding: const EdgeInsetsDirectional.symmetric(
+                                horizontal: 12),
+                            height: 52,
+                            decoration: BoxDecoration(
+                                color: AppColors.whiteLightNew,
+                                border: Border.all(
+                                    color: AppColors.cardBorderNew, width: 1),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(26))),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(AppPaths.personIconSvg),
+                                const SizedBox(width: 8),
+                                const Text(
+                                  'تعديل الملف الشخصي',
+                                  style: Styles.textStyle12W400,
+                                ),
+                                const Spacer(),
+                                SvgPicture.asset('assets/icons/previous.svg'),
+                              ],
+                            )),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Text(
+                      'الإشعارات والتنبيهات',
+                      style: Styles.textStyle14W500
+                          .copyWith(color: AppColors.secondNew),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 12),
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppColors.whiteLightNew,
+                          border: Border.all(
+                              color: AppColors.cardBorderNew, width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(26))),
                       child: Row(
                         children: [
+                          Text(
+                            'تفعيل الإشعارات والتنبيهات',
+                            style: Styles.textStyle12W400
+                                .copyWith(color: AppColors.blackColor),
+                          ),
+                          const Spacer(),
                           Switch(
                             value: cubit.switchOfNotification,
-                            onChanged: (bool value){
+                            onChanged: (bool value) {
                               cubit.changeSwitchOfNotification(value);
                             },
                             activeColor: AppColors.whiteColor,
                             activeTrackColor: AppColors.primaryBlueColor,
                           ),
-                          const Spacer(),
-                          Text('تفعيل الإشعارات والتنبيهات' , style: Styles.textStyle12W400.copyWith(color: AppColors.textColorBlack),),
                         ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 40,
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Text('المؤشرات الحيوية' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),
-                  ),
-                  SizedBox(
-                    height:  8,
-                  ),
-                  Container(margin: const EdgeInsets.fromLTRB(0,0,0,8),width: double.infinity,padding: const EdgeInsets.all(8),
-                    height: 52,alignment: Alignment.center,decoration: BoxDecoration(color: AppColors.whiteLightNew,border: Border.all(color: AppColors.cardBorderNew,width: 1),borderRadius: BorderRadius.all(Radius.circular(25))),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Text(
+                      'المؤشرات الحيوية',
+                      style: Styles.textStyle14W500
+                          .copyWith(color: AppColors.secondNew),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 12),
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppColors.whiteLightNew,
+                          border: Border.all(
+                              color: AppColors.cardBorderNew, width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(26))),
                       child: Row(
                         children: [
+                          const Text(
+                            'تفعيل بصمة اللإصبع عند الدخول',
+                            style: Styles.textStyle12W400,
+                          ),
+                          const Spacer(),
                           Switch(
                             value: cubit.switchOfFingerPrint,
-                            onChanged: (bool value){
+                            onChanged: (bool value) {
                               cubit.changeSwitchOfFingerPrint(value);
                             },
                             activeColor: AppColors.whiteColor,
                             activeTrackColor: AppColors.primaryBlueColor,
                           ),
-                          const Spacer(),
-                          const Text('تفعيل بصمة اللإصبع عند الدخول' , style: Styles.textStyle12W400,),
                         ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 35,
-                  ),
-                  // Align(
-                  //   alignment: AlignmentDirectional.centerEnd,
-                  //   child: Text('اللغة المفضلة' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),
-                  // ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // Container(
-                  //   width: 220,
-                  //   height: 40,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Container(width: 95,padding: EdgeInsets.all(5),alignment: Alignment.center,
-                  //           decoration: BoxDecoration(color: AppColors.whiteLightNew,borderRadius: BorderRadius.only(topLeft: Radius.circular(32),bottomLeft:Radius.circular(32) )),
-                  //           child:  Text('English' , style: Styles.textStyle12W400.copyWith(color: AppColors.secondNew),)),
-                  //       SizedBox(width: 1,),
-                  //       Container(width: 95,padding: EdgeInsets.all(5),alignment: Alignment.center,
-                  //           decoration: BoxDecoration(color: AppColors.secondNew,borderRadius: BorderRadius.only(topRight: Radius.circular(32),bottomRight:Radius.circular(32) )),
-                  //           child:  Text('العربية' , style: Styles.textStyle12W400.copyWith(color: AppColors.whiteLightNew),)),
-                  //     ],
-                  //   ),
-                  // ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 35,
-                  ),
-                ],
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Text(
+                      'اللغة المفضلة',
+                      style: Styles.textStyle14W500
+                          .copyWith(color: AppColors.secondNew),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 220,
+                        height: 44,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                width: 95,
+                                padding: EdgeInsets.all(5),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.secondNew,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(32),
+                                        bottomRight: Radius.circular(32))),
+                                child: Text(
+                                  'العربية',
+                                  style: Styles.textStyle12W400
+                                      .copyWith(color: AppColors.whiteLightNew),
+                                )),
+                            SizedBox(
+                              width: 1,
+                            ),
+                            Container(
+                                width: 95,
+                                padding: EdgeInsets.all(5),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.whiteLightNew,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(32),
+                                        bottomLeft: Radius.circular(32))),
+                                child: Text(
+                                  'English',
+                                  style: Styles.textStyle12W400
+                                      .copyWith(color: AppColors.secondNew),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 35,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
+          );
         } else {
           return Scaffold();
         }
       },
-);
+    );
   }
 }

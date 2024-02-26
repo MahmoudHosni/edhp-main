@@ -52,7 +52,6 @@ class DefaultTextFormField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: TextFormField(
-          textAlign: TextAlign.end,
           enabled: isClickable,
           minLines: minLines,
           maxLines: maxLines,

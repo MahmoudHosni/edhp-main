@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MemberShipTypes extends StatefulWidget {
-
-  const MemberShipTypes({super.key,});
+  const MemberShipTypes({
+    super.key,
+  });
 
   @override
   State<MemberShipTypes> createState() => _MemberShipTypesState();
@@ -44,21 +45,25 @@ class _MemberShipTypesState extends State<MemberShipTypes> {
                     child: Row(
                       children: [
                         Spacer(),
-                        Text(StringsManager.membershipCards , style: Styles.textStyle20W500 , textAlign: TextAlign.center),
+                        Text(StringsManager.membershipCards,
+                            style: Styles.textStyle20W500,
+                            textAlign: TextAlign.center),
                         Spacer(),
                         BackCustomAppBar(),
                       ],
                     ),
                   ),
-                  if(state is OurProductLoadingState)
-                    const CircularProgressIndicator(color: AppColors.primaryBlueColor),
+                  if (state is OurProductLoadingState)
+                    const CircularProgressIndicator(
+                        color: AppColors.primaryBlueColor),
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (context, index) => MemberShipTypeView(
                         price: cubit.membershipTypeList[index].price.toString(),
                         name: cubit.membershipTypeList[index].name.toString(),
-                        description: cubit.membershipTypeList[index].description.toString(),
-                        id: cubit.membershipTypeList[index].iD??0,
+                        description: cubit.membershipTypeList[index].description
+                            .toString(),
+                        id: cubit.membershipTypeList[index].iD ?? 0,
                       ),
                       separatorBuilder: (context, index) => const SizedBox(
                         height: 30,

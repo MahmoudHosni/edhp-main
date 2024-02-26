@@ -1,7 +1,6 @@
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/authantication/forget_password/cubit/ForgetCubit.dart';
 import 'package:edhp/features/authantication/forget_password/cubit/ForgetStates.dart';
-import 'package:edhp/models/ForgetResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,7 +12,7 @@ import '../../../core/utils/styles/styles.dart';
 
 
 class ForgetPasswordScreen extends StatefulWidget {
-  ForgetPasswordScreen({super.key});
+  const ForgetPasswordScreen({super.key});
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();

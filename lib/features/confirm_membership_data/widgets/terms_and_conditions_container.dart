@@ -19,7 +19,13 @@ class TermsAndConditionsContainer extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 18.0 , horizontal: 14),
           child: Column(
             children: [
-              Container(child: Text('الشروط والأحكام' , style: Styles.textStyle14W500.copyWith(color: AppColors.secondNew),),alignment: Alignment.centerRight),
+              Container(
+                  child: Text(
+                    'الشروط والأحكام',
+                    style: Styles.textStyle14W500
+                        .copyWith(color: AppColors.secondNew),
+                  ),
+                  alignment: Alignment.centerRight),
               const SizedBox(
                 height: 20,
               ),
