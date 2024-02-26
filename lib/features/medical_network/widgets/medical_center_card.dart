@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
@@ -113,6 +114,7 @@ class MedicalCenterCard extends StatelessWidget {
             height: 12,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SvgPicture.asset(AppImages.location),
               const SizedBox(width: 12),
@@ -121,27 +123,28 @@ class MedicalCenterCard extends StatelessWidget {
                   serviceProviderEntity.address ?? '',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.blackColor, fontSize: 16),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          Row(
-            children: [
-              SvgPicture.asset(AppImages.phone),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  '${serviceProviderEntity.telephone ?? ''} ${serviceProviderEntity.telephoneTwo ?? ''} ${serviceProviderEntity.telephoneThree ?? ''}',
-                  style: Styles.textStyle195W500
-                      .copyWith(color: AppColors.secondNew, fontSize: 16),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+          InkWell(
+            onTap: () => openUrl('tel://${serviceProviderEntity.telephone}'),
+            child: Row(
+              children: [
+                SvgPicture.asset(AppImages.phone),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    '${serviceProviderEntity.telephone ?? ''} ${serviceProviderEntity.telephoneTwo ?? ''} ${serviceProviderEntity.telephoneThree ?? ''}',
+                    style: Styles.textStyle195W500
+                        .copyWith(color: AppColors.secondNew, fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

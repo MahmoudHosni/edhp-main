@@ -117,28 +117,18 @@ class RadiologyCentersDataScreen extends StatelessWidget {
                               ),
                             )
                           : ListView.separated(
-                              itemBuilder: (context, index) => InkWell(
-                                child: MedicalCenterCard(
-                                  medicalCenterEntity: MedicalCenterEntity(
-                                    medicalCenterType:
-                                        MedicalCenterType.radiologyCenters,
-                                    title: StringsManager.radiologyCenters.tr(),
-                                    id: cubit.radiologyCenters[index].id!,
-                                    medicalCenterName: cubit.radiologyCenters[index].name!,
-                                  ),
-                                  serviceProviderEntity:
-                                      cubit.radiologyCenters[index],
+                              itemBuilder: (context, index) =>
+                                  MedicalCenterCard(
+                                medicalCenterEntity: MedicalCenterEntity(
+                                  medicalCenterType:
+                                      MedicalCenterType.radiologyCenters,
+                                  title: StringsManager.radiologyCenters.tr(),
+                                  id: cubit.radiologyCenters[index].id!,
+                                  medicalCenterName:
+                                      cubit.radiologyCenters[index].name!,
                                 ),
-                                onTap: () => GoRouter.of(context).push(
-                                  AppRouters.kNearestMedicalCentersScreen,
-                                  extra: MedicalCenterEntity(
-                                    medicalCenterType:
-                                        MedicalCenterType.radiologyCenters,
-                                    title: StringsManager.radiologyCenters.tr(),
-                                    id: cubit.radiologyCenters[index].id!,
-                                    medicalCenterName: cubit.radiologyCenters[index].name!,
-                                  ),
-                                ),
+                                serviceProviderEntity:
+                                    cubit.radiologyCenters[index],
                               ),
                               separatorBuilder: (context, index) => Container(
                                 height: 1,

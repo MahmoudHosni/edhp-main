@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
+import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/medical_network/branches/medical_center_branches_cubit.dart';
@@ -72,6 +73,7 @@ class MedicalCenterBranchesScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 8),
                                       Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           SvgPicture.asset(AppImages.location),
                                           const SizedBox(width: 12),
@@ -84,32 +86,35 @@ class MedicalCenterBranchesScreen extends StatelessWidget {
                                                       color:
                                                           AppColors.blackColor,
                                                       fontSize: 16),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                         ],
                                       ),
                                       const SizedBox(height: 8),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          SvgPicture.asset(AppImages.phone),
-                                          const SizedBox(width: 12),
-                                          Expanded(
-                                            child: Text(
-                                              cubit.branches[index].phone ?? '',
-                                              style: Styles.textStyle195W500
-                                                  .copyWith(
-                                                      color:
-                                                          AppColors.secondNew,
-                                                      fontSize: 16),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
+                                      InkWell(
+                                        onTap: () => openUrl(
+                                            'tel://${cubit.branches[index].phone ?? ''}'),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(AppImages.phone),
+                                            const SizedBox(width: 12),
+                                            Expanded(
+                                              child: Text(
+                                                cubit.branches[index].phone ??
+                                                    '',
+                                                style: Styles.textStyle195W500
+                                                    .copyWith(
+                                                        color:
+                                                            AppColors.secondNew,
+                                                        fontSize: 16),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),

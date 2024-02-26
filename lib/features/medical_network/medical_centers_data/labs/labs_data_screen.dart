@@ -109,25 +109,15 @@ class LabsDataScreen extends StatelessWidget {
                               ),
                             )
                           : ListView.separated(
-                              itemBuilder: (context, index) => InkWell(
-                                child: MedicalCenterCard(
-                                  medicalCenterEntity: MedicalCenterEntity(
-                                    medicalCenterType: MedicalCenterType.labs,
-                                    title: StringsManager.labs.tr(),
-                                    id: cubit.labs[index].id!,
-                                    medicalCenterName: cubit.labs[index].name!,
-                                  ),
-                                  serviceProviderEntity: cubit.labs[index],
+                              itemBuilder: (context, index) =>
+                                  MedicalCenterCard(
+                                medicalCenterEntity: MedicalCenterEntity(
+                                  medicalCenterType: MedicalCenterType.labs,
+                                  title: StringsManager.labs.tr(),
+                                  id: cubit.labs[index].id!,
+                                  medicalCenterName: cubit.labs[index].name!,
                                 ),
-                                onTap: () => GoRouter.of(context).push(
-                                  AppRouters.kNearestMedicalCentersScreen,
-                                  extra: MedicalCenterEntity(
-                                    medicalCenterType: MedicalCenterType.labs,
-                                    title: StringsManager.labs.tr(),
-                                    id: cubit.labs[index].id!,
-                                    medicalCenterName: cubit.labs[index].name!,
-                                  ),
-                                ),
+                                serviceProviderEntity: cubit.labs[index],
                               ),
                               separatorBuilder: (context, index) => Container(
                                 height: 1,
