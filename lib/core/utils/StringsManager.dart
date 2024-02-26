@@ -79,4 +79,7 @@ class StringsManager {
   static const String callClinic = 'call the clinic';
   static const String radiologyCenterServices = 'radiology center services';
   static const String medicalDevicesServices = 'medical devices services';
+
+  static const String medicalEvents = 'الفاعليات الطبية';
+  static const String noMedicalEvents = 'لا يوجد فاعليات الان';
 }
