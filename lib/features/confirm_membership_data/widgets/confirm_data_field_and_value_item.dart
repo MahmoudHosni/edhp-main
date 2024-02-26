@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/styles/styles.dart';
+import 'dart:ui' as ui;
 
 class ConfirmDataFieldAndValueItem extends StatelessWidget {
   const ConfirmDataFieldAndValueItem(
@@ -28,7 +29,7 @@ class ConfirmDataFieldAndValueItem extends StatelessWidget {
               child: Text(
                 value,
                 style: Styles.textStyle14W400,
-                textAlign: TextAlign.end,
+                textDirection: ui.TextDirection.ltr,
               ),
             ),
           ],

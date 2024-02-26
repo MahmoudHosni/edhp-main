@@ -434,7 +434,7 @@ class _OrganizationMembershipDataScreenState
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
               ],
             ),

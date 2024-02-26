@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:ui' as ui;
 
 class MedicalCenterCard extends StatelessWidget {
   const MedicalCenterCard({
@@ -135,12 +138,17 @@ class MedicalCenterCard extends StatelessWidget {
                 SvgPicture.asset(AppImages.phone),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    '${serviceProviderEntity.telephone ?? ''} ${serviceProviderEntity.telephoneTwo ?? ''} ${serviceProviderEntity.telephoneThree ?? ''}',
-                    style: Styles.textStyle195W500
-                        .copyWith(color: AppColors.secondNew, fontSize: 16),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  child: Row(
+                    children: [
+                      Text(
+                        '${serviceProviderEntity.telephone ?? ''} ${serviceProviderEntity.telephoneTwo ?? ''} ${serviceProviderEntity.telephoneThree ?? ''}',
+                        style: Styles.textStyle195W500
+                            .copyWith(color: AppColors.secondNew, fontSize: 16),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: ui.TextDirection.ltr,
+                      ),
+                    ],
                   ),
                 ),
               ],

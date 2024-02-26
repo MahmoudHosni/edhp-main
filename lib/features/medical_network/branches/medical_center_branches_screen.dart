@@ -11,6 +11,7 @@ import 'package:edhp/models/medical_network_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:ui' as ui;
 
 class MedicalCenterBranchesScreen extends StatelessWidget {
   const MedicalCenterBranchesScreen({
@@ -73,7 +74,8 @@ class MedicalCenterBranchesScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 8),
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           SvgPicture.asset(AppImages.location),
                                           const SizedBox(width: 12),
@@ -101,16 +103,25 @@ class MedicalCenterBranchesScreen extends StatelessWidget {
                                             SvgPicture.asset(AppImages.phone),
                                             const SizedBox(width: 12),
                                             Expanded(
-                                              child: Text(
-                                                cubit.branches[index].phone ??
-                                                    '',
-                                                style: Styles.textStyle195W500
-                                                    .copyWith(
-                                                        color:
-                                                            AppColors.secondNew,
-                                                        fontSize: 16),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    cubit.branches[index]
+                                                            .phone ??
+                                                        '',
+                                                    style: Styles
+                                                        .textStyle195W500
+                                                        .copyWith(
+                                                            color: AppColors
+                                                                .secondNew,
+                                                            fontSize: 16),
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textDirection:
+                                                        ui.TextDirection.ltr,
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ],

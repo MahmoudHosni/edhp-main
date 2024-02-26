@@ -1,5 +1,6 @@
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_paths.dart';
+import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/call_center/call_center_screen.dart';
 import 'package:edhp/features/home/home_screen.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
@@ -64,6 +65,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
                     items: bottomNavigationBarItems,
                     selectedItemColor: AppColors.primaryBlueColor,
                     unselectedItemColor: AppColors.unselectedColor,
+                    selectedLabelStyle: Styles.textStyle195W500.copyWith(
+                        color: AppColors.textColorBlue, fontSize: 12),
+                    unselectedLabelStyle: Styles.textStyle195W500.copyWith(
+                    color: AppColors.textColorBlue, fontSize: 12),
                     onTap: (index) {
                       changeBottomIndex(index);
                     },
