@@ -1,4 +1,6 @@
+import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_routers.dart';
+import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -67,7 +69,11 @@ class MembershipTypeContainer extends StatelessWidget {
                     AppRouters.kConfirmMembershipDataScreen,
                     extra: subscriptionRequest);
               }else{
-                GoRouter.of(context).push(AppRouters.kSelectCompanyScreen);
+                if(memberShips!=null && memberShips.length>0){
+                  ShowToast.showToastGreen('انت بالفعل مشترك فى باقة');
+                }else {
+                  GoRouter.of(context).push(AppRouters.kSelectCompanyScreen);
+                }
               }
             },
             text: 'اختر عضويتك',

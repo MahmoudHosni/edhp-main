@@ -3,6 +3,7 @@ import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/slide_panel/views/slide_panel.dart';
+import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -111,12 +112,14 @@ class HomeScreen extends StatelessWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
+                                        InkWell(child: Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
                                           child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
                                             SvgPicture.asset('assets/icons/ic_01.svg',width: 70,),
                                             SizedBox(height: 20,),
-                                            Text('عن المنصة',style: Styles.textStyle12W500.copyWith(color: Color(0xffFEA6A7)),)
-                                          ]),),
+                                            Text(StringsManager.medicalEvents,style: Styles.textStyle12W500.copyWith(color: Color(0xffFEA6A7)),)
+                                          ]),),onTap: (){
+                                                GoRouter.of(context).push(AppRouters.kMedicalEvents);
+                                        }),
 
                                         InkWell(child: Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
                                           child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
@@ -124,7 +127,13 @@ class HomeScreen extends StatelessWidget {
                                             SizedBox(height: 20,),
                                             Text('العضويات',style: Styles.textStyle12W500.copyWith(color: Color(0xff9CA8FA)),)
                                           ]),),onTap: (){
-                                          GoRouter.of(context).push(AppRouters.kServiceScreen,extra: SubscriptionRequest());
+                                                if(memberShips!=null && memberShips.length>0){
+                                                    ShowToast.showToastGreen('انت بالفعل مشترك فى باقة');
+                                                }else {
+                                                  GoRouter.of(context).push(
+                                                      AppRouters.kServiceScreen,
+                                                      extra: SubscriptionRequest());
+                                                }
                                         }),
 
 

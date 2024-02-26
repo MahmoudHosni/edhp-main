@@ -42,4 +42,7 @@ class StringsManager {
 
   static const String companyName = 'أسم الشركة';//
   static const String jahatName = 'أسم الهيئة';
+
+  static const String medicalEvents = 'الفاعليات الطبية';
+  static const String noMedicalEvents = 'لا يوجد فاعليات الان';
 }

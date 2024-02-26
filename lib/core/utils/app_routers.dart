@@ -1,5 +1,6 @@
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/app_constants.dart';
+import 'package:edhp/features/MedicalEvent/MedicalEvents.dart';
 import 'package:edhp/features/confirm_membership_data/CardPreview.dart';
 import 'package:edhp/features/confirm_membership_data/confirm_membership_data_screen.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmResponse.dart';
@@ -45,6 +46,7 @@ abstract class AppRouters {
   static const kLayoutScreen = '/layoutScreen';
   static const kEditProfileScreen = '/editProfileScreen';
   static const kServiceScreen = '/serviceScreen';
+  static const kMedicalEvents = '/MedicalEvents';
   static const kMemberShipTypes = '/memberShipTypes';
   static const kCreateMembershipScreen = '/createMembershipScreen';
   static const kMedicalNetworkScreen = '/medicalNetworkScreen';
@@ -124,6 +126,10 @@ abstract class AppRouters {
       GoRoute(
         path: kServiceScreen,
         builder: (context, state) => ServiceScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+      ),
+      GoRoute(
+        path: kMedicalEvents,
+        builder: (context, state) => MedicalEvents(),
       ),
       GoRoute(
         path: kMemberShipTypes,
@@ -230,6 +236,10 @@ abstract class AppRouters {
       GoRoute(
         path: kServiceScreen,
         builder: (context, state) => ServiceScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+      ),
+      GoRoute(
+        path: kMedicalEvents,
+        builder: (context, state) => MedicalEvents(),
       ),
       GoRoute(
         path: kCreateMembershipScreen,
