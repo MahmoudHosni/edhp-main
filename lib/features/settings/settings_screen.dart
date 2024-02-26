@@ -228,56 +228,56 @@ class SettingScreen extends StatelessWidget {
                     const SizedBox(
                       height: 28,
                     ),
-                    Text(
-                      'اللغة المفضلة',
-                      style: Styles.textStyle14W500
-                          .copyWith(color: AppColors.secondNew),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Center(
-                      child: SizedBox(
-                        width: 220,
-                        height: 44,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                width: 95,
-                                padding: EdgeInsets.all(5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: AppColors.secondNew,
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(32),
-                                        bottomRight: Radius.circular(32))),
-                                child: Text(
-                                  'العربية',
-                                  style: Styles.textStyle12W400
-                                      .copyWith(color: AppColors.whiteLightNew),
-                                )),
-                            SizedBox(
-                              width: 1,
-                            ),
-                            Container(
-                                width: 95,
-                                padding: EdgeInsets.all(5),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: AppColors.whiteLightNew,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(32),
-                                        bottomLeft: Radius.circular(32))),
-                                child: Text(
-                                  'English',
-                                  style: Styles.textStyle12W400
-                                      .copyWith(color: AppColors.secondNew),
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // Text(
+                    //   'اللغة المفضلة',
+                    //   style: Styles.textStyle14W500
+                    //       .copyWith(color: AppColors.secondNew),
+                    // ),
+                    // const SizedBox(
+                    //   height: 12,
+                    // ),
+                    // Center(
+                    //   child: SizedBox(
+                    //     width: 220,
+                    //     height: 44,
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.center,
+                    //       children: [
+                    //         Container(
+                    //             width: 95,
+                    //             padding: EdgeInsets.all(5),
+                    //             alignment: Alignment.center,
+                    //             decoration: BoxDecoration(
+                    //                 color: AppColors.secondNew,
+                    //                 borderRadius: BorderRadius.only(
+                    //                     topRight: Radius.circular(32),
+                    //                     bottomRight: Radius.circular(32))),
+                    //             child: Text(
+                    //               'العربية',
+                    //               style: Styles.textStyle12W400
+                    //                   .copyWith(color: AppColors.whiteLightNew),
+                    //             )),
+                    //         SizedBox(
+                    //           width: 1,
+                    //         ),
+                    //         Container(
+                    //             width: 95,
+                    //             padding: EdgeInsets.all(5),
+                    //             alignment: Alignment.center,
+                    //             decoration: BoxDecoration(
+                    //                 color: AppColors.whiteLightNew,
+                    //                 borderRadius: BorderRadius.only(
+                    //                     topLeft: Radius.circular(32),
+                    //                     bottomLeft: Radius.circular(32))),
+                    //             child: Text(
+                    //               'English',
+                    //               style: Styles.textStyle12W400
+                    //                   .copyWith(color: AppColors.secondNew),
+                    //             )),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 35,
                     ),
