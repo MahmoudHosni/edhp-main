@@ -61,8 +61,6 @@ dependencies:
   animated_custom_dropdown: 3.0.0
   easy_localization: ^3.0.3
   carousel_slider: ^4.2.1
-  phone_form_field: ^9.0.5
-
 
 flutter_launcher_icons:
   android: "launcher_icon"
