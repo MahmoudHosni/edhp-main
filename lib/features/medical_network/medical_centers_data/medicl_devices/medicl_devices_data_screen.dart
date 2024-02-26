@@ -57,78 +57,80 @@ class MedicalDevicesDataScreen extends StatelessWidget {
                           cubit.search(searchText: searchText),
                     ),
                     const SizedBox(height: 20),
-                    Container(
-                      height: 52,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(26),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.lightGrayColor.withOpacity(0.25),
-                            blurRadius: 40,
-                            spreadRadius: 12,
-                            offset: const Offset(0, 12),
-                          )
-                        ],
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [AppColors.secondNew, AppColors.blue],
-                        ),
-                      ),
-                      width: double.infinity,
-                      child: TextButton(
-                        onPressed: () => GoRouter.of(context).push(
-                          AppRouters.kNearestMedicalCentersScreen,
-                          extra: MedicalCenterEntity(
-                            medicalCenterType: MedicalCenterType.medicalDevices,
-                            title: StringsManager.medicalDevices.tr(),
-                          ),
-                        ),
-                        child: Text(
-                          StringsManager.closestToYou.tr(),
-                          style: Styles.textStyle195W500.copyWith(
-                              color: AppColors.whiteColor, fontSize: 20),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   height: 52,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(26),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: AppColors.lightGrayColor.withOpacity(0.25),
+                    //         blurRadius: 40,
+                    //         spreadRadius: 12,
+                    //         offset: const Offset(0, 12),
+                    //       )
+                    //     ],
+                    //     gradient: const LinearGradient(
+                    //       begin: Alignment.topLeft,
+                    //       end: Alignment.bottomRight,
+                    //       colors: [AppColors.secondNew, AppColors.blue],
+                    //     ),
+                    //   ),
+                    //   width: double.infinity,
+                    //   child: TextButton(
+                    //     onPressed: () => GoRouter.of(context).push(
+                    //       AppRouters.kNearestMedicalCentersScreen,
+                    //       extra: MedicalCenterEntity(
+                    //         medicalCenterType: MedicalCenterType.medicalDevices,
+                    //         title: StringsManager.medicalDevices.tr(),
+                    //       ),
+                    //     ),
+                    //     child: Text(
+                    //       StringsManager.closestToYou.tr(),
+                    //       style: Styles.textStyle195W500.copyWith(
+                    //           color: AppColors.whiteColor, fontSize: 20),
+                    //     ),
+                    //   ),
+                    // ),
                     Expanded(
-                            child: state is MedicalDevicesDataLoadingState
-                                ? const Center(
-                                    child: CircularProgressIndicator(
-                                      color: AppColors.primaryBlueColor,
-                                    ),
-                                  )
-                                : ListView.separated(
-                                    itemBuilder: (context, index) => InkWell(
-                                      child: MedicalCenterCard(
-                                        medicalCenterEntity:
-                                            MedicalCenterEntity(
-                                          medicalCenterType:
-                                              MedicalCenterType.medicalDevices,
-                                          title: StringsManager.medicalDevices
-                                              .tr(),
-                                        ),
-                                        serviceProviderEntity:
-                                            cubit.medicalDevices[index],
-                                      ),
-                                      onTap: () => GoRouter.of(context).push(
-                                        AppRouters.kNearestMedicalCentersScreen,
-                                        extra: MedicalCenterEntity(
-                                          medicalCenterType:
-                                              MedicalCenterType.medicalDevices,
-                                          title: StringsManager.medicalDevices
-                                              .tr(),
-                                        ),
-                                      ),
-                                    ),
-                                    separatorBuilder: (context, index) =>
-                                        Container(
-                                      height: 1,
-                                      color: AppColors.unselectedColor,
-                                    ),
-                                    itemCount: cubit.medicalDevices.length,
+                      child: state is MedicalDevicesDataLoadingState
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryBlueColor,
+                              ),
+                            )
+                          : ListView.separated(
+                              itemBuilder: (context, index) => InkWell(
+                                child: MedicalCenterCard(
+                                  medicalCenterEntity: MedicalCenterEntity(
+                                    medicalCenterType:
+                                        MedicalCenterType.medicalDevices,
+                                    title: StringsManager.medicalDevices.tr(),
+                                    id: cubit.medicalDevices[index].id!,
+                                    medicalCenterName:
+                                        cubit.medicalDevices[index].name!,
                                   ),
-                          )
+                                  serviceProviderEntity:
+                                      cubit.medicalDevices[index],
+                                ),
+                                onTap: () => GoRouter.of(context).push(
+                                  AppRouters.kNearestMedicalCentersScreen,
+                                  extra: MedicalCenterEntity(
+                                    medicalCenterType:
+                                        MedicalCenterType.medicalDevices,
+                                    title: StringsManager.medicalDevices.tr(),
+                                    id: cubit.medicalDevices[index].id!,
+                                    medicalCenterName:
+                                        cubit.medicalDevices[index].name!,
+                                  ),
+                                ),
+                              ),
+                              separatorBuilder: (context, index) => Container(
+                                height: 1,
+                                color: AppColors.unselectedColor,
+                              ),
+                              itemCount: cubit.medicalDevices.length,
+                            ),
+                    )
                   ],
                 ),
               ));

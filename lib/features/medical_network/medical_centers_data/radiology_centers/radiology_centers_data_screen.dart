@@ -74,41 +74,41 @@ class RadiologyCentersDataScreen extends StatelessWidget {
                           cubit.search(searchText: searchText),
                     ),
                     const SizedBox(height: 20),
-                    Container(
-                      height: 52,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(26),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.lightGrayColor.withOpacity(0.25),
-                            blurRadius: 40,
-                            spreadRadius: 12,
-                            offset: const Offset(0, 12),
-                          )
-                        ],
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [AppColors.secondNew, AppColors.blue],
-                        ),
-                      ),
-                      width: double.infinity,
-                      child: TextButton(
-                        onPressed: () => GoRouter.of(context).push(
-                          AppRouters.kNearestMedicalCentersScreen,
-                          extra: MedicalCenterEntity(
-                            medicalCenterType:
-                                MedicalCenterType.radiologyCenters,
-                            title: StringsManager.radiologyCenters.tr(),
-                          ),
-                        ),
-                        child: Text(
-                          StringsManager.closestToYou.tr(),
-                          style: Styles.textStyle195W500.copyWith(
-                              color: AppColors.whiteColor, fontSize: 20),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   height: 52,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(26),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: AppColors.lightGrayColor.withOpacity(0.25),
+                    //         blurRadius: 40,
+                    //         spreadRadius: 12,
+                    //         offset: const Offset(0, 12),
+                    //       )
+                    //     ],
+                    //     gradient: const LinearGradient(
+                    //       begin: Alignment.topLeft,
+                    //       end: Alignment.bottomRight,
+                    //       colors: [AppColors.secondNew, AppColors.blue],
+                    //     ),
+                    //   ),
+                    //   width: double.infinity,
+                    //   child: TextButton(
+                    //     onPressed: () => GoRouter.of(context).push(
+                    //       AppRouters.kNearestMedicalCentersScreen,
+                    //       extra: MedicalCenterEntity(
+                    //         medicalCenterType:
+                    //             MedicalCenterType.radiologyCenters,
+                    //         title: StringsManager.radiologyCenters.tr(),
+                    //       ),
+                    //     ),
+                    //     child: Text(
+                    //       StringsManager.closestToYou.tr(),
+                    //       style: Styles.textStyle195W500.copyWith(
+                    //           color: AppColors.whiteColor, fontSize: 20),
+                    //     ),
+                    //   ),
+                    // ),
                     Expanded(
                       child: state is RadiologyCentersDataLoadingState
                           ? const Center(
@@ -123,6 +123,8 @@ class RadiologyCentersDataScreen extends StatelessWidget {
                                     medicalCenterType:
                                         MedicalCenterType.radiologyCenters,
                                     title: StringsManager.radiologyCenters.tr(),
+                                    id: cubit.radiologyCenters[index].id!,
+                                    medicalCenterName: cubit.radiologyCenters[index].name!,
                                   ),
                                   serviceProviderEntity:
                                       cubit.radiologyCenters[index],
@@ -133,6 +135,8 @@ class RadiologyCentersDataScreen extends StatelessWidget {
                                     medicalCenterType:
                                         MedicalCenterType.radiologyCenters,
                                     title: StringsManager.radiologyCenters.tr(),
+                                    id: cubit.radiologyCenters[index].id!,
+                                    medicalCenterName: cubit.radiologyCenters[index].name!,
                                   ),
                                 ),
                               ),

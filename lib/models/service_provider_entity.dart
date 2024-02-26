@@ -31,7 +31,7 @@ class ServiceProviderEntity {
 
   factory ServiceProviderEntity.fromJson(Map<String, dynamic> json) {
     return ServiceProviderEntity(
-      id: json['ID'],
+      id: json['Id'],
       name: json['Name'],
       telephone: json['Telephone'],
       email: json['Email'],

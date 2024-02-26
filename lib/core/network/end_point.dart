@@ -44,4 +44,6 @@ class EndPoint {
   static const String getAreas = '/ApiCity/GetListByStateID';
   static const String getServiceProvider =
       '/APIAndriodServicePorvider/GetSerivcePorviderBYType';
+  static const String getServiceProviderBranches =
+      '/APIAndriodServicePorvider/GetSerivcePorviderBranchesByType';
 }

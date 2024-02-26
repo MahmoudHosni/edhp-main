@@ -42,10 +42,14 @@ final List<MedicalNetworkEntity> medicalNetworkList = [
 class MedicalCenterEntity {
   final MedicalCenterType medicalCenterType;
   final String title;
+  final int id;
+  final String medicalCenterName;
 
   MedicalCenterEntity({
     required this.medicalCenterType,
     required this.title,
+    required this.id,
+    required this.medicalCenterName,
   });
 }
 
