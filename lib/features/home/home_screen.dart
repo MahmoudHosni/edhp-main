@@ -131,36 +131,78 @@ class HomeScreen extends StatelessWidget {
                             height: 24,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
-                                child: InkWell(child: Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
-                                  child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
-                                    SvgPicture.asset('assets/icons/ic_01.svg',width: 70,),
-                                    SizedBox(height: 20,),
-                                    Text(StringsManager.medicalEvents,style: Styles.textStyle12W500.copyWith(color: Color(0xffFEA6A7)),)
-                                  ]),),onTap: (){
-                                  GoRouter.of(context).push(AppRouters.kMedicalEvents);
-                                }),
+                                child: InkWell(
+                                    child: Container(
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12))),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/icons/ic_01.svg',
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              StringsManager.medicalEvents,
+                                              style: Styles.textStyle12W500
+                                                  .copyWith(
+                                                      color: Color(0xffFEA6A7)),
+                                            )
+                                          ]),
+                                    ),
+                                    onTap: () {
+                                      GoRouter.of(context)
+                                          .push(AppRouters.kMedicalEvents);
+                                    }),
                               ),
                               const SizedBox(
                                 width: 8,
                               ),
                               Expanded(
-                                child: InkWell(child: Container(margin: EdgeInsets.all(8),width: 90,height: 140,decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(12))),
-                                  child: Column(mainAxisAlignment: MainAxisAlignment.center,children: [
-                                    SvgPicture.asset('assets/icons/ic_02.svg',width: 70,),
-                                    SizedBox(height: 20,),
-                                    Text('العضويات',style: Styles.textStyle12W500.copyWith(color: Color(0xff9CA8FA)),)
-                                  ]),),onTap: (){
-                                  if(memberShips!=null && memberShips.length>0){
-                                    ShowToast.showToastGreen('انت بالفعل مشترك فى باقة');
-                                  }else {
-                                    GoRouter.of(context).push(
-                                        AppRouters.kServiceScreen,
-                                        extra: SubscriptionRequest());
-                                  }
-                                }),
+                                child: InkWell(
+                                    child: Container(
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12))),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/icons/ic_02.svg',
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              'العضويات',
+                                              style: Styles.textStyle12W500
+                                                  .copyWith(
+                                                      color: Color(0xff9CA8FA)),
+                                            )
+                                          ]),
+                                    ),
+                                    onTap: () {
+                                      if (memberShips != null &&
+                                          memberShips.length > 0) {
+                                        ShowToast.showToastGreen(
+                                            'انت بالفعل مشترك فى باقة');
+                                      } else {
+                                        GoRouter.of(context).push(
+                                            AppRouters.kServiceScreen,
+                                            extra: SubscriptionRequest());
+                                      }
+                                    }),
                               ),
                               const SizedBox(
                                 width: 8,
@@ -179,7 +221,6 @@ class HomeScreen extends StatelessWidget {
                                         children: [
                                           SvgPicture.asset(
                                             'assets/icons/ic_03.svg',
-                                            width: 70,
                                           ),
                                           SizedBox(
                                             height: 20,
