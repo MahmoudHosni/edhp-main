@@ -81,20 +81,25 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                      child: IntlPhoneField(
-                        decoration: InputDecoration(
-                          labelText: StringsManager.phoneNumber,
-                          fillColor: Colors.white,
+                      const EdgeInsetsDirectional.symmetric(horizontal: 20),
+                      child: Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: IntlPhoneField(
+                          decoration: InputDecoration(
+                            labelText: StringsManager.phoneNumber,
+                            labelStyle: Styles.textStyle14W500
+                                .copyWith(color: AppColors.lightGrayColor),
+                            fillColor: Colors.white,
+                          ),
+                          initialCountryCode: 'EG',
+                          pickerDialogStyle: PickerDialogStyle(
+                              backgroundColor: Colors.white,
+                              countryCodeStyle: TextStyle(color: Colors.blue),
+                              countryNameStyle: TextStyle(color: Colors.black)),
+                          onChanged: (phone) {
+                            phoneNumberController.text = phone.completeNumber;
+                          },
                         ),
-                        initialCountryCode: 'EG',
-                        pickerDialogStyle: PickerDialogStyle(
-                            backgroundColor: Colors.white,
-                            countryCodeStyle: TextStyle(color: Colors.blue),
-                            countryNameStyle: TextStyle(color: Colors.black)),
-                        onChanged: (phone) {
-                          phoneNumberController.text = phone.completeNumber;
-                        },
                       ),
                     ),
 

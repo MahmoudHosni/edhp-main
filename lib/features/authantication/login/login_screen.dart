@@ -1,5 +1,6 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/EditTextView.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -85,19 +86,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                      child: IntlPhoneField(
-                        decoration: const InputDecoration(
-                          labelText: StringsManager.phoneNumber,
-                          fillColor: Colors.white,
+                      child: Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: IntlPhoneField(
+                          decoration: InputDecoration(
+                            labelText: StringsManager.phoneNumber,
+                            labelStyle: Styles.textStyle14W500
+                                .copyWith(color: AppColors.lightGrayColor),
+                            fillColor: Colors.white,
+                          ),
+                          initialCountryCode: 'EG',
+                          pickerDialogStyle: PickerDialogStyle(
+                              backgroundColor: Colors.white,
+                              countryCodeStyle: TextStyle(color: Colors.blue),
+                              countryNameStyle: TextStyle(color: Colors.black)),
+                          onChanged: (phone) {
+                            phoneNumberController.text = phone.completeNumber;
+                          },
                         ),
-                        initialCountryCode: 'EG',
-                        pickerDialogStyle: PickerDialogStyle(
-                            backgroundColor: Colors.white,
-                            countryCodeStyle: TextStyle(color: Colors.blue),
-                            countryNameStyle: TextStyle(color: Colors.black)),
-                        onChanged: (phone) {
-                          phoneNumberController.text = phone.completeNumber;
-                        },
                       ),
                     ),
                     // Padding(
