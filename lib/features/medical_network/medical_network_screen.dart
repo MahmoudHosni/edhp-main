@@ -24,23 +24,8 @@ class MedicalNetworkScreen extends StatelessWidget {
           separatorBuilder: (context, index) => Container(height: 12),
           itemBuilder: (context, index) {
             return InkWell(
-              onTap: () {
-                {
-                  switch (medicalNetworkList[index].router) {
-                    case AppRouters.kHospitalsDataScreen:
-                    case AppRouters.kDoctorsSpecialtiesScreen:
-                      openUrl(HealthyNetworkLinks.elementAt(index));
-                    case AppRouters.kLabsDataScreen:
-                      GoRouter.of(context).push(AppRouters.kLabsDataScreen);
-                    case AppRouters.kRadiologyCentersDataScreen:
-                      GoRouter.of(context)
-                          .push(AppRouters.kRadiologyCentersDataScreen);
-                    case AppRouters.kMedicalDevicesDataScreen:
-                    case AppRouters.kPharmaciesDataScreen:
-                      openUrl(HealthyNetworkLinks.elementAt(index));
-                  }
-                }
-              },
+              onTap: () =>
+                  GoRouter.of(context).push(medicalNetworkList[index].router),
               child: SizedBox(
                 height: 120,
                 child: Stack(

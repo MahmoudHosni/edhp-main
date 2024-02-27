@@ -71,36 +71,36 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                       valueChanged: (searchText) =>
                           cubit.search(searchText: searchText),
                     ),
-                    const SizedBox(height: 20),
-                    Container(
-                      height: 52,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(26),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.lightGrayColor.withOpacity(0.25),
-                            blurRadius: 40,
-                            spreadRadius: 12,
-                            offset: const Offset(0, 12),
-                          )
-                        ],
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [AppColors.secondNew, AppColors.blue],
-                        ),
-                      ),
-                      width: double.infinity,
-                      child: TextButton(
-                        onPressed: () => GoRouter.of(context)
-                            .push(AppRouters.kNearestDoctorsScreen),
-                        child: Text(
-                          StringsManager.closestToYou.tr(),
-                          style: Styles.textStyle195W500.copyWith(
-                              color: AppColors.whiteColor, fontSize: 20),
-                        ),
-                      ),
-                    ),
+                    // const SizedBox(height: 20),
+                    // Container(
+                    //   height: 52,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(26),
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: AppColors.lightGrayColor.withOpacity(0.25),
+                    //         blurRadius: 40,
+                    //         spreadRadius: 12,
+                    //         offset: const Offset(0, 12),
+                    //       )
+                    //     ],
+                    //     gradient: const LinearGradient(
+                    //       begin: Alignment.topLeft,
+                    //       end: Alignment.bottomRight,
+                    //       colors: [AppColors.secondNew, AppColors.blue],
+                    //     ),
+                    //   ),
+                    //   width: double.infinity,
+                    //   child: TextButton(
+                    //     onPressed: () => GoRouter.of(context)
+                    //         .push(AppRouters.kNearestDoctorsScreen),
+                    //     child: Text(
+                    //       StringsManager.closestToYou.tr(),
+                    //       style: Styles.textStyle195W500.copyWith(
+                    //           color: AppColors.whiteColor, fontSize: 20),
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(height: 28),
                     Expanded(
                       child: ListView.separated(

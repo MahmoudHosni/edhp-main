@@ -283,49 +283,26 @@ class HomeScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(12))),
                                     child: InkWell(
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              SvgPicture.asset(
-                                                  'assets/icons/ico_${index + 1}.svg'),
-                                              const SizedBox(
-                                                height: 25,
-                                              ),
-                                              Text(
-                                                medicalNetworkList[index].title,
-                                                style: Styles.textStyle12W500
-                                                    .copyWith(
-                                                        color:
-                                                            AppColors.thirdNew),
-                                              )
-                                            ]),
-                                        onTap: () {
-                                          switch (medicalNetworkList[index]
-                                              .router) {
-                                            case AppRouters
-                                                  .kHospitalsDataScreen:
-                                            case AppRouters
-                                                  .kDoctorsSpecialtiesScreen:
-                                              openUrl(
-                                                  HealthyNetworkLinks.elementAt(
-                                                      index));
-                                            case AppRouters.kLabsDataScreen:
-                                              GoRouter.of(context).push(
-                                                  AppRouters.kLabsDataScreen);
-                                            case AppRouters
-                                                  .kRadiologyCentersDataScreen:
-                                              GoRouter.of(context).push(AppRouters
-                                                  .kRadiologyCentersDataScreen);
-                                            case AppRouters
-                                                  .kMedicalDevicesDataScreen:
-                                            case AppRouters
-                                                  .kPharmaciesDataScreen:
-                                              openUrl(
-                                                  HealthyNetworkLinks.elementAt(
-                                                      index));
-                                          }
-                                        }),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                                'assets/icons/ico_${index + 1}.svg'),
+                                            const SizedBox(
+                                              height: 25,
+                                            ),
+                                            Text(
+                                              medicalNetworkList[index].title,
+                                              style: Styles.textStyle12W500
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.thirdNew),
+                                            )
+                                          ]),
+                                      onTap: () => GoRouter.of(context).push(
+                                          medicalNetworkList[index].router),
+                                    ),
                                   );
                                 }),
                           ),
