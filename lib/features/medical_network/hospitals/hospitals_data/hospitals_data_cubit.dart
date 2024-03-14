@@ -10,16 +10,19 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
     _getHospitals();
     _getGovernorates();
     _getLevels();
+    _getServices();
   }
 
   static HospitalsDataCubit get(context) => BlocProvider.of(context);
 
   List<LookupEntity> governorates = [LookupEntity(id: 0, name: '')];
   List<LookupEntity> levels = [LookupEntity(id: 0, name: '')];
+  List<LookupEntity> services = [LookupEntity(id: 0, name: '')];
   List<HospitalEntity> hospitals = [];
 
   int _governorateId = 0;
   int _levelsId = 0;
+  int _serviceId = 0;
   String _searchText = '';
 
   selectGovernorate({required int id}) {
@@ -27,8 +30,13 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
     _getHospitals();
   }
 
-  selectLevels({required int id}) {
+  selectLevel({required int id}) {
     _levelsId = id;
+    _getHospitals();
+  }
+
+  selectService({required int id}) {
+    _serviceId = id;
     _getHospitals();
   }
 
@@ -44,6 +52,7 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
       queryParameters: {
         'GovID': _governorateId,
         'LevelID': _levelsId,
+        'SerivceID': _serviceId,
         'name': _searchText,
       },
     ).then(
@@ -83,11 +92,28 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
       },
     ).then(
       (levels) {
-        print(levels);
         final levelsList = levels.data as List;
-        this.levels =
-            levelsList.map((i) => LookupEntity.fromJson(i)).toList();
+        this.levels = levelsList.map((i) => LookupEntity.fromJson(i)).toList();
         emit(HospitalsGetLevelsState());
+      },
+    ).catchError(
+      (onError) {
+        emit(HospitalsLoadErrorState());
+      },
+    );
+  }
+
+  _getServices() {
+    DioHelper.getData(
+      path: EndPoint.getHospitalServices,
+      queryParameters: {
+        'Type': '1004',
+      },
+    ).then(
+      (services) {
+        final levelsList = services.data as List;
+        this.services = levelsList.map((i) => LookupEntity.fromJson(i)).toList();
+        emit(HospitalsGetServicesState());
       },
     ).catchError(
       (onError) {

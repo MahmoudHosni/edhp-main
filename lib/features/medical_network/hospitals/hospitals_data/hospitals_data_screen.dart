@@ -52,7 +52,7 @@ class HospitalsDataScreen extends StatelessWidget {
                     EHDPDropDown(
                       list: cubit.levels.map((e) => e.name).toList(),
                       hintText: StringsManager.selectLevel.tr(),
-                      valueChanged: (value) => cubit.selectLevels(
+                      valueChanged: (value) => cubit.selectLevel(
                           id: cubit.levels
                               .where((element) => element.name == value)
                               .first
@@ -60,9 +60,13 @@ class HospitalsDataScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     EHDPDropDown(
-                      list: ['بيانات متغيرة', 'بيانات متغيرة', 'بيانات متغيرة'],
+                      list: cubit.services.map((e) => e.name).toList(),
                       hintText: StringsManager.services.tr(),
-                      valueChanged: (value) {},
+                      valueChanged: (value) => cubit.selectService(
+                          id: cubit.services
+                              .where((element) => element.name == value)
+                              .first
+                              .id),
                     ),
                     const SizedBox(height: 4),
                     SearchableTextFormField(

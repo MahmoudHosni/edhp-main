@@ -54,4 +54,6 @@ class EndPoint {
       '/APIAndriodServicePorvider/GetSerivcePorviderHospital';
   static const String getDoctorsSpecialists =
       '/APIAndriodServicePorvider/GetSerivcePorviderDoctores';
+  static const String getHospitalServices =
+      '/APIAndriodServicePorvider/GetServiceByType';
 }

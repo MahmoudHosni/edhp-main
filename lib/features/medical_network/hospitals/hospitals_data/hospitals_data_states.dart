@@ -8,6 +8,8 @@ class HospitalsGetGovernoratesState extends HospitalsDataStates {}
 
 class HospitalsGetLevelsState extends HospitalsDataStates {}
 
+class HospitalsGetServicesState extends HospitalsDataStates {}
+
 class HospitalsGetHospitalsState extends HospitalsDataStates {}
 
 class HospitalsLoadErrorState extends HospitalsDataStates {}
