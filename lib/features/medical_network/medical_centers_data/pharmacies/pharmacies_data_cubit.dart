@@ -46,7 +46,7 @@ class PharmaciesDataCubit extends Cubit<PharmaciesDataStates> {
         'Type': 1007,
         'GovID': _governorateId,
         'cityId': _areaId,
-        'name': _searchText,
+        'Name': _searchText,
       },
     ).then(
       (pharmacies) {

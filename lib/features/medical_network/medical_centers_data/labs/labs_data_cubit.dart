@@ -46,7 +46,7 @@ class LabsDataCubit extends Cubit<LabsDataStates> {
         'Type': 1005,
         'GovID': _governorateId,
         'cityId': _areaId,
-        'name': _searchText,
+        'Name': _searchText,
       },
     ).then(
       (labs) {

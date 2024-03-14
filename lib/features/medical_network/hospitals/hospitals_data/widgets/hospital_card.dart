@@ -156,6 +156,31 @@ class HospitalCard extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(width: 8,),
+              Container(
+                height: 32,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.lightGrayColor.withOpacity(0.25),
+                        blurRadius: 4,
+                        spreadRadius: 1,
+                        offset: const Offset(1, 1),
+                      )
+                    ],
+                    color: AppColors.secondNew),
+                width: 120,
+                child: TextButton(
+                  onPressed: () => GoRouter.of(context)
+                      .push(AppRouters.kMedicalCenterServicesScreen),
+                  child: Text(
+                    StringsManager.services.tr(),
+                    style: Styles.textStyle195W500
+                        .copyWith(color: AppColors.whiteColor, fontSize: 12),
+                  ),
+                ),
+              ),
             ],
           ),
         ],

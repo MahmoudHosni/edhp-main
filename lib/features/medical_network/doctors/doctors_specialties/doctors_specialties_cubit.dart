@@ -55,7 +55,7 @@ class DoctorsSpecialtiesCubit extends Cubit<DoctorsSpecialtiesStates> {
         'GovID': _governorateId,
         'CityID': _areaId,
         'LevelID': _degreeId,
-        'name': _searchText,
+        'Name': _searchText,
       },
     ).then(
       (doctorsSpecialists) {

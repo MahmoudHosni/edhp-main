@@ -36,7 +36,7 @@ class MedicalDevicesDataCubit extends Cubit<MedicalDevicesDataStates> {
       queryParameters: {
         'Type': 1011,
         'GovID': _governorateId,
-        'name': _searchText,
+        'Name': _searchText,
       },
     ).then(
       (medicalDevices) {

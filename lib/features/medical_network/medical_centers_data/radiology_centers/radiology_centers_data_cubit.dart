@@ -45,8 +45,8 @@ class RadiologyCentersDataCubit extends Cubit<RadiologyCentersDataStates> {
       queryParameters: {
         'Type': 1006,
         'GovID': _governorateId,
-        'cityId': _areaId,
-        'name': _searchText,
+        'CityID': _areaId,
+        'Name': _searchText,
       },
     ).then(
       (radiologyCenters) {

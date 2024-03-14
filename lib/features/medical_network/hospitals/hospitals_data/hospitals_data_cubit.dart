@@ -53,7 +53,7 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
         'GovID': _governorateId,
         'LevelID': _levelsId,
         'SerivceID': _serviceId,
-        'name': _searchText,
+        'Name': _searchText,
       },
     ).then(
       (hospitals) {
