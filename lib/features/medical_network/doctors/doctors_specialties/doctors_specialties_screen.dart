@@ -60,9 +60,13 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     EHDPDropDown(
-                      list: ['بيانات متغيرة', 'بيانات متغيرة', 'بيانات متغيرة'],
+                      list: cubit.degrees.map((e) => e.name).toList(),
                       hintText: StringsManager.degree.tr(),
-                      valueChanged: (value) {},
+                      valueChanged: (value) => cubit.selectDegree(
+                          id: cubit.degrees
+                              .where((element) => element.name == value)
+                              .first
+                              .id),
                     ),
                     const SizedBox(height: 4),
                     SearchableTextFormField(
@@ -103,18 +107,27 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                     // ),
                     const SizedBox(height: 28),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => InkWell(
-                          child: DoctorCard(),
-                          onTap: () => GoRouter.of(context)
-                              .push(AppRouters.kNearestDoctorsScreen),
-                        ),
-                        separatorBuilder: (context, index) => Container(
-                          height: 1,
-                          color: AppColors.unselectedColor,
-                        ),
-                        itemCount: 10,
-                      ),
+                      child: state is DoctorsSpecialtiesLoadingState
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryBlueColor,
+                              ),
+                            )
+                          : ListView.separated(
+                              itemBuilder: (context, index) => InkWell(
+                                child: DoctorCard(
+                                  doctorSpecialist:
+                                      cubit.doctorsSpecialists[index],
+                                ),
+                                onTap: () => GoRouter.of(context)
+                                    .push(AppRouters.kNearestDoctorsScreen),
+                              ),
+                              separatorBuilder: (context, index) => Container(
+                                height: 1,
+                                color: AppColors.unselectedColor,
+                              ),
+                              itemCount: cubit.doctorsSpecialists.length,
+                            ),
                     ),
                   ],
                 ),

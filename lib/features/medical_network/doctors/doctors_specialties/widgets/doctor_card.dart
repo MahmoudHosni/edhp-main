@@ -2,10 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/models/doctor_specialist_entity.dart';
 import 'package:flutter/material.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key});
+  const DoctorCard({
+    super.key,
+    required this.doctorSpecialist,
+  });
+
+  final DoctorSpecialistEntity doctorSpecialist;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +29,11 @@ class DoctorCard extends StatelessWidget {
                 width: 1,
               ),
             ),
-            child: const Padding(
-              padding: EdgeInsetsDirectional.all(20),
+            child: Padding(
+              padding: const EdgeInsetsDirectional.all(20),
               child: Image(
                 image: NetworkImage(
-                  'بيانات متغيرة',
+                  doctorSpecialist.photoPath ?? '',
                 ),
                 fit: BoxFit.cover,
               ),
@@ -41,7 +47,7 @@ class DoctorCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'بيانات متغيرة',
+                  doctorSpecialist.name ?? '',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.textColorBlue, fontSize: 16),
                   maxLines: 1,
@@ -61,13 +67,15 @@ class DoctorCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         'بيانات متغيرة',
-                        style: Styles.textStyle195W500
-                            .copyWith(color: AppColors.blackColor, fontSize: 16),
+                        style: Styles.textStyle195W500.copyWith(
+                            color: AppColors.blackColor, fontSize: 16),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    const SizedBox(width: 8,),
+                    const SizedBox(
+                      width: 8,
+                    ),
                     Container(
                       height: 32,
                       decoration: BoxDecoration(

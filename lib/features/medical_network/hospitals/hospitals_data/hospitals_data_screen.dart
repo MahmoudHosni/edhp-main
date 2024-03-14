@@ -23,7 +23,7 @@ class HospitalsDataScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => HospitalsDataCubit(),
       child: BlocBuilder<HospitalsDataCubit, HospitalsDataStates>(
-        builder: (context, states) {
+        builder: (context, state) {
           HospitalsDataCubit cubit = HospitalsDataCubit.get(context);
 
           return ViewContainer(
@@ -50,9 +50,13 @@ class HospitalsDataScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     EHDPDropDown(
-                      list: ['بيانات متغيرة', 'بيانات متغيرة', 'بيانات متغيرة'],
+                      list: cubit.levels.map((e) => e.name).toList(),
                       hintText: StringsManager.selectLevel.tr(),
-                      valueChanged: (value) {},
+                      valueChanged: (value) => cubit.selectLevels(
+                          id: cubit.levels
+                              .where((element) => element.name == value)
+                              .first
+                              .id),
                     ),
                     const SizedBox(height: 4),
                     EHDPDropDown(
@@ -99,18 +103,21 @@ class HospitalsDataScreen extends StatelessWidget {
                     // ),
                     const SizedBox(height: 28),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => InkWell(
-                          child: HospitalCard(),
-                          onTap: () => GoRouter.of(context)
-                              .push(AppRouters.kNearestHospitalsScreen),
-                        ),
-                        separatorBuilder: (context, index) => Container(
-                          height: 1,
-                          color: AppColors.unselectedColor,
-                        ),
-                        itemCount: 10,
-                      ),
+                      child: state is HospitalsLoadingState
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryBlueColor,
+                              ),
+                            )
+                          : ListView.separated(
+                              itemBuilder: (context, index) => HospitalCard(
+                                  hospitalData: cubit.hospitals[index]),
+                              separatorBuilder: (context, index) => Container(
+                                height: 1,
+                                color: AppColors.unselectedColor,
+                              ),
+                              itemCount: cubit.hospitals.length,
+                            ),
                     ),
                   ],
                 ),

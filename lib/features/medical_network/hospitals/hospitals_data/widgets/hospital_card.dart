@@ -1,16 +1,24 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
+import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/models/hospital_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:ui' as ui;
 
 class HospitalCard extends StatelessWidget {
-  const HospitalCard({super.key});
+  const HospitalCard({
+    super.key,
+    required this.hospitalData,
+  });
+
+  final HospitalEntity hospitalData;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +39,11 @@ class HospitalCard extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: const Padding(
-                  padding: EdgeInsetsDirectional.all(20),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.all(20),
                   child: Image(
                     image: NetworkImage(
-                      'بيانات متغيرة',
+                      hospitalData.photoPath ?? '',
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -47,7 +55,7 @@ class HospitalCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'بيانات متغيرة',
+                      hospitalData.name ?? '',
                       style: Styles.textStyle195W500.copyWith(
                           color: AppColors.textColorBlue, fontSize: 16),
                       maxLines: 1,
@@ -67,7 +75,7 @@ class HospitalCard extends StatelessWidget {
                           ),
                         ),
                         RatingBarIndicator(
-                          rating: 2.75,
+                          rating: hospitalData.rating?.toDouble() ?? 0,
                           itemBuilder: (context, index) => const Icon(
                             Icons.star,
                             color: AppColors.secondNew,
@@ -85,57 +93,71 @@ class HospitalCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Row(children: [
-            SvgPicture.asset(AppImages.location),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                'بيانات متغيرة',
-                style: Styles.textStyle195W500.copyWith(
-                    color: AppColors.blackColor, fontSize: 16),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],),
-          const SizedBox(height: 4,),
-          Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            SvgPicture.asset(AppImages.phone),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                'بيانات متغيرة',
-                style: Styles.textStyle195W500.copyWith(
-                    color: AppColors.secondNew, fontSize: 16),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Container(
-              height: 32,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.lightGrayColor.withOpacity(0.25),
-                      blurRadius: 4,
-                      spreadRadius: 1,
-                      offset: const Offset(1, 1),
-                    )
-                  ],
-                  color: AppColors.secondNew
-              ),
-              width: 120,
-              child: TextButton(
-                onPressed: () => GoRouter.of(context).push(AppRouters.kOutpatientClinicsScreen),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SvgPicture.asset(AppImages.location),
+              const SizedBox(width: 12),
+              Expanded(
                 child: Text(
-                  StringsManager.outpatientClinics.tr(),
+                  hospitalData.address ?? '',
                   style: Styles.textStyle195W500
-                      .copyWith(color: AppColors.whiteColor, fontSize: 12),
+                      .copyWith(color: AppColors.blackColor, fontSize: 16),
                 ),
               ),
-            ),
-          ],),
+            ],
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: () => openUrl('tel://${hospitalData.telephone}'),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(AppImages.phone),
+                      const SizedBox(width: 12),
+                      Text(
+                        hospitalData.telephone ?? '',
+                        style: Styles.textStyle195W500
+                            .copyWith(color: AppColors.secondNew, fontSize: 16),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: ui.TextDirection.ltr,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                height: 32,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.lightGrayColor.withOpacity(0.25),
+                        blurRadius: 4,
+                        spreadRadius: 1,
+                        offset: const Offset(1, 1),
+                      )
+                    ],
+                    color: AppColors.secondNew),
+                width: 120,
+                child: TextButton(
+                  onPressed: () => GoRouter.of(context)
+                      .push(AppRouters.kOutpatientClinicsScreen),
+                  child: Text(
+                    StringsManager.outpatientClinics.tr(),
+                    style: Styles.textStyle195W500
+                        .copyWith(color: AppColors.whiteColor, fontSize: 12),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
