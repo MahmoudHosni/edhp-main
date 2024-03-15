@@ -51,6 +51,7 @@ class StringsManager {
   static const String medicalDevices = 'medical devices';
   static const String pharmacies = 'pharmacies';
   static const String hospitalsData = 'hospitals data';
+  static const String hospitalServices = 'hospitals services';
   static const String doctorsSpecialties = 'doctors specialties';
   static const String labsData = 'labs data';
   static const String radiologyCentersData = 'radiology centers data';

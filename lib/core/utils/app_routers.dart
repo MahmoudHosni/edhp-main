@@ -16,6 +16,7 @@ import 'package:edhp/features/medical_file/medical_file_screen.dart';
 import 'package:edhp/features/medical_network/branches/medical_center_branches_screen.dart';
 import 'package:edhp/features/medical_network/doctors/doctors_specialties/doctors_specialties_screen.dart';
 import 'package:edhp/features/medical_network/doctors/nearest_doctors/nearest_doctors_screen.dart';
+import 'package:edhp/features/medical_network/hospitals/hospital_services/hospital_services_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/hospitals_data/hospitals_data_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/nearest_hospitals/nearest_hospitals_screen.dart';
 import 'package:edhp/features/medical_network/hospitals/outpatient_clinics/outpatient_clinics_screen.dart';
@@ -70,6 +71,7 @@ abstract class AppRouters {
   static const kPharmaciesDataScreen = '/pharmaciesDataScreen';
   static const kMedicalCenterBranchesScreen = '/medicalCenterBranchesScreen';
   static const kOutpatientClinicsScreen = '/outpatientClinicsScreen';
+  static const kHospitalServicesScreen = '/hospitalServicesScreen';
   static const kNearestMedicalCentersScreen = '/nearestMedicalCentersScreen';
   static const kNearestHospitalsScreen = '/nearestHospitalsScreen';
   static const kNearestDoctorsScreen = '/nearestDoctorsScreen';
@@ -207,7 +209,15 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kOutpatientClinicsScreen,
-        builder: (context, state) => const OutpatientClinicsScreen(),
+        builder: (context, state) => OutpatientClinicsScreen(
+          hospitalId: state.extra as int,
+        ),
+      ),
+      GoRoute(
+        path: kHospitalServicesScreen,
+        builder: (context, state) => HospitalServicesScreen(
+          hospitalId: state.extra as int,
+        ),
       ),
       GoRoute(
         path: kNearestMedicalCentersScreen,

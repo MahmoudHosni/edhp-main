@@ -105,7 +105,7 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
 
   _getServices() {
     DioHelper.getData(
-      path: EndPoint.getHospitalServices,
+      path: EndPoint.getServices,
       queryParameters: {
         'Type': '1004',
       },

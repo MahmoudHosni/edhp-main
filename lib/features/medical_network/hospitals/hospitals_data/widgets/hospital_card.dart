@@ -147,8 +147,9 @@ class HospitalCard extends StatelessWidget {
                     color: AppColors.secondNew),
                 width: 120,
                 child: TextButton(
-                  onPressed: () => GoRouter.of(context)
-                      .push(AppRouters.kOutpatientClinicsScreen),
+                  onPressed: () => GoRouter.of(context).push(
+                      AppRouters.kOutpatientClinicsScreen,
+                      extra: hospitalData.id),
                   child: Text(
                     StringsManager.outpatientClinics.tr(),
                     style: Styles.textStyle195W500
@@ -156,7 +157,9 @@ class HospitalCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 8,),
+              const SizedBox(
+                width: 8,
+              ),
               Container(
                 height: 32,
                 decoration: BoxDecoration(
@@ -170,10 +173,11 @@ class HospitalCard extends StatelessWidget {
                       )
                     ],
                     color: AppColors.secondNew),
-                width: 120,
+                width: 72,
                 child: TextButton(
-                  onPressed: () => GoRouter.of(context)
-                      .push(AppRouters.kMedicalCenterServicesScreen),
+                  onPressed: () => GoRouter.of(context).push(
+                      AppRouters.kHospitalServicesScreen,
+                      extra: hospitalData.id),
                   child: Text(
                     StringsManager.services.tr(),
                     style: Styles.textStyle195W500

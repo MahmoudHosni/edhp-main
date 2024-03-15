@@ -1,7 +1,6 @@
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/features/medical_network/doctors/doctors_specialties/doctors_specialties_states.dart';
-import 'package:edhp/models/doctor_degree_entity.dart';
 import 'package:edhp/models/doctor_specialist_entity.dart';
 import 'package:edhp/models/lookup_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +14,7 @@ class DoctorsSpecialtiesCubit extends Cubit<DoctorsSpecialtiesStates> {
 
   List<LookupEntity> governorates = [LookupEntity(id: 0, name: '')];
   List<LookupEntity> areas = [LookupEntity(id: 0, name: '')];
-  List<DoctorDegreesEntity> degrees = [DoctorDegreesEntity(id: 0, name: '')];
+  List<LookupEntity> degrees = [LookupEntity(id: 0, name: '')];
   List<DoctorSpecialistEntity> doctorsSpecialists = [];
 
   static DoctorsSpecialtiesCubit get(context) => BlocProvider.of(context);
@@ -110,7 +109,7 @@ class DoctorsSpecialtiesCubit extends Cubit<DoctorsSpecialtiesStates> {
       (degrees) {
         final levelsList = degrees.data as List;
         this.degrees =
-            levelsList.map((i) => DoctorDegreesEntity.fromJson(i)).toList();
+            levelsList.map((i) => LookupEntity.fromJson(i)).toList();
         emit(DoctorsSpecialtiesGetDegreesState());
       },
     ).catchError(
