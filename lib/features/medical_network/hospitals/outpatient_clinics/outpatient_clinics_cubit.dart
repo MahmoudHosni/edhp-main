@@ -13,6 +13,8 @@ class OutpatientClinicsCubit extends Cubit<OutpatientClinicsStates> {
   static OutpatientClinicsCubit get(context) => BlocProvider.of(context);
   List<HospitalClinicEntity> clinics = [];
 
+  List<HospitalClinicEntity> _searches = [];
+
   _getClinics({required int hospitalId}) {
     emit(OutpatientClinicsLoadingState());
     DioHelper.getData(
@@ -25,13 +27,27 @@ class OutpatientClinicsCubit extends Cubit<OutpatientClinicsStates> {
         final labsList = clinics.data as List;
         this.clinics =
             labsList.map((i) => HospitalClinicEntity.fromJson(i)).toList();
+        _searches = this.clinics;
         emit(OutpatientClinicsGetClinicsState());
       },
     ).catchError(
       (error) {
-
+        clinics = [
+          HospitalClinicEntity(clinicId: 1, name: 'name'),
+          HospitalClinicEntity(clinicId: 1, name: 'nvr'),
+          HospitalClinicEntity(clinicId: 1, name: 'sear'),
+          HospitalClinicEntity(clinicId: 1, name: 'mor'),
+        ];
+        _searches = clinics;
         emit(OutpatientClinicsErrorState());
       },
     );
+  }
+
+  clinicsFiltered({required String searchText}) {
+    clinics = _searches;
+    clinics =
+        clinics.where((element) => element.name.contains(searchText)).toList();
+    emit(OutpatientClinicsClinicsFilteredState());
   }
 }

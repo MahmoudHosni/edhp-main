@@ -10,12 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OutpatientClinicsScreen extends StatelessWidget {
-  const OutpatientClinicsScreen({
+  OutpatientClinicsScreen({
     super.key,
     required this.hospitalId,
   });
 
   final int hospitalId;
+  final searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,49 +43,13 @@ class OutpatientClinicsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     SearchableTextFormField(
-                      controller: TextEditingController(),
+                      controller: searchController,
                       hintText: StringsManager.searchByClinic.tr(),
-                      valueChanged: (searchText) {},
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      StringsManager.recentlySearched.tr(),
-                      style: Styles.textStyle195W500
-                          .copyWith(color: AppColors.blackColor, fontSize: 14),
-                    ),
-                    const Divider(
-                      color: AppColors.unselectedColor,
-                    ),
-                    SizedBox(
-                      height: 28,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => Container(
-                          width: 112,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: AppColors.unselectedColor, width: 1),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'بيانات متغيرة',
-                              style: Styles.textStyle195W500.copyWith(
-                                  color: AppColors.lightGrayColor,
-                                  fontSize: 12),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        separatorBuilder: (context, index) => Container(
-                          width: 12,
-                        ),
-                        itemCount: 10,
-                      ),
+                      valueChanged: (searchText) =>
+                          cubit.clinicsFiltered(searchText: searchText),
                     ),
                     const SizedBox(
-                      height: 40,
+                      height: 20,
                     ),
                     Center(
                       child: Text(
@@ -94,7 +59,7 @@ class OutpatientClinicsScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 8,
                     ),
                     Expanded(
                       child: state is OutpatientClinicsLoadingState

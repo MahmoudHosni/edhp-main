@@ -6,4 +6,6 @@ class OutpatientClinicsLoadingState extends OutpatientClinicsStates {}
 
 class OutpatientClinicsGetClinicsState extends OutpatientClinicsStates {}
 
+class OutpatientClinicsClinicsFilteredState extends OutpatientClinicsStates {}
+
 class OutpatientClinicsErrorState extends OutpatientClinicsStates {}
