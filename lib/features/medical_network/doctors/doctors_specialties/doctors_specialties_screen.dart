@@ -114,13 +114,9 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                               ),
                             )
                           : ListView.separated(
-                              itemBuilder: (context, index) => InkWell(
-                                child: DoctorCard(
-                                  doctorSpecialist:
-                                      cubit.doctorsSpecialists[index],
-                                ),
-                                onTap: () => GoRouter.of(context)
-                                    .push(AppRouters.kNearestDoctorsScreen),
+                              itemBuilder: (context, index) => DoctorCard(
+                                doctorSpecialist:
+                                    cubit.doctorsSpecialists[index],
                               ),
                               separatorBuilder: (context, index) => Container(
                                 height: 1,

@@ -61,45 +61,12 @@ class DoctorCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'بيانات متغيرة',
-                        style: Styles.textStyle195W500.copyWith(
-                            color: AppColors.blackColor, fontSize: 16),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Container(
-                      height: 32,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.lightGrayColor.withOpacity(0.25),
-                              blurRadius: 4,
-                              spreadRadius: 1,
-                              offset: const Offset(1, 1),
-                            )
-                          ],
-                          color: AppColors.secondNew),
-                      width: 80,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          StringsManager.details.tr(),
-                          style: Styles.textStyle195W500.copyWith(
-                              color: AppColors.whiteColor, fontSize: 12),
-                        ),
-                      ),
-                    ),
-                  ],
+                Text(
+                  'بيانات متغيرة',
+                  style: Styles.textStyle195W500.copyWith(
+                      color: AppColors.blackColor, fontSize: 16),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 )
               ],
             ),
