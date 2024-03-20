@@ -5,8 +5,9 @@ class DoctorSpecialistEntity {
   final String? address;
   final String? url;
   final String? map;
-  final String? photoPath;
   final int? rating;
+  final String? level;
+  final String? specialist;
 
   DoctorSpecialistEntity({
     required this.id,
@@ -15,8 +16,9 @@ class DoctorSpecialistEntity {
     required this.address,
     required this.url,
     required this.map,
-    required this.photoPath,
     required this.rating,
+    required this.level,
+    required this.specialist,
   });
 
   factory DoctorSpecialistEntity.fromJson(Map<String, dynamic> json) {
@@ -27,8 +29,9 @@ class DoctorSpecialistEntity {
       address: json['Address'],
       url: json['Url'],
       map: json['Map'],
-      photoPath: json['PhotoPath'],
       rating: json['Rating'],
+      level: json['ServicePorviderLevelName'],
+      specialist: json['ServicePorviderSpecialtiesName'],
     );
   }
 }

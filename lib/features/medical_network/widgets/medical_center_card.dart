@@ -48,7 +48,7 @@ class MedicalCenterCard extends StatelessWidget {
                   padding: const EdgeInsetsDirectional.all(20),
                   child: Image(
                     image: NetworkImage(
-                      serviceProviderEntity.photoPath ?? '',
+                      'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${serviceProviderEntity.id}',
                     ),
                     fit: BoxFit.cover,
                   ),

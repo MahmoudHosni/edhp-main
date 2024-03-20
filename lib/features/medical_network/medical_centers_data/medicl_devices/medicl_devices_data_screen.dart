@@ -99,30 +99,17 @@ class MedicalDevicesDataScreen extends StatelessWidget {
                               ),
                             )
                           : ListView.separated(
-                              itemBuilder: (context, index) => InkWell(
-                                child: MedicalCenterCard(
-                                  medicalCenterEntity: MedicalCenterEntity(
-                                    medicalCenterType:
-                                        MedicalCenterType.medicalDevices,
-                                    title: StringsManager.medicalDevices.tr(),
-                                    id: cubit.medicalDevices[index].id!,
-                                    medicalCenterName:
-                                        cubit.medicalDevices[index].name!,
-                                  ),
-                                  serviceProviderEntity:
-                                      cubit.medicalDevices[index],
+                              itemBuilder: (context, index) => MedicalCenterCard(
+                                medicalCenterEntity: MedicalCenterEntity(
+                                  medicalCenterType:
+                                      MedicalCenterType.medicalDevices,
+                                  title: StringsManager.medicalDevices.tr(),
+                                  id: cubit.medicalDevices[index].id!,
+                                  medicalCenterName:
+                                      cubit.medicalDevices[index].name!,
                                 ),
-                                onTap: () => GoRouter.of(context).push(
-                                  AppRouters.kNearestMedicalCentersScreen,
-                                  extra: MedicalCenterEntity(
-                                    medicalCenterType:
-                                        MedicalCenterType.medicalDevices,
-                                    title: StringsManager.medicalDevices.tr(),
-                                    id: cubit.medicalDevices[index].id!,
-                                    medicalCenterName:
-                                        cubit.medicalDevices[index].name!,
-                                  ),
-                                ),
+                                serviceProviderEntity:
+                                    cubit.medicalDevices[index],
                               ),
                               separatorBuilder: (context, index) => Container(
                                 height: 1,

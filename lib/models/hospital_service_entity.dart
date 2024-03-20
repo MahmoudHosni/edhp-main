@@ -1,15 +1,15 @@
 class HospitalServiceEntity {
-  final int clinicId;
+  final int id;
   final String name;
 
   HospitalServiceEntity({
-    required this.clinicId,
+    required this.id,
     required this.name,
   });
 
   factory HospitalServiceEntity.fromJson(Map<String, dynamic> json) {
     return HospitalServiceEntity(
-      clinicId: json['ServiceID'],
+      id: json['ID'],
       name: json['Name'],
     );
   }

@@ -43,7 +43,7 @@ class HospitalCard extends StatelessWidget {
                   padding: const EdgeInsetsDirectional.all(20),
                   child: Image(
                     image: NetworkImage(
-                      hospitalData.photoPath ?? '',
+                      'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${hospitalData.id}',
                     ),
                     fit: BoxFit.cover,
                   ),

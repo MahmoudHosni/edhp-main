@@ -33,7 +33,7 @@ class DoctorCard extends StatelessWidget {
               padding: const EdgeInsetsDirectional.all(20),
               child: Image(
                 image: NetworkImage(
-                  doctorSpecialist.photoPath ?? '',
+                  'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${doctorSpecialist.id}',
                 ),
                 fit: BoxFit.cover,
               ),
@@ -55,16 +55,16 @@ class DoctorCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'بيانات متغيرة',
+                  doctorSpecialist.level ?? '',
                   style: Styles.textStyle195W500
                       .copyWith(color: AppColors.secondNew, fontSize: 16),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  'بيانات متغيرة',
-                  style: Styles.textStyle195W500.copyWith(
-                      color: AppColors.blackColor, fontSize: 16),
+                  doctorSpecialist.specialist ?? '',
+                  style: Styles.textStyle195W500
+                      .copyWith(color: AppColors.blackColor, fontSize: 16),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 )

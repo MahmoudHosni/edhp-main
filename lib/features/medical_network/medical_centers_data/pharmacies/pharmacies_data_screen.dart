@@ -109,28 +109,16 @@ class PharmaciesDataScreen extends StatelessWidget {
                               ),
                             )
                           : ListView.separated(
-                              itemBuilder: (context, index) => InkWell(
-                                child: MedicalCenterCard(
-                                  medicalCenterEntity: MedicalCenterEntity(
-                                    medicalCenterType:
-                                        MedicalCenterType.pharmacies,
-                                    title: StringsManager.pharmacies.tr(),
-                                    id: cubit.pharmacies[index].id!,
-                                    medicalCenterName: cubit.pharmacies[index].name!,
-                                  ),
-                                  serviceProviderEntity:
-                                      cubit.pharmacies[index],
+                              itemBuilder: (context, index) => MedicalCenterCard(
+                                medicalCenterEntity: MedicalCenterEntity(
+                                  medicalCenterType:
+                                      MedicalCenterType.pharmacies,
+                                  title: StringsManager.pharmacies.tr(),
+                                  id: cubit.pharmacies[index].id!,
+                                  medicalCenterName: cubit.pharmacies[index].name!,
                                 ),
-                                onTap: () => GoRouter.of(context).push(
-                                  AppRouters.kNearestMedicalCentersScreen,
-                                  extra: MedicalCenterEntity(
-                                    medicalCenterType:
-                                        MedicalCenterType.pharmacies,
-                                    title: StringsManager.pharmacies.tr(),
-                                    id: cubit.pharmacies[index].id!,
-                                    medicalCenterName: cubit.pharmacies[index].name!,
-                                  ),
-                                ),
+                                serviceProviderEntity:
+                                    cubit.pharmacies[index],
                               ),
                               separatorBuilder: (context, index) => Container(
                                 height: 1,

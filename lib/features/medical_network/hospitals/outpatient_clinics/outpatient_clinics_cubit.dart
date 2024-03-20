@@ -32,12 +32,6 @@ class OutpatientClinicsCubit extends Cubit<OutpatientClinicsStates> {
       },
     ).catchError(
       (error) {
-        clinics = [
-          HospitalClinicEntity(clinicId: 1, name: 'name'),
-          HospitalClinicEntity(clinicId: 1, name: 'nvr'),
-          HospitalClinicEntity(clinicId: 1, name: 'sear'),
-          HospitalClinicEntity(clinicId: 1, name: 'mor'),
-        ];
         _searches = clinics;
         emit(OutpatientClinicsErrorState());
       },

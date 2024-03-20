@@ -5,7 +5,6 @@ class HospitalEntity {
   final String? address;
   final String? url;
   final String? map;
-  final String? photoPath;
   final int? rating;
 
   HospitalEntity({
@@ -15,7 +14,6 @@ class HospitalEntity {
     required this.address,
     required this.url,
     required this.map,
-    required this.photoPath,
     required this.rating,
   });
 
@@ -27,7 +25,6 @@ class HospitalEntity {
       address: json['Address'],
       url: json['Url'],
       map: json['Map'],
-      photoPath: json['PhotoPath'],
       rating: json['Rating'],
     );
   }

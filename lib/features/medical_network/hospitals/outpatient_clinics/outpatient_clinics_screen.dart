@@ -110,6 +110,7 @@ class OutpatientClinicsScreen extends StatelessWidget {
                                             color: AppColors.whiteColor,
                                             fontSize: 16),
                                         maxLines: 2,
+                                        textAlign: TextAlign.center,
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),

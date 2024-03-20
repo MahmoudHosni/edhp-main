@@ -6,7 +6,6 @@ class ServiceProviderEntity {
   final String? email;
   final String? url;
   final String? map;
-  final String? photoPath;
   final String? telephoneTwo;
   final String? telephoneThree;
   final int? rating;
@@ -21,7 +20,6 @@ class ServiceProviderEntity {
     required this.email,
     required this.url,
     required this.map,
-    required this.photoPath,
     required this.telephoneTwo,
     required this.telephoneThree,
     required this.rating,
@@ -38,7 +36,6 @@ class ServiceProviderEntity {
       address: json['Address'],
       url: json['Url'],
       map: json['Map'],
-      photoPath: json['PhotoPath'],
       telephoneTwo: json['TelephoneTwo'],
       telephoneThree: json['TelephoneThird'],
       rating: json['Rating'],
