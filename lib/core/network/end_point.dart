@@ -14,6 +14,7 @@ class EndPoint {
 
   static const String getAppVerion = "/home/GetAppVersion";
   static const String GetMedicalEvents = "/apiUserInterface/GetMedicalEvents";
+  static const String GetEventServiceProvidersBranches = "/apiUserInterface/GetEventServiceProvidersBranches?medicalEventId=";
 
   static const String validateOrganizationMember =
       '/apiAccount/ValidateOrganizationMember';

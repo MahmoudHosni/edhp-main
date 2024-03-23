@@ -3,12 +3,14 @@ import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/MedicalEvent/cubit/MedicalEventStates.dart';
 import 'package:edhp/features/MedicalEvent/cubit/MedicalEventsCubit.dart';
 import 'package:edhp/models/MedicalEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class MedicalEvents extends StatelessWidget{
   @override
@@ -77,27 +79,40 @@ class MedicalEventCardView extends StatelessWidget {
               textAlign: TextAlign.right,
             )),
 
-            Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                child: DefaultButton(
-                  backgroundColor: AppColors.blue,
-                  function: () {
+          Expanded(child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+                    Padding(
+                        padding: const EdgeInsetsDirectional.symmetric(horizontal: 5),
+                        child: DefaultButton(width: 80,fontSize: 12,textColor:  Colors.black,
+                          backgroundColor: Colors.transparent,
+                          function: () {
 
-                  },
-                  text: StringsManager.conditions.tr(),
-                  redius: 32,
-                )),
-            const SizedBox(height: 8,),
-            Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                child: DefaultButton(
-                  backgroundColor: AppColors.unselectedColor,
-                  function: () {
+                          },
+                          text: StringsManager.conditions.tr(),
+                          redius: 32,
+                        )),
+                     Padding(
+                        padding: const EdgeInsetsDirectional.symmetric(horizontal: 5),
+                        child: DefaultButton(width: 80,
+                          backgroundColor: Colors.transparent,fontSize: 12,textColor:  Colors.black,
+                          function: () {
 
-                  },
-                  text: StringsManager.sunsribedetails.tr(),
-                  redius: 32,
-                )),
+                          },
+                          text: StringsManager.sunsribedetails.tr(),
+                          redius: 32,
+                        )),
+                     Padding(
+                        padding: const EdgeInsetsDirectional.symmetric(horizontal: 5),
+                        child: DefaultButton(width: 80,
+                          backgroundColor: AppColors.unselectedColor,fontSize: 12,textColor:  Colors.black,
+                          function: () {
+                              GoRouter.of(context).push(AppRouters.kMedicalEventCenters,extra: item);
+                          },
+                          text: StringsManager.subscribe_now.tr(),
+                          redius: 32,
+                        )),
+                  ],))
+
+
           ],
         ));
   }

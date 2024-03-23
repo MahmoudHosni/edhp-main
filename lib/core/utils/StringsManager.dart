@@ -87,6 +87,7 @@ class StringsManager {
   static const String later = "later";
   static const String conditions = "conditions";
   static const String sunsribedetails = "sunsribedetails";
+  static const String subscribe_now = "subscribe_now";
 
 
   static const String medicalEvents = 'الفاعليات الطبية';
