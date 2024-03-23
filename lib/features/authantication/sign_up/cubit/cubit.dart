@@ -40,12 +40,11 @@ class SignUpCubit extends Cubit<SignUpState> {
         "MobileNumber": mobileNumber,
       },
     ).then((value) {
-      print(value.data['ResultObject']['AccessToken']);
       token = value.data['ResultObject']['AccessToken'];
-      CacheHelper.saveData(key: 'token', value: token);
-      CacheHelper.saveData(key: 'name', value: mobileNumber);
-      CacheHelper.saveData(key: 'email', value: email);
-      CacheHelper.saveData(key: 'profile', value: username);
+      CacheHelper.saveData(key: Token, value: token);
+      CacheHelper.saveData(key: Name, value: mobileNumber);
+      CacheHelper.saveData(key: Email, value: email);
+      CacheHelper.saveData(key: Profile, value: username);
       print(token);
       emit(SignUpSuccessfullyState());
     }).catchError((error){

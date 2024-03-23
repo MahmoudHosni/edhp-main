@@ -11,6 +11,10 @@ class EndPoint {
   static const String getOrganizations = '/apiUserInterface/GetOrganizations';
   static const String getMedicalCompanies = '/apiUserInterface/GetMICs';
   static const String updateProfileImage = '/apiAttachments/UpdateProfileImage';
+
+  static const String getAppVerion = "/home/GetAppVersion";
+  static const String GetMedicalEvents = "/apiUserInterface/GetMedicalEvents";
+
   static const String validateOrganizationMember =
       '/apiAccount/ValidateOrganizationMember';
   static const String getSubscriptionInfoLookUps =

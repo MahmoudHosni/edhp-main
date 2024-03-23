@@ -46,7 +46,7 @@ class OrganizationSubscriptionCubit extends Cubit<OrganizationSubscriptionStates
       print('token : ${value.data['ResultObject']['AccessToken']}');
       token = value.data['ResultObject']['AccessToken'];
       print(token);
-      CacheHelper.saveData(key: 'token', value: token);
+      CacheHelper.saveData(key: Token, value: token);
       emit(OrganizationSubscriptionSuccessfullyState());
     }).catchError((error) {
       emit(OrganizationSubscriptionErrorState(error: error.toString()));

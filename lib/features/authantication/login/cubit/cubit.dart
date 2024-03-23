@@ -48,10 +48,10 @@ class LoginCubit extends Cubit<LoginStates> {
       token = value.data['ResultObject']['AccessToken'];
 
       print(token);
-      CacheHelper.saveData(key: 'name', value: loginModel?.resultObject?.userName??'');
-      CacheHelper.saveData(key: 'profile', value: loginModel?.resultObject?.profileName);
+      CacheHelper.saveData(key: Name, value: loginModel?.resultObject?.userName??'');
+      CacheHelper.saveData(key: Profile, value: loginModel?.resultObject?.profileName);
       CacheHelper.saveData(key: 'id', value: loginModel?.resultObject?.profileID);
-      CacheHelper.saveData(key: 'token', value: token);
+      CacheHelper.saveData(key: Token, value: token);
       emit(LoginSuccessfullyState());
     }).catchError((error) {
       emit(LoginErrorState(error: error.toString()));

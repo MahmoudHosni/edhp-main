@@ -1,6 +1,7 @@
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
+import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/features/medical_advices/cubit/MedicalAdvicesState.dart';
 import 'package:edhp/models/Medical.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MedicalAdvicesCubit extends Cubit<MedicalAdvicesState>{
     emit(MedicalAdvicesLoadingState());
     await DioHelper.getData(
       path: EndPoint.getAdvicesData ,
-      token: CacheHelper.getData(key: 'token'),
+      token: CacheHelper.getData(key: Token),
     ).then((value) {
       print(value.data);
       value.data.forEach((element) {

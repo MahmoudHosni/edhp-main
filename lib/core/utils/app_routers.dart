@@ -98,7 +98,7 @@ abstract class AppRouters {
 
   static final baseRouter = GoRouter(
     redirect: (context, state) {
-      String _token = CacheHelper.getData(key: 'token') ?? '';
+      String _token = CacheHelper.getData(key: Token) ?? '';
       print(_token);
       if (state.fullPath == kLoginScreen) {
         if ((_token?.length ?? 0) > 0) {

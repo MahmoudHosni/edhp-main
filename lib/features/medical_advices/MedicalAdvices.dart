@@ -1,7 +1,6 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
-import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/medical_advices/cubit/MedicalAdvicesCubit.dart';
 import 'package:edhp/features/medical_advices/cubit/MedicalAdvicesState.dart';

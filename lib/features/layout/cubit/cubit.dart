@@ -48,7 +48,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   Future getAdvertisements(BuildContext context) async {
     await DioHelper.getData(
       path: EndPoint.getAdvertisements,
-      token: CacheHelper.getData(key: 'token'),
+      token: CacheHelper.getData(key: Token),
     ).then((value) {
       advertisements = [];
       adsImage = [];
@@ -77,7 +77,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(GetProfileLoadingState());
     await DioHelper.getData(
       path: EndPoint.getProfile,
-      token: CacheHelper.getData(key: 'token'),
+      token: CacheHelper.getData(key: Token),
     ).then((value) {
       print(value.data);
       GetProfileCubit.get(context).userProfileModel =
@@ -129,35 +129,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
       print(e.toString());
       emit(GetProfileImageErrorState());
     }
-
-    // await DioHelper.getData(
-    //   path: EndPoint.imageProfile ,
-    //   queryParameters: {
-    //     'referenceTypeId': userProfileModel!.profileID,
-    //     'referenceId' : 1,
-    //   },
-    //   token: token,
-    // ).then((value) {
-    //   print('Get Image Profile: ');
-    //   // profileImage = Image.memory(value.data.bodyBytes).image;
-    //   profileImage = File(value.data);
-    //   print(profileImage);
-    //   print(value.data);
-    //   emit(GetProfileImageSuccessfullyState());
-    // }).catchError((error) {
-    //   print('Error');
-    //   print(error.toString());
-    //   emit(GetProfileImageErrorState());
-    // });
   }
 
-  List<String> adsImage = [
-    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22220740/auto-draft-1317-1024x683.jpg',
-    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22220827/auto-draft-1320-1024x683.jpg',
-    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22221000/auto-draft-1326-1024x683.jpg',
-    // 'https://uicreative.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/02/22221000/auto-draft-1326.jpg',
-    // 'https://elements-cover-images-0.imgix.net/ba74bcfa-aa7c-43e6-b726-2bba7733d5fb?auto=compress%2Cformat&w=1370&fit=max&s=f2de7d383a6ab16de8dd4ebf90382d68'
-  ];
+  List<String> adsImage = [];
+
   Random random = Random();
   int? index = 0;
 
@@ -176,7 +151,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       print('token : ${value.data['ResultObject']['AccessToken']}');
       token = value.data['ResultObject']['AccessToken'];
       print(token);
-      CacheHelper.saveData(key: 'token', value: token);
+      CacheHelper.saveData(key: Token, value: token);
       emit(GetNewAccessTokenSuccessfullyState());
       getProfile(context);
     }).catchError((error) {
@@ -188,7 +163,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   Future getStaticData(BuildContext context) async {
     await DioHelper.getData(
       path: EndPoint.getStaticData,
-      token: CacheHelper.getData(key: 'token'),
+      token: CacheHelper.getData(key: Token),
     ).then((value) {}).catchError((error) {
       print(error.toString());
       emit(GetNewAccessTokenErrorState());
@@ -198,16 +173,23 @@ class LayoutCubit extends Cubit<LayoutStates> {
   Future getMySubscriptions() async {
     await DioHelper.getData(
       path: EndPoint.getMySubscriptions,
-      token: CacheHelper.getData(key: 'token'),
+      token: CacheHelper.getData(key: Token),
     ).then((value) {
       print("::::::: getMySubscriptions ::::::::");
       value.data.forEach((element) {
         memberShips.add(MemberShipsResponse.fromJson(element));
       });
       emit(MemberShipsStateLoadSuccess());
+      getAppVersion();
     }).catchError((error) {
       print(error.toString());
       emit(GetNewAccessTokenErrorState());
     });
+  }
+
+  Future getAppVersion() async{
+    await DioHelper.getData(path: EndPoint.getAppVerion).then((value) =>
+           emit(OnGetAppVersion(newAppVersion: value.toString() , currentAppVersion: CacheHelper.getData(key: AppVersion) ?? ''))
+        );
   }
 }

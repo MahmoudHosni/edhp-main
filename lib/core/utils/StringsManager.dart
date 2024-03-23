@@ -81,6 +81,14 @@ class StringsManager {
   static const String radiologyCenterServices = 'radiology center services';
   static const String medicalDevicesServices = 'medical devices services';
 
+  static const String new_version = "new_version";
+  static const String update_app = "update_app";
+  static const String Update_Now = "Update_Now";
+  static const String later = "later";
+  static const String conditions = "conditions";
+  static const String sunsribedetails = "sunsribedetails";
+
+
   static const String medicalEvents = 'الفاعليات الطبية';
   static const String noMedicalEvents = 'لا يوجد فاعليات الان';
 }

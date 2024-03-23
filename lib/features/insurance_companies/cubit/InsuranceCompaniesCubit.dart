@@ -1,6 +1,7 @@
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
+import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompanyState.dart';
 import 'package:edhp/models/MedicalCompany.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class InsuranceCompaniesCubit extends Cubit<InsuranceCompanyState> {
         path: EndPoint.getOrganizations,queryParameters: {
           "MedicalInsuranceCompanyID": company
          },
-        token: CacheHelper.getData(key: 'token'),
+        token: CacheHelper.getData(key: Token),
       ).then((value) {
         companiesList.clear();
         print(value.data);
