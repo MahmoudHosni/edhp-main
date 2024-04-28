@@ -42,5 +42,9 @@
   "later":"لاحقا",
   "conditions": "شروط الاشتراك",
   "sunsribedetails": "التفاصيل",
-  "subscribe_now": "اشتراك"
+  "subscribe_now": "اشتراك",
+  "unsubscribe_now": "الغاء الاشتراك",
+  "select service": "اختر الخدمة",
+  "select provider": "اختر المزود",
+  "please wait": "برجاء الانتظار"
 }

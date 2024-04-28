@@ -166,12 +166,12 @@ class DrawerAppList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ClickableDrawerItem(
-            text: 'عن المنصة',
-            svgIcon: AppPaths.aboutIconSvg,
-            pathLocationScreen: AppRouters.kServiceScreen,
-            checkForMembership: false),
-        getSeparatorView(),
+        // const ClickableDrawerItem(
+        //     text: 'عن المنصة',
+        //     svgIcon: AppPaths.aboutIconSvg,
+        //     pathLocationScreen: AppRouters.kServiceScreen,
+        //     checkForMembership: false),
+        // getSeparatorView(),
         const ClickableDrawerItem(
             text: 'إشتراكات العضويات',
             svgIcon: AppPaths.membershipIconSvg,

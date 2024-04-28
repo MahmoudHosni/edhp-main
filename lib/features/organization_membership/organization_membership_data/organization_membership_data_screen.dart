@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
@@ -23,6 +24,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 import '../../../core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
 import '../../membership_data/widgets/custom_step_one_app_bar.dart';
 
@@ -48,6 +50,7 @@ class _OrganizationMembershipDataScreenState
   TextEditingController region = TextEditingController();
   TextEditingController address = TextEditingController();
   OrganizationMembershipDataCubit? cubit;
+  late ProgressDialog pd ;
 
   List<City> cities = [];
   int stateID = 1;
@@ -58,6 +61,7 @@ class _OrganizationMembershipDataScreenState
     super.initState();
     cubit = OrganizationMembershipDataCubit.get(context);
     cubit?.getSubscriptionInfoLookUps();
+    pd = ProgressDialog(context: context);
     // birthDate.text = cubit?.selectedBirthDate != null ? '${cubit?.selectedBirthDate!.year} / ${cubit?.selectedBirthDate!.month} / ${cubit?.selectedBirthDate!.day}' : '';
   }
 
@@ -539,11 +543,12 @@ class _OrganizationMembershipDataScreenState
       ShowToast.showToast('برجاء اختيار صورة كارت العضوية للمؤسسة بصورة صحيحة');
       return;
     } else {
+      pd.show(max: 100, msg: StringsManager.please_wait.tr());
       widget.subscriptionRequest.PersonalImage = cubit?.personalImage;
       widget.subscriptionRequest.NationalNumberImage = cubit?.nationalIdImage;
       widget.subscriptionRequest.OrganizationMembershipNumberImage =
           cubit?.orgCardImage;
-
+      pd.close();
       // OrganizationMembershipDataCubit.get(context).requestSubscription(widget.subscriptionRequest);
       GoRouter.of(context)
           .push(AppRouters.kServiceScreen, extra: widget.subscriptionRequest);

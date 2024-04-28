@@ -13,7 +13,7 @@ class MedicalCenterBranchEntity {
 
   factory MedicalCenterBranchEntity.fromJson(Map<String, dynamic> json) {
     return MedicalCenterBranchEntity(
-      id: json['ID'],
+      id: json['Id'],
       title: json['Name'],
       address: json['Address'],
       phone: json['Telephone'],

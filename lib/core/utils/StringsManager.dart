@@ -63,6 +63,10 @@ class StringsManager {
   static const String searchByName = 'search by name';
   static const String closestToYou = 'closest to you';
   static const String selectRegion = 'select region';
+  static const String selectService = 'select service';
+  static const String selectProvider = 'select provider';
+  static const String please_wait = "please wait";
+
   static const String degree = 'degree';
   static const String searchByNameOrSpeciality = 'search by name / specialty';
   static const String branches = 'branches';
@@ -88,7 +92,7 @@ class StringsManager {
   static const String conditions = "conditions";
   static const String sunsribedetails = "sunsribedetails";
   static const String subscribe_now = "subscribe_now";
-
+  static const String unsubscribe_now = "unsubscribe_now";
 
   static const String medicalEvents = 'الفاعليات الطبية';
   static const String noMedicalEvents = 'لا يوجد فاعليات الان';

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
@@ -14,6 +15,7 @@ import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 import '../../core/utils/styles/styles.dart';
 
 class ConfirmMembershipDataScreen extends StatefulWidget {
@@ -31,11 +33,13 @@ class _ConfirmMembershipDataScreenState
     extends State<ConfirmMembershipDataScreen> {
   late ConfirmMemberShipCubit cubit;
   var msg = "";
+  late ProgressDialog pd ;
 
   @override
   void initState() {
     super.initState();
     cubit = ConfirmMemberShipCubit.get(context);
+    pd = ProgressDialog(context: context);
   }
 
   @override
@@ -44,15 +48,16 @@ class _ConfirmMembershipDataScreenState
         listener: (context, state) {
       if (state is ConfirmMembershipSuccessState) {
         if (int.parse(widget.subscriptionRequest.Cost ?? '0') > 0) {
-          msg = state.response.Message;
+          msg = state.response.Message??'';
           GoRouter.of(context)
               .push(AppRouters.kPaymentMembershipScreen, extra: state.response);
         } else {
-          msg = state.response.Message;
+          msg = state.response.Message??'';
           GoRouter.of(context)
               .push(AppRouters.kCardPreviewScreen, extra: state.response);
         }
       } else if (state is ConfirmMembershipErrorState) {
+        pd.close();
         showError(state.error);
         // GoRouter.of(context).push(AppRouters.kCardPreviewScreen,extra: widget.subscriptionRequest);
       }
@@ -188,6 +193,7 @@ class _ConfirmMembershipDataScreenState
                   alignment: Alignment.bottomLeft,
                   child: NextButton(
                     function: () {
+                      pd.show(max: 100, msg: StringsManager.please_wait.tr());
                       cubit.requestSubscription(widget.subscriptionRequest);
                     },
                     text: 'تأكيد',

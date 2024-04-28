@@ -70,8 +70,8 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
         ShowToast.showToastGreen('تم الاشتراك بنجاح');
         emit(ConfirmMembershipSuccessState(response: res));
       }else{
-        ShowToast.showToast(res.Message);
-        emit(ConfirmMembershipErrorState(error: res.Message));
+        ShowToast.showToast(res.Message??'');
+        emit(ConfirmMembershipErrorState(error: res.Message??''));
       }
     }).catchError((error) {
       print(error.toString());
