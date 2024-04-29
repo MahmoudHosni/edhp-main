@@ -35,3 +35,10 @@ class AdvertisementStateLoadError extends LayoutStates{}
 class AdvertisementStateLoadSuccess extends LayoutStates{}
 
 class MemberShipsStateLoadSuccess extends LayoutStates{}
+
+class OnGetAppVersion extends LayoutStates{
+  String newAppVersion;
+  String currentAppVersion;
+
+  OnGetAppVersion({required this.newAppVersion,required this.currentAppVersion});
+}

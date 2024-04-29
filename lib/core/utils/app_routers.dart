@@ -1,5 +1,8 @@
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/app_constants.dart';
+import 'package:edhp/features/MedicalEvent/ConditionsAndDetailsView.dart';
+import 'package:edhp/features/MedicalEvent/MedicalEventBranchAndProviders.dart';
+import 'package:edhp/features/MedicalEvent/MedicalEventServices.dart';
 import 'package:edhp/features/MedicalEvent/MedicalEvents.dart';
 import 'package:edhp/features/confirm_membership_data/CardPreview.dart';
 import 'package:edhp/features/confirm_membership_data/confirm_membership_data_screen.dart';
@@ -34,6 +37,9 @@ import 'package:edhp/features/payment/payment_screen.dart';
 import 'package:edhp/features/service/MemberShipTypes.dart';
 import 'package:edhp/features/service/service_screen.dart';
 import 'package:edhp/features/splash_screen/splash_screen.dart';
+import 'package:edhp/models/EventWithBranchObjects.dart';
+import 'package:edhp/models/MedicalEvent.dart';
+import 'package:edhp/models/MedicalEventService.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/medical_network_entity.dart';
 import 'package:go_router/go_router.dart';
@@ -60,6 +66,10 @@ abstract class AppRouters {
   static const kEditProfileScreen = '/editProfileScreen';
   static const kServiceScreen = '/serviceScreen';
   static const kMedicalEvents = '/MedicalEvents';
+  static const kMedicalEventServics = '/MedicalEventServics';
+  static const kMedicalEventConditionsAndDetails = '/ConditionsAndDetails';
+  static const kMedicalEventCenters = '/MedicalEventCenters';
+
   static const kMemberShipTypes = '/memberShipTypes';
   static const kCreateMembershipScreen = '/createMembershipScreen';
   static const kMedicalNetworkScreen = '/medicalNetworkScreen';
@@ -98,7 +108,7 @@ abstract class AppRouters {
 
   static final baseRouter = GoRouter(
     redirect: (context, state) {
-      String _token = CacheHelper.getData(key: 'token') ?? '';
+      String _token = CacheHelper.getData(key: Token) ?? '';
       print(_token);
       if (state.fullPath == kLoginScreen) {
         if ((_token?.length ?? 0) > 0) {
@@ -163,6 +173,18 @@ abstract class AppRouters {
       GoRoute(
         path: kMedicalEvents,
         builder: (context, state) => MedicalEvents(),
+      ),//kMedicalEventCenters
+      GoRoute(
+        path: kMedicalEventCenters,
+        builder: (context, state) => MedicalEventBranchAndProviders(mEvent: state.extra as EventWithBranchObjects),
+      ),//kMedicalEventServics
+      GoRoute(
+        path: kMedicalEventServics,
+        builder: (context, state) => MedicalEventServices(medicalEvent: state.extra as MedicalEvent),
+      ),
+      GoRoute(
+        path: kMedicalEventConditionsAndDetails,
+        builder: (context, state) => ConditionsAndDetailsView(event: state.extra as MedicalEvent),
       ),
       GoRoute(
         path: kMemberShipTypes,
@@ -344,6 +366,18 @@ abstract class AppRouters {
       GoRoute(
         path: kMedicalEvents,
         builder: (context, state) => MedicalEvents(),
+      ),
+      GoRoute(
+        path: kMedicalEventServics,
+        builder: (context, state) => MedicalEventServices(medicalEvent: state.extra as MedicalEvent),
+      ),
+      GoRoute(
+        path: kMedicalEventConditionsAndDetails,
+        builder: (context, state) => ConditionsAndDetailsView(event: state.extra as MedicalEvent),
+      ),
+      GoRoute(
+        path: kMedicalEventCenters,
+        builder: (context, state) => MedicalEventBranchAndProviders(mEvent: state.extra as EventWithBranchObjects),
       ),
       GoRoute(
         path: kCreateMembershipScreen,

@@ -5,6 +5,8 @@ abstract class AppColors {
   static const Color primaryBlueColor = Color(0xFF157DE6);
   static const Color unselectedColor = Color(0xFFB7CEE6);
   static const Color blackColor = Color(0xFF000000);
+  static const Color redColor = Color(0xFFff0000);
+
   static const Color boxesColor = Color(0x4DDBDBDB);
   static const Color shadowColor = Color(0x1A000000);
   static const Color lightGrayColor = Color(0xFF808080);

@@ -5,6 +5,7 @@ import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_button.dart';
+import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -165,12 +166,12 @@ class DrawerAppList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ClickableDrawerItem(
-            text: 'عن المنصة',
-            svgIcon: AppPaths.aboutIconSvg,
-            pathLocationScreen: AppRouters.kServiceScreen,
-            checkForMembership: false),
-        getSeparatorView(),
+        // const ClickableDrawerItem(
+        //     text: 'عن المنصة',
+        //     svgIcon: AppPaths.aboutIconSvg,
+        //     pathLocationScreen: AppRouters.kServiceScreen,
+        //     checkForMembership: false),
+        // getSeparatorView(),
         const ClickableDrawerItem(
             text: 'إشتراكات العضويات',
             svgIcon: AppPaths.membershipIconSvg,
@@ -218,7 +219,7 @@ class DrawerAppList extends StatelessWidget {
         InkWell(
           onTap: () {
             memberShips = [];
-            CacheHelper.saveData(key: 'token', value: '');
+            CacheHelper.saveData(key: Token, value: '');
             GoRouter.of(context).pushReplacement(AppRouters.kLoginScreen);
           },
           child: Container(

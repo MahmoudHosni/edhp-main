@@ -35,5 +35,16 @@
   "call the clinic": "الاتصال بالعيادة",
   "radiology center services": "خدمات مركز الآشعة",
   "medical devices services": "خدمات الأجهزة الطبية",
-  "hospitals services": "خدمات المستشفى"
+  "hospitals services": "خدمات المستشفى",
+  "new_version": "تحديث جديد",
+  "update_app": "قم بتحديث التطبيق ",
+  "Update_Now": "حدث الان",
+  "later":"لاحقا",
+  "conditions": "شروط الاشتراك",
+  "sunsribedetails": "التفاصيل",
+  "subscribe_now": "اشتراك",
+  "unsubscribe_now": "الغاء الاشتراك",
+  "select service": "اختر الخدمة",
+  "select provider": "اختر المزود",
+  "please wait": "برجاء الانتظار"
 }

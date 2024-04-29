@@ -24,7 +24,7 @@ class SubscriptionInfoLookUpCubit extends Cubit<SubscriptionInfoLookUpStates> {
       print('token : ${value.data['ResultObject']['AccessToken']}');
       token = value.data['ResultObject']['AccessToken'];
       print(token);
-      CacheHelper.saveData(key: 'token', value: token);
+      CacheHelper.saveData(key: Token, value: token);
       emit(GetNewAccessTokenSuccessfullyState());
       getSubscriptionInfoLookUps();
     }).catchError((error) {

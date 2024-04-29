@@ -28,7 +28,7 @@ void main() async {
   await CacheHelper.init();
   await EasyLocalization.ensureInitialized();
   // bool ? rememberMe = await CacheHelper.getData(key: 'rememberMe');
-  token = await CacheHelper.getData(key: 'token');
+  token = await CacheHelper.getData(key: Token);
   print(token);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: AppColors.secondNew.withAlpha(10),
@@ -41,6 +41,7 @@ void main() async {
         Brightness.dark, // color of navigation controls
   ));
   HttpOverrides.global = new MyHttpoverrides();
+  CacheHelper.saveData(key: AppVersion, value: '0.0.0.8');
   runApp(
     EasyLocalization(
         supportedLocales: const [Locale('ar'), Locale('en')],

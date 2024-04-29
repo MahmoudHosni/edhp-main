@@ -22,7 +22,7 @@ class CompanyItemCubit extends Cubit<CompanyItemsStates> {
     if(organizationItemsList!.isEmpty) {
       await DioHelper.getData(
         path: EndPoint.getMedicalCompanies,
-        token: CacheHelper.getData(key: 'token'),
+        token: CacheHelper.getData(key: Token),
       ).then((value) {
         organizationItemsList.clear();
         print(value.data);

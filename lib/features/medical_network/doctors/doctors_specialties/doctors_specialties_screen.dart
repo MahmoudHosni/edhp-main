@@ -109,21 +109,21 @@ class DoctorsSpecialtiesScreen extends StatelessWidget {
                     Expanded(
                       child: state is DoctorsSpecialtiesLoadingState
                           ? const Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.primaryBlueColor,
-                              ),
-                            )
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryBlueColor,
+                        ),
+                      )
                           : ListView.separated(
-                              itemBuilder: (context, index) => DoctorCard(
-                                doctorSpecialist:
-                                    cubit.doctorsSpecialists[index],
-                              ),
-                              separatorBuilder: (context, index) => Container(
-                                height: 1,
-                                color: AppColors.unselectedColor,
-                              ),
-                              itemCount: cubit.doctorsSpecialists.length,
-                            ),
+                        itemBuilder: (context, index) => DoctorCard(
+                          doctorSpecialist:
+                          cubit.doctorsSpecialists[index],
+                        ),
+                        separatorBuilder: (context, index) => Container(
+                          height: 1,
+                          color: AppColors.unselectedColor,
+                        ),
+                        itemCount: cubit.doctorsSpecialists.length,
+                      ),
                     ),
                   ],
                 ),

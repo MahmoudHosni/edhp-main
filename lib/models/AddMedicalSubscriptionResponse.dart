@@ -1,22 +1,22 @@
-import 'package:edhp/features/confirm_membership_data/cubit/ResultObject.dart';
+import 'package:edhp/models/MedicalSubscriptionState.dart';
 
-class ConfirmResponse{
+class AddMedicalSubscriptionResponse{
   int? ID=0;
   int? ResultType=0;
   String? Message='';
-  bool IsSuccess=false;
-  bool IsFailed=false;
-  ResultObject? result;
+  bool? IsSuccess=false;
+  bool? IsFailed=false;
+  MedicalSubscriptionState? result;
 
-  ConfirmResponse({required this.ID,required this.ResultType,required this.IsFailed,required this.IsSuccess,required this.Message,this.result});
+  AddMedicalSubscriptionResponse({required this.ID,required this.ResultType,required this.IsFailed,required this.IsSuccess,required this.Message,this.result});
 
-  ConfirmResponse.fromJson(Map<String, dynamic> json) {
+  AddMedicalSubscriptionResponse.fromJson(Map<String, dynamic> json) {
     ID = json['ID'];
     ResultType = json['ResultType'];
     Message = json['Message'];
     IsSuccess = json['IsSuccess'];
     IsFailed = json['IsFailed'];
-    result = json['ResultObject'] == null? null: ResultObject.fromJson(json['ResultObject']);
+    result = json['ResultObject'] == null? null: MedicalSubscriptionState.fromJson(json['ResultObject']);
   }
 
   Map<String, dynamic> toJson() {

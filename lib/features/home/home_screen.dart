@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
@@ -34,7 +36,13 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => LayoutCubit()..loadData(context),
       child: BlocConsumer<LayoutCubit, LayoutStates>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if(state is OnGetAppVersion){
+              if(state.newAppVersion !=state.currentAppVersion){
+                showVersionDialog(context);
+              }
+            }
+          },
           builder: (context, state) {
             // if(state is GetProfileSuccessfullyState || state is GetProfileImageSuccessfullyState || state is ChangeAdsImage ) {
             return Scaffold(

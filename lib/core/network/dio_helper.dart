@@ -48,6 +48,25 @@ class DioHelper {
     );
   }
 
+  static Future<Response> deleteData ({
+    required String path,
+    Map<String , dynamic> ? query,
+    required Map <String , dynamic> data,
+    // String lang = 'en',
+    String ? token,
+  }) async{
+    dio!.options.headers = {
+      // 'lang' : lang,
+      'Content-Type' : 'application/json',
+      'Access-Token' : token,
+    };
+    return await dio!.delete(
+        path,
+        queryParameters: query,
+        data: data
+    );
+  }
+
   static Future<Response> postFormData ({
     required String path,
     Map<String , dynamic> ? query,
