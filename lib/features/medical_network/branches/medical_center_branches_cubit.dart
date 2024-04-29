@@ -47,7 +47,7 @@ class MedicalCenterBranchesCubit extends Cubit<MedicalCenterBranchesStates> {
     DioHelper.getData(
       path: EndPoint.getServiceProviderBranches,
       queryParameters: {
-        'id': medicalCenterId,
+        'HospitalID': medicalCenterId,
         'GovID': _governorateId,
         'CityID': _areaId,
         'Name': _searchText,
