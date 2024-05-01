@@ -67,7 +67,7 @@ class HospitalCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            'بيانات متغيرة',
+                            hospitalData.level ?? '',
                             style: Styles.textStyle195W500.copyWith(
                                 color: AppColors.secondNew, fontSize: 16),
                             maxLines: 1,

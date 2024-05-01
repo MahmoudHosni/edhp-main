@@ -112,7 +112,10 @@ class HospitalsDataCubit extends Cubit<HospitalsDataStates> {
     ).then(
       (services) {
         final levelsList = services.data as List;
-        this.services = levelsList.map((i) => LookupEntity.fromJson(i)).toList();
+        this.services =
+            levelsList.map((i) => LookupEntity.fromJson(i)).toList();
+        if (this.services.isEmpty)
+          this.services = [LookupEntity(id: 0, name: '')];
         emit(HospitalsGetServicesState());
       },
     ).catchError(
