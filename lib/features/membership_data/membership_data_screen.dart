@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
+import 'package:edhp/core/utils/app_components/widgets/ChoiceImageDialog.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
 import 'package:edhp/core/utils/app_components/widgets/InputViewWithLabel.dart';
@@ -9,7 +11,6 @@ import 'package:edhp/core/utils/app_components/widgets/NextButton.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/UserSexType.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
-import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -23,10 +24,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:screenshot/screenshot.dart';
-
-import 'widgets/custom_step_one_app_bar.dart';
 
 class MembershipDataScreen extends StatefulWidget {
   final SubscriptionRequest subscriptionRequest;
@@ -57,20 +54,30 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
   @override
   void initState() {
     super.initState();
-    print(
-        "selected Membership :: ${widget.subscriptionRequest.MembershipTypeID}");
     cubit = MembershipDataCubit.get(context);
     cubit?.getSubscriptionInfoLookUps();
     birthDateController.text = cubit?.selectedDate != null
         ? '${cubit?.selectedDate!.year}/${cubit?.selectedDate!.month}/${cubit?.selectedDate!.day}'
         : '';
+
+
+    var now = DateTime.now();
+    var formatter = DateFormat('yyyy/MM/dd');
+    String start = formatter.format(now);
+    int endYear = now.year +1;
+    String end =  "${"$endYear/${now.month}"}/${now.day}" ;
+
+    startDateController.text = start;
+    widget.subscriptionRequest.SubscriptionStartDate = start;
+    endDateController.text = end;
+    widget.subscriptionRequest.SubscriptionEndDate = end;
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MembershipDataCubit, MembershipDataStates>(
       listener: (context, state) {
-        // TODO: implement listener
+
       },
       builder: (context, state) {
         return ViewContainer(
@@ -78,14 +85,14 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 11,
                 ),
                 const Text(
                   StringsManager.individualMemberShip,
                   style: Styles.textStyle15W500,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 6,
                 ),
                 const Text(
@@ -102,17 +109,9 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                     if (value != null && value.length == 14) {
                       var analyser = DateAnaylser(date: value);
                       widget.subscriptionRequest.IdentityNumber = value;
-                      birthDateController.text = analyser.getYear() +
-                          "/" +
-                          analyser.getMonth() +
-                          "/" +
-                          analyser.getDay();
+                      birthDateController.text = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       widget.subscriptionRequest.BirthDate =
-                          analyser.getYear() +
-                              "/" +
-                              analyser.getMonth() +
-                              "/" +
-                              analyser.getDay();
+                          "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       stateID = int.parse(analyser.getGovernorate());
                       print('State   ::: ${stateID}');
                       widget.subscriptionRequest.StateID = stateID;
@@ -129,17 +128,9 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                     widget.subscriptionRequest.IdentityNumber = value;
                     if (value != null && value.length == 14) {
                       var analyser = DateAnaylser(date: value);
-                      birthDateController.text = analyser.getYear() +
-                          "/" +
-                          analyser.getMonth() +
-                          "/" +
-                          analyser.getDay();
+                      birthDateController.text = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       widget.subscriptionRequest.BirthDate =
-                          analyser.getYear() +
-                              "/" +
-                              analyser.getMonth() +
-                              "/" +
-                              analyser.getDay();
+                          "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       stateID = int.parse(analyser.getGovernorate());
                       print('State   ::: ${stateID}');
                       widget.subscriptionRequest.StateID = stateID;
@@ -249,102 +240,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                   ),
                   nameOfField: 'تاريخ الميلاد',
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                // Row(mainAxisAlignment: MainAxisAlignment.spaceAround,children: [
-                InputViewWithLabel(
-                  subview: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                            alignment: Alignment.center,
-                            child: DefaultTextFormFieldWithoutLabel(
-                              maxLen: 11,
-                              error: startDateController.text.length >= 7
-                                  ? ''
-                                  : "",
-                              controller: startDateController,
-                              keyboardType: TextInputType.text,
-                              onChange: (value) {
-                                print("onChange");
-                                if (value != null && value.length > 7) {
-                                  setState(() {
-                                    startDateController.text = value;
-                                    widget.subscriptionRequest
-                                        .SubscriptionStartDate = value;
-                                  });
-                                } else {
-                                  ShowToast.showToast(
-                                      'برجاء ادخال تاريخ بدء الاشتراك بصورة صحيحة');
-                                  return 'برجاء ادخال تاريخ بدء الاشتراك بصورة صحيحة';
-                                }
-                              },
-                              validation: (value) {
-                                print("validation");
-                              },
-                              isClickable: false,
-                            )),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          selectDate(context, startDateController);
-                        },
-                        icon: SvgPicture.asset(AppPaths.dateIconSvg, width: 18),
-                      ),
-                    ],
-                  ),
-                  nameOfField: 'بدء الاشتراك',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                InputViewWithLabel(
-                  subview: Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        alignment: Alignment.center,
-                        child: DefaultTextFormFieldWithoutLabel(
-                          maxLen: 11,
-                          error: endDateController.text.length >= 7 ? '' : "",
-                          controller: endDateController,
-                          keyboardType: TextInputType.text,
-                          onChange: (value) {
-                            print("onChange");
-                            if (value != null && value.length > 7) {
-                              setState(() {
-                                endDateController.text = value;
-                                widget.subscriptionRequest.SubscriptionEndDate =
-                                    value;
-                              });
-                            } else {
-                              ShowToast.showToast(
-                                  'برجاء ادخال تاريخ نهاية الاشتراك بصورة صحيحة');
-                              return 'برجاء ادخال تاريخ نهاية الاشتراك بصورة صحيحة';
-                            }
-                          },
-                          validation: (value) {
-                            print("validation");
-                          },
-                          isClickable: false,
-                        ),
-                      )),
-                      IconButton(
-                        onPressed: () {
-                          selectDate(context, endDateController);
-                        },
-                        icon: SvgPicture.asset(
-                          AppPaths.dateIconSvg,
-                          width: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                  nameOfField: 'نهاية الاشتراك',
-                ),
+
                 // ],),
                 const SizedBox(
                   height: 10,
@@ -356,7 +252,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            _showChoiceDialog(
+                            ChoiceImageDialog().getImageDialog(
                                 context, cubit!.getProfileImageFromGallery);
                           },
                           child: Container(
@@ -369,12 +265,12 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                             ),
                             child: Center(
                               child: Padding(
-                                padding: const EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(5),
                                 child: Row(
                                   children: [
                                     const Text(
                                       'ارفق صورة لك',
-                                      style: Styles.textStyle8W500,
+                                      style: Styles.textStyle8W400,
                                     ),
                                     const Spacer(),
                                     cubit?.profileImage == null
@@ -385,8 +281,8 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                                                 Radius.circular(12)),
                                             child: Image.file(
                                               cubit!.profileImage!,
-                                              width: 65,
-                                              height: 65,
+                                              width: 38,
+                                              height: 50,
                                             )),
                                   ],
                                 ),
@@ -396,12 +292,12 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                         ),
                       ),
                       const SizedBox(
-                        width: 16,
+                        width: 5,
                       ),
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            _showChoiceDialog(
+                            ChoiceImageDialog().getImageDialog(
                                 context, cubit!.getNotationIdImageFromGallery);
                           },
                           child: Container(
@@ -413,24 +309,24 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                               color: AppColors.cardNew,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(5),
                               child: Row(
                                 children: [
                                   const Text(
                                     'ارفق البطاقة الشخصية',
-                                    style: Styles.textStyle8W500,
+                                    style: Styles.textStyle8W400,
                                   ),
                                   const Spacer(),
                                   cubit?.notationIdImage == null
                                       ? SvgPicture.asset(
                                           AppPaths.personalIdIconSvg)
                                       : ClipRRect(
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(12)),
                                           child: Image.file(
                                             cubit!.notationIdImage!,
-                                            width: 65,
-                                            height: 65,
+                                            width: 38,
+                                            height: 50,
                                           )),
                                 ],
                               ),
@@ -515,11 +411,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
     );
     if (picked != null) {
       setState(() {
-        String date = picked.year.toString() +
-            " / " +
-            picked.month.toString() +
-            " / " +
-            picked.day.toString();
+        String date = "${picked.year} / ${picked.month} / ${picked.day}";
         controller.text = date;
         if (controller == birthDateController) {
           widget.subscriptionRequest.BirthDate = date;
@@ -593,62 +485,6 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
           [];
       print(cities.length.toString());
     });
-  }
-
-  Future<void> _showChoiceDialog(BuildContext context, Function callBack) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: Colors.blue,
-            title: Text(
-              "اختر",
-              style: TextStyle(color: Colors.white),
-            ),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: [
-                  Divider(
-                    height: 1,
-                    color: Colors.white,
-                  ),
-                  ListTile(
-                    onTap: () {
-                      callBack(ImageSource.gallery);
-                      Navigator.pop(context);
-                    },
-                    title: Text(
-                      "معرض الصور",
-                      style:
-                          Styles.textStyle13W500.copyWith(color: Colors.white),
-                    ),
-                    leading: Icon(
-                      Icons.image,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Divider(
-                    height: 1,
-                    color: Colors.white,
-                  ),
-                  ListTile(
-                    onTap: () {
-                      callBack(ImageSource.camera);
-                      Navigator.pop(context);
-                    },
-                    title: Text("الكاميرا",
-                        style: Styles.textStyle13W500
-                            .copyWith(color: Colors.white)),
-                    leading: Icon(
-                      Icons.camera,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:edhp/features/confirm_membership_data/cubit/PaymentDetails.dart';
 
 class ResultObject{
   int SubscriptionTypeID = 0;
@@ -16,11 +17,13 @@ class ResultObject{
   String MembershipTypeName='';
   String OrganizationName='';
   String MedicalCompanyName='';
+  bool Paid = false;
+  PaymentDetails? paymentDetails;
 
   ResultObject({required this.SubscriptionTypeID,required this.OrganizationID,
                 required this.OrganizationMembershipNumber,required this.MedicalCompanyID,required this.MembershipTypeID,
                 required this.SubscriptionStartDate,required this.SubscriptionEndDate,required this.SubscriptionNumber,required this.StateID,
-                required this.CityID,required this.Gender,required this.BirthDate,});
+                required this.CityID,required this.Gender,required this.BirthDate,required this.Paid,required this.paymentDetails});
 
   ResultObject.fromJson(Map<String, dynamic> json) {
     SubscriptionTypeID = json['SubscriptionTypeID'];
@@ -43,6 +46,9 @@ class ResultObject{
 
     Gender = json['Gender'];
     BirthDate = json['BirthDate'];
+
+    Paid = json['Paid'];
+    paymentDetails =json['PaymentDetails'] == null? null: PaymentDetails.fromJson(json['PaymentDetails']);
   }
 
   Map<String, dynamic> toJson() {
@@ -62,6 +68,9 @@ class ResultObject{
     data['CityID'] = CityID;
     data['Gender'] = Gender;
     data['BirthDate'] = BirthDate;
+
+    data['Paid'] = Paid;
+    data['PaymentDetails'] = paymentDetails;
     return data;
   }
 }

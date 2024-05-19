@@ -12,7 +12,7 @@ class ConfirmLeftValue extends StatelessWidget{
     return Container(width: 85,height: 45,alignment: Alignment.centerRight,padding: EdgeInsets.all(5),
       decoration: BoxDecoration(color: AppColors.whiteLightNew,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)),),
-      child: Text(vSide,style: Styles.textStyle14W400.copyWith(color: AppColors.secondNew),),
+      child: Text(vSide,style: Styles.textStyle13W400.copyWith(color: AppColors.secondNew),),
     );
   }
 

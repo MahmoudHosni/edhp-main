@@ -3,6 +3,7 @@ import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
+import 'package:edhp/core/utils/app_components/widgets/ChoiceImageDialog.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
 import 'package:edhp/core/utils/app_components/widgets/InputViewWithLabel.dart';
@@ -10,7 +11,6 @@ import 'package:edhp/core/utils/app_components/widgets/NextButton.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/UserSexType.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
-import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
@@ -23,10 +23,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:sn_progress_dialog/progress_dialog.dart';
 import '../../../core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
-import '../../membership_data/widgets/custom_step_one_app_bar.dart';
 
 class OrganizationMembershipDataScreen extends StatefulWidget {
   final SubscriptionRequest subscriptionRequest;
@@ -39,8 +37,7 @@ class OrganizationMembershipDataScreen extends StatefulWidget {
       _OrganizationMembershipDataScreenState();
 }
 
-class _OrganizationMembershipDataScreenState
-    extends State<OrganizationMembershipDataScreen> {
+class _OrganizationMembershipDataScreenState extends State<OrganizationMembershipDataScreen> {
   TextEditingController identityNumberController = TextEditingController();
   TextEditingController membershipNumberController = TextEditingController();
   TextEditingController birthDate = TextEditingController();
@@ -95,17 +92,9 @@ class _OrganizationMembershipDataScreenState
                     if (value != null && value.length == 14) {
                       widget.subscriptionRequest.IdentityNumber = value;
                       var analyser = DateAnaylser(date: value);
-                      birthDate.text = analyser.getYear() +
-                          "/" +
-                          analyser.getMonth() +
-                          "/" +
-                          analyser.getDay();
+                      birthDate.text = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       widget.subscriptionRequest.BirthDate =
-                          analyser.getYear() +
-                              "/" +
-                              analyser.getMonth() +
-                              "/" +
-                              analyser.getDay();
+                          "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       stateID = int.parse(analyser.getGovernorate());
                       print('State   ::: ${stateID}');
                       widget.subscriptionRequest.StateID = stateID;
@@ -122,17 +111,9 @@ class _OrganizationMembershipDataScreenState
                     widget.subscriptionRequest.IdentityNumber = value;
                     if (value != null && value.length == 14) {
                       var analyser = DateAnaylser(date: value);
-                      birthDate.text = analyser.getYear() +
-                          "/" +
-                          analyser.getMonth() +
-                          "/" +
-                          analyser.getDay();
+                      birthDate.text = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       widget.subscriptionRequest.BirthDate =
-                          analyser.getYear() +
-                              "/" +
-                              analyser.getMonth() +
-                              "/" +
-                              analyser.getDay();
+                          "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                       stateID = int.parse(analyser.getGovernorate());
                       print('State   ::: ${stateID}');
                       widget.subscriptionRequest.StateID = stateID;
@@ -274,7 +255,7 @@ class _OrganizationMembershipDataScreenState
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            _showChoiceDialog(
+                            ChoiceImageDialog().getImageDialog(
                               context,
                               cubit!.getNationalIDImageFromGallery,
                             );
@@ -320,7 +301,7 @@ class _OrganizationMembershipDataScreenState
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            _showChoiceDialog(
+                            ChoiceImageDialog().getImageDialog(
                               context,
                               cubit!.getPersonalImageFromGallery,
                             );
@@ -369,7 +350,7 @@ class _OrganizationMembershipDataScreenState
                 ),
                 InkWell(
                   onTap: () {
-                    _showChoiceDialog(
+                    ChoiceImageDialog().getImageDialog(
                       context,
                       cubit!.getOrganizationCardFromGallery,
                     );
@@ -483,11 +464,7 @@ class _OrganizationMembershipDataScreenState
     );
     if (picked != null) {
       setState(() {
-        String date = picked.year.toString() +
-            " / " +
-            picked.month.toString() +
-            " / " +
-            picked.day.toString();
+        String date = "${picked.year} / ${picked.month} / ${picked.day}";
         birthDate.text = date;
         widget.subscriptionRequest.BirthDate = date;
       });
@@ -565,62 +542,6 @@ class _OrganizationMembershipDataScreenState
           [];
       print(cities.length.toString());
     });
-  }
-
-  Future<void> _showChoiceDialog(BuildContext context, Function callBack) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: Colors.blue,
-            title: Text(
-              "اختر",
-              style: TextStyle(color: Colors.white),
-            ),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: [
-                  Divider(
-                    height: 1,
-                    color: Colors.white,
-                  ),
-                  ListTile(
-                    onTap: () {
-                      callBack(ImageSource.gallery);
-                      Navigator.pop(context);
-                    },
-                    title: Text(
-                      "معرض الصور",
-                      style:
-                          Styles.textStyle13W500.copyWith(color: Colors.white),
-                    ),
-                    leading: Icon(
-                      Icons.image,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Divider(
-                    height: 1,
-                    color: Colors.white,
-                  ),
-                  ListTile(
-                    onTap: () {
-                      callBack(ImageSource.camera);
-                      Navigator.pop(context);
-                    },
-                    title: Text("الكاميرا",
-                        style: Styles.textStyle13W500
-                            .copyWith(color: Colors.white)),
-                    leading: Icon(
-                      Icons.camera,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
   }
 
   @override

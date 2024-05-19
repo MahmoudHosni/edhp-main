@@ -112,6 +112,7 @@ class MedicalEventCardView extends StatelessWidget {
                         child: DefaultButton(width: 80,fontSize: 12,textColor:  Colors.black,
                           backgroundColor: Colors.transparent,
                           function: () {
+                            item.state = 1;
                             GoRouter.of(context).push(AppRouters.kMedicalEventConditionsAndDetails,extra: item);
                           },
                           text: StringsManager.conditions.tr(),
@@ -122,6 +123,7 @@ class MedicalEventCardView extends StatelessWidget {
                         child: DefaultButton(width: 80,
                           backgroundColor: Colors.transparent,fontSize: 12,textColor:  Colors.black,
                           function: () {
+                            item.state = 2;
                             GoRouter.of(context).push(AppRouters.kMedicalEventConditionsAndDetails,extra: item);
                           },
                           text: StringsManager.sunsribedetails.tr(),

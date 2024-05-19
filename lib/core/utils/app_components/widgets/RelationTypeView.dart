@@ -1,17 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';
 
-class UserSexType extends StatelessWidget {
-  List<GenderList>? genderList;
-  String? genderSelectedValue;
+class RelationTypeView extends StatelessWidget{
+  List<RelationType>? relationLst;
+  String? relationSelectedValue;
   final Function callBack;
-  int gender;
+  int rel;
 
-  UserSexType(
-      {required this.genderList, required this.callBack, required this.gender});
+  RelationTypeView(
+      {required this.relationLst, required this.callBack, required this.rel});
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +23,17 @@ class UserSexType extends StatelessWidget {
           border: InputBorder.none,
         ),
         hint: Text(
-          genderList?.firstWhere((element) => element?.key == gender).value ??
+          relationLst?.firstWhere((element) => element?.key == rel).value ??
               '',
           style: Styles.textStyle14W400,
         ),
-        items: genderList
+        items: relationLst
             ?.map((item) => DropdownMenuItem<String>(
-                  value: item.value,
-                  child: Text(item.value ?? '',
-                      style:
-                          Styles.textStyle16W500.copyWith(color: Colors.black)),
-                ))
+          value: item.value,
+          child: Text(item.value ?? '',
+              style:
+              Styles.textStyle16W500.copyWith(color: Colors.black)),
+        ))
             .toList(),
         validator: (value) {
           if (value == null) {
@@ -48,7 +47,7 @@ class UserSexType extends StatelessWidget {
           callBack(value);
         },
         onSaved: (value) {
-          genderSelectedValue = value.toString();
+          relationSelectedValue = value.toString();
           callBack(value);
         },
         dropdownStyleData: DropdownStyleData(

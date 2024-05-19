@@ -35,9 +35,10 @@ class ConditionsAndDetailsView extends StatelessWidget{
                                     child: const CircularProgressIndicator(
                                         color: AppColors.primaryBlueColor),
                                   ) :
-                            (state is ConditionsAndDetailsResponse)?
+                            (state is ConditionsAndDetailsResponse && event.state == 1)?
                              Column(mainAxisSize: MainAxisSize.max,
                                  children: [
+
                                   Row(textDirection: TextDirection.ltr,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -68,21 +69,7 @@ class ConditionsAndDetailsView extends StatelessWidget{
                                     ],
                                   ),
                                    const SizedBox(height: 8,),
-                                  Row(textDirection: TextDirection.ltr,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: ConfirmLeftLargeValue(
-                                            vSide: state.response.resultObject?.eventTerms ??''),
-                                        flex: 1,
-                                      ),
-                                      SizedBox(
-                                        width: 7,
-                                      ),
-                                      ConfirmRightLargeTitle(title: 'الشروط'),
-                                    ],
-                                  ),
-                                   const SizedBox(height: 8,),
+
                                   Row(textDirection: TextDirection.ltr,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -112,26 +99,43 @@ class ConditionsAndDetailsView extends StatelessWidget{
                                       ConfirmRightTitle(title: 'عدد الحضور'),
                                     ],
                                   ),
-                                   const SizedBox(height: 8,),
-                                  Row(textDirection: TextDirection.ltr,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: ConfirmLeftLargeValue(
-                                            vSide: state.response.resultObject?.description.toString() ??''),
-                                        flex: 1,
-                                      ),
-                                      SizedBox(
-                                        width: 7,
-                                      ),
-                                      ConfirmRightLargeTitle(title: 'التفاصيل'),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8,),
 
+                                  const SizedBox(height: 8,),
+                                   Row(textDirection: TextDirection.ltr,
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Expanded(
+                                         child: ConfirmLeftLargeValue(
+                                             vSide: state.response.resultObject?.eventTerms ??''),
+                                         flex: 1,
+                                       ),
+                                       SizedBox(
+                                         width: 7,
+                                       ),
+                                       ConfirmRightLargeTitle(title: 'الشروط'),
+                                     ],
+                                   ),
+                                   const SizedBox(height: 8,),
                       ],
-                    ):null),
-              );
+                    ):((state is ConditionsAndDetailsResponse && event.state == 2)?
+                            Column(mainAxisSize: MainAxisSize.max,
+                              children: [
+                        Row(textDirection: TextDirection.ltr,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: ConfirmLeftLargeValue(
+                                  vSide: state.response.resultObject?.description.toString() ??''),
+                              flex: 1,
+                            ),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            ConfirmRightLargeTitle(title: 'التفاصيل'),
+                          ],
+                        )]):null)
+                    ,
+              ));
             }));
   }
 

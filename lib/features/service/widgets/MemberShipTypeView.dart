@@ -91,6 +91,7 @@ class MemberShipTypeView extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height / 14,
           ),
+
           DefaultButton(
             function: () {},
             text: 'اختر عضويتك',

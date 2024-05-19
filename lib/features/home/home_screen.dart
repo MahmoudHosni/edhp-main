@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
@@ -24,13 +22,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:screenshot/screenshot.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
-  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+ // Create a key
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -44,7 +46,6 @@ class HomeScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            // if(state is GetProfileSuccessfullyState || state is GetProfileImageSuccessfullyState || state is ChangeAdsImage ) {
             return Scaffold(
               backgroundColor: Colors.transparent,
               key: _key,
@@ -67,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () { GoRouter.of(context).push(AppRouters.kCreatePaymentScreen,);  },
                     icon: SvgPicture.asset(AppPaths.notificationIconSvg),
                   ),
                 ],
@@ -144,7 +145,7 @@ class HomeScreen extends StatelessWidget {
                                 child: InkWell(
                                     child: Container(
                                       height: 140,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(12))),
@@ -155,8 +156,8 @@ class HomeScreen extends StatelessWidget {
                                             SvgPicture.asset(
                                               'assets/icons/ic_01.svg',
                                             ),
-                                            SizedBox(
-                                              height: 20,
+                                            const SizedBox(
+                                              height: 14,
                                             ),
                                             Text(
                                               StringsManager.medicalEvents,
@@ -178,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                                 child: InkWell(
                                     child: Container(
                                       height: 140,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(12))),
@@ -189,7 +190,7 @@ class HomeScreen extends StatelessWidget {
                                             SvgPicture.asset(
                                               'assets/icons/ic_02.svg',
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 20,
                                             ),
                                             Text(
@@ -206,9 +207,11 @@ class HomeScreen extends StatelessWidget {
                                         ShowToast.showToastGreen(
                                             'انت بالفعل مشترك فى باقة');
                                       } else {
+                                        var sbRequest = SubscriptionRequest();
+                                        sbRequest.SubscriptionTypeID = -1;
                                         GoRouter.of(context).push(
                                             AppRouters.kServiceScreen,
-                                            extra: SubscriptionRequest());
+                                            extra: sbRequest);
                                       }
                                     }),
                               ),
@@ -219,7 +222,7 @@ class HomeScreen extends StatelessWidget {
                                 child: InkWell(
                                   child: Container(
                                     height: 140,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(12))),
@@ -230,7 +233,7 @@ class HomeScreen extends StatelessWidget {
                                           SvgPicture.asset(
                                             'assets/icons/ic_03.svg',
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 20,
                                           ),
                                           Text(

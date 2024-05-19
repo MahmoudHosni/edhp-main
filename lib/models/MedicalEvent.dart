@@ -5,6 +5,7 @@ class MedicalEvent {
   bool? registered;
   String? EventDate;
   bool? IsActive;
+  int state=0;
   /*
   "EventDate": "2022-12-30T00:00:00",
         "IsActive": true

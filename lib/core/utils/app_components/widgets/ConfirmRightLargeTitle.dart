@@ -9,10 +9,10 @@ class ConfirmRightLargeTitle extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(width: 115,height: 125,alignment: Alignment.centerRight,padding: EdgeInsets.all(5),
+    return Container(width: 115,height: 360,alignment: Alignment.centerRight,padding: EdgeInsets.all(5),
       decoration: BoxDecoration(color: AppColors.whiteLightNew,
         borderRadius: BorderRadius.only(topRight: Radius.circular(10),bottomRight: Radius.circular(10)),),
-      child: Text(title,style: Styles.textStyle12W400.copyWith(color: AppColors.secondNew),),
+      child: Text(title,style: Styles.textStyle11W400.copyWith(color: AppColors.secondNew),),
     );
   }
 }

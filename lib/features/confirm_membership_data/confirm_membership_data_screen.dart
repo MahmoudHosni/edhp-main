@@ -49,10 +49,16 @@ class _ConfirmMembershipDataScreenState
       if (state is ConfirmMembershipSuccessState) {
         if (int.parse(widget.subscriptionRequest.Cost ?? '0') > 0) {
           msg = state.response.Message??'';
+          while(GoRouter.of(context).canPop()){
+            GoRouter.of(context).pop();
+          }
           GoRouter.of(context)
-              .push(AppRouters.kPaymentMembershipScreen, extra: state.response);
+              .push(AppRouters.kCreatePaymentScreen, extra: state.response);
         } else {
           msg = state.response.Message??'';
+          while(GoRouter.of(context).canPop()){
+            GoRouter.of(context).pop();
+          }
           GoRouter.of(context)
               .push(AppRouters.kCardPreviewScreen, extra: state.response);
         }
@@ -102,15 +108,16 @@ class _ConfirmMembershipDataScreenState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+
+                ConfirmRightTitle(title: 'الإسم'),
+                const SizedBox(
+                  width: 7,
+                ),
                 Expanded(
                   child: ConfirmLeftValue(
                       vSide: CacheHelper.getData(key: 'profile')),
                   flex: 1,
                 ),
-                SizedBox(
-                  width: 7,
-                ),
-                ConfirmRightTitle(title: 'الإسم'),
               ],
             ),
             SizedBox(
@@ -118,15 +125,16 @@ class _ConfirmMembershipDataScreenState
             ),
             Row(
               children: [
+                ConfirmRightTitle(title: 'رقم الهاتف'),
+
+                SizedBox(
+                  width: 7,
+                ),
                 Expanded(
                   child:
-                      ConfirmLeftValue(vSide: CacheHelper.getData(key: 'name')),
+                  ConfirmLeftValue(vSide: CacheHelper.getData(key: 'name')),
                   flex: 1,
                 ),
-                SizedBox(
-                  width: 7,
-                ),
-                ConfirmRightTitle(title: 'رقم الهاتف'),
               ],
             ),
             SizedBox(
@@ -134,6 +142,11 @@ class _ConfirmMembershipDataScreenState
             ),
             Row(
               children: [
+
+                ConfirmRightTitle(title: 'الجنس'),
+                SizedBox(
+                  width: 7,
+                ),
                 Expanded(
                   child: ConfirmLeftValue(
                       vSide: widget.subscriptionRequest.Gender == 1
@@ -141,10 +154,6 @@ class _ConfirmMembershipDataScreenState
                           : genderItems[1]),
                   flex: 1,
                 ),
-                SizedBox(
-                  width: 7,
-                ),
-                ConfirmRightTitle(title: 'الجنس'),
               ],
             ),
             SizedBox(
@@ -152,15 +161,16 @@ class _ConfirmMembershipDataScreenState
             ),
             Row(
               children: [
+
+                ConfirmRightTitle(title: 'الرقم القومي'),
+                SizedBox(
+                  width: 7,
+                ),
                 Expanded(
                   child: ConfirmLeftValue(
                       vSide: widget.subscriptionRequest?.IdentityNumber ?? ''),
                   flex: 1,
                 ),
-                SizedBox(
-                  width: 7,
-                ),
-                ConfirmRightTitle(title: 'الرقم القومي'),
               ],
             ),
             SizedBox(
@@ -168,15 +178,16 @@ class _ConfirmMembershipDataScreenState
             ),
             Row(
               children: [
+
+                ConfirmRightTitle(title: 'المبلغ'),
+                SizedBox(
+                  width: 7,
+                ),
                 Expanded(
                   child: ConfirmLeftValue(
                       vSide: widget.subscriptionRequest.Cost ?? ''),
                   flex: 1,
                 ),
-                SizedBox(
-                  width: 7,
-                ),
-                ConfirmRightTitle(title: 'المبلغ'),
               ],
             ),
             SizedBox(
@@ -190,6 +201,15 @@ class _ConfirmMembershipDataScreenState
             Row(
               children: [
                 Container(
+                  width: 35,
+                  height: 35,
+                  child: BackCircleButton(),
+                ),
+
+                const SizedBox(
+                  width: 8,
+                ),
+                Container(
                   alignment: Alignment.bottomLeft,
                   child: NextButton(
                     function: () {
@@ -200,14 +220,6 @@ class _ConfirmMembershipDataScreenState
                     height: 45,
                     width: 120,
                   ),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Container(
-                  width: 35,
-                  height: 35,
-                  child: BackCircleButton(),
                 ),
               ],
             ),

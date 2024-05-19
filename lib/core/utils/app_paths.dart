@@ -54,6 +54,7 @@ abstract class AppPaths {
   static const String ageIcon = 'assets/icons/age.svg';
   static const String logoutIconSvg = 'assets/icons/logout.svg';
   static const String languageIconSvg = 'assets/icons/lang.svg';
+  static const String addFollower = 'assets/icons/add_follower.svg';
   ///
   /// Images
   ///

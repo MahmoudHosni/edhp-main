@@ -22,8 +22,8 @@ class ViewContainer extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: getSharedAppBarWithBack(context, title, showBack),
         body: Container(
-            margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-            padding: const EdgeInsets.all(8),
+            margin: const EdgeInsets.fromLTRB(14.5, 15, 14.5, 0),
+            padding: const EdgeInsets.all(6),
             decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(

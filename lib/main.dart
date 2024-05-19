@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_routers.dart';
+import 'package:edhp/features/add_relatives/AddRelativesCubit.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMemberShipCubit.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompaniesCubit.dart';
 import 'package:edhp/features/medical_advices/cubit/MedicalAdvicesCubit.dart';
@@ -14,6 +15,8 @@ import 'package:edhp/features/service/cubit/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:opay_online_flutter_sdk/opay_online_flutter_sdk.dart';
 import 'core/network/cache_helper.dart';
 import 'core/network/dio_helper.dart';
 import 'core/utils/bloc_observer/bloc_observer.dart';
@@ -40,6 +43,10 @@ void main() async {
     systemNavigationBarIconBrightness:
         Brightness.dark, // color of navigation controls
   ));
+  // put it on testing state
+  OPayTask.setSandBox(true);
+
+
   HttpOverrides.global = new MyHttpoverrides();
   CacheHelper.saveData(key: AppVersion, value: '0.0.0.8');
   runApp(
@@ -82,6 +89,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => OrganizationMembershipDataCubit()), //
         BlocProvider(create: (context) => ConfirmMemberShipCubit()),
         BlocProvider(create: (context) => MembershipDataCubit()),
+        BlocProvider(create: (context) => AddRelativesCubit()),
         BlocProvider(create: (context) => MedicalAdvicesCubit())
       ],
       child: MaterialApp.router(
@@ -113,6 +121,7 @@ class MyApp extends StatelessWidget {
         // : AppRouters.skipLoginRouter,
         ,
         title: 'EDHP',
+        builder: EasyLoading.init(),
       ),
     );
   }

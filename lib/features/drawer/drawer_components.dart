@@ -10,6 +10,7 @@ import 'package:edhp/core/utils/app_images.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
+import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -32,7 +33,7 @@ class DrawerAppHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 2.62,
+      height: MediaQuery.of(context).size.height / 2.82,
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsetsDirectional.only(top: 12),
@@ -73,7 +74,7 @@ class DrawerAppHeader extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              (memberShips != null && memberShips.length > 0)
+              (memberShips != null && memberShips.isNotEmpty)
                   ? Text(
                       memberShips[0].SubscriptionNumber,
                       style:
@@ -107,7 +108,6 @@ class DrawerAppHeader extends StatelessWidget {
 
 class ClickableDrawerItem extends StatelessWidget {
   final bool checkForMembership;
-
   final String text;
   final String svgIcon;
   final String pathLocationScreen;
@@ -127,9 +127,13 @@ class ClickableDrawerItem extends StatelessWidget {
         onTap: () {
           if (checkForMembership) {
             if (memberShips != null && memberShips.length > 0) {
-              ShowToast.showToastGreen('انت بالفعل مشترك فى باقة');
-            } else {
-              GoRouter.of(context).push(pathLocationScreen);
+                ShowToast.showToastGreen('انت بالفعل مشترك فى باقة');
+            } else if(pathLocationScreen==AppRouters.kServiceScreen) {
+                var sbRequest = SubscriptionRequest();
+                sbRequest.SubscriptionTypeID = -2;
+                GoRouter.of(context).push(AppRouters.kServiceScreen, extra: sbRequest);
+            } else{
+                GoRouter.of(context).push(pathLocationScreen);
             }
           } else {
             GoRouter.of(context).push(pathLocationScreen);
@@ -177,6 +181,15 @@ class DrawerAppList extends StatelessWidget {
             svgIcon: AppPaths.membershipIconSvg,
             pathLocationScreen: AppRouters.kSelectCompanyScreen,
             checkForMembership: true),
+        getSeparatorView(),
+        // if (memberShips != null && memberShips.length > 0)
+          ClickableDrawerItem(
+              text: StringsManager.add_relatives.tr(),
+              svgIcon: AppPaths.addFollower,
+              pathLocationScreen: AppRouters.kServiceScreen,
+              checkForMembership: true),
+        // else const SizedBox(),
+
         //kSelectCompanyScreenAppRouters.kCreateMembershipInsideAppScreen
         getSeparatorView(),
         // const ClickableDrawerItem(text: 'الشبكة الطبية', svgIcon: AppPaths.medicalNetworkIconSvg, pathLocationScreen: AppRouters.kMedicalNetworkScreen),

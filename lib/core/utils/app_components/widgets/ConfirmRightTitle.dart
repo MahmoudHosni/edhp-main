@@ -14,7 +14,7 @@ class ConfirmRightTitle extends StatelessWidget{
     return Container(width: 115,height: 45,alignment: Alignment.centerRight,padding: EdgeInsets.all(5),
             decoration: BoxDecoration(color: AppColors.whiteLightNew,
             borderRadius: BorderRadius.only(topRight: Radius.circular(10),bottomRight: Radius.circular(10)),),
-            child: Text(title,style: Styles.textStyle12W400.copyWith(color: AppColors.secondNew),),
+            child: Text(title,style: Styles.textStyle12W300.copyWith(color: AppColors.secondNew),),
     );
   }
 

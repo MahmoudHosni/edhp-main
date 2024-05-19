@@ -1,12 +1,10 @@
 import 'package:edhp/core/utils/StringsManager.dart';
-import 'package:edhp/core/utils/app_colors.dart';
-import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
+ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/features/service/widgets/membership_type_container.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/utils/app_components/widgets/back_custom_app_bar.dart';
-import '../../core/utils/styles/styles.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
@@ -40,28 +38,26 @@ class _ServiceScreenState extends State<ServiceScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<OurProductCubit, OurProductStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is OurProductInitialState || state is OurProductLoadingState){
+          EasyLoading.show(status: StringsManager.please_wait);
+        }else if(state is OurProductSuccessfullyState){
+          EasyLoading.dismiss();
+        }
+      },
       builder: (context, state) {
         return ViewContainer(
             title: StringsManager.membershipCards,
             body: SafeArea(
               child: Scaffold(
                 body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
                   child: Column(
                     children: [
                       Expanded(
                         child: ListView.separated(
                           itemBuilder: (context, index) =>
-                              MembershipTypeContainer(
-                            price: cubit.membershipTypeList[index].price
-                                .toString(),
-                            name:
-                                cubit.membershipTypeList[index].name.toString(),
-                            description: cubit
-                                .membershipTypeList[index].description
-                                .toString(),
-                            id: cubit.membershipTypeList[index].iD ?? 0,
+                              MembershipTypeContainer(membershipType: cubit.membershipTypeList[index],
                             subscriptionRequest: widget.subscriptionRequest,
                             clickable: (widget.subscriptionRequest
                                         .SubscriptionTypeID ??

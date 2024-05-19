@@ -93,6 +93,7 @@ class StringsManager {
   static const String sunsribedetails = "sunsribedetails";
   static const String subscribe_now = "subscribe_now";
   static const String unsubscribe_now = "unsubscribe_now";
+  static const String add_relatives = "add_relatives";
 
   static const String medicalEvents = 'الفاعليات الطبية';
   static const String noMedicalEvents = 'لا يوجد فاعليات الان';

@@ -1,18 +1,21 @@
 import 'package:edhp/core/utils/app_components/widgets/back_custom_app_bar.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_paths.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
+import 'package:edhp/features/confirm_membership_data/cubit/ConfirmResponse.dart';
 import 'package:edhp/features/payment/widgets/custom_step_three_app_bar.dart';
 import 'package:edhp/features/payment/widgets/payment_text_form_field.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/utils/app_colors.dart';
 
 class PaymentScreen extends StatelessWidget {
-  final SubscriptionRequest subscriptionRequest;
-  PaymentScreen({super.key,required this.subscriptionRequest});
+  final ConfirmResponse confirmResponse;
+  PaymentScreen({super.key,required this.confirmResponse});
 
   TextEditingController cardNumberController = TextEditingController();
   TextEditingController expiryDateController = TextEditingController();
@@ -121,7 +124,10 @@ class PaymentScreen extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height/18,
                 ),
-                DefaultButton(function: (){}, text: 'الدفع'),
+                DefaultButton(function: (){
+                  GoRouter.of(context).push(AppRouters.kCreatePaymentScreen,);
+
+                }, text: 'الدفع'),
               ],
             ),
           ),

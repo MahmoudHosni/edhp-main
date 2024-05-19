@@ -14,6 +14,7 @@ import 'package:edhp/features/home/widgets/DescriptionView.dart';
 import 'package:edhp/features/home/widgets/MemberShipPreview.dart';
 import 'package:edhp/features/insurance_companies/SelectInsuranceCompany.dart';
 import 'package:edhp/features/layout/layout_screen.dart';
+import 'package:edhp/features/medical_advices/MedicalAdviceDetails.dart';
 import 'package:edhp/features/medical_advices/MedicalAdvices.dart';
 import 'package:edhp/features/medical_file/medical_file_screen.dart';
 import 'package:edhp/features/medical_network/branches/medical_center_branches_screen.dart';
@@ -33,15 +34,19 @@ import 'package:edhp/features/medical_network/nearest_medical_centers/nearest_me
 import 'package:edhp/features/medical_record/medical_record_screen.dart';
 import 'package:edhp/features/membership_data/membership_data_screen.dart';
 import 'package:edhp/features/otp/otp_screen.dart';
+import 'package:edhp/features/payment/CreatePaymentScreen.dart';
 import 'package:edhp/features/payment/payment_screen.dart';
 import 'package:edhp/features/service/MemberShipTypes.dart';
+import 'package:edhp/features/service/ServiceDetailsview.dart';
 import 'package:edhp/features/service/service_screen.dart';
 import 'package:edhp/features/splash_screen/splash_screen.dart';
 import 'package:edhp/models/EventWithBranchObjects.dart';
+import 'package:edhp/models/Medical.dart';
 import 'package:edhp/models/MedicalEvent.dart';
 import 'package:edhp/models/MedicalEventService.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/medical_network_entity.dart';
+import 'package:edhp/models/membership_type_model.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/add_relatives/add_relatives_screen.dart';
 import '../../features/authantication/forget_password/forget_password_screen.dart';
@@ -69,7 +74,7 @@ abstract class AppRouters {
   static const kMedicalEventServics = '/MedicalEventServics';
   static const kMedicalEventConditionsAndDetails = '/ConditionsAndDetails';
   static const kMedicalEventCenters = '/MedicalEventCenters';
-
+  static const kCreatePaymentScreen = "/CreatePaymentScreen";
   static const kMemberShipTypes = '/memberShipTypes';
   static const kCreateMembershipScreen = '/createMembershipScreen';
   static const kMedicalNetworkScreen = '/medicalNetworkScreen';
@@ -91,6 +96,8 @@ abstract class AppRouters {
   static const kSelectCompanyScreen = '/selectCompanyScreen';
   static const kMembershipDataScreen = '/membershipDataScreen';
   static const kConfirmMembershipDataScreen = '/confirmMembershipDataScreen';
+  static const kServiceDetailsview = "/kServiceDetailsview";
+  static const kMedicalAdviceDetails = "/kMedicalAdviceDetails";
   static const kPaymentMembershipScreen = '/paymentMembershipScreen';
   static const kCardPreviewScreen = '/cardPreviewScreen';
   static const kMemberShipPreview = '/memberShipPreview';
@@ -178,6 +185,8 @@ abstract class AppRouters {
         path: kMedicalEventCenters,
         builder: (context, state) => MedicalEventBranchAndProviders(mEvent: state.extra as EventWithBranchObjects),
       ),//kMedicalEventServics
+      GoRoute(path: kCreatePaymentScreen,
+        builder: (context, state) => CreatePaymentScreen(confirmResponse: state.extra as ConfirmResponse),),
       GoRoute(
         path: kMedicalEventServics,
         builder: (context, state) => MedicalEventServices(medicalEvent: state.extra as MedicalEvent),
@@ -282,11 +291,21 @@ abstract class AppRouters {
         path: kConfirmMembershipDataScreen,
         builder: (context, state) => ConfirmMembershipDataScreen(
             subscriptionRequest: state.extra as SubscriptionRequest),
+      ),//kServiceDetailsview
+      GoRoute(
+        path: kServiceDetailsview,
+        builder: (context, state) => ServiceDetailsview(
+            membershipType: state.extra as MembershipType),
+      ),//
+      GoRoute(
+        path: kMedicalAdviceDetails,
+        builder: (context, state) => MedicalAdviceDetails(
+            advice: state.extra as MedicalAdvice),
       ),
       GoRoute(
         path: kPaymentMembershipScreen,
         builder: (context, state) => PaymentScreen(
-            subscriptionRequest: state.extra as SubscriptionRequest),
+            confirmResponse: state.extra as ConfirmResponse),
       ), //kCardPreviewScreen
       GoRoute(
         path: kCardPreviewScreen,
@@ -308,7 +327,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kAddRelativesScreen,
-        builder: (context, state) => AddRelativesScreen(),
+        builder: (context, state) => AddRelativesScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ), //
       GoRoute(
         path: kSelectInsuranceCompany,
@@ -379,6 +398,8 @@ abstract class AppRouters {
         path: kMedicalEventCenters,
         builder: (context, state) => MedicalEventBranchAndProviders(mEvent: state.extra as EventWithBranchObjects),
       ),
+      GoRoute(path: kCreatePaymentScreen,
+        builder: (context, state) => CreatePaymentScreen(confirmResponse: state.extra as ConfirmResponse),),
       GoRoute(
         path: kCreateMembershipScreen,
         builder: (context, state) => CreateMembershipScreen(
@@ -407,9 +428,19 @@ abstract class AppRouters {
             subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
+        path: kServiceDetailsview,
+        builder: (context, state) => ServiceDetailsview(
+            membershipType: state.extra as MembershipType),
+      ),
+      GoRoute(
+        path: kMedicalAdviceDetails,
+        builder: (context, state) => MedicalAdviceDetails(
+            advice: state.extra as MedicalAdvice),
+      ),
+      GoRoute(
         path: kPaymentMembershipScreen,
         builder: (context, state) => PaymentScreen(
-            subscriptionRequest: state.extra as SubscriptionRequest),
+            confirmResponse: state.extra as ConfirmResponse),
       ),
       GoRoute(
         path: kCardPreviewScreen,
@@ -431,7 +462,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kAddRelativesScreen,
-        builder: (context, state) => AddRelativesScreen(),
+        builder: (context, state) => AddRelativesScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       )
     ],
   );

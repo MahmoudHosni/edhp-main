@@ -7,6 +7,7 @@ import 'package:edhp/features/service/cubit/states.dart';
 import 'package:edhp/features/service/widgets/MemberShipTypeView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class MemberShipTypes extends StatefulWidget {
   const MemberShipTypes({
@@ -29,9 +30,15 @@ class _MemberShipTypesState extends State<MemberShipTypes> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return BlocConsumer<OurProductCubit, OurProductStates>(
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is OurProductLoadingState || state is OurProductInitialState){
+          EasyLoading.show(status: StringsManager.please_wait);
+        }else if(state is OurProductSuccessfullyState){
+          EasyLoading.dismiss();
+        }
       },
       builder: (context, state) {
         return SafeArea(

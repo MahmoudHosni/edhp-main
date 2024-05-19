@@ -9,10 +9,10 @@ class ConfirmLeftLargeValue extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(width: 85,height: 125,alignment: Alignment.centerRight,padding: EdgeInsets.all(5),
+    return Container(width: 85,height: 360,alignment: Alignment.centerRight,padding: EdgeInsets.all(5),
       decoration: BoxDecoration(color: AppColors.whiteLightNew,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(10),bottomLeft: Radius.circular(10)),),
-      child: Text(vSide,style: Styles.textStyle15W500.copyWith(color: AppColors.secondNew),),
+      child: Text(vSide,style: Styles.textStyle13W500.copyWith(color: AppColors.secondNew),),
     );
   }
 
