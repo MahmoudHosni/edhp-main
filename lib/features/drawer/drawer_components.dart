@@ -98,6 +98,26 @@ class DrawerAppHeader extends StatelessWidget {
                   height: 40,
                 ),
               ),
+
+              if (memberShips != null && memberShips.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0,vertical: 5),
+                  child: DefaultButton(
+                    backgroundColor: const Color(0xffF5FAFC),
+                    fontSize: 12,
+                    textColor: const Color(0xff0DBBD6),
+                    redius: 20,
+                    function: () {
+                      var sbRequest = SubscriptionRequest();
+                      sbRequest.SubscriptionTypeID = -2;
+                      GoRouter.of(context).push(AppRouters.kServiceScreen, extra: sbRequest);
+                    },
+                    text: StringsManager.add_relatives.tr(),
+                    height: 40,
+                  ),
+                )
+              else const SizedBox(),
+
             ],
           ),
         ),
@@ -126,9 +146,7 @@ class ClickableDrawerItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           if (checkForMembership) {
-            if (memberShips != null && memberShips.length > 0) {
-                ShowToast.showToastGreen('انت بالفعل مشترك فى باقة');
-            } else if(pathLocationScreen==AppRouters.kServiceScreen) {
+            if(pathLocationScreen==AppRouters.kServiceScreen) {
                 var sbRequest = SubscriptionRequest();
                 sbRequest.SubscriptionTypeID = -2;
                 GoRouter.of(context).push(AppRouters.kServiceScreen, extra: sbRequest);
@@ -182,16 +200,7 @@ class DrawerAppList extends StatelessWidget {
             pathLocationScreen: AppRouters.kSelectCompanyScreen,
             checkForMembership: true),
         getSeparatorView(),
-        // if (memberShips != null && memberShips.length > 0)
-          ClickableDrawerItem(
-              text: StringsManager.add_relatives.tr(),
-              svgIcon: AppPaths.addFollower,
-              pathLocationScreen: AppRouters.kServiceScreen,
-              checkForMembership: true),
-        // else const SizedBox(),
 
-        //kSelectCompanyScreenAppRouters.kCreateMembershipInsideAppScreen
-        getSeparatorView(),
         // const ClickableDrawerItem(text: 'الشبكة الطبية', svgIcon: AppPaths.medicalNetworkIconSvg, pathLocationScreen: AppRouters.kMedicalNetworkScreen),
         // SizedBox(height: 12,),
         ClickableDrawerItem(

@@ -23,5 +23,10 @@ class SubscriptionRequest {
   String? MedicalCompanyName;
   String? OrganizationName;
 
+  String? ArabicName;
+  String? EnglishName;
+  String? MobileNumber;
+  int? RelationTypeID;
+
   SubscriptionRequest();
 }

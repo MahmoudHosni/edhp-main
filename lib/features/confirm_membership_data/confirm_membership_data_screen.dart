@@ -70,7 +70,7 @@ class _ConfirmMembershipDataScreenState
     }, builder: (context, state) {
       return ViewContainer(
         title: StringsManager.memberShips,
-        body: Column(
+        body: SingleChildScrollView(child: Column(
           children: [
             if (state == ConfirmMembershipLoadingState())
               const CircularProgressIndicator(
@@ -229,7 +229,7 @@ class _ConfirmMembershipDataScreenState
 
             Text(msg, style: Styles.textStyle12W400)
           ],
-        ),
+        )),
       );
     });
   }

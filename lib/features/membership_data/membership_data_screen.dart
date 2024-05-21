@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
@@ -273,17 +275,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                                       style: Styles.textStyle8W400,
                                     ),
                                     const Spacer(),
-                                    cubit?.profileImage == null
-                                        ? SvgPicture.asset(
-                                            AppPaths.notationIdIconSvg)
-                                        : ClipRRect(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(12)),
-                                            child: Image.file(
-                                              cubit!.profileImage!,
-                                              width: 38,
-                                              height: 50,
-                                            )),
+                                    getImage(cubit?.profileImage, AppPaths.notationIdIconSvg),
                                   ],
                                 ),
                               ),
@@ -317,17 +309,7 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
                                     style: Styles.textStyle8W400,
                                   ),
                                   const Spacer(),
-                                  cubit?.notationIdImage == null
-                                      ? SvgPicture.asset(
-                                          AppPaths.personalIdIconSvg)
-                                      : ClipRRect(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(12)),
-                                          child: Image.file(
-                                            cubit!.notationIdImage!,
-                                            width: 38,
-                                            height: 50,
-                                          )),
+                                  getImage(cubit?.notationIdImage, AppPaths.personalIdIconSvg),
                                 ],
                               ),
                             ),
@@ -485,6 +467,13 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
           [];
       print(cities.length.toString());
     });
+  }
+
+  Widget getImage(File? file, String iconSvg) {
+    return file == null ?
+    SvgPicture.asset(AppPaths.notationIdIconSvg) :
+    ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(12)),
+        child: Image.file(file!, width: 38, height: 50,));
   }
 
   @override

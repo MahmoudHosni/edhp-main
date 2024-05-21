@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 
 class AddRelativesCubit extends Cubit<RelativeDataStates>{
   GetSubscriptionInfoLookupsModel ? subscriptionInfoLookupsModel;
-  File ? notationIdImage;
+  File ? nationalIdImage;
   var pickerNotationId = ImagePicker();
   var NotationIdImagePath;
   DateTime ? selectedDate;
@@ -48,8 +48,8 @@ class AddRelativesCubit extends Cubit<RelativeDataStates>{
   Future getNotationIdImageFromGallery(ImageSource source)async{
     final pickedFile = await pickerNotationId.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
-      notationIdImage = File(pickedFile.path);
-      NotationIdImagePath = notationIdImage;
+      nationalIdImage = File(pickedFile.path);
+      NotationIdImagePath = nationalIdImage;
       print('Path of Image:');
       print(pickedFile.path);
       emit(RelativeSelectNationalIdImageSuccessfullyState());

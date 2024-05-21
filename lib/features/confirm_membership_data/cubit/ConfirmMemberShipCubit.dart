@@ -36,7 +36,11 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
         'SubscriptionEndDate':subscriptionRequest.SubscriptionEndDate,
         "PersonalImage": await MultipartFile.fromFile(subscriptionRequest.PersonalImage?.path ??'', filename:'PersonalImage'),
         "OrganizationMembershipNumberImage": await MultipartFile.fromFile(subscriptionRequest.PersonalImage?.path ??'', filename:'OrganizationMembershipNumberImage'),
-        "NationalNumberImage": await MultipartFile.fromFile(subscriptionRequest.NationalNumberImage?.path ??'', filename:'NationalNumberImage')
+        "NationalNumberImage": await MultipartFile.fromFile(subscriptionRequest.NationalNumberImage?.path ??'', filename:'NationalNumberImage'),
+        "RelationTypeID":subscriptionRequest.RelationTypeID,
+        "ArabicName":subscriptionRequest.ArabicName,
+        "EnglishName":subscriptionRequest.EnglishName,
+        "MobileNumber":subscriptionRequest.MobileNumber
       });
     }else{
       formData = FormData.fromMap({
@@ -54,7 +58,11 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
         'BirthDate':subscriptionRequest.BirthDate,
         "PersonalImage": await MultipartFile.fromFile(subscriptionRequest.PersonalImage?.path ??'', filename:'PersonalImage'),
         "OrganizationMembershipNumberImage": await MultipartFile.fromFile(subscriptionRequest.OrganizationMembershipNumberImage?.path ??'', filename:'OrganizationMembershipNumberImage'),
-        "NationalNumberImage": await MultipartFile.fromFile(subscriptionRequest.NationalNumberImage?.path ??'', filename:'NationalNumberImage')
+        "NationalNumberImage": await MultipartFile.fromFile(subscriptionRequest.NationalNumberImage?.path ??'', filename:'NationalNumberImage'),
+        "RelationTypeID":subscriptionRequest.RelationTypeID,
+        "ArabicName":subscriptionRequest.ArabicName,
+        "EnglishName":subscriptionRequest.EnglishName,
+        "MobileNumber":subscriptionRequest.MobileNumber
       });
     }
 

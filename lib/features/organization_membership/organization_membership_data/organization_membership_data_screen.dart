@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
@@ -278,17 +280,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                                     'ارفق البطاقة الشخصية',
                                     style: Styles.textStyle8W500,
                                   )),
-                                  cubit?.nationalIdImage == null
-                                      ? SvgPicture.asset(
-                                          AppPaths.personalIdIconSvg)
-                                      : ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                          child: Image.file(
-                                            cubit!.nationalIdImage!,
-                                            width: 65,
-                                            height: 65,
-                                          )),
+                                  getImage(cubit?.nationalIdImage, AppPaths.personalIdIconSvg),
                                 ],
                               ),
                             ),
@@ -325,17 +317,7 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                                     'ارفق صورة لك',
                                     style: Styles.textStyle8W500,
                                   )),
-                                  cubit?.personalImage == null
-                                      ? SvgPicture.asset(
-                                          AppPaths.notationIdIconSvg)
-                                      : ClipRRect(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(12)),
-                                          child: Image.file(
-                                            cubit!.personalImage!,
-                                            width: 65,
-                                            height: 65,
-                                          )),
+                                  getImage(cubit?.personalImage, AppPaths.notationIdIconSvg),
                                 ],
                               ),
                             ),
@@ -368,21 +350,12 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Expanded(
-                              child: const Text(
+                          const Expanded(
+                              child: Text(
                             'قم برفع صورة كارنية العضوية للمؤسسة',
                             style: Styles.textStyle8W500,
                           )),
-                          cubit?.orgCardImage == null
-                              ? SvgPicture.asset(AppPaths.notationIdIconSvg)
-                              : ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                  child: Image.file(
-                                    cubit!.orgCardImage!,
-                                    width: 65,
-                                    height: 65,
-                                  )),
+                          getImage(cubit?.orgCardImage, AppPaths.notationIdIconSvg),
                           const SizedBox(
                             height: 5,
                           ),
@@ -542,6 +515,13 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
           [];
       print(cities.length.toString());
     });
+  }
+
+  Widget getImage(File? file, String iconSvg) {
+    return file == null ?
+    SvgPicture.asset(AppPaths.notationIdIconSvg) :
+    ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(12)),
+        child: Image.file(file!, width: 65, height: 65,));
   }
 
   @override

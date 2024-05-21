@@ -1,7 +1,9 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/app_components/widgets/ChoiceImageDialog.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
 import 'package:edhp/core/utils/app_components/widgets/InputViewWithLabel.dart';
@@ -9,16 +11,22 @@ import 'package:edhp/core/utils/app_components/widgets/RelationTypeView.dart';
 import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/UserSexType.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/add_relatives/AddRelativesCubit.dart';
 import 'package:edhp/features/add_relatives/RelativesStates.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl_phone_field/country_picker_dialog.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_components/widgets/default_button.dart';
 import '../../core/utils/app_components/widgets/default_text_form_filed_without_label.dart';
+import 'dart:ui' as ui;
 import '../../core/utils/app_paths.dart';
 import '../../core/utils/styles/styles.dart';
 import '../membership_data/widgets/membership_text_form_field.dart';
@@ -35,7 +43,8 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
   int stateID = 1;
   int gender = 1;
   int rl=1;
-  TextEditingController nameController = TextEditingController();
+  TextEditingController arabicNameController = TextEditingController();
+  TextEditingController englishNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController jobController = TextEditingController();
   TextEditingController notationIdController = TextEditingController();
@@ -48,13 +57,6 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
   List<City> cities = [];
   String? membershipSelectedValue;
   String? genderSelectedValue;
-
-  final maritalStatusItem = [
-    'أعزب',
-    'متزوج',
-    'مطلق',
-    'ارمل',
-  ];
   AddRelativesCubit? cubit;
   String? maritalStatusSelectedValue;
 
@@ -63,6 +65,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
     super.initState();
     cubit = AddRelativesCubit.get(context);
     cubit?.getSubscriptionInfoLookUps();
+    widget.subscriptionRequest.RelationTypeID = 1;
   }
 
   @override
@@ -85,24 +88,24 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                       height: 8,
                     ),
 
-                    MembershipTextFormField(maxLength: 100,error: nameController.text.length==14?'':"",onSummit: (value) {
-
-                    },
-                      validation: (value){
-
+                    MembershipTextFormField(maxLength: 100,error: arabicNameController.text.length==14?'':"",onSummit: (value) {
+                        validateName(value ??"","ar");
                       },
-                      controller: nameController,
+                      validation: (value){
+                         widget.subscriptionRequest.ArabicName = value ??"";
+                      },
+                      controller: arabicNameController,
                       textInputType: TextInputType.text,
                       nameOfField: 'الاسم',
                     ),
 
-                    MembershipTextFormField(maxLength: 100,error: nameController.text.length==14?'':"",onSummit: (value) {
-
+                    MembershipTextFormField(maxLength: 100,error: englishNameController.text.length==14?'':"",onSummit: (value) {
+                      validateName(value ??"","en");
                     },
                       validation: (value){
-
+                        widget.subscriptionRequest.EnglishName = value ??"";
                       },
-                      controller: nameController,
+                      controller: englishNameController,
                       textInputType: TextInputType.text,
                       nameOfField: 'Name',
                     ),
@@ -125,29 +128,28 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                       textInputType: TextInputType.text,
                       nameOfField: 'العنوان',
                     ),
-                    MembershipTextFormField(maxLength: 100,error: phoneNumberController.text.length==14?'':"",onSummit: (value) {
-
-                    },
-                      validation: (value){
-
-                      },
-                      controller: phoneNumberController,
-                      textInputType: TextInputType.number,
-                      nameOfField: 'رقم الهاتف',
-                    ),
-
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    MembershipTextFormField(maxLength: 100,error: passwordController.text.length==14?'':"",onSummit: (value) {
-
-                    },
-                      validation: (value){
-
-                      },
-                      controller: passwordController,
-                      textInputType: TextInputType.text,
-                      nameOfField: 'الرقم السري',
+                    Padding(
+                      padding:
+                      const EdgeInsetsDirectional.symmetric(horizontal: 20),
+                      child: Directionality(
+                        textDirection:  ui.TextDirection.ltr ,
+                        child: IntlPhoneField(
+                          decoration: InputDecoration(
+                            labelText: StringsManager.phoneNumber,
+                            labelStyle: Styles.textStyle14W500
+                                .copyWith(color: AppColors.lightGrayColor),
+                            fillColor: Colors.white,
+                          ),
+                          initialCountryCode: 'EG',
+                          pickerDialogStyle: PickerDialogStyle(
+                              backgroundColor: Colors.white,
+                              countryCodeStyle: TextStyle(color: Colors.blue),
+                              countryNameStyle: TextStyle(color: Colors.black)),
+                          onChanged: (phone) {
+                            phoneNumberController.text = phone.completeNumber;
+                          },
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 4,
@@ -279,11 +281,8 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                         children: [
                           Expanded(
                             child: InkWell(
-                              onTap: () {
-                                // _showChoiceDialog(
-                                //   context,
-                                //   cubit!.getNationalIDImageFromGallery,
-                                // );
+                              onTap: (){
+                                  ChoiceImageDialog().getImageDialog(context,cubit!.getNotationIdImageFromGallery);
                               },
                               child: Container(
                                 height: 50,
@@ -303,17 +302,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                                             'ارفق البطاقة الشخصية',
                                             style: Styles.textStyle8W500,
                                           )),
-                                      // cubit?.nationalIdImage == null?
-                                        SvgPicture.asset(
-                                          AppPaths.personalIdIconSvg)
-                                          // : ClipRRect(
-                                          // borderRadius: BorderRadius.all(
-                                          //     Radius.circular(12)),
-                                          // child: Image.file(
-                                          //   cubit!.nationalIdImage!,
-                                          //   width: 65,
-                                          //   height: 65,
-                                          // )),
+                                      getImage(cubit?.nationalIdImage,AppPaths.personalIdIconSvg),
                                     ],
                                   ),
                                 ),
@@ -326,10 +315,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                           Expanded(
                             child: InkWell(
                               onTap: () {
-                                // _showChoiceDialog(
-                                //   context,
-                                //   cubit!.getPersonalImageFromGallery,
-                                // );
+                                ChoiceImageDialog().getImageDialog(context,cubit!.getProfileImageFromGallery);
                               },
                               child: Container(
                                 height: 50,
@@ -350,18 +336,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                                             'ارفق صورة لك',
                                             style: Styles.textStyle8W500,
                                           )),
-                                      // cubit?.personalImage == null ?
-                                        SvgPicture.asset(
-                                            AppPaths.notationIdIconSvg)
-                                            // :
-                                          // ClipRRect(
-                                          //   borderRadius: BorderRadius.all(
-                                          //       Radius.circular(12)),
-                                          //   child: Image.file(
-                                          //     cubit!.personalImage!,
-                                          //     width: 65,
-                                          //     height: 65,
-                                          //   )),
+                                      getImage(cubit?.profileImage,AppPaths.notationIdIconSvg),
                                     ],
                                   ),
                                 ),
@@ -376,7 +351,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                     ),
                     DefaultButton(
                       function: (){
-
+                        validateAndRegister();
                       },
                       text: 'تسجيل' ,
                       height: 45,
@@ -446,5 +421,79 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
 
   onSelectRelation(String name) {
     rl = cubit?.relations[ cubit?.relations?.indexWhere((element) => element.value == name) ?? 0].key ?? 0;
+    widget.subscriptionRequest.RelationTypeID = rl;
+  }
+
+   validateName(String value,String lang) {
+    if (value != null && (value?.length ?? 0) > 10) {
+      if(lang=="ar") {
+        widget.subscriptionRequest.ArabicName = value;
+      } else {
+        widget.subscriptionRequest.EnglishName = value;
+      }
+    } else {
+      ShowToast.showToast('برجاء ادخال الاسم بشكل صحيح');
+      return 'برجاء ادخال الاسم بشكل صحيح';
+    }
+  }
+
+  void validateAndRegister() {
+    if (widget.subscriptionRequest.ArabicName == null ||
+        (widget.subscriptionRequest.ArabicName?.length ?? 0) < 10) {
+      ShowToast.showToast('برجاء ادخال الاسم بصورة صحيحة');
+      return;
+    }else if (widget.subscriptionRequest.EnglishName == null ||
+        (widget.subscriptionRequest.EnglishName?.length ?? 0) < 10) {
+      ShowToast.showToast('برجاء ادخال الاسم الانجليزى بصورة صحيحة');
+      return;
+    }else if (widget.subscriptionRequest.Address == null ||
+        (widget.subscriptionRequest.Address?.length ?? 0) < 10) {
+      ShowToast.showToast('برجاء ادخال العنوان بصورة صحيحة');
+      return;
+    }
+
+
+    else if (widget.subscriptionRequest.IdentityNumber == null ||
+        ((widget.subscriptionRequest.IdentityNumber?.length ?? 0) < 14 ||
+            (widget.subscriptionRequest.IdentityNumber?.length ?? 0) > 14)) {
+      ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
+      return;
+    } else if (widget.subscriptionRequest.StateID == null ||
+        (widget.subscriptionRequest.StateID ?? 0) < 0) {
+      ShowToast.showToast('برجاء اختيار المحافظة بصورة صحيحة');
+      return;
+    } else if (widget.subscriptionRequest.CityID == null ||
+        (widget.subscriptionRequest.CityID ?? 0) < 0) {
+      ShowToast.showToast('برجاء اختيار المنطقة بصورة صحيحة');
+      return;
+    }  else if (widget.subscriptionRequest.Gender == null ||
+        (widget.subscriptionRequest.Gender ?? 0) < 0) {
+      ShowToast.showToast('برجاء اختيار النوع بصورة صحيحة');
+      return;
+    } else if (widget.subscriptionRequest.BirthDate == null ||
+        (widget.subscriptionRequest.BirthDate?.length ?? 0) <= 6) {
+      ShowToast.showToast('برجاء ادخال تاريخ الميلاد بصورة صحيحة');
+      return;
+    }else if (cubit?.nationalIdImage == null ||
+        cubit?.nationalIdImage?.path == null) {
+      ShowToast.showToast('برجاء اختيار صورة الرقم القومى بصورة صحيحة');
+      return;
+    } else if (cubit?.profileImage == null ||
+        cubit?.profileImage?.path == null) {
+      ShowToast.showToast('برجاء اختيار صورة لك بصورة صحيحة');
+      return;
+    }else{
+      widget.subscriptionRequest.PersonalImage = cubit?.profileImage;
+      widget.subscriptionRequest.NationalNumberImage = cubit?.nationalIdImage;
+      widget.subscriptionRequest.OrganizationMembershipNumberImage = cubit?.nationalIdImage;
+      GoRouter.of(context).push(AppRouters.kConfirmMembershipDataScreen, extra: widget.subscriptionRequest);
+    }
+  }
+
+  Widget getImage(File? file, String iconSvg) {
+    return file == null ?
+              SvgPicture.asset(AppPaths.notationIdIconSvg) :
+              ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(12)),
+                child: Image.file(file!, width: 65, height: 65,));
   }
 }

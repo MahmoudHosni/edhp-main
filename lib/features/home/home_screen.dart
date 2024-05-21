@@ -4,7 +4,6 @@ import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/slide_panel/views/slide_panel.dart';
-import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
@@ -202,17 +201,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ]),
                                     ),
                                     onTap: () {
-                                      if (memberShips != null &&
-                                          memberShips.length > 0) {
-                                        ShowToast.showToastGreen(
-                                            'انت بالفعل مشترك فى باقة');
-                                      } else {
                                         var sbRequest = SubscriptionRequest();
                                         sbRequest.SubscriptionTypeID = -1;
                                         GoRouter.of(context).push(
                                             AppRouters.kServiceScreen,
                                             extra: sbRequest);
-                                      }
                                     }),
                               ),
                               const SizedBox(
