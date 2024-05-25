@@ -101,7 +101,7 @@ class MembershipTypeContainer extends StatelessWidget {
                     AppRouters.kConfirmMembershipDataScreen,
                     extra: subscriptionRequest);
               }else if(subscriptionRequest.SubscriptionTypeID==-1){
-                GoRouter.of(context).push(AppRouters.kSelectCompanyScreen);
+                GoRouter.of(context).push(AppRouters.kSelectCompanyScreen,extra: subscriptionRequest);
               }else if(subscriptionRequest.SubscriptionTypeID==-2){
                 GoRouter.of(context).push(AppRouters.kAddRelativesScreen,extra: subscriptionRequest);
               }

@@ -280,7 +280,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kSelectCompanyScreen,
-        builder: (context, state) => SelectTheCompanyScreen(),
+        builder: (context, state) => SelectTheCompanyScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kMembershipDataScreen,
@@ -415,7 +415,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kSelectCompanyScreen,
-        builder: (context, state) => SelectTheCompanyScreen(),
+        builder: (context, state) => SelectTheCompanyScreen(subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
         path: kMembershipDataScreen,

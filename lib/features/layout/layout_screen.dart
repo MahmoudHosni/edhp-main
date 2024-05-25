@@ -33,7 +33,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
       child: BlocConsumer<LayoutCubit, LayoutStates>(
         listener: (context, state) {
           if (state is ChangeBottomNavigationBarState) {
-            GetProfileCubit.get(context).getProfile();
+            // GetProfileCubit.get(context).getProfile();
           }
         },
         builder: (context, state) {

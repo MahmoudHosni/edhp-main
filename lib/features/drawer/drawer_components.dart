@@ -40,14 +40,14 @@ class DrawerAppHeader extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                  width: 80,
-                  height: 80,
+                  width: 75,
+                  height: 75,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: Image.network(
-                    '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                    '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}&${DateTime.now().millisecondsSinceEpoch.toString()}',
                     fit: BoxFit.cover,
                     width: 80,
                     height: 80,
@@ -145,16 +145,16 @@ class ClickableDrawerItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 36.0),
       child: InkWell(
         onTap: () {
+          var sbRequest = SubscriptionRequest();
+          sbRequest.SubscriptionTypeID = -2;
           if (checkForMembership) {
             if(pathLocationScreen==AppRouters.kServiceScreen) {
-                var sbRequest = SubscriptionRequest();
-                sbRequest.SubscriptionTypeID = -2;
                 GoRouter.of(context).push(AppRouters.kServiceScreen, extra: sbRequest);
             } else{
-                GoRouter.of(context).push(pathLocationScreen);
+                GoRouter.of(context).push(pathLocationScreen, extra: sbRequest);
             }
           } else {
-            GoRouter.of(context).push(pathLocationScreen);
+            GoRouter.of(context).push(pathLocationScreen, extra: sbRequest);
           }
         },
         child: Padding(

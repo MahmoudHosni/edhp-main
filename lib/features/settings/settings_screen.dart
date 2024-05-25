@@ -15,8 +15,20 @@ import '../layout/cubit/cubit.dart';
 import '../layout/cubit/states.dart';
 import '../profile/cubit/get_profile_cubit.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
+
+  @override
+  State<SettingScreen> createState() => _SettingScreenState();
+}
+
+class _SettingScreenState extends State<SettingScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +64,7 @@ class SettingScreen extends StatelessWidget {
                             ),
                             clipBehavior: Clip.antiAlias,
                             child: Image.network(
-                              '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                              '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}&${DateTime.now().millisecondsSinceEpoch.toString()}',
                               fit: BoxFit.cover,
                               width: 80,
                               height: 80,
@@ -88,11 +100,7 @@ class SettingScreen extends StatelessWidget {
                       height: 16,
                     ),
                     Center(
-                      child: Text(
-                        GetProfileCubit.get(context)
-                            .userProfileModel!
-                            .profileName
-                            .toString(),
+                      child: Text(CacheHelper.getData(key: 'profile'),
                         style: Styles.textStyle14W400
                             .copyWith(color: AppColors.secondNew),
                       ),

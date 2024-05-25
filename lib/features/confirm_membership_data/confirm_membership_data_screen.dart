@@ -114,83 +114,83 @@ class _ConfirmMembershipDataScreenState
                   width: 7,
                 ),
                 Expanded(
-                  child: ConfirmLeftValue(
-                      vSide: CacheHelper.getData(key: 'profile')),
                   flex: 1,
+                  child: ConfirmLeftValue(
+                      vSide: widget.subscriptionRequest.ArabicName ?? CacheHelper.getData(key: 'profile')),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
               children: [
                 ConfirmRightTitle(title: 'رقم الهاتف'),
 
-                SizedBox(
+                const SizedBox(
                   width: 7,
                 ),
                 Expanded(
-                  child:
-                  ConfirmLeftValue(vSide: CacheHelper.getData(key: 'name')),
                   flex: 1,
+                  child:
+                  ConfirmLeftValue(vSide: widget.subscriptionRequest.MobileNumber ?? CacheHelper.getData(key: 'name')),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
               children: [
 
                 ConfirmRightTitle(title: 'الجنس'),
-                SizedBox(
+                const SizedBox(
                   width: 7,
                 ),
                 Expanded(
+                  flex: 1,
                   child: ConfirmLeftValue(
                       vSide: widget.subscriptionRequest.Gender == 1
                           ? genderItems[0]
                           : genderItems[1]),
-                  flex: 1,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
               children: [
 
                 ConfirmRightTitle(title: 'الرقم القومي'),
-                SizedBox(
+                const SizedBox(
                   width: 7,
                 ),
                 Expanded(
+                  flex: 1,
                   child: ConfirmLeftValue(
                       vSide: widget.subscriptionRequest?.IdentityNumber ?? ''),
-                  flex: 1,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
               children: [
 
                 ConfirmRightTitle(title: 'المبلغ'),
-                SizedBox(
+                const SizedBox(
                   width: 7,
                 ),
                 Expanded(
+                  flex: 1,
                   child: ConfirmLeftValue(
                       vSide: widget.subscriptionRequest.Cost ?? ''),
-                  flex: 1,
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
 

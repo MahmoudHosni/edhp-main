@@ -49,7 +49,7 @@ class GetProfileCubit extends Cubit<GetProfileState> {
         Uri.parse(
             '$baseUrl${EndPoint
                 .imageProfile}?referenceTypeId=1&referenceId=${userProfileModel!
-                .profileID}'),
+                .profileID}&${DateTime.now().millisecondsSinceEpoch.toString()}'),
         headers: {'Access-Token': token!},
       );
       final dir = await getTemporaryDirectory();

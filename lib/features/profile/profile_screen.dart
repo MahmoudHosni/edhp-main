@@ -12,8 +12,20 @@ import 'package:go_router/go_router.dart';
 import '../confirm_membership_data/widgets/confirm_data_field_and_value_item.dart';
 import 'cubit/get_profile_state.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    GetProfileCubit.get(context).getProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       clipBehavior: Clip.antiAlias,
                       child: Image.network(
-                        '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                        '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}&${DateTime.now().millisecondsSinceEpoch.toString()}',
                         fit: BoxFit.cover,
                         width: 80,
                         height: 80,

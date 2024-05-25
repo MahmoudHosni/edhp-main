@@ -9,9 +9,14 @@ import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_paths.dart';
 import '../../edit_profile/cubit/state.dart';
 
-class EditImage extends StatelessWidget {
+class EditImage extends StatefulWidget {
   const EditImage({super.key});
 
+  @override
+  State<EditImage> createState() => _EditImageState();
+}
+
+class _EditImageState extends State<EditImage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<EditProfileCubit, EditProfileStates>(
@@ -33,7 +38,7 @@ class EditImage extends StatelessWidget {
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.network(
-                    '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+                    '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}&${DateTime.now().millisecondsSinceEpoch.toString()}',
                     fit: BoxFit.cover,
                     width: 115,
                     height: 115,

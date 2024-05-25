@@ -48,7 +48,7 @@ void main() async {
 
 
   HttpOverrides.global = new MyHttpoverrides();
-  CacheHelper.saveData(key: AppVersion, value: '0.0.0.8');
+
   runApp(
     EasyLocalization(
         supportedLocales: const [Locale('ar'), Locale('en')],
@@ -77,11 +77,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => CompanyItemCubit()..getOrganizations(),
+          create: (context) => CompanyItemCubit(),//..getOrganizations()
         ),
         BlocProvider(create: (context) => InsuranceCompaniesCubit()),
         BlocProvider(
-          create: (context) => GetProfileCubit()..getProfile(),
+          create: (context) => GetProfileCubit(),//..getProfile()
         ),
         BlocProvider(
           create: (context) => OurProductCubit(),

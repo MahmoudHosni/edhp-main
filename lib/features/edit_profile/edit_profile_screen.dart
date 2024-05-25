@@ -1,3 +1,4 @@
+import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
@@ -31,19 +32,11 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    nameController.text =
-        GetProfileCubit.get(context).userProfileModel!.profileName.toString();
-    usernameController.text =
-        GetProfileCubit.get(context).userProfileModel!.userName.toString();
-    emailController.text =
-        GetProfileCubit.get(context).userProfileModel!.email.toString();
-    identityNumberController.text = GetProfileCubit.get(context)
-            .userProfileModel
-            ?.identityNumber
-            ?.toString() ??
-        '';
-    phoneNumberController.text =
-        GetProfileCubit.get(context).userProfileModel!.mobileNumber.toString();
+    nameController.text = CacheHelper.getData(key: 'profile');
+    usernameController.text = CacheHelper.getData(key: 'name');
+    emailController.text = CacheHelper.getData(key: 'email');
+    identityNumberController.text = CacheHelper.getData(key: 'identity');
+    phoneNumberController.text = CacheHelper.getData(key: 'name');
 
     return MultiBlocProvider(
       providers: [

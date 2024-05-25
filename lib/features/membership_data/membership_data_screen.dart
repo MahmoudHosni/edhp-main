@@ -449,11 +449,16 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
       ShowToast.showToast('برجاء اختيار صورة الرقم القومى بصورة صحيحة');
       return;
     } else {
+      print("SubscriptionTypeID >>>>>>>>>>> ${widget.subscriptionRequest.SubscriptionTypeID}");
       widget.subscriptionRequest.PersonalImage = cubit?.profileImage;
       widget.subscriptionRequest.NationalNumberImage = cubit?.notationIdImage;
-
-      GoRouter.of(context)
-          .push(AppRouters.kServiceScreen, extra: widget.subscriptionRequest);
+      if((widget.subscriptionRequest.MembershipTypeID ??0) >0){
+        GoRouter.of(context)
+            .push(AppRouters.kConfirmMembershipDataScreen, extra: widget.subscriptionRequest);
+      }else {
+        GoRouter.of(context)
+            .push(AppRouters.kServiceScreen, extra: widget.subscriptionRequest);
+      }
     }
     ;
   }

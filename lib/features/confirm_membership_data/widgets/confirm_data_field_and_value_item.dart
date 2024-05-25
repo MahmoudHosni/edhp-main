@@ -21,7 +21,7 @@ class ConfirmDataFieldAndValueItem extends StatelessWidget {
               flex: 2,
               child: Text(
                 field,
-                style: Styles.textStyle16W500,
+                style: Styles.textStyle13W500,
               ),
             ),
             Expanded(

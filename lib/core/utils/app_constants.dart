@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ final maritalStatusItem = [
   'ارمل',
 ];
 
- showVersionDialog(context) async {
+ showVersionDialog(context,String newVersion) async {
   await showDialog<String>(
     context: context,
     barrierDismissible: false,
@@ -75,7 +76,7 @@ final maritalStatusItem = [
                 actions: <Widget>[
                   ElevatedButton(
                     child: Text(btnLabel),
-                    onPressed: () => openUrl(PLAY_STORE_URL),
+                    onPressed: () => updateAppVersion(newVersion,context),
                   ),
                   ElevatedButton(
                     child: Text(btnLabelCancel),
@@ -88,7 +89,7 @@ final maritalStatusItem = [
                   actions: <Widget>[
                     ElevatedButton(
                       child: Text(btnLabel),
-                      onPressed: () => openUrl(PLAY_STORE_URL),
+                      onPressed: () => updateAppVersion(newVersion,context),
                     ),
                     ElevatedButton(
                       child: Text(btnLabelCancel),
@@ -99,6 +100,11 @@ final maritalStatusItem = [
   );
 }
 
+updateAppVersion(String newVersion,BuildContext context) {
+   CacheHelper.saveData(key: AppVersion, value: newVersion);
+   openUrl(PLAY_STORE_URL);
+   Navigator.pop(context);
+}
 final String Token = "token";
 final String Name = "name";
 final String Email = "email";

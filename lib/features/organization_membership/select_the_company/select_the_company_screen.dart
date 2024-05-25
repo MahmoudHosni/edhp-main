@@ -14,7 +14,9 @@ import 'cubit/cubit.dart';
 import 'cubit/states.dart';
 
 class SelectTheCompanyScreen extends StatefulWidget {
-  const SelectTheCompanyScreen({super.key});
+  final SubscriptionRequest subscriptionRequest;
+
+  const SelectTheCompanyScreen({super.key,required this.subscriptionRequest});
 
   @override
   State<SelectTheCompanyScreen> createState() => _SelectTheCompanyScreenState();
@@ -26,6 +28,12 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
   final formKey = GlobalKey<FormState>();
   int organizationID = -1;
   String organizationName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    CompanyItemCubit.get(context).getOrganizations();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,13 +84,13 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
                                 .organizationItemsList[index]
                                 .name ??
                             '';
-                        var subscriptionRequest = SubscriptionRequest();
-                        subscriptionRequest.MedicalCompanyID = organizationID;
-                        subscriptionRequest.MedicalCompanyName =
+
+                        widget.subscriptionRequest.MedicalCompanyID = organizationID;
+                        widget.subscriptionRequest.MedicalCompanyName =
                             organizationName;
                         GoRouter.of(context).push(
                             AppRouters.kCreateMembershipScreen,
-                            extra: subscriptionRequest);
+                            extra: widget.subscriptionRequest);
                       });
                     },
                     child: Container(

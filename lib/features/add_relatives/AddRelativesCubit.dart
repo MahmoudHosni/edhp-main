@@ -20,12 +20,12 @@ class AddRelativesCubit extends Cubit<RelativeDataStates>{
   var picker = ImagePicker();
   var imagePath;
   List<RelationType> relations = [
-    RelationType(key: 1,value: "Husband"),
-    RelationType(key: 2,value: "Wife"),
-    RelationType(key: 3,value: "Son"),
-    RelationType(key: 4,value: "Daughter"),
-    RelationType(key: 5,value: "Father"),
-    RelationType(key: 6,value: "Mother"),
+    RelationType(key: 1,value: "زوجى"),
+    RelationType(key: 2,value: "زوجتى"),
+    RelationType(key: 3,value: "ابنى"),
+    RelationType(key: 4,value: "بنتي"),
+    RelationType(key: 5,value: "والدى"),
+    RelationType(key: 6,value: "امى"),
   ];
 
   AddRelativesCubit() : super(RelativeDataInitialState());

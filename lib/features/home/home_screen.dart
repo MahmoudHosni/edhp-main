@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           listener: (context, state) {
             if(state is OnGetAppVersion){
               if(state.newAppVersion !=state.currentAppVersion){
-                showVersionDialog(context);
+                showVersionDialog(context,state.newAppVersion);
               }
             }
           },
@@ -372,14 +372,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           }
-          // else {
-          //   return const Scaffold(
-          //     body: Center(
-          //       child: CircularProgressIndicator(color: AppColors.primaryBlueColor,),
-          //     ),
-          //   );
-          // }
-          // },
           ),
     );
   }

@@ -499,9 +499,13 @@ class _OrganizationMembershipDataScreenState extends State<OrganizationMembershi
       widget.subscriptionRequest.OrganizationMembershipNumberImage =
           cubit?.orgCardImage;
       pd.close();
-      // OrganizationMembershipDataCubit.get(context).requestSubscription(widget.subscriptionRequest);
-      GoRouter.of(context)
-          .push(AppRouters.kServiceScreen, extra: widget.subscriptionRequest);
+      if((widget.subscriptionRequest.MembershipTypeID ??0) >0){
+        GoRouter.of(context)
+            .push(AppRouters.kConfirmMembershipDataScreen, extra: widget.subscriptionRequest);
+      }else {
+        GoRouter.of(context)
+            .push(AppRouters.kServiceScreen, extra: widget.subscriptionRequest);
+      }
     }
     ;
   }

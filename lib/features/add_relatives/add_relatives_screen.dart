@@ -187,7 +187,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                           gender = analyser.getGender();
                           print('Gender   ::: ${gender}');
                           widget.subscriptionRequest.Gender = gender;
-                          // updateCities();
+                          updateCities();
                         }
                       },
                       controller: notationIdController,

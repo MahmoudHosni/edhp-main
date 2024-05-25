@@ -19,7 +19,7 @@ class MemberShipCard extends StatelessWidget{
         Flexible(flex: 0,fit: FlexFit.tight,
           child: Container(padding:EdgeInsets.fromLTRB(20, 30*scaler,0,0),alignment: Alignment.topCenter,
             child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(8)),child:Image.network(
-              '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}',
+              '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}&${DateTime.now().millisecondsSinceEpoch.toString()}',
               fit: BoxFit.cover,width: 45*scaler,height: 45*scaler,)),
           ),
         ),

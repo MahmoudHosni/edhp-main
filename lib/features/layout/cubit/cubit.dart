@@ -61,16 +61,16 @@ class LayoutCubit extends Cubit<LayoutStates> {
       });
 
       emit(AdvertisementStateLoadSuccess());
+      getProfile(context);
     }).catchError((error) {
       print(error.toString());
       emit(AdvertisementStateLoadError());
+      getProfile(context);
     });
   }
 
   Future loadData(BuildContext context) async {
-    getProfile(context);
     getAdvertisements(context);
-    getMySubscriptions();
   }
 
   Future getProfile(BuildContext context) async {
@@ -101,35 +101,36 @@ class LayoutCubit extends Cubit<LayoutStates> {
               GetProfileCubit.get(context).userProfileModel?.identityNumber ??
                   '');
       emit(GetProfileSuccessfullyState());
-      getAdvertisements(context);
-      getImageProfile(context);
+      getMySubscriptions();
+      // getImageProfile(context);
     }).catchError((error) {
       print(error.toString());
       emit(GetProfileErrorState());
+      getMySubscriptions();
     });
   }
 
-  Future getImageProfile(BuildContext context) async {
-    emit(GetProfileImageLoadingState());
-    try {
-      final response = await http.get(
-        Uri.parse(
-            '$baseUrl${EndPoint.imageProfile}?referenceTypeId=1&referenceId=${GetProfileCubit.get(context).userProfileModel!.profileID}'),
-        headers: {'Access-Token': token!},
-      );
-      final dir = await getTemporaryDirectory();
-      var filename = '${dir.path}/image.png';
-      // Save to filesystem
-      GetProfileCubit.get(context).profileImage = File(filename);
-      await GetProfileCubit.get(context)
-          .profileImage
-          ?.writeAsBytes(response.bodyBytes);
-      emit(GetProfileImageSuccessfullyState());
-    } catch (e) {
-      print(e.toString());
-      emit(GetProfileImageErrorState());
-    }
-  }
+  // Future getImageProfile(BuildContext context) async {
+  //   emit(GetProfileImageLoadingState());
+  //   try {
+  //     final response = await http.get(
+  //       Uri.parse(
+  //           '$baseUrl${EndPoint.imageProfile}?referenceTypeId=1&referenceId=${GetProfileCubit.get(context).userProfileModel!.profileID}'),
+  //       headers: {'Access-Token': token!},
+  //     );
+  //     final dir = await getTemporaryDirectory();
+  //     var filename = '${dir.path}/image.png';
+  //     // Save to filesystem
+  //     GetProfileCubit.get(context).profileImage = File(filename);
+  //     // await GetProfileCubit.get(context)
+  //     //     .profileImage
+  //     //     ?.writeAsBytes(response.bodyBytes);
+  //     emit(GetProfileImageSuccessfullyState());
+  //   } catch (e) {
+  //     print(e.toString());
+  //     emit(GetProfileImageErrorState());
+  //   }
+  // }
 
   List<String> adsImage = [];
 
@@ -153,7 +154,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       print(token);
       CacheHelper.saveData(key: Token, value: token);
       emit(GetNewAccessTokenSuccessfullyState());
-      getProfile(context);
+      // getProfile(context);
     }).catchError((error) {
       print(error.toString());
       emit(GetNewAccessTokenErrorState());
