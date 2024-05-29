@@ -2,8 +2,8 @@ import 'package:edhp/features/confirm_membership_data/cubit/PaymentDetails.dart'
 
 class ResultObject{
   int SubscriptionTypeID = 0;
-  int OrganizationID = 0;
-  String OrganizationMembershipNumber = '';
+  int? OrganizationID = 0;
+  String? OrganizationMembershipNumber = '';
   int MedicalCompanyID = 0;
   int MembershipTypeID = 0;
   String SubscriptionStartDate = '';
@@ -15,7 +15,7 @@ class ResultObject{
   int TotalPrice = 0;
   String BirthDate = '';
   String MembershipTypeName='';
-  String OrganizationName='';
+  String? OrganizationName='';
   String MedicalCompanyName='';
   bool Paid = false;
   PaymentDetails? paymentDetails;

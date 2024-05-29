@@ -2,9 +2,9 @@
 
 class MemberShipsResponse {
   int SubscriptionTypeID=0;
-  int OrganizationID=0;
-  String OrganizationName='';
-  String OrganizationMembershipNumber='';
+  int? OrganizationID=0;
+  String? OrganizationName='';
+  String? OrganizationMembershipNumber='';
   int MedicalCompanyID=0;
   String MedicalCompanyName='';
   int MembershipTypeID=0;

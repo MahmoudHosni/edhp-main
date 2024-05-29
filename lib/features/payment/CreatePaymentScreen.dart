@@ -1,8 +1,10 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
+import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 import 'package:opay_online_flutter_sdk/opay_online_flutter_sdk.dart';
 
 class CreatePaymentScreen extends StatefulWidget{
@@ -110,7 +112,16 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
         var status = response.webJsResponse?.orderStatus;
         debugPrint("webJsResponse.status=$status");
         if(status!=null){
-          EasyLoading.showToast(status,duration: const Duration(seconds:5));
+          if(status.toLowerCase().contains("success")){
+            EasyLoading.showToast("تم الدفع بنجاح",duration: const Duration(seconds:5));
+            while(GoRouter.of(context).canPop()){
+              GoRouter.of(context).pop();
+            }
+            GoRouter.of(context)
+                .push(AppRouters.kCardPreviewScreen, extra: widget.confirmResponse);
+          }else {
+            EasyLoading.showToast(status, duration: const Duration(seconds: 5));
+          }
         }
         switch(status){
           case PayResultStatus.initial:

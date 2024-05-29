@@ -24,6 +24,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   @override
   void initState() {
     super.initState();
+    GetProfileCubit.get(context).getProfile();
   }
 
   @override
