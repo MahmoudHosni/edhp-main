@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/Utilites.dart';
 import 'package:edhp/core/utils/app_components/widgets/ChoiceImageDialog.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernorateRegionsView.dart';
 import 'package:edhp/core/utils/app_components/widgets/GovernoratesView.dart';
@@ -453,7 +454,6 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
       return;
     }
 
-
     else if (widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber == null ||
         ((widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber?.length ?? 0) < 14 ||
             (widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber?.length ?? 0) > 14)) {
@@ -490,6 +490,9 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
       widget.subscribtionWithMembership.subscriptionRequest.OrganizationMembershipNumber = (widget.subscribtionWithMembership.memberships[0]).OrganizationMembershipNumber;
       widget.subscribtionWithMembership.subscriptionRequest.MedicalCompanyName = (widget.subscribtionWithMembership.memberships[0]).MedicalCompanyName;
       widget.subscribtionWithMembership.subscriptionRequest.SubscriptionTypeID = (widget.subscribtionWithMembership.memberships[0]).SubscriptionTypeID;
+
+      widget.subscribtionWithMembership.subscriptionRequest.SubscriptionStartDate = getStartDate();
+      widget.subscribtionWithMembership.subscriptionRequest.SubscriptionEndDate = getEndDate();
 
       widget.subscribtionWithMembership.subscriptionRequest.PersonalImage = cubit?.profileImage;
       widget.subscribtionWithMembership.subscriptionRequest.NationalNumberImage = cubit?.nationalIdImage;

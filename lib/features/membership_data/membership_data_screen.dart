@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/Utilites.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
 import 'package:edhp/core/utils/app_components/widgets/ChoiceImageDialog.dart';
@@ -62,12 +63,8 @@ class _MembershipDataScreenState extends State<MembershipDataScreen> {
         ? '${cubit?.selectedDate!.year}/${cubit?.selectedDate!.month}/${cubit?.selectedDate!.day}'
         : '';
 
-
-    var now = DateTime.now();
-    var formatter = DateFormat('yyyy/MM/dd');
-    String start = formatter.format(now);
-    int endYear = now.year +1;
-    String end =  "${"$endYear/${now.month}"}/${now.day}" ;
+    String start = getStartDate();
+    String end = getEndDate();
 
     startDateController.text = start;
     widget.subscriptionRequest.SubscriptionStartDate = start;
