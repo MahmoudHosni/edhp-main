@@ -5,7 +5,7 @@ abstract class AppPaths {
   /// Logo Image Path
   ///
   static const String logoPath = 'assets/icons/logo.svg';
-  static const String upperLoginPart = 'assets/icons/up_img.png';
+  static const String upperLoginPart = 'assets/icons/up_img.jpg';
   static const String downLoginPart = 'assets/icons/down_img.svg';
 
 

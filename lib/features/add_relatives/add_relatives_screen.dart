@@ -14,11 +14,12 @@ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/add_relatives/AddRelativesCubit.dart';
 import 'package:edhp/features/add_relatives/RelativesStates.dart';
+import 'package:edhp/features/home/cubit/MemberShipsResponse.dart';
+import 'package:edhp/models/SubscribtionWithMembership.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
@@ -32,8 +33,8 @@ import '../../core/utils/styles/styles.dart';
 import '../membership_data/widgets/membership_text_form_field.dart';
 
 class AddRelativesScreen extends StatefulWidget {
-  final SubscriptionRequest subscriptionRequest;
-  AddRelativesScreen({super.key, required this.subscriptionRequest});
+  final SubscribtionWithMembership subscribtionWithMembership;
+  AddRelativesScreen({super.key, required this.subscribtionWithMembership});
 
   @override
   State<AddRelativesScreen> createState() => _AddRelativesScreenState();
@@ -65,7 +66,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
     super.initState();
     cubit = AddRelativesCubit.get(context);
     cubit?.getSubscriptionInfoLookUps();
-    widget.subscriptionRequest.RelationTypeID = 1;
+    widget.subscribtionWithMembership.subscriptionRequest.RelationTypeID = 1;
   }
 
   @override
@@ -92,7 +93,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                         validateName(value ??"","ar");
                       },
                       validation: (value){
-                         widget.subscriptionRequest.ArabicName = value ??"";
+                         widget.subscribtionWithMembership.subscriptionRequest.ArabicName = value ??"";
                       },
                       controller: arabicNameController,
                       textInputType: TextInputType.text,
@@ -103,7 +104,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                       validateName(value ??"","en");
                     },
                       validation: (value){
-                        widget.subscriptionRequest.EnglishName = value ??"";
+                        widget.subscribtionWithMembership.subscriptionRequest.EnglishName = value ??"";
                       },
                       controller: englishNameController,
                       textInputType: TextInputType.text,
@@ -115,14 +116,14 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                       error: addressController.text.length == 14 ? '' : "",
                       onSummit: (value) {
                         if (value != null && (value?.length ?? 0) > 10) {
-                          widget.subscriptionRequest.Address = value;
+                          widget.subscribtionWithMembership.subscriptionRequest.Address = value;
                         } else {
                           ShowToast.showToast('برجاء ادخال العنوان بشكل صحيح');
                           return 'برجاء ادخال العنوان بشكل صحيح';
                         }
                       },
                       validation: (value) {
-                        widget.subscriptionRequest.Address = value;
+                        widget.subscribtionWithMembership.subscriptionRequest.Address = value;
                       },
                       controller: addressController,
                       textInputType: TextInputType.text,
@@ -159,16 +160,16 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                       error: notationIdController.text.length == 14 ? '' : "",
                       onSummit: (value) {
                         if (value != null && value.length == 14) {
-                          widget.subscriptionRequest.IdentityNumber = value;
+                          widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber = value;
                           var analyser = DateAnaylser(date: value);
                           birthDateController.text = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
-                          widget.subscriptionRequest.BirthDate = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
+                          widget.subscribtionWithMembership.subscriptionRequest.BirthDate = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                           stateID = int.parse(analyser.getGovernorate());
                           print('State   ::: ${stateID}');
-                          widget.subscriptionRequest.StateID = stateID;
+                          widget.subscribtionWithMembership.subscriptionRequest.StateID = stateID;
                           gender = analyser.getGender();
                           print('Gender   ::: ${gender}');
-                          widget.subscriptionRequest.Gender = gender;
+                          widget.subscribtionWithMembership.subscriptionRequest.Gender = gender;
                         } else {
                           ShowToast.showToast(
                               'برجاء ادخال الرقم القومى بصورة صحيحة');
@@ -176,17 +177,17 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                         }
                       },
                       validation: (value) {
-                        widget.subscriptionRequest.IdentityNumber = value;
+                        widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber = value;
                         if (value != null && value.length == 14) {
                           var analyser = DateAnaylser(date: value);
                           birthDateController.text = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
-                          widget.subscriptionRequest.BirthDate = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
+                          widget.subscribtionWithMembership.subscriptionRequest.BirthDate = "${analyser.getYear()}/${analyser.getMonth()}/${analyser.getDay()}";
                           stateID = int.parse(analyser.getGovernorate());
                           print('State   ::: ${stateID}');
-                          widget.subscriptionRequest.StateID = stateID;
+                          widget.subscribtionWithMembership.subscriptionRequest.StateID = stateID;
                           gender = analyser.getGender();
                           print('Gender   ::: ${gender}');
-                          widget.subscriptionRequest.Gender = gender;
+                          widget.subscribtionWithMembership.subscriptionRequest.Gender = gender;
                           updateCities();
                         }
                       },
@@ -233,7 +234,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
                                 if (value != null && value.length > 7) {
                                   setState(() {
                                     birthDateController.text = value;
-                                    widget.subscriptionRequest.BirthDate = value;
+                                    widget.subscribtionWithMembership.subscriptionRequest.BirthDate = value;
                                   });
                                 } else {
                                   ShowToast.showToast(
@@ -378,17 +379,17 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
       setState(() {
         String date = "${picked.year} / ${picked.month} / ${picked.day}";
         birthDateController.text = date;
-        widget.subscriptionRequest.BirthDate = date;
+        widget.subscribtionWithMembership.subscriptionRequest.BirthDate = date;
       });
     }
   }
 
   onSelectGender(String name) {
-    widget.subscriptionRequest.Gender = (name.toLowerCase() == 'male' || name.toLowerCase() == 'ذكر') ? 1 : 2;
+    widget.subscribtionWithMembership.subscriptionRequest.Gender = (name.toLowerCase() == 'male' || name.toLowerCase() == 'ذكر') ? 1 : 2;
   }
 
   onSelectGovernorate(String name) {
-    widget.subscriptionRequest.StateID = cubit
+    widget.subscribtionWithMembership.subscriptionRequest.StateID = cubit
         ?.subscriptionInfoLookupsModel
         ?.states?[cubit?.subscriptionInfoLookupsModel?.states
         ?.indexWhere((element) => element.name == name) ??
@@ -399,7 +400,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
   }
 
   onSelectCity(String name) {
-    widget.subscriptionRequest.CityID = cubit
+    widget.subscribtionWithMembership.subscriptionRequest.CityID = cubit
         ?.subscriptionInfoLookupsModel
         ?.Cities?[cubit?.subscriptionInfoLookupsModel?.Cities
         ?.indexWhere((element) => element.name == name) ??
@@ -412,7 +413,7 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
     setState(() {
       cities = cubit?.subscriptionInfoLookupsModel?.Cities
           ?.where((element) =>
-      element.StateID == widget.subscriptionRequest?.StateID)
+      element.StateID == widget.subscribtionWithMembership.subscriptionRequest?.StateID)
           .toList() ??
           [];
       print(cities.length.toString());
@@ -421,15 +422,15 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
 
   onSelectRelation(String name) {
     rl = cubit?.relations[ cubit?.relations?.indexWhere((element) => element.value == name) ?? 0].key ?? 0;
-    widget.subscriptionRequest.RelationTypeID = rl;
+    widget.subscribtionWithMembership.subscriptionRequest.RelationTypeID = rl;
   }
 
    validateName(String value,String lang) {
     if (value != null && (value?.length ?? 0) > 10) {
       if(lang=="ar") {
-        widget.subscriptionRequest.ArabicName = value;
+        widget.subscribtionWithMembership.subscriptionRequest.ArabicName = value;
       } else {
-        widget.subscriptionRequest.EnglishName = value;
+        widget.subscribtionWithMembership.subscriptionRequest.EnglishName = value;
       }
     } else {
       ShowToast.showToast('برجاء ادخال الاسم بشكل صحيح');
@@ -438,40 +439,40 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
   }
 
   void validateAndRegister() {
-    if (widget.subscriptionRequest.ArabicName == null ||
-        (widget.subscriptionRequest.ArabicName?.length ?? 0) < 10) {
+    if (widget.subscribtionWithMembership.subscriptionRequest.ArabicName == null ||
+        (widget.subscribtionWithMembership.subscriptionRequest.ArabicName?.length ?? 0) < 10) {
       ShowToast.showToast('برجاء ادخال الاسم بصورة صحيحة');
       return;
-    }else if (widget.subscriptionRequest.EnglishName == null ||
-        (widget.subscriptionRequest.EnglishName?.length ?? 0) < 10) {
+    }else if (widget.subscribtionWithMembership.subscriptionRequest.EnglishName == null ||
+        (widget.subscribtionWithMembership.subscriptionRequest.EnglishName?.length ?? 0) < 10) {
       ShowToast.showToast('برجاء ادخال الاسم الانجليزى بصورة صحيحة');
       return;
-    }else if (widget.subscriptionRequest.Address == null ||
-        (widget.subscriptionRequest.Address?.length ?? 0) < 10) {
+    }else if (widget.subscribtionWithMembership.subscriptionRequest.Address == null ||
+        (widget.subscribtionWithMembership.subscriptionRequest.Address?.length ?? 0) < 10) {
       ShowToast.showToast('برجاء ادخال العنوان بصورة صحيحة');
       return;
     }
 
 
-    else if (widget.subscriptionRequest.IdentityNumber == null ||
-        ((widget.subscriptionRequest.IdentityNumber?.length ?? 0) < 14 ||
-            (widget.subscriptionRequest.IdentityNumber?.length ?? 0) > 14)) {
+    else if (widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber == null ||
+        ((widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber?.length ?? 0) < 14 ||
+            (widget.subscribtionWithMembership.subscriptionRequest.IdentityNumber?.length ?? 0) > 14)) {
       ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
       return;
-    } else if (widget.subscriptionRequest.StateID == null ||
-        (widget.subscriptionRequest.StateID ?? 0) < 0) {
+    } else if (widget.subscribtionWithMembership.subscriptionRequest.StateID == null ||
+        (widget.subscribtionWithMembership.subscriptionRequest.StateID ?? 0) < 0) {
       ShowToast.showToast('برجاء اختيار المحافظة بصورة صحيحة');
       return;
-    } else if (widget.subscriptionRequest.CityID == null ||
-        (widget.subscriptionRequest.CityID ?? 0) < 0) {
+    } else if (widget.subscribtionWithMembership.subscriptionRequest.CityID == null ||
+        (widget.subscribtionWithMembership.subscriptionRequest.CityID ?? 0) < 0) {
       ShowToast.showToast('برجاء اختيار المنطقة بصورة صحيحة');
       return;
-    }  else if (widget.subscriptionRequest.Gender == null ||
-        (widget.subscriptionRequest.Gender ?? 0) < 0) {
+    }  else if (widget.subscribtionWithMembership.subscriptionRequest.Gender == null ||
+        (widget.subscribtionWithMembership.subscriptionRequest.Gender ?? 0) < 0) {
       ShowToast.showToast('برجاء اختيار النوع بصورة صحيحة');
       return;
-    } else if (widget.subscriptionRequest.BirthDate == null ||
-        (widget.subscriptionRequest.BirthDate?.length ?? 0) <= 6) {
+    } else if (widget.subscribtionWithMembership.subscriptionRequest.BirthDate == null ||
+        (widget.subscribtionWithMembership.subscriptionRequest.BirthDate?.length ?? 0) <= 6) {
       ShowToast.showToast('برجاء ادخال تاريخ الميلاد بصورة صحيحة');
       return;
     }else if (cubit?.nationalIdImage == null ||
@@ -483,10 +484,17 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
       ShowToast.showToast('برجاء اختيار صورة لك بصورة صحيحة');
       return;
     }else{
-      widget.subscriptionRequest.PersonalImage = cubit?.profileImage;
-      widget.subscriptionRequest.NationalNumberImage = cubit?.nationalIdImage;
-      widget.subscriptionRequest.OrganizationMembershipNumberImage = cubit?.nationalIdImage;
-      GoRouter.of(context).push(AppRouters.kConfirmMembershipDataScreen, extra: widget.subscriptionRequest);
+      widget.subscribtionWithMembership.subscriptionRequest.MedicalCompanyID = (widget.subscribtionWithMembership.memberships[0]).MedicalCompanyID;
+      widget.subscribtionWithMembership.subscriptionRequest.OrganizationID = (widget.subscribtionWithMembership.memberships[0]).OrganizationID;
+      widget.subscribtionWithMembership.subscriptionRequest.OrganizationName = (widget.subscribtionWithMembership.memberships[0]).OrganizationName;
+      widget.subscribtionWithMembership.subscriptionRequest.OrganizationMembershipNumber = (widget.subscribtionWithMembership.memberships[0]).OrganizationMembershipNumber;
+      widget.subscribtionWithMembership.subscriptionRequest.MedicalCompanyName = (widget.subscribtionWithMembership.memberships[0]).MedicalCompanyName;
+      widget.subscribtionWithMembership.subscriptionRequest.SubscriptionTypeID = (widget.subscribtionWithMembership.memberships[0]).SubscriptionTypeID;
+
+      widget.subscribtionWithMembership.subscriptionRequest.PersonalImage = cubit?.profileImage;
+      widget.subscribtionWithMembership.subscriptionRequest.NationalNumberImage = cubit?.nationalIdImage;
+      widget.subscribtionWithMembership.subscriptionRequest.OrganizationMembershipNumberImage = cubit?.nationalIdImage;
+      GoRouter.of(context).push(AppRouters.kConfirmMembershipDataScreen, extra: widget.subscribtionWithMembership.subscriptionRequest);
     }
   }
 

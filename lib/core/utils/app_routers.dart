@@ -44,6 +44,7 @@ import 'package:edhp/models/EventWithBranchObjects.dart';
 import 'package:edhp/models/Medical.dart';
 import 'package:edhp/models/MedicalEvent.dart';
 import 'package:edhp/models/MedicalEventService.dart';
+import 'package:edhp/models/SubscribtionWithMembership.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/medical_network_entity.dart';
 import 'package:edhp/models/membership_type_model.dart';
@@ -327,7 +328,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kAddRelativesScreen,
-        builder: (context, state) => AddRelativesScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => AddRelativesScreen(subscribtionWithMembership: state.extra as SubscribtionWithMembership),
       ), //
       GoRoute(
         path: kSelectInsuranceCompany,
@@ -462,7 +463,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kAddRelativesScreen,
-        builder: (context, state) => AddRelativesScreen(subscriptionRequest: state.extra as SubscriptionRequest),
+        builder: (context, state) => AddRelativesScreen(subscribtionWithMembership: state.extra as SubscribtionWithMembership),
       )
     ],
   );

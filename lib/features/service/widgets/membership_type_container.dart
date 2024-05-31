@@ -1,5 +1,6 @@
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_routers.dart';
+import 'package:edhp/models/SubscribtionWithMembership.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/membership_type_model.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_components/widgets/default_button.dart';
 import '../../../core/utils/styles/styles.dart';
+import '../../layout/cubit/cubit.dart';
 
 class MembershipTypeContainer extends StatelessWidget {
   final MembershipType membershipType;
@@ -103,7 +105,7 @@ class MembershipTypeContainer extends StatelessWidget {
               }else if(subscriptionRequest.SubscriptionTypeID==-1){
                 GoRouter.of(context).push(AppRouters.kSelectCompanyScreen,extra: subscriptionRequest);
               }else if(subscriptionRequest.SubscriptionTypeID==-2){
-                GoRouter.of(context).push(AppRouters.kAddRelativesScreen,extra: subscriptionRequest);
+                GoRouter.of(context).push(AppRouters.kAddRelativesScreen,extra: SubscribtionWithMembership(subscriptionRequest: subscriptionRequest, memberships: memberShips));
               }
             },
             text: 'اختر عضويتك',

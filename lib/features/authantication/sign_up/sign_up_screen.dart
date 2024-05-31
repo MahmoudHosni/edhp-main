@@ -13,6 +13,7 @@ import '../../../../core/utils/app_components/widgets/default_button.dart';
 import '../../../../core/utils/app_components/widgets/default_text_button.dart';
 import '../../../../core/utils/app_paths.dart';
 import '../../../../core/utils/styles/styles.dart';
+import '../../../core/utils/app_components/widgets/ShowToast.dart';
 import 'cubit/state.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -32,6 +33,8 @@ class SignUpScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is SignUpSuccessfullyState) {
             GoRouter.of(context).push(AppRouters.kLayoutScreen);
+          }else if(state is SignUpErrorState){
+            ShowToast.showToast(state.message);
           }
         },
         builder: (context, state) {
