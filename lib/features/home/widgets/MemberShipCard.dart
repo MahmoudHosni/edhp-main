@@ -12,14 +12,14 @@ class MemberShipCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.all(8),child: SizedBox(height: 280,width: 720,child: Stack(children: [
+    return Padding(padding: const EdgeInsets.all(8),child: SizedBox(height: 280,width: 720,child: Stack(children: [
       Image.asset('assets/images/card_Image.jpg',fit: BoxFit.fill,height: 240,width: 720,),
       Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,textDirection: TextDirection.ltr,children: [
 
         Flexible(flex: 0,fit: FlexFit.tight,
           child: Container(padding:EdgeInsets.fromLTRB(20, 30*scaler,0,0),alignment: Alignment.topCenter,
             child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(8)),child:Image.network(
-              '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${CacheHelper.getData(key: 'id')}&${DateTime.now().millisecondsSinceEpoch.toString()}',
+              '$baseUrl${EndPoint.imgPath}?referenceTypeId=1&referenceId=${memberShip.SubscriberProfileID}&${DateTime.now().millisecondsSinceEpoch.toString()}',
               fit: BoxFit.cover,width: 45*scaler,height: 45*scaler,)),
           ),
         ),
@@ -29,7 +29,7 @@ class MemberShipCard extends StatelessWidget{
             padding: EdgeInsets.fromLTRB(8.0,spaceTop,8,8),child: Column(crossAxisAlignment: CrossAxisAlignment.start,textDirection: TextDirection.ltr,children: [
             // SizedBox(height: (20*scaler),),
             Text("Name: ",style: TextStyle(color: Colors.black,fontFamily: 'Droid Arabic Kufi',fontSize: 5*scaler,height: 1.2,fontWeight: FontWeight.bold),textAlign: TextAlign.left,),
-            Text(CacheHelper.getData(key: 'profile'),style: TextStyle(color: Colors.black,fontFamily: 'Droid Arabic Kufi',fontSize: 6.0*scaler,fontWeight: FontWeight.bold,height: 1.4),textAlign: TextAlign.left),
+            Text(memberShip?.Name ??CacheHelper.getData(key: 'profile'),style: TextStyle(color: Colors.black,fontFamily: 'Droid Arabic Kufi',fontSize: 6.0*scaler,fontWeight: FontWeight.bold,height: 1.4),textAlign: TextAlign.left),
             Spacer(),
             Text("Membership No: ",style: TextStyle(color: Colors.black,fontFamily: 'Droid Arabic Kufi',fontSize: 5*scaler,fontWeight: FontWeight.bold,height: 1.2),textAlign: TextAlign.left,),
             Text(memberShip!.SubscriptionNumber,style: TextStyle(color: Color(0xff2f2f2f),fontFamily: 'Droid Arabic Kufi',fontWeight: FontWeight.bold,fontSize: 6.0*scaler,height: 1.4),),

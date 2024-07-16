@@ -7,6 +7,7 @@ import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/edit_profile/cubit/cubit.dart';
 import 'package:edhp/features/home/cubit/MemberShipsResponse.dart';
 import 'package:edhp/features/home/widgets/MemberShipCard.dart';
+import 'package:edhp/features/home/widgets/MemberShipGoldCard.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
 import 'package:edhp/features/settings/widgets/edit_image.dart';
@@ -119,11 +120,11 @@ class EditProfileScreen extends StatelessWidget {
                               width: MediaQuery.of(context).size.width,
                               height:
                                   MediaQuery.of(context).size.height / 3.7,
-                              child: MemberShipCard(
-                                memberShip: memberShips[0],
-                                scaler: 1.5,
-                                spaceTop: 32,
-                              ))
+                              child: ((memberShips[0].MembershipTypeName=="Gold Member")? MemberShipGoldCard(memberShip: memberShips[0], scaler: 1.5, spaceTop: 32,spaceLeft: 1.5,):
+                                        MemberShipCard(memberShip: memberShips[0],scaler: 1.5,spaceTop: 32,))
+
+
+                              )
                           : const SizedBox(),
                       SizedBox(
                         height: MediaQuery.of(context).size.height / 25,

@@ -178,7 +178,11 @@ class LayoutCubit extends Cubit<LayoutStates> {
     ).then((value) {
       print("::::::: getMySubscriptions ::::::::");
       value.data.forEach((element) {
-        memberShips.add(MemberShipsResponse.fromJson(element));
+        print(element);
+        var mbElement = MemberShipsResponse.fromJson(element);
+        mbElement.Name= CacheHelper.getData(key: 'profile');
+        mbElement.SubscriberProfileID = CacheHelper.getData(key: "id").toString();
+        memberShips.add(mbElement);
       });
       emit(MemberShipsStateLoadSuccess());
       getAppVersion();

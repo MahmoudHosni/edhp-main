@@ -28,5 +28,7 @@ class SubscriptionRequest {
   String? MobileNumber;
   int? RelationTypeID;
 
+  bool isRelativeRequest = false;
+
   SubscriptionRequest();
 }

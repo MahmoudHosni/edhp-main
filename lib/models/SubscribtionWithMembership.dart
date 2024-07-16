@@ -3,7 +3,7 @@ import 'package:edhp/models/SubscriptionRequest.dart';
 
 class SubscribtionWithMembership {
   final SubscriptionRequest subscriptionRequest;
-  final List<MemberShipsResponse> memberships;
+  final MemberShipsResponse membership;
 
-  SubscribtionWithMembership({required this.subscriptionRequest,required this.memberships});
+  SubscribtionWithMembership({required this.subscriptionRequest,required this.membership});
 }

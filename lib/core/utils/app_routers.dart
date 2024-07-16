@@ -32,10 +32,15 @@ import 'package:edhp/features/medical_network/medical_cernter_services/medical_c
 import 'package:edhp/features/medical_network/medical_network_screen.dart';
 import 'package:edhp/features/medical_network/nearest_medical_centers/nearest_medical_centers_screen.dart';
 import 'package:edhp/features/medical_record/medical_record_screen.dart';
-import 'package:edhp/features/membership_data/membership_data_screen.dart';
+import 'package:edhp/features/individual_membership_data/membership_data_screen.dart';
+import 'package:edhp/features/membership_selection/AllMemberships.dart';
+import 'package:edhp/features/membership_selection/MembershipSelection.dart';
+import 'package:edhp/features/organization_membership/organization_membership_data/AddAnotherOrganizationMembership.dart';
 import 'package:edhp/features/otp/otp_screen.dart';
 import 'package:edhp/features/payment/CreatePaymentScreen.dart';
 import 'package:edhp/features/payment/payment_screen.dart';
+import 'package:edhp/features/relatives/add/add_relatives_screen.dart';
+import 'package:edhp/features/relatives/show/AllRelativesScreen.dart';
 import 'package:edhp/features/service/MemberShipTypes.dart';
 import 'package:edhp/features/service/ServiceDetailsview.dart';
 import 'package:edhp/features/service/service_screen.dart';
@@ -43,13 +48,10 @@ import 'package:edhp/features/splash_screen/splash_screen.dart';
 import 'package:edhp/models/EventWithBranchObjects.dart';
 import 'package:edhp/models/Medical.dart';
 import 'package:edhp/models/MedicalEvent.dart';
-import 'package:edhp/models/MedicalEventService.dart';
-import 'package:edhp/models/SubscribtionWithMembership.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/medical_network_entity.dart';
 import 'package:edhp/models/membership_type_model.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/add_relatives/add_relatives_screen.dart';
 import '../../features/authantication/forget_password/forget_password_screen.dart';
 import '../../features/authantication/login/login_screen.dart';
 import '../../features/authantication/reset_password/reset_password_screen.dart';
@@ -71,6 +73,7 @@ abstract class AppRouters {
   static const kLayoutScreen = '/layoutScreen';
   static const kEditProfileScreen = '/editProfileScreen';
   static const kServiceScreen = '/serviceScreen';
+  static const kMembershipSelection = "/MembershipSelection";
   static const kMedicalEvents = '/MedicalEvents';
   static const kMedicalEventServics = '/MedicalEventServics';
   static const kMedicalEventConditionsAndDetails = '/ConditionsAndDetails';
@@ -79,6 +82,7 @@ abstract class AppRouters {
   static const kMemberShipTypes = '/memberShipTypes';
   static const kCreateMembershipScreen = '/createMembershipScreen';
   static const kMedicalNetworkScreen = '/medicalNetworkScreen';
+  static const kAllMemberships = '/AllMemberships';
   static const kHospitalsDataScreen = '/hospitalsDataScreen';
   static const kDoctorsSpecialtiesScreen = '/doctorsSpecialtiesScreen';
   static const kLabsDataScreen = '/labsDataScreen';
@@ -103,8 +107,8 @@ abstract class AppRouters {
   static const kCardPreviewScreen = '/cardPreviewScreen';
   static const kMemberShipPreview = '/memberShipPreview';
   static const kProfileScreen = '/profileScreen';
-  static const kOrganizationMembershipDataScreen =
-      '/organizationMembershipDataScreen';
+  static const kOrganizationMembershipDataScreen = '/organizationMembershipDataScreen';
+  static const kAddAnotherOrganizationMembership = '/AddAnotherOrganizationMembership';
   static const kAddRelativesScreen = '/addRelativesScreen';
   static const kOrganizationSubscriptionScreen =
       '/organizationSubscriptionScreen';
@@ -113,6 +117,7 @@ abstract class AppRouters {
   static const kSelectInsuranceCompany = '/SelectInsuranceCompany';
   static const kMedicalAdvices = '/MedicalAdvices';
   static const kShowFileContent = "/DescriptionView";
+  static const kAllRelativesScreen = "/AllRelativesScreen";
 
   static final baseRouter = GoRouter(
     redirect: (context, state) {
@@ -137,6 +142,10 @@ abstract class AppRouters {
       GoRoute(
         path: kOrganizationSubscriptionScreen,
         builder: (context, state) => OrganizationSubscriptionScreen(),
+      ),//
+      GoRoute(
+        path: kAllRelativesScreen,
+        builder: (context, state) => AllRelativesScreen(),
       ),
       GoRoute(
         path: kSplashScreen,
@@ -177,6 +186,11 @@ abstract class AppRouters {
         path: kServiceScreen,
         builder: (context, state) => ServiceScreen(
             subscriptionRequest: state.extra as SubscriptionRequest),
+      ),//kMembershipSelection
+      GoRoute(
+        path: kMembershipSelection,
+        builder: (context, state) => MembershipSelection(
+            memberShips: state.extra as List<MemberShipsResponse>),
       ),
       GoRoute(
         path: kMedicalEvents,
@@ -208,6 +222,10 @@ abstract class AppRouters {
       GoRoute(
         path: kMedicalNetworkScreen,
         builder: (context, state) => const MedicalNetworkScreen(),
+      ),//kAllMemberships
+      GoRoute(
+        path: kAllMemberships,
+        builder: (context, state) => AllMemberships(memberShips: state.extra as List<MemberShipsResponse>),
       ),
       GoRoute(
         path: kHospitalsDataScreen,
@@ -315,7 +333,7 @@ abstract class AppRouters {
       ), //MemberShipPreview
       GoRoute(
         path: kMemberShipPreview,
-        builder: (context, state) => MemberShipPreview(),
+        builder: (context, state) => MemberShipPreview(memberShip: state.extra as MemberShipsResponse),
       ),
       GoRoute(
         path: kProfileScreen,
@@ -327,8 +345,13 @@ abstract class AppRouters {
             subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
+        path: kAddAnotherOrganizationMembership,
+        builder: (context, state) => AddAnotherOrganizationMembership(
+            subscriptionRequest: state.extra as SubscriptionRequest),
+      ),
+      GoRoute(
         path: kAddRelativesScreen,
-        builder: (context, state) => AddRelativesScreen(subscribtionWithMembership: state.extra as SubscribtionWithMembership),
+        builder: (context, state) => AddRelativesScreen(subscribtionRequest: state.extra as SubscriptionRequest),
       ), //
       GoRoute(
         path: kSelectInsuranceCompany,
@@ -379,9 +402,22 @@ abstract class AppRouters {
                 : null),
       ),
       GoRoute(
+        path: kAllMemberships,
+        builder: (context, state) => AllMemberships(memberShips: state.extra as List<MemberShipsResponse>),
+      ),
+      GoRoute(
         path: kServiceScreen,
         builder: (context, state) => ServiceScreen(
             subscriptionRequest: state.extra as SubscriptionRequest),
+      ),
+      GoRoute(
+        path: kMembershipSelection,
+        builder: (context, state) => MembershipSelection(
+            memberShips: state.extra as List<MemberShipsResponse>),
+      ),
+      GoRoute(
+        path: kAllRelativesScreen,
+        builder: (context, state) => AllRelativesScreen(),
       ),
       GoRoute(
         path: kMedicalEvents,
@@ -450,7 +486,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kMemberShipPreview,
-        builder: (context, state) => MemberShipPreview(),
+        builder: (context, state) => MemberShipPreview(memberShip: state.extra as MemberShipsResponse),
       ),
       GoRoute(
         path: kProfileScreen,
@@ -462,8 +498,13 @@ abstract class AppRouters {
             subscriptionRequest: state.extra as SubscriptionRequest),
       ),
       GoRoute(
+        path: kAddAnotherOrganizationMembership,
+        builder: (context, state) => AddAnotherOrganizationMembership(
+            subscriptionRequest: state.extra as SubscriptionRequest),
+      ),
+      GoRoute(
         path: kAddRelativesScreen,
-        builder: (context, state) => AddRelativesScreen(subscribtionWithMembership: state.extra as SubscribtionWithMembership),
+        builder: (context, state) => AddRelativesScreen(subscribtionRequest: state.extra as SubscriptionRequest),
       )
     ],
   );

@@ -132,31 +132,31 @@ class HospitalCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: 32,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.lightGrayColor.withOpacity(0.25),
-                        blurRadius: 4,
-                        spreadRadius: 1,
-                        offset: const Offset(1, 1),
-                      )
-                    ],
-                    color: AppColors.secondNew),
-                width: 120,
-                child: TextButton(
-                  onPressed: () => GoRouter.of(context).push(
-                      AppRouters.kOutpatientClinicsScreen,
-                      extra: hospitalData.id),
-                  child: Text(
-                    StringsManager.outpatientClinics.tr(),
-                    style: Styles.textStyle195W500
-                        .copyWith(color: AppColors.whiteColor, fontSize: 12),
-                  ),
-                ),
-              ),
+              // Container(
+              //   height: 32,
+              //   decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(16),
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: AppColors.lightGrayColor.withOpacity(0.25),
+              //           blurRadius: 4,
+              //           spreadRadius: 1,
+              //           offset: const Offset(1, 1),
+              //         )
+              //       ],
+              //       color: AppColors.secondNew),
+              //   width: 120,
+              //   child: TextButton(
+              //     onPressed: () => GoRouter.of(context).push(
+              //         AppRouters.kOutpatientClinicsScreen,
+              //         extra: hospitalData.id),
+              //     child: Text(
+              //       StringsManager.outpatientClinics.tr(),
+              //       style: Styles.textStyle195W500
+              //           .copyWith(color: AppColors.whiteColor, fontSize: 12),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 width: 8,
               ),
@@ -173,7 +173,7 @@ class HospitalCard extends StatelessWidget {
                       )
                     ],
                     color: AppColors.secondNew),
-                width: 72,
+                width: 100,//72,
                 child: TextButton(
                   onPressed: () => GoRouter.of(context).push(
                       AppRouters.kHospitalServicesScreen,

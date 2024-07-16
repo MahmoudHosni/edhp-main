@@ -16,11 +16,14 @@ class MemberShipsResponse {
   int Gender=0;
   String BirthDate='';
   String SubscriptionNumber='';
+  String Name='';
+  String SubscriberProfileID="";
+
   int TotalPrice=0;
 
   MemberShipsResponse({required this.MedicalCompanyID,required this.MembershipTypeID,required this.OrganizationMembershipNumber,
   required this.OrganizationID,required this.MembershipTypeName,required this.OrganizationName,required this.SubscriptionStartDate,required this.SubscriptionEndDate
-  ,required this.Gender,required this.SubscriptionTypeID,required this.BirthDate,required this.StateID,required this.CityID,required this.MedicalCompanyName,required this.SubscriptionNumber,required this.TotalPrice});
+  ,required this.Gender,required this.SubscriptionTypeID,required this.BirthDate,required this.StateID,required this.CityID,required this.MedicalCompanyName,required this.SubscriptionNumber,required this.TotalPrice,required this.Name,required this.SubscriberProfileID});
 
 
   MemberShipsResponse.fromJson(Map<String, dynamic> json) {

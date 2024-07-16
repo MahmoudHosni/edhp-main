@@ -1,35 +1,23 @@
 import 'dart:io';
-import 'package:bloc/bloc.dart';
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/dio_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_constants.dart';
-import 'package:edhp/features/add_relatives/RelativesStates.dart';
+import 'package:edhp/features/individual_membership_data/cubit/states.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AddRelativesCubit extends Cubit<RelativeDataStates>{
-  GetSubscriptionInfoLookupsModel ? subscriptionInfoLookupsModel;
-  File ? nationalIdImage;
-  var pickerNotationId = ImagePicker();
-  var NotationIdImagePath;
+class MembershipDataCubit extends Cubit<MembershipDataStates>{
+  MembershipDataCubit() : super(MembershipDataInitialState());
+
+  static MembershipDataCubit get(BuildContext context) => BlocProvider.of(context);
+
   DateTime ? selectedDate;
   File ? profileImage;
   var picker = ImagePicker();
   var imagePath;
-  List<RelationType> relations = [
-    RelationType(key: 1,value: "زوجى"),
-    RelationType(key: 2,value: "زوجتى"),
-    RelationType(key: 3,value: "ابنى"),
-    RelationType(key: 4,value: "بنتي"),
-    RelationType(key: 5,value: "والدى"),
-    RelationType(key: 6,value: "امى"),
-  ];
-
-  AddRelativesCubit() : super(RelativeDataInitialState());
-  static AddRelativesCubit get(BuildContext context) => BlocProvider.of(context);
 
   Future getProfileImageFromGallery(ImageSource source)async{
     final pickedFile = await picker.pickImage(source: source,imageQuality: 40);
@@ -38,29 +26,35 @@ class AddRelativesCubit extends Cubit<RelativeDataStates>{
       imagePath = profileImage;
       print('Path of Image:');
       print(pickedFile.path);
-      emit(RelativeDataSelectProfileImageSuccessfullyState());
+      emit(MembershipDataSelectProfileImageSuccessfullyState());
     }else{
       print('No Image Picked');
-      emit(RelativeSelectProfileImageErrorState());
+      emit(MembershipDataSelectProfileImageErrorState());
     }
   }
+
+  File ? notationIdImage;
+  var pickerNotationId = ImagePicker();
+  var NotationIdImagePath;
 
   Future getNotationIdImageFromGallery(ImageSource source)async{
     final pickedFile = await pickerNotationId.pickImage(source: source,imageQuality: 40);
     if(pickedFile != null){
-      nationalIdImage = File(pickedFile.path);
-      NotationIdImagePath = nationalIdImage;
+      notationIdImage = File(pickedFile.path);
+      NotationIdImagePath = notationIdImage;
       print('Path of Image:');
       print(pickedFile.path);
-      emit(RelativeSelectNationalIdImageSuccessfullyState());
+      emit(MembershipDataSelectNationalIdImageSuccessfullyState());
     }else{
       print('No Image Picked');
-      emit(RelativeSelectNationalIdImageErrorState());
+      emit(MembershipDataSelectNationalIdImageErrorState());
     }
   }
 
+  GetSubscriptionInfoLookupsModel ? subscriptionInfoLookupsModel;
+
   Future getSubscriptionInfoLookUps()async{
-    emit(RelativeDataInitialState());
+    emit(MembershipDataInitialState());
     await DioHelper.getData(
       path: EndPoint.getSubscriptionInfoLookup ,
       token: CacheHelper.getData(key: Token),
@@ -68,10 +62,10 @@ class AddRelativesCubit extends Cubit<RelativeDataStates>{
       print(value.data);
       subscriptionInfoLookupsModel = GetSubscriptionInfoLookupsModel.fromJson(value.data);
       print(subscriptionInfoLookupsModel!.states![0].name);
-      emit(RelativeDataLoadStaticDataSuccessState());
+      emit(MembershipDataLoadStaticDataSuccessState());
     }).catchError((error) {
       print(error.toString());
-      emit(RelativeDataLoadStaticDataErrorState());
+      emit(MembershipDataLoadStaticDataErrorState());
     });
   }
 }

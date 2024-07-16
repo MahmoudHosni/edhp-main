@@ -183,31 +183,6 @@ class _SelectTheCompanyScreenState extends State<SelectTheCompanyScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 25,
               ),
-
-              // Row(children: [
-              //   Container(alignment: Alignment.bottomLeft,
-              //   child: NextButton(backgroundColor: (organizationID > 0) ? AppColors.secondNew : Colors.grey,
-              //     function: () {
-              //       if(organizationID<=0){
-              //         ShowToast.showToast('برجاء اختيار شركة التأمين بصورة صحيحة');
-              //       }else{
-              //         var subscriptionRequest = SubscriptionRequest();
-              //         subscriptionRequest.MedicalCompanyID = organizationID;
-              //         subscriptionRequest.MedicalCompanyName = organizationName;
-              //         GoRouter.of(context).push(AppRouters.kCreateMembershipScreen,extra: subscriptionRequest);
-              //       }
-              //     },
-              //     text: StringsManager.select,width: 120,fontSize: 13,
-              //     redius: 32,
-              //   ),
-              // ),
-              //   const SizedBox(width: 8,),
-              //   BackCircleButton(),
-              // ],),
-
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 33,
-              ),
             ],
           ),
         );

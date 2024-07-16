@@ -108,9 +108,7 @@ class DrawerAppHeader extends StatelessWidget {
                     textColor: const Color(0xff0DBBD6),
                     redius: 20,
                     function: () {
-                      var sbRequest = SubscriptionRequest();
-                      sbRequest.SubscriptionTypeID = -2;
-                      GoRouter.of(context).push(AppRouters.kServiceScreen, extra: sbRequest);
+                      GoRouter.of(context).push(AppRouters.kAllRelativesScreen, );
                     },
                     text: StringsManager.add_relatives.tr(),
                     height: 40,
@@ -148,7 +146,10 @@ class ClickableDrawerItem extends StatelessWidget {
           var sbRequest = SubscriptionRequest();
           sbRequest.SubscriptionTypeID = -2;
           if (checkForMembership) {
-            if(pathLocationScreen==AppRouters.kServiceScreen) {
+            if(pathLocationScreen==AppRouters.kAllMemberships){
+              GoRouter.of(context).push(AppRouters.kAllMemberships, extra: memberShips);
+            }
+            else if(pathLocationScreen==AppRouters.kServiceScreen) {
                 GoRouter.of(context).push(AppRouters.kServiceScreen, extra: sbRequest);
             } else{
                 GoRouter.of(context).push(pathLocationScreen, extra: sbRequest);
@@ -197,7 +198,7 @@ class DrawerAppList extends StatelessWidget {
         const ClickableDrawerItem(
             text: 'إشتراكات العضويات',
             svgIcon: AppPaths.membershipIconSvg,
-            pathLocationScreen: AppRouters.kSelectCompanyScreen,
+            pathLocationScreen: AppRouters.kAllMemberships,
             checkForMembership: true),
         getSeparatorView(),
 

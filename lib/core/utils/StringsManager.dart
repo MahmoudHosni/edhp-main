@@ -12,6 +12,8 @@ class StringsManager {
 
   static const String notHaveAccount = 'لا يوجد لديك حساب فى المنصة ؟';
   static const String name = "الإسم";
+  static const String identityNo = "رقم البطاقة";
+  static const String relation = "صلة القرابة";
   static const String password = 'كلمة السر';
   static const String resetPassword = "إعادة تعين كلمة المرور";
   static const String categories = 'التصنيفات';
@@ -37,6 +39,7 @@ class StringsManager {
 
 
   static const String memberShips = 'العضويات' ;
+  static const String add_membership = "اضافة عضوية";
   static const String previewMembership = 'معاينة البطاقة' ;
 
   static const String companyName = 'أسم الشركة';//
@@ -93,8 +96,15 @@ class StringsManager {
   static const String sunsribedetails = "sunsribedetails";
   static const String subscribe_now = "subscribe_now";
   static const String unsubscribe_now = "unsubscribe_now";
-  static const String add_relatives = "add_relatives";
+  static const String add_relatives = "اضافة تابعين";
+  static const String all_relatives = "التابعين";
+
 
   static const String medicalEvents = 'الفاعليات الطبية';
   static const String noMedicalEvents = 'لا يوجد فاعليات الان';
+
+  static const String subscriptionName = 'باقة';
+  static const String membershipNumber ="رقم العضوية";
+  static const String SelectMembership = 'اختر عضوية';
+  static const String MembershipCost = 'سعر العضوية';
 }

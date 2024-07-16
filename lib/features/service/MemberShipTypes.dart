@@ -30,8 +30,6 @@ class _MemberShipTypesState extends State<MemberShipTypes> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocConsumer<OurProductCubit, OurProductStates>(
       listener: (context, state) {
         if(state is OurProductLoadingState || state is OurProductInitialState){

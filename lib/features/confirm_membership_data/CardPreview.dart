@@ -8,6 +8,7 @@ import 'package:edhp/features/confirm_membership_data/cubit/ConfirmResponse.dart
 import 'package:edhp/features/confirm_membership_data/widgets/CardPreviewWidget.dart';
 import 'package:edhp/features/home/cubit/MemberShipsResponse.dart';
 import 'package:edhp/features/home/widgets/MemberShipCard.dart';
+import 'package:edhp/features/home/widgets/MemberShipGoldCard.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _CardPreviewState extends State<CardPreview> {
         SubscriptionStartDate: widget.subscriptionRequest.result?.SubscriptionStartDate??'', SubscriptionEndDate: widget.subscriptionRequest.result?.SubscriptionEndDate??'',
         Gender: widget.subscriptionRequest.result?.Gender??1, SubscriptionTypeID: widget.subscriptionRequest.result?.SubscriptionTypeID??0, BirthDate: widget.subscriptionRequest.result?.BirthDate??'',
         StateID: widget.subscriptionRequest.result?.StateID??0, CityID: widget.subscriptionRequest.result?.CityID ??0, MedicalCompanyName: widget.subscriptionRequest.result?.MedicalCompanyName??'',
-        SubscriptionNumber:  '', TotalPrice:  widget.subscriptionRequest.result?.TotalPrice?? 0 );
+        SubscriptionNumber:  '', TotalPrice:  widget.subscriptionRequest.result?.TotalPrice?? 0 ,Name: CacheHelper.getData(key: 'profile'),SubscriberProfileID: CacheHelper.getData(key: "id").toString());
     // Future.delayed(const Duration(milliseconds: 120), () {
     //   screenshotController.capture(pixelRatio: MediaQuery.of(context).devicePixelRatio).then((image) => _saved(image, context));
     // });
@@ -50,7 +51,9 @@ class _CardPreviewState extends State<CardPreview> {
       padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
       child: Column(
             children: [
-              Container(width: double.infinity,height: 400,child: MemberShipCard(memberShip: memberShip,scaler: 1.7,spaceTop: 12,),alignment: Alignment.center,),
+              Container(width: double.infinity,height: 400
+                ,alignment: Alignment.center,child: ((memberShip.MembershipTypeName=="Gold Member")? MemberShipGoldCard(memberShip: memberShip, scaler: 1.7, spaceTop: 12,spaceLeft: 1.7,):
+                MemberShipCard(memberShip: memberShip,scaler: 1.7,spaceTop: 12,) ) ,),
               const SizedBox(height: 20,),
 
               Row(children:[

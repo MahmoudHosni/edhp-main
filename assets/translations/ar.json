@@ -47,5 +47,12 @@
   "select service": "اختر الخدمة",
   "select provider": "اختر المزود",
   "please wait": "برجاء الانتظار",
-  "add_relatives": "اضافة تابعين"
+  "add_relatives": "اضافة تابعين",
+  "subscriptionName": "باقة",
+  "SelectMembership": "اختر عضوية",
+  "membershipNumber": "رقم العضوية",
+  "MembershipCost": "سعر العضوية",
+  "identityNo": "رقم البطاقة",
+  "relation": "صلة القرابة",
+  "add_membership": "اضافة عضوية"
 }

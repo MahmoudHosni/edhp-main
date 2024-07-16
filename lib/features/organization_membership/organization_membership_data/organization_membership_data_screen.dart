@@ -16,7 +16,7 @@ import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
-import 'package:edhp/features/membership_data/widgets/membership_text_form_field.dart';
+import 'package:edhp/features/individual_membership_data/widgets/membership_text_form_field.dart';
 import 'package:edhp/features/organization_membership/organization_membership_data/cubit/cubit.dart';
 import 'package:edhp/features/organization_membership/organization_membership_data/cubit/states.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';

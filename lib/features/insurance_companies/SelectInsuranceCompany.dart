@@ -7,6 +7,7 @@ import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompaniesCubit.dart';
 import 'package:edhp/features/insurance_companies/cubit/InsuranceCompanyState.dart';
+import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,9 +77,15 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
                             '';
                         widget.subscriptionRequest.OrganizationID = orgID;
                         widget.subscriptionRequest.OrganizationName = orgName;
-                        GoRouter.of(context).push(
-                            AppRouters.kOrganizationMembershipDataScreen,
-                            extra: widget.subscriptionRequest);
+                        if(memberShips.isEmpty) {
+                          GoRouter.of(context).push(
+                              AppRouters.kOrganizationMembershipDataScreen,
+                              extra: widget.subscriptionRequest);
+                        }else{
+                          GoRouter.of(context).push(
+                              AppRouters.kAddAnotherOrganizationMembership,
+                              extra: widget.subscriptionRequest);
+                        }
                       });
                     },
                     child: Padding(
@@ -170,29 +177,6 @@ class _SelectInsuranceCompanyState extends State<SelectInsuranceCompany> {
                       InsuranceCompaniesCubit.get(context).companiesList.length,
                 ),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 25,
-              ),
-
-              // Row(children: [
-              //   Container(alignment: Alignment.bottomLeft,
-              //     child: NextButton(backgroundColor: (orgID > 0) ? AppColors.secondNew : Colors.grey,
-              //       function: () {
-              //         if(orgID<=0){
-              //           ShowToast.showToast('برجاء اختيار الهيئة بصورة صحيحة');
-              //         }else{
-              //             widget.subscriptionRequest.OrganizationID = orgID;
-              //             widget.subscriptionRequest.OrganizationName = orgName;
-              //             GoRouter.of(context).push(AppRouters.kOrganizationMembershipDataScreen,extra: widget.subscriptionRequest);
-              //           }
-              //         },
-              //       text: StringsManager.select,width: 120,fontSize: 13,
-              //       redius: 32,
-              //     ),
-              //   ),
-              //   const SizedBox(width: 8,),
-              //   BackCircleButton(),
-              // ],),
 
               SizedBox(
                 height: MediaQuery.of(context).size.height / 33,

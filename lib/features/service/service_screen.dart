@@ -58,11 +58,8 @@ class _ServiceScreenState extends State<ServiceScreen> {
                         child: ListView.separated(
                           itemBuilder: (context, index) =>
                               MembershipTypeContainer(membershipType: cubit.membershipTypeList[index],
-                            subscriptionRequest: widget.subscriptionRequest,
-                            clickable: (widget.subscriptionRequest
-                                        .SubscriptionTypeID ??
-                                    0) >
-                                0,
+                                                      subscriptionRequest: widget.subscriptionRequest,
+                                                      clickable: ((widget.subscriptionRequest.SubscriptionTypeID ?? 0) > 0 && (widget.subscriptionRequest.CityID ?? 0) > 0),
                           ),
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 30,

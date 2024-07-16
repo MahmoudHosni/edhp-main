@@ -48,6 +48,9 @@ class EndPoint {
   static const String getAdvertisements = '/apiUserInterface/GetAdvertisements';
   static const String addNewSubscription =
       '/apiUserInterface/AddNewSubscription';
+  static const String cancelMembershipRequest = '/apiUserInterface/GetOPayPaymentStatus';
+  static const String addAnotherSubscription =
+      '/apiUserInterface/AddNewSubscription';
   static const String getMySubscriptions =
       '/apiUserInterface/GetMySubscriptions';
   static const String getGovernorates = '/apiStates/GetList';
@@ -70,4 +73,7 @@ class EndPoint {
       '/APIAndriodServicePorvider/GetClinicbyHospitalID';
   static const String getHospitalServices =
       '/APIAndriodServicePorvider/GetServicebyHospitalID';
+
+  static const String getRelatives =
+      '/apiUserInterface/GetMyFollowersSubscriptions';
 }

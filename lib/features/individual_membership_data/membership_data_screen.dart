@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/utils/DateAnaylser.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/Utilites.dart';
@@ -18,9 +17,9 @@ import 'package:edhp/core/utils/app_components/widgets/default_text_form_filed_w
 import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
-import 'package:edhp/features/membership_data/cubit/cubit.dart';
-import 'package:edhp/features/membership_data/cubit/states.dart';
-import 'package:edhp/features/membership_data/widgets/membership_text_form_field.dart';
+import 'package:edhp/features/individual_membership_data/cubit/cubit.dart';
+import 'package:edhp/features/individual_membership_data/cubit/states.dart';
+import 'package:edhp/features/individual_membership_data/widgets/membership_text_form_field.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:edhp/models/subscription_info_lookup_model.dart';
 import 'package:flutter/material.dart';

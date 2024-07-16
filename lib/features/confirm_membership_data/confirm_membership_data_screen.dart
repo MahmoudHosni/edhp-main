@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
+import 'package:edhp/core/utils/Utilites.dart';
 import 'package:edhp/core/utils/app_colors.dart';
 import 'package:edhp/core/utils/app_components/widgets/BackCircleButton.dart';
 import 'package:edhp/core/utils/app_components/widgets/ConfirmLeftValue.dart';
@@ -11,6 +12,7 @@ import 'package:edhp/core/utils/app_constants.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMemberShipCubit.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmMembershipState.dart';
+import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,10 +98,10 @@ class _ConfirmMembershipDataScreenState
                   borderRadius: BorderRadius.circular(100),
                 ),
                 clipBehavior: Clip.antiAlias,
-                child: Image.file(
+                child:(widget.subscriptionRequest!.PersonalImage!=null)? Image.file(
                   widget.subscriptionRequest!.PersonalImage!,
                   fit: BoxFit.cover,
-                ),
+                ):const SizedBox(),
               ),
             ),
             const SizedBox(
@@ -190,9 +192,6 @@ class _ConfirmMembershipDataScreenState
                 ),
               ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
 
             // const TermsAndConditionsContainer(),
             const SizedBox(
@@ -214,7 +213,13 @@ class _ConfirmMembershipDataScreenState
                   child: NextButton(
                     function: () {
                       pd.show(max: 100, msg: StringsManager.please_wait.tr());
-                      cubit.requestSubscription(widget.subscriptionRequest);
+                      if(widget.subscriptionRequest.isRelativeRequest || memberShips.isEmpty) {
+                        cubit.requestSubscription(widget.subscriptionRequest);
+                      }else{
+                        widget.subscriptionRequest.SubscriptionStartDate = getStartDate();
+                        widget.subscriptionRequest.SubscriptionEndDate   = getEndDate();
+                        cubit.addAnotherSubscription(widget.subscriptionRequest);
+                      }
                     },
                     text: 'تأكيد',
                     height: 45,

@@ -9,7 +9,9 @@ import 'package:edhp/core/utils/app_paths.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/core/utils/styles/styles.dart';
 import 'package:edhp/features/drawer/drawer_components.dart';
+import 'package:edhp/features/home/cubit/MemberShipsResponse.dart';
 import 'package:edhp/features/home/widgets/MemberShipCard.dart';
+import 'package:edhp/features/home/widgets/MemberShipGoldCard.dart';
 import 'package:edhp/features/home/widgets/SearchBarView.dart';
 import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/features/layout/cubit/states.dart';
@@ -313,32 +315,23 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     )),
-                slideHandlerWidth: 7,
-                slidePanelHeight: 170,
+                slideHandlerWidth: 10,
+                slidePanelHeight: 210,
                 slidePanelWidth: 250,
                 slideOffBodyTap: true,
                 leftPanelVisible: true,
                 rightPanelVisible: false,
-                leftSlide: Container(
-                  padding: const EdgeInsets.all(5),
+                leftSlide:Container(
+                  padding: const EdgeInsets.fromLTRB(0,0,7,0),height: 170,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.boxesColor,
-                  ),
-                  child: InkWell(
-                    child: Center(
-                        child: (memberShips != null && memberShips.length > 0)
-                            ? MemberShipCard(
-                                memberShip: memberShips[0],
-                                scaler: 1,
-                                spaceTop: 28,
-                              )
-                            : SizedBox()),
-                    onTap: () {
-                      GoRouter.of(context).push(AppRouters.kMemberShipPreview);
-                    },
-                  ),
+                  ),child: ListView(padding: EdgeInsets.zero,shrinkWrap: false, children: [
+                        for(MemberShipsResponse membership in memberShips)
+                            getMembershipView(membership),
+                    ]),
                 ),
+
                 rightSlide: const SizedBox(),
               ),
               drawer: Drawer(
@@ -374,5 +367,24 @@ class _HomeScreenState extends State<HomeScreen> {
           }
           ),
     );
+  }
+
+  getMembershipView(MemberShipsResponse membership) {
+    print(membership.MembershipTypeName);
+    return  Container(
+        padding: const EdgeInsets.all(5),height: 170,
+        decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: AppColors.boxesColor,
+        ),child:InkWell(
+          child: Center(
+              child: (membership != null)
+                  ? ((membership.MembershipTypeName=="Gold Member")? MemberShipGoldCard(memberShip: membership, scaler: 1.0, spaceTop: 28,spaceLeft: 1.2,):
+                                                                     MemberShipCard(memberShip: membership,scaler: 1,spaceTop: 28,) )
+                  : const SizedBox()),
+          onTap: () {
+            GoRouter.of(context).push(AppRouters.kMemberShipPreview,extra: membership);
+          },
+    ));
   }
 }

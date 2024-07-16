@@ -2,6 +2,7 @@ import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/ViewContainer.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/features/confirm_membership_data/cubit/ConfirmResponse.dart';
+import 'package:edhp/features/payment/cubit/PaymentCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
@@ -120,6 +121,7 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
             GoRouter.of(context)
                 .push(AppRouters.kCardPreviewScreen, extra: widget.confirmResponse);
           }else {
+            cancelPayment();
             EasyLoading.showToast(status, duration: const Duration(seconds: 5));
           }
         }
@@ -133,6 +135,7 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
             EasyLoading.showToast("تم الدفع بنجاح",duration: const Duration(seconds:5));
             break;
           case PayResultStatus.fail:
+            cancelPayment();
             EasyLoading.showToast("لم تتم العملية حدث خطا",duration: const Duration(seconds:5));
             break;
           case PayResultStatus.close:
@@ -140,5 +143,12 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
         }
       }
     });
+  }
+
+  void cancelPayment() {
+    PaymentCubit.get(context).
+                cancelFailedMembership(widget.confirmResponse.result?.paymentDetails?.referenceCode ??'',
+                    (widget.confirmResponse.result?.TotalPrice ?? 0).toString(),
+                    true);
   }
 }

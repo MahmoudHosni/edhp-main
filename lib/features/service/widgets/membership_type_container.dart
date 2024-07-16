@@ -1,3 +1,4 @@
+import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/app_routers.dart';
 import 'package:edhp/models/SubscribtionWithMembership.dart';
@@ -96,6 +97,7 @@ class MembershipTypeContainer extends StatelessWidget {
           DefaultButton(
             function: (){
               subscriptionRequest.MembershipTypeID = (membershipType.iD??0);
+              subscriptionRequest.MobileNumber = CacheHelper.getData(key: "profile");
               subscriptionRequest.MembershipTypeName = (membershipType.name);
               subscriptionRequest.Cost = (membershipType.price??0).toString();
               if(clickable) {
@@ -104,8 +106,14 @@ class MembershipTypeContainer extends StatelessWidget {
                     extra: subscriptionRequest);
               }else if(subscriptionRequest.SubscriptionTypeID==-1){
                 GoRouter.of(context).push(AppRouters.kSelectCompanyScreen,extra: subscriptionRequest);
-              }else if(subscriptionRequest.SubscriptionTypeID==-2){
-                GoRouter.of(context).push(AppRouters.kAddRelativesScreen,extra: SubscribtionWithMembership(subscriptionRequest: subscriptionRequest, memberships: memberShips));
+              }else if(subscriptionRequest.CityID==-2){
+                GoRouter.of(context).push(AppRouters.kAddRelativesScreen,extra: subscriptionRequest);
+              }else{
+                subscriptionRequest.StateID = -1;
+                subscriptionRequest.Gender = memberShips[0].Gender;
+                GoRouter.of(context).push(
+                    AppRouters.kConfirmMembershipDataScreen,
+                    extra: subscriptionRequest);
               }
             },
             text: 'اختر عضويتك',
