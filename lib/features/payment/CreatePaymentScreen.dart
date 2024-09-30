@@ -104,8 +104,15 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
           }
           return null;
         }).toString();
-        EasyLoading.showToast(_createOrderResult,duration: const Duration(seconds:5));
-        debugPrint("httpResult=$_createOrderResult");
+        if(_createOrderResult.contains("status: error") || _createOrderResult.contains("status: INITIAL")){
+          cancelPayment(true);
+          EasyLoading.showToast(StringsManager.ErrorOccured,duration: const Duration(seconds:5));
+          goBack();
+        }else {
+          EasyLoading.showToast(
+              _createOrderResult, duration: const Duration(seconds: 5));
+          debugPrint("httpResult=$_createOrderResult");
+        }
       });
 
       // h5 Response （Payment result check ）
@@ -114,6 +121,7 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
         debugPrint("webJsResponse.status=$status");
         if(status!=null){
           if(status.toLowerCase().contains("success")){
+            cancelPayment(false);
             EasyLoading.showToast("تم الدفع بنجاح",duration: const Duration(seconds:5));
             while(GoRouter.of(context).canPop()){
               GoRouter.of(context).pop();
@@ -121,7 +129,7 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
             GoRouter.of(context)
                 .push(AppRouters.kCardPreviewScreen, extra: widget.confirmResponse);
           }else {
-            cancelPayment();
+            cancelPayment(true);
             EasyLoading.showToast(status, duration: const Duration(seconds: 5));
           }
         }
@@ -135,7 +143,7 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
             EasyLoading.showToast("تم الدفع بنجاح",duration: const Duration(seconds:5));
             break;
           case PayResultStatus.fail:
-            cancelPayment();
+            cancelPayment(true);
             EasyLoading.showToast("لم تتم العملية حدث خطا",duration: const Duration(seconds:5));
             break;
           case PayResultStatus.close:
@@ -145,10 +153,16 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
     });
   }
 
-  void cancelPayment() {
+  void cancelPayment(bool isCanceled) {
     PaymentCubit.get(context).
                 cancelFailedMembership(widget.confirmResponse.result?.paymentDetails?.referenceCode ??'',
                     (widget.confirmResponse.result?.TotalPrice ?? 0).toString(),
-                    true);
+                    isCanceled);
+  }
+
+  void goBack() {
+    while(GoRouter.of(context).canPop()){
+      GoRouter.of(context).pop();
+    }
   }
 }

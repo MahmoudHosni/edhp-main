@@ -24,7 +24,6 @@ class _PaymentCashVisaScreenState extends State<PaymentCashVisaScreen> {
   String _paymentMethod = 'bank';
   int price=0;
   String _createOrderResult='';
-  String _getCashierStatusResult='';
   PayParams? payParams;
   CashierStatusParam? cashierStatusParam;
 
@@ -162,6 +161,7 @@ class _PaymentCashVisaScreenState extends State<PaymentCashVisaScreen> {
           return null;
         }).toString();
         if(_createOrderResult.contains("status: error") || _createOrderResult.contains("status: INITIAL")){
+          cancelPayment(true);
           EasyLoading.showToast(StringsManager.ErrorOccured,duration: const Duration(seconds:5));
           goBack();
         }else {
@@ -177,10 +177,11 @@ class _PaymentCashVisaScreenState extends State<PaymentCashVisaScreen> {
         debugPrint("webJsResponse.status=$status");
         if(status!=null){
           if(status.toLowerCase().contains("success")){
+            cancelPayment(false);
             EasyLoading.showToast("تم الدفع بنجاح",duration: const Duration(seconds:5));
             goBack();
           }else {
-            cancelPayment();
+            cancelPayment(true);
             EasyLoading.showToast(status, duration: const Duration(seconds: 5));
           }
         }
@@ -195,7 +196,7 @@ class _PaymentCashVisaScreenState extends State<PaymentCashVisaScreen> {
             EasyLoading.showToast("تم الدفع بنجاح",duration: const Duration(seconds:5));
             break;
           case PayResultStatus.fail:
-            cancelPayment();
+            cancelPayment(true);
             EasyLoading.showToast("لم تتم العملية حدث خطا",duration: const Duration(seconds:5));
             break;
           case PayResultStatus.close:
@@ -205,11 +206,11 @@ class _PaymentCashVisaScreenState extends State<PaymentCashVisaScreen> {
     });
   }
 
-  void cancelPayment() {
+  void cancelPayment(bool isCancelled) {
     PaymentCubit.get(context).
     cancelFailedMembership(widget.request.paymentOrder?.referenceCode ??'',
         (widget.request.paymentOrder?.payAmount ?? 0).toString(),
-        true);
+        isCancelled);
     goBack();
   }
 
