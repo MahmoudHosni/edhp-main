@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:edhp/core/network/cache_helper.dart';
 import 'package:edhp/core/network/end_point.dart';
 import 'package:edhp/core/utils/StringsManager.dart';
-import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_button.dart';
 import 'package:edhp/core/utils/app_components/widgets/default_text_button.dart';
 import 'package:edhp/core/utils/app_constants.dart';
@@ -13,7 +12,6 @@ import 'package:edhp/features/layout/cubit/cubit.dart';
 import 'package:edhp/models/SubscriptionRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/styles/styles.dart';
@@ -33,7 +31,7 @@ class DrawerAppHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 2.82,
+      height: MediaQuery.of(context).size.height / 2.5,
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsetsDirectional.only(top: 12),
@@ -202,6 +200,13 @@ class DrawerAppList extends StatelessWidget {
             checkForMembership: true),
         getSeparatorView(),
 
+        const ClickableDrawerItem(
+            text: 'طلبات الدفع',
+            svgIcon: AppPaths.moneySvg,
+            pathLocationScreen: AppRouters.kPaymentOrdersPage,
+            checkForMembership: true),
+        getSeparatorView(),
+
         // const ClickableDrawerItem(text: 'الشبكة الطبية', svgIcon: AppPaths.medicalNetworkIconSvg, pathLocationScreen: AppRouters.kMedicalNetworkScreen),
         // SizedBox(height: 12,),
         ClickableDrawerItem(
@@ -269,7 +274,7 @@ class DrawerAppList extends StatelessWidget {
 
   getSeparatorView() {
     return Container(
-      padding: const EdgeInsets.all(22),
+      padding: const EdgeInsets.all(14),
       child: Divider(height: 1, color: Colors.white),
     );
   }

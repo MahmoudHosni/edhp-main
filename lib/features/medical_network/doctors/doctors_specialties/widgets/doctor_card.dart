@@ -29,8 +29,8 @@ class DoctorCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 90,
-                height: 90,
+                width: 85,
+                height: 85,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(45),
                   border: Border.all(
@@ -38,16 +38,14 @@ class DoctorCard extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.all(20),
-                  child: Image(
-                    image: NetworkImage(
+                clipBehavior: Clip.antiAlias,
+                  child: Image.network(
                       'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${doctorSpecialist.id}',
-                    ),
+                    width: 75,
+                    height: 75,
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -55,7 +53,7 @@ class DoctorCard extends StatelessWidget {
                   children: [
                     Text(
                       doctorSpecialist.name ?? '',
-                      style: Styles.textStyle195W500.copyWith(
+                      style: Styles.textStyle185W500.copyWith(
                           color: AppColors.textColorBlue, fontSize: 16),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -63,7 +61,7 @@ class DoctorCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       doctorSpecialist.level ?? '',
-                      style: Styles.textStyle195W500
+                      style: Styles.textStyle185W500
                           .copyWith(color: AppColors.secondNew, fontSize: 16),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -73,7 +71,7 @@ class DoctorCard extends StatelessWidget {
                         Expanded(
                           child: Text(
                             doctorSpecialist.name ?? '',
-                            style: Styles.textStyle195W500.copyWith(
+                            style: Styles.textStyle185W500.copyWith(
                                 color: AppColors.blackColor, fontSize: 16),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -106,7 +104,7 @@ class DoctorCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   doctorSpecialist.address ?? '',
-                  style: Styles.textStyle195W500
+                  style: Styles.textStyle185W500
                       .copyWith(color: AppColors.blackColor, fontSize: 16),
                 ),
               ),
@@ -127,7 +125,7 @@ class DoctorCard extends StatelessWidget {
                       const SizedBox(width: 12),
                       Text(
                         doctorSpecialist.telephone ?? '',
-                        style: Styles.textStyle195W500
+                        style: Styles.textStyle185W500
                             .copyWith(color: AppColors.secondNew, fontSize: 16),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

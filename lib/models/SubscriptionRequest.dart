@@ -27,7 +27,7 @@ class SubscriptionRequest {
   String? EnglishName;
   String? MobileNumber;
   int? RelationTypeID;
-
+  String SubscriptionNumber='';
   bool isRelativeRequest = false;
 
   SubscriptionRequest();

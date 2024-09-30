@@ -38,4 +38,26 @@ class InsuranceCompaniesCubit extends Cubit<InsuranceCompanyState> {
         emit(InsuranceCompanyItemErrorState());
       });
     }
+
+  Future<List<MedicalCompany>> getCompaniesDirect(String? company)  async {
+    companiesList.clear();
+    print("company ::: ${company}");
+    await DioHelper.getData(
+      path: EndPoint.getOrganizations,queryParameters: {
+      "MedicalInsuranceCompanyID": company
+    },
+      token: CacheHelper.getData(key: Token),
+    ).then((value) {
+      companiesList.clear();
+      print(value.data);
+      value.data.forEach((element) {
+        companiesList.add(MedicalCompany.fromJson(element));
+      });
+      return Future(() => companiesList);
+    }).catchError((error) {
+      print(error.toString());
+      return Future(() => null);
+    });
+    return Future(() => companiesList);
+  }
 }

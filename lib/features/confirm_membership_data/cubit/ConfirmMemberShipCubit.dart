@@ -41,7 +41,8 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
         "RelationTypeID":subscriptionRequest.RelationTypeID,
         "ArabicName":subscriptionRequest.ArabicName,
         "EnglishName":subscriptionRequest.EnglishName,
-        "MobileNumber":subscriptionRequest.MobileNumber
+        "MobileNumber":subscriptionRequest.MobileNumber,
+        "SubscriptionNumber":subscriptionRequest.SubscriptionNumber
       });
     }else{
       formData = FormData.fromMap({
@@ -65,7 +66,8 @@ class ConfirmMemberShipCubit extends Cubit<ConfirmMembershipState>{
         "RelationTypeID":subscriptionRequest.RelationTypeID,
         "ArabicName":subscriptionRequest.ArabicName,
         "EnglishName":subscriptionRequest.EnglishName,
-        "MobileNumber":subscriptionRequest.MobileNumber
+        "MobileNumber":subscriptionRequest.MobileNumber,
+        "SubscriptionNumber":subscriptionRequest.SubscriptionNumber
       });
     }
 

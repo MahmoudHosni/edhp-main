@@ -177,6 +177,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       token: CacheHelper.getData(key: Token),
     ).then((value) {
       print("::::::: getMySubscriptions ::::::::");
+      memberShips.clear();
       value.data.forEach((element) {
         print(element);
         var mbElement = MemberShipsResponse.fromJson(element);
@@ -194,7 +195,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   Future getAppVersion() async{
     await DioHelper.getData(path: EndPoint.getAppVerion).then((value) =>
-           emit(OnGetAppVersion(newAppVersion: value.toString() , currentAppVersion: CacheHelper.getData(key: AppVersion) ?? ''))
+           emit(OnGetAppVersion(newAppVersion: value.data.toString().replaceAll("\"", "") , currentAppVersion: CacheHelper.getData(key: AppVersion) ?? "0.0.3.1".toString()))
         );
   }
 }

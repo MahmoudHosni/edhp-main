@@ -76,4 +76,12 @@ class EndPoint {
 
   static const String getRelatives =
       '/apiUserInterface/GetMyFollowersSubscriptions';
+
+  static const String getSubscriptionOrdersRequests =
+      '/ApiSpSubscriptionRequests/GetMySpSubscriptionPayments';
+
+  static const String getSubscriptionRequestServices =
+      '/ApiSpSubscriptionRequests/GetSpSubscriptionServices';
+
+  static const String cancelSubscriptionRequest = "/ApiSpSubscriptionRequests/Cancel";
 }

@@ -35,8 +35,8 @@ class MedicalCenterCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 90,
-                height: 90,
+                width: 85,
+                height: 85,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(45),
                   border: Border.all(
@@ -44,16 +44,16 @@ class MedicalCenterCard extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.all(20),
-                  child: Image(
-                    image: NetworkImage(
-                      'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${serviceProviderEntity.id}',
-                    ),
-                    fit: BoxFit.cover,
-                  ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(
+                  'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${serviceProviderEntity.id}',
+                  width: 75,
+                  height: 75,
+                  fit: BoxFit.cover,
                 ),
               ),
+
+
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -61,7 +61,7 @@ class MedicalCenterCard extends StatelessWidget {
                   children: [
                     Text(
                       serviceProviderEntity.name ?? '',
-                      style: Styles.textStyle195W500.copyWith(
+                      style: Styles.textStyle185W500.copyWith(
                           color: AppColors.textColorBlue, fontSize: 16),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -101,7 +101,7 @@ class MedicalCenterCard extends StatelessWidget {
                                 extra: medicalCenterEntity),
                             child: Text(
                               StringsManager.branches.tr(),
-                              style: Styles.textStyle195W500.copyWith(
+                              style: Styles.textStyle185W500.copyWith(
                                   color: AppColors.whiteColor, fontSize: 14),
                             ),
                           ),
@@ -116,20 +116,20 @@ class MedicalCenterCard extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset(AppImages.location),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  serviceProviderEntity.address ?? '',
-                  style: Styles.textStyle195W500
-                      .copyWith(color: AppColors.blackColor, fontSize: 16),
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     SvgPicture.asset(AppImages.location),
+          //     const SizedBox(width: 12),
+          //     Expanded(
+          //       child: Text(
+          //         serviceProviderEntity.address ?? '',
+          //         style: Styles.textStyle185W500
+          //             .copyWith(color: AppColors.blackColor, fontSize: 16),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           const SizedBox(height: 8),
           InkWell(
             onTap: () => openUrl('tel://${serviceProviderEntity.telephone}'),
@@ -142,7 +142,7 @@ class MedicalCenterCard extends StatelessWidget {
                     children: [
                       Text(
                         '${serviceProviderEntity.telephone ?? ''} ${serviceProviderEntity.telephoneTwo ?? ''} ${serviceProviderEntity.telephoneThree ?? ''}',
-                        style: Styles.textStyle195W500
+                        style: Styles.textStyle185W500
                             .copyWith(color: AppColors.secondNew, fontSize: 16),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

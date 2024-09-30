@@ -21,7 +21,7 @@ class ViewContainer extends StatelessWidget {
       Scaffold(
         backgroundColor: Colors.transparent,
         appBar: getSharedAppBarWithBack(context, title, showBack),
-        body: Container(
+        body: Container(width: double.infinity,
             margin: const EdgeInsets.fromLTRB(14.5, 15, 14.5, 0),
             padding: const EdgeInsets.all(6),
             decoration: const BoxDecoration(

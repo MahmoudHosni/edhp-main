@@ -146,7 +146,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                 const SizedBox(width: 8),
                                 const Text(
                                   'تعديل الملف الشخصي',
-                                  style: Styles.textStyle12W400,
+                                  style: Styles.textStyle15W500,
                                 ),
                                 const Spacer(),
                                 SvgPicture.asset('assets/icons/previous.svg'),
@@ -154,6 +154,38 @@ class _SettingScreenState extends State<SettingScreen> {
                             )),
                       ),
                     ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    InkWell(child: Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(
+                          horizontal: 52),
+                      child: Container(
+                          padding: const EdgeInsetsDirectional.symmetric(
+                              horizontal: 12),
+                          height: 52,
+                          decoration: BoxDecoration(
+                              color: AppColors.whiteLightNew,
+                              border: Border.all(
+                                  color: AppColors.cardBorderNew, width: 1),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(26))),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(AppPaths.personIconSvg),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'تغيير كلمة السر',
+                                style: Styles.textStyle14W400,
+                              ),
+                              const Spacer(),
+                              SvgPicture.asset('assets/icons/previous.svg'),
+                            ],
+                          )),
+                    ),onTap: () {
+                      GoRouter.of(context).push(AppRouters.kResetPasswordScreen);
+                    },),
+
                     const SizedBox(
                       height: 28,
                     ),
@@ -236,6 +268,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     const SizedBox(
                       height: 28,
                     ),
+
+
                     // Text(
                     //   'اللغة المفضلة',
                     //   style: Styles.textStyle14W500

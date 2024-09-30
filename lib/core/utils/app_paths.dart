@@ -40,6 +40,7 @@ abstract class AppPaths {
 
   static const String aboutIconSvg = 'assets/icons/info.svg';
 
+  static const String moneySvg = "assets/icons/money.svg";
   static const String serviceIconSvg = 'assets/icons/service.svg';
   static const String membershipIconSvg = 'assets/icons/user-circle.svg';
   static const String medicalNetworkIconSvg = 'assets/icons/user-md.svg';

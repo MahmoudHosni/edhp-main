@@ -41,7 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: BlocConsumer<LayoutCubit, LayoutStates>(
           listener: (context, state) {
             if(state is OnGetAppVersion){
-              if(state.newAppVersion !=state.currentAppVersion){
+              print("state.newAppVersion >>> ${state.newAppVersion.trim()}");
+              print("state.currentAppVersion >>> ${state.currentAppVersion.trim()}");
+              if(state.newAppVersion.trim() !=state.currentAppVersion){
                 showVersionDialog(context,state.newAppVersion);
               }
             }

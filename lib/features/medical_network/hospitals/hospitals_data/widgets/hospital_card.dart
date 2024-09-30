@@ -30,8 +30,8 @@ class HospitalCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: 90,
-                height: 90,
+                width: 85,
+                height: 85,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(45),
                   border: Border.all(
@@ -39,14 +39,12 @@ class HospitalCard extends StatelessWidget {
                     width: 1,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.all(20),
-                  child: Image(
-                    image: NetworkImage(
-                      'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${hospitalData.id}',
-                    ),
-                    fit: BoxFit.cover,
-                  ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(
+                  'https://edhp-eg.com/apiPublicUserInterface/GetImage?referenceTypeId=8&referenceId=${hospitalData.id}',
+                  width: 75,
+                  height: 75,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(width: 12),
@@ -56,7 +54,7 @@ class HospitalCard extends StatelessWidget {
                   children: [
                     Text(
                       hospitalData.name ?? '',
-                      style: Styles.textStyle195W500.copyWith(
+                      style: Styles.textStyle185W500.copyWith(
                           color: AppColors.textColorBlue, fontSize: 16),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -68,7 +66,7 @@ class HospitalCard extends StatelessWidget {
                         Expanded(
                           child: Text(
                             hospitalData.level ?? '',
-                            style: Styles.textStyle195W500.copyWith(
+                            style: Styles.textStyle185W500.copyWith(
                                 color: AppColors.secondNew, fontSize: 16),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -101,7 +99,7 @@ class HospitalCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   hospitalData.address ?? '',
-                  style: Styles.textStyle195W500
+                  style: Styles.textStyle185W500
                       .copyWith(color: AppColors.blackColor, fontSize: 16),
                 ),
               ),
@@ -122,7 +120,7 @@ class HospitalCard extends StatelessWidget {
                       const SizedBox(width: 12),
                       Text(
                         hospitalData.telephone ?? '',
-                        style: Styles.textStyle195W500
+                        style: Styles.textStyle185W500
                             .copyWith(color: AppColors.secondNew, fontSize: 16),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -152,7 +150,7 @@ class HospitalCard extends StatelessWidget {
               //         extra: hospitalData.id),
               //     child: Text(
               //       StringsManager.outpatientClinics.tr(),
-              //       style: Styles.textStyle195W500
+              //       style: Styles.textStyle185W500
               //           .copyWith(color: AppColors.whiteColor, fontSize: 12),
               //     ),
               //   ),
@@ -180,7 +178,7 @@ class HospitalCard extends StatelessWidget {
                       extra: hospitalData.id),
                   child: Text(
                     StringsManager.services.tr(),
-                    style: Styles.textStyle195W500
+                    style: Styles.textStyle185W500
                         .copyWith(color: AppColors.whiteColor, fontSize: 12),
                   ),
                 ),

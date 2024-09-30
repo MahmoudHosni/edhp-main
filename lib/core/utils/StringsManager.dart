@@ -99,12 +99,16 @@ class StringsManager {
   static const String add_relatives = "اضافة تابعين";
   static const String all_relatives = "التابعين";
 
+  static const String ordersPayments = 'طلبات الدفع';
 
   static const String medicalEvents = 'الفاعليات الطبية';
   static const String noMedicalEvents = 'لا يوجد فاعليات الان';
-
+  static const String ErrorOccured = "حدث خطا برجاء المحاولة مرة اخرى";
   static const String subscriptionName = 'باقة';
   static const String membershipNumber ="رقم العضوية";
   static const String SelectMembership = 'اختر عضوية';
+  static const String Ok = 'موافق';
+  static const String Cancel = 'الغاء';
+  static const String ConfirmDelete = 'هل تريد فعلا حذف الطلب ؟';
   static const String MembershipCost = 'سعر العضوية';
 }

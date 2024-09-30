@@ -20,6 +20,8 @@ class RelativeMembership{
   String? subscriptionNumber;
   int? totalPrice;
   bool? paid;
+  int? OrganizationID=0;
+  String? OrganizationName='';
 
   RelativeMembership(
       {this.subscriptionTypeID,
@@ -39,7 +41,7 @@ class RelativeMembership{
         this.birthDate,
         this.subscriptionNumber,
         this.totalPrice,
-        this.paid,this.SubscriberProfileID});
+        this.paid,this.SubscriberProfileID,this.OrganizationID,this.OrganizationName});
 
   RelativeMembership.fromJson(Map<String, dynamic> json) {
     subscriptionTypeID = json['SubscriptionTypeID'];
@@ -61,6 +63,8 @@ class RelativeMembership{
     totalPrice = json['TotalPrice'];
     paid = json['Paid'];
     SubscriberProfileID = json['SubscriberProfileID'].toString();
+    OrganizationName = json['OrganizationName'];
+    OrganizationID = json['OrganizationID'];
   }
 
   Map<String, dynamic> toJson() {
@@ -84,6 +88,8 @@ class RelativeMembership{
     data['TotalPrice'] = this.totalPrice;
     data['Paid'] = this.paid;
     data['SubscriberProfileID'] = this.SubscriberProfileID;
+    data['OrganizationName'] = this.OrganizationName;
+    data['OrganizationID'] = this.OrganizationID;
     return data;
   }
 }

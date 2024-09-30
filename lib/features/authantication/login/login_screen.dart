@@ -1,9 +1,11 @@
 import 'package:edhp/core/utils/StringsManager.dart';
 import 'package:edhp/core/utils/app_components/widgets/EditTextView.dart';
+import 'package:edhp/core/utils/app_components/widgets/ShowToast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -27,7 +29,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController identityNumberController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
+  final _listMemberTypes = ["عضو","تابع"];
+  int _tabTextIconIndexSelected = 0;
 
   @override
   void initState() {
@@ -83,9 +89,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 20),
+                    FlutterToggleTab(
+                      width: 50,
+                      borderRadius: 15,
+                      selectedBackgroundColors: [AppColors.primaryBlueColor],unSelectedBackgroundColors: [AppColors.unselectedColor],
+                      selectedTextStyle: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+                      unSelectedTextStyle: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
+                      labels: _listMemberTypes,
+                      selectedIndex: _tabTextIconIndexSelected,
+                      selectedLabelIndex: (index) {
+                        setState(() {
+                          _tabTextIconIndexSelected = index;
+                        });
+                      },
+                    ),
+
+                    Visibility(visible: _tabTextIconIndexSelected==0, child:  Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
                       child: Directionality(
                         textDirection: TextDirection.ltr,
                         child: IntlPhoneField(
@@ -98,29 +118,34 @@ class _LoginScreenState extends State<LoginScreen> {
                           initialCountryCode: 'EG',
                           pickerDialogStyle: PickerDialogStyle(
                               backgroundColor: Colors.white,
-                              countryCodeStyle: TextStyle(color: Colors.blue),
-                              countryNameStyle: TextStyle(color: Colors.black)),
+                              countryCodeStyle: const TextStyle(color: Colors.blue),
+                              countryNameStyle: const TextStyle(color: Colors.black)),
                           onChanged: (phone) {
                             phoneNumberController.text = phone.completeNumber;
                           },
                         ),
                       ),
-                    ),
-                    // Padding(
-                    //   padding: const EdgeInsets.fromLTRB(20,5,20,8),
-                    //   child: EditTextView(
-                    //     controller: phoneNumberController,
-                    //     keyboardType: TextInputType.text,
-                    //     validation: (value) {
-                    //       if(value!.isEmpty) {
-                    //         return 'Phone Number must be not empty';
-                    //       }
-                    //       return null;
-                    //     },
-                    //     fieldName: StringsManager.phoneNumber,
-                    //     suffixIcon: Icons.call_outlined,
-                    //   ),
-                    // ),
+                    )),
+                    Visibility(visible: _tabTextIconIndexSelected==1, child:  Padding(
+                      padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+                      child: EditTextView(
+                        controller: identityNumberController,
+                        keyboardType: TextInputType.phone,
+                        validation: (value) {
+                          if (value!.isEmpty) {
+                            return 'برجاء ادخال الرقم القومى بصورة صحيحة';
+                          }
+                          return null;
+                        },onSubmit: (value) {
+                        if (value == null && value.length != 14) {
+                          ShowToast.showToast('برجاء ادخال الرقم القومى بصورة صحيحة');
+                          return 'برجاء ادخال الرقم القومى بصورة صحيحة';
+                        }
+                      },
+                        fieldName: 'الرقم القومي',
+                        prefixIcon: Icons.account_box,
+                      ),
+                    )),
 
                     const SizedBox(
                       height: 16,
@@ -169,10 +194,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           backgroundColor: AppColors.blue,
                           function: () {
                             if (formKey.currentState!.validate()) {
-                              cubit.login(
-                                username: phoneNumberController.text.trim(),
-                                password: passwordController.text.trim(),
-                              );
+                              if(_tabTextIconIndexSelected==0) {
+                                cubit.login(
+                                  username: phoneNumberController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
+                              }else{
+                                cubit.login(
+                                  username: identityNumberController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                );
+                              }
                             }
                           },
                           text: StringsManager.enterApp,

@@ -12,6 +12,7 @@ import 'package:edhp/features/payment/cubit/PaymentCubit.dart';
 import 'package:edhp/features/profile/cubit/get_profile_cubit.dart';
 import 'package:edhp/features/relatives/add/AddRelativesCubit.dart';
 import 'package:edhp/features/service/cubit/cubit.dart';
+import 'package:edhp/features/settings/reset_password/cubit/ResetPasswordCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,7 +92,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => PaymentCubit()),
         BlocProvider(create: (context) => MembershipDataCubit()),
         BlocProvider(create: (context) => AddRelativesCubit()),
-        BlocProvider(create: (context) => MedicalAdvicesCubit())
+        BlocProvider(create: (context) => MedicalAdvicesCubit()),
+        BlocProvider(create: (context) => ResetPasswordCubit())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
