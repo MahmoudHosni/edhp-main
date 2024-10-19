@@ -104,8 +104,11 @@ class _CreatePaymentScreenState extends State<CreatePaymentScreen> {
           }
           return null;
         }).toString();
-        if(_createOrderResult.contains("status: error") || _createOrderResult.contains("status: INITIAL")){
+        if(_createOrderResult.contains("status: error")){
           cancelPayment(true);
+          EasyLoading.showToast(StringsManager.ErrorOccured,duration: const Duration(seconds:5));
+          goBack();
+        }if(_createOrderResult.contains("status: INITIAL")){
           EasyLoading.showToast(StringsManager.ErrorOccured,duration: const Duration(seconds:5));
           goBack();
         }else {
